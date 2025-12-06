@@ -1,0 +1,44 @@
+{
+    "key": "plugin-auth",
+    "name": "Authentication & Login",
+    "version": "1.0.0",
+    "description": "Sistema de autenticación multi-tenant con detección por subdominio y soporte OAuth.",
+    "category": "SYSTEM",
+    "author": "GestasAI Team",
+    "license": "Proprietary",
+    "icon": "LogIn",
+    "store_media": {
+        "banner": "/assets/auth_banner.png",
+        "screenshots": []
+    },
+    "type": "SYSTEM",
+    "capabilities": [
+        "auth:login",
+        "auth:logout",
+        "auth:oauth",
+        "tenant:detection"
+    ],
+    "ui": {
+        "menu": {
+            "label": "Autenticación",
+            "icon": "Shield",
+            "path": "/auth",
+            "public": true
+        },
+        "widgets": [
+            "LoginWidget"
+        ]
+    },
+    "network": {
+        "strategy": "docker_internal",
+        "host": "gestas_plugin_auth",
+        "port": 3004,
+        "health_check": "/health"
+    },
+    "ai": {
+        "enabled": false,
+        "description": "Sistema de autenticación multi-tenant",
+        "tools": [],
+        "context_endpoint": "/api/ai/context"
+    }
+}

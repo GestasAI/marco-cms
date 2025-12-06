@@ -1,0 +1,59 @@
+# GestasCore-ACIDE Framework Configuration
+# Version: 1.0.0
+
+core:
+  version: "1.0.0"
+  name: "GestasCore-ACIDE"
+  description: "Arquitectura de Componentes Inteligentes y Definidos por Esquema"
+
+storage:
+  type: "document" # document | database | hybrid
+  base_path: "/data"
+  schemas_path: "/gestas-core/schemas"
+  config_path: "/gestas-core/config"
+  backup_path: "/backups"
+
+schemas:
+  core_entities:
+    - post
+    - category
+    - user
+  validation:
+    strict_mode: true
+    allow_additional_properties: false
+  cache:
+    enabled: true
+    ttl: 3600 # seconds
+
+query_engine:
+  cache:
+    enabled: true
+    max_size: 1000 # number of cached queries
+    ttl: 1800 # seconds
+  indexes:
+    enabled: true
+    auto_create: true
+
+backup:
+  enabled: true
+  schedule: "0 0 1 * *" # Cron: First day of each month at midnight
+  retention_days: 90
+  compression: true
+  include:
+    - "/data"
+    - "/gestas-core/config"
+    - "/gestas-core/schemas"
+
+sync:
+  enabled: true
+  check_interval: 300 # seconds (5 minutes)
+  auto_update: true
+  channels:
+    core_update: "SYSTEM:CORE_UPDATED"
+    cert_update: "SYSTEM:CERTIFICATE_UPDATE"
+    plugin_register: "SYSTEM:PLUGIN_REGISTER"
+
+logging:
+  level: "info" # debug | info | warn | error
+  format: "json"
+  output: "console" # console | file | both

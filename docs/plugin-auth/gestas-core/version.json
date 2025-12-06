@@ -1,0 +1,22 @@
+{
+    "synced_at": "2025-11-23T15:23:00Z",
+    "core_version": "1.0.0",
+    "master": "plugin-gestascore-acide",
+    "clone_of": "plugin-seed",
+    "functions": [
+        "QueryEngine.js",
+        "ConfigLoader.js",
+        "CertificateManager.js",
+        "BackupManager.js",
+        "SchemaValidator.js",
+        "PluginSync.js",
+        "VersionControl.js"
+    ],
+    "plugin": "plugin-auth",
+    "status": "synced",
+    "communication": {
+        "master_host": "gestas_plugin_gestascore",
+        "master_port": 5003,
+        "redis_channel": "SYSTEM:CORE_UPDATED"
+    }
+}

@@ -1,0 +1,146 @@
+/* Featured Snippet Styles */
+.featured-snippet {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: white;
+    border-left: 4px solid #3b82f6;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Question/Title */
+.snippet-question,
+.snippet-term {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+/* Paragraph Snippet */
+.snippet-answer {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.snippet-details {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    color: #6b7280;
+}
+
+/* List Snippet */
+.snippet-list .snippet-items {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.snippet-list .snippet-item {
+    margin-bottom: 0.75rem;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+}
+
+.snippet-list .snippet-item strong {
+    color: #1f2937;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.snippet-list .snippet-item p {
+    color: #6b7280;
+    margin: 0;
+}
+
+/* Table Snippet */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.snippet-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+}
+
+.snippet-data-table th {
+    background: #f9fafb;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #1f2937;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.snippet-data-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+}
+
+.snippet-data-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* Definition Snippet */
+.snippet-definition-text {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.snippet-examples {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+}
+
+.snippet-examples h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+}
+
+.snippet-examples ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.snippet-examples li {
+    margin-bottom: 0.5rem;
+    color: #6b7280;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .featured-snippet {
+        padding: 1.5rem;
+    }
+
+    .snippet-question,
+    .snippet-term {
+        font-size: 1.25rem;
+    }
+
+    .snippet-answer,
+    .snippet-definition-text {
+        font-size: 1rem;
+    }
+
+    .snippet-data-table {
+        font-size: 0.875rem;
+    }
+
+    .snippet-data-table th,
+    .snippet-data-table td {
+        padding: 0.5rem 0.75rem;
+    }
+}

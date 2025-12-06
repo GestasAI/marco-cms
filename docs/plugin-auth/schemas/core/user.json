@@ -1,0 +1,81 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "User",
+    "description": "Schema for user profile metadata (actual user data is in PostgreSQL)",
+    "type": "object",
+    "required": [
+        "id",
+        "email",
+        "full_name"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for the user (matches PostgreSQL users.id)"
+        },
+        "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User email address"
+        },
+        "full_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "User's full name"
+        },
+        "avatar_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL of the user's avatar image"
+        },
+        "bio": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "User biography"
+        },
+        "social_links": {
+            "type": "object",
+            "properties": {
+                "twitter": {
+                    "type": "string"
+                },
+                "linkedin": {
+                    "type": "string"
+                },
+                "github": {
+                    "type": "string"
+                },
+                "website": {
+                    "type": "string",
+                    "format": "uri"
+                }
+            },
+            "description": "Social media links"
+        },
+        "preferences": {
+            "type": "object",
+            "description": "User preferences and settings"
+        },
+        "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the user was created"
+        },
+        "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the user profile was last updated"
+        }
+    },
+    "relations": {
+        "posts": {
+            "entity": "Post",
+            "field": "author_id",
+            "type": "hasMany",
+            "description": "Posts created by this user"
+        }
+    },
+    "note": "This schema is for user profile metadata only. Sensitive data (password_hash, role_id, tenant_id) remains in PostgreSQL and is managed by the authentication system."
+}

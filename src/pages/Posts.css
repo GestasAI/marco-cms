@@ -1,0 +1,44 @@
+/* Posts Page Styles */
+.posts-page-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.post-form-card {
+    position: sticky;
+    top: 2rem;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.post-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+}
+
+.card-text {
+    color: var(--color-text-light, #6b7280);
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .posts-page-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .post-form-card {
+        position: static;
+        margin-bottom: 2rem;
+    }
+}

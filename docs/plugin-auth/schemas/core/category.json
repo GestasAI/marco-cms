@@ -1,0 +1,78 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Category",
+    "description": "Schema for content categories",
+    "type": "object",
+    "required": [
+        "id",
+        "name",
+        "slug"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for the category"
+        },
+        "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "Category name"
+        },
+        "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "description": "URL-friendly version of the name"
+        },
+        "description": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "Category description"
+        },
+        "parent_id": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "format": "uuid",
+            "description": "ID of the parent category (null for root categories)"
+        },
+        "order": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "description": "Display order"
+        },
+        "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the category was created"
+        },
+        "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the category was last updated"
+        }
+    },
+    "relations": {
+        "parent": {
+            "entity": "Category",
+            "field": "parent_id",
+            "type": "belongsTo",
+            "description": "Parent category (if any)"
+        },
+        "children": {
+            "entity": "Category",
+            "field": "parent_id",
+            "type": "hasMany",
+            "description": "Child categories"
+        },
+        "posts": {
+            "entity": "Post",
+            "field": "category_id",
+            "type": "hasMany",
+            "description": "Posts in this category"
+        }
+    }
+}
