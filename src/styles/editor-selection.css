@@ -1,0 +1,21 @@
+/* Editor: Elemento Seleccionado */
+.element-selected {
+    outline: 2px solid #6366f1 !important;
+    outline-offset: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.element-selected::after {
+    content: attr(id);
+    position: absolute;
+    top: -20px;
+    left: 0;
+    background: #6366f1;
+    color: white;
+    padding: 2px 8px;
+    font-size: 10px;
+    border-radius: 4px;
+    font-family: monospace;
+    z-index: 1000;
+}

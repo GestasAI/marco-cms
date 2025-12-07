@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { contentService } from '../services/content';
+import { acideService } from '../acide/acideService';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
@@ -24,14 +24,15 @@ export default function PostDetail() {
     const loadPost = async () => {
         try {
             setLoading(true);
-            // Asumimos que contentService tiene un método getBySlug o usamos getAll y filtramos
-            // Para eficiencia real, el backend debería soportar /api/content/slug/:slug
-            // Por ahora simularemos con getAll
-            const allPosts = await contentService.getAll();
-            const found = allPosts.find(p => p.slug === slug || p.id === slug); // Fallback a ID si no hay slug
 
-            if (found) {
-                setPost(found);
+            // Use ACIDE Query Engine to find post by slug
+            const result = await acideService.query('posts', {
+                where: [['slug', '=', slug]],
+                limit: 1
+            });
+
+            if (result && result.items && result.items.length > 0) {
+                setPost(result.items[0]);
             } else {
                 setError('Contenido no encontrado');
             }

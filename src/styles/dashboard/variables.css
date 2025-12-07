@@ -1,0 +1,20 @@
+/* Dashboard Variables (Namespace: --dashboard-*) */
+:root {
+    --dashboard-color-primary: #2563eb;
+    --dashboard-color-secondary: #475569;
+    --dashboard-color-bg: #f8fafc;
+    --dashboard-color-surface: #ffffff;
+    --dashboard-color-border: #e2e8f0;
+    --dashboard-color-text: #0f172a;
+    --dashboard-color-text-muted: #64748b;
+    --dashboard-color-danger: #ef4444;
+
+    --dashboard-space-xs: 0.25rem;
+    --dashboard-space-sm: 0.5rem;
+    --dashboard-space-md: 1rem;
+    --dashboard-space-lg: 1.5rem;
+    --dashboard-space-xl: 2rem;
+
+    --dashboard-radius: 0.375rem;
+    --dashboard-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}

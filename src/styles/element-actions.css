@@ -1,0 +1,36 @@
+/* Botones de Acción del Elemento */
+.element-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--dashboard-color-border);
+    background: var(--dashboard-color-bg);
+}
+
+.action-btn {
+    flex: 1;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--dashboard-color-border);
+    background: white;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn:hover {
+    border-color: var(--dashboard-color-primary);
+    background: var(--dashboard-color-primary-light);
+    transform: translateY(-1px);
+}
+
+.action-btn-delete {
+    color: #ef4444;
+}
+
+.action-btn-delete:hover {
+    border-color: #ef4444;
+    background: #fee2e2;
+}

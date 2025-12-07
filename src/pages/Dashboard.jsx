@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BarChart3, FileText, Image, Users, Palette, Search } from 'lucide-react';
-import axios from 'axios';
+import { acideService } from '../acide/acideService';
 import { useThemeSettings } from '../hooks/useThemeSettings';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export default function Dashboard() {
     const navigate = useNavigate();
@@ -30,14 +28,17 @@ export default function Dashboard() {
 
     const loadDashboardData = async () => {
         try {
-            // Load plugins
-            const pluginsRes = await axios.get(`${API_URL}/api/plugins`);
-            setPlugins(pluginsRes.data.plugins || []);
-            // Load themes
-            const themesData = await loadThemes();
-            setThemes(themesData);
-            // Load stats (mock data)
+            // Load plugins via ACIDE (Local)
+            const pluginsList = await acideService.listPlugins();
+            setPlugins(pluginsList || []);
+
+            // Load themes via ACIDE (Local)
+            const themesList = await acideService.listThemes();
+            setThemes(themesList || []);
+
+            // Load stats (mock data or future implementation)
             setStats({ pages: 5, posts: 12, media: 48, users: 3 });
+
             setLoading(false);
         } catch (error) {
             console.error('Error loading dashboard data:', error);
@@ -45,30 +46,9 @@ export default function Dashboard() {
         }
     };
 
-    const loadThemes = async () => [
-        {
-            id: 'gestasai-default',
-            name: 'GestasAI Default',
-            description: 'Tema espectacular con IA, diseño moderno y responsive',
-            version: '1.0.0',
-            author: 'GestasAI Team',
-            screenshot: '/themes/gestasai-default/screenshot.jpg',
-            active: true,
-            features: ['SEO Optimizado', 'AI-Native', 'Responsive', 'Dark Mode']
-        }
-    ];
-
     const handleActivateTheme = async (themeId) => {
         try {
-            const token = localStorage.getItem('marco_token');
-            await axios.post(
-                `${API_URL}/api/bridge/insert`,
-                {
-                    collection: 'site_settings',
-                    document: { id: 'active_theme', theme_id: themeId, updated_at: new Date().toISOString() }
-                },
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
+            await acideService.activateTheme(themeId);
             setActiveTheme(themeId);
             alert('Tema activado correctamente');
         } catch (error) {
@@ -79,7 +59,7 @@ export default function Dashboard() {
 
     if (loading) return <div className="p-8 text-center">Cargando dashboard...</div>;
 
-    // Componente interno para Stats usando Card atómica
+    // Componente interno para Stats
     const StatCard = ({ icon: Icon, title, value, color, onClick }) => (
         <Card className="stat-card" onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default', borderLeft: `4px solid ${color}`, transition: 'transform 0.2s' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -101,7 +81,6 @@ export default function Dashboard() {
                     <h1 className="heading-2">Resumen General</h1>
                     <p className="text-secondary">Bienvenido al panel de control</p>
                 </div>
-                {/* Ejemplo de uso futuro: Botones de acción rápida */}
             </div>
 
             {/* Stats Cards - Grid System del Tema */}
@@ -210,97 +189,6 @@ export default function Dashboard() {
                         </div>
                     )}
                 </div>
-            </div>
-        </div>
-    );
-}
-
-function StatCard({ icon: Icon, title, value, color, onClick }) {
-    return (
-        <div
-            className="stat-card"
-            style={{ '--stat-color': color }}
-            onClick={onClick}
-        >
-            <div className="stat-icon">
-                <Icon size={24} />
-            </div>
-            <div className="stat-info">
-                <p className="stat-title">{title}</p>
-                <p className="stat-value">{value}</p>
-            </div>
-        </div>
-    );
-}
-
-function ThemeCard({ theme, isActive, onActivate, onDelete }) {
-    return (
-        <div className={`theme-card ${isActive ? 'active' : ''}`}>
-            <div className="theme-screenshot">
-                <img
-                    src={theme.screenshot || '/placeholder-theme.jpg'}
-                    alt={theme.name}
-                    onError={(e) => {
-                        e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%239ca3af" font-family="sans-serif" font-size="18"%3E' + theme.name + '%3C/text%3E%3C/svg%3E';
-                    }}
-                />
-                {isActive && (
-                    <div className="theme-badge">
-                        <span>✓ Activo</span>
-                    </div>
-                )}
-            </div>
-            <div className="theme-info">
-                <h3>{theme.name}</h3>
-                <p className="theme-description">{theme.description}</p>
-                <div className="theme-meta">
-                    <span>v{theme.version}</span>
-                    <span>por {theme.author}</span>
-                </div>
-                {theme.features && (
-                    <div className="theme-features">
-                        {theme.features.map((feature, index) => (
-                            <span key={index} className="feature-tag">
-                                {feature}
-                            </span>
-                        ))}
-                    </div>
-                )}
-                <div className="theme-actions">
-                    {!isActive ? (
-                        <>
-                            <button className="btn btn-primary" onClick={onActivate}>
-                                Activar
-                            </button>
-                            <button className="btn btn-secondary" onClick={onDelete}>
-                                Eliminar
-                            </button>
-                        </>
-                    ) : (
-                        <button className="btn btn-secondary" disabled>
-                            Tema Activo
-                        </button>
-                    )}
-                </div>
-            </div>
-        </div>
-    );
-}
-
-function PluginCard({ plugin }) {
-    return (
-        <div className="plugin-card">
-            <div className="plugin-header">
-                <div className="plugin-icon">
-                    {plugin.name?.charAt(0) || 'P'}
-                </div>
-                <div className="plugin-info">
-                    <h3>{plugin.name || 'Unknown Plugin'}</h3>
-                    <p>{plugin.type || 'Unknown Type'}</p>
-                </div>
-            </div>
-            <div className="plugin-status">
-                <span className="status-badge status-active">Conectado</span>
             </div>
         </div>
     );

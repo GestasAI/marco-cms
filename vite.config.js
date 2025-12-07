@@ -20,6 +20,11 @@ export default defineConfig({
         target: 'https://gestasai.com',
         changeOrigin: true,
         secure: false,
+      },
+      '/acide': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false
       }
     }
   }

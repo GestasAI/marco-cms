@@ -1,0 +1,207 @@
+/* Styles Panel */
+.styles-panel {
+    border-left: 1px solid var(--dashboard-color-border);
+}
+
+.styles-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--dashboard-color-border);
+    background: var(--dashboard-color-bg);
+}
+
+.styles-tab {
+    flex: 1;
+    padding: var(--spacing-sm);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dashboard-color-text-secondary);
+}
+
+.styles-tab:hover {
+    background: var(--dashboard-color-bg);
+    color: var(--dashboard-color-primary);
+}
+
+.styles-tab.active {
+    background: white;
+    color: var(--dashboard-color-primary);
+    border-bottom: 2px solid var(--dashboard-color-primary);
+}
+
+/* Class Buttons Grid */
+.class-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.class-btn {
+    padding: var(--spacing-sm);
+    border: 1px solid var(--dashboard-color-border);
+    background: white;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 12px;
+}
+
+.class-btn:hover {
+    border-color: var(--dashboard-color-primary);
+    background: var(--dashboard-color-primary-light);
+}
+
+.class-btn.active {
+    border-color: var(--dashboard-color-primary);
+    background: var(--dashboard-color-primary);
+    color: white;
+    font-weight: 500;
+}
+
+.color-preview {
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--dashboard-color-border);
+    flex-shrink: 0;
+}
+
+.class-label {
+    flex: 1;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Current Classes */
+.current-classes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.class-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 2px 8px;
+    background: var(--dashboard-color-bg);
+    border: 1px solid var(--dashboard-color-border);
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-family: monospace;
+}
+
+.class-tag-remove {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--dashboard-color-text-secondary);
+    font-size: 16px;
+    line-height: 1;
+}
+
+.class-tag-remove:hover {
+    background: var(--dashboard-color-border);
+    color: var(--dashboard-color-text);
+}
+
+/* Custom Styles Controls */
+.custom-styles-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.color-input {
+    width: 40px;
+    height: 32px;
+    border: 1px solid var(--dashboard-color-border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+
+.color-input::-webkit-color-swatch-wrapper {
+    padding: 2px;
+}
+
+.color-input::-webkit-color-swatch {
+    border: none;
+    border-radius: 2px;
+}
+
+/* Utility Classes */
+.flex {
+    display: flex;
+}
+
+.gap-xs {
+    gap: var(--spacing-xs);
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+/* Spacing Grid */
+.spacing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xs);
+}
+
+/* Range Input */
+input[type="range"] {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--dashboard-color-border);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--dashboard-color-primary);
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--dashboard-color-primary);
+    cursor: pointer;
+    border: none;
+}
+
+/* Number Input */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

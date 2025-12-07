@@ -1,0 +1,25 @@
+{
+    "blocks": [
+        {
+            "element": "container",
+            "id": "footer-container-0001",
+            "class": "footer-content",
+            "content": [
+                {
+                    "element": "text",
+                    "id": "copyright-0002",
+                    "class": "footer-text",
+                    "tag": "p",
+                    "text": "© 2024 GestasAI. Todos los derechos reservados."
+                },
+                {
+                    "element": "text",
+                    "id": "version-0003",
+                    "class": "footer-version",
+                    "tag": "p",
+                    "text": "Marco CMS v1.0 Alpha"
+                }
+            ]
+        }
+    ]
+}

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import { authService } from '../../services/auth';
 
 /**
  * 📐 MainLayout - Componente Layout Principal
@@ -9,33 +10,33 @@ import Header from './Header';
  * Estructura base para el panel de administración.
  * Integra Sidebar y Header, y renderiza el contenido de la ruta activa.
  */
-export default function MainLayout({ user, onLogout }) {
+export default function MainLayout() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const navigate = useNavigate();
+
+    const user = authService.getUser() || JSON.parse(localStorage.getItem('user') || '{}');
+
+    const handleLogout = () => {
+        authService.logout();
+        navigate('/login');
+    };
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
     return (
-        <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--color-surface)' }}>
-            {/* Sidebar tiene position: fixed según su CSS */}
+        <div className="dashboard-root">
             <Sidebar isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
-            <div style={{
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                marginLeft: '250px', // Espacio para el sidebar fijo
-                transition: 'margin-left 0.3s ease'
-            }} className="layout-content">
-
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
                 <Header
                     onMenuClick={toggleMobileMenu}
-                    onLogout={onLogout}
+                    onLogout={handleLogout}
                     user={user}
                 />
 
-                <main style={{ padding: 'var(--space-lg)', flex: 1, background: 'var(--color-bg)' }}>
+                <main className="dashboard-main">
                     <Outlet />
                 </main>
             </div>

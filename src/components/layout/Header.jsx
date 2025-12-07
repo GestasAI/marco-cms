@@ -6,8 +6,8 @@ export default function Header({ onMenuClick, onLogout }) {
 
     return (
         <header style={{
-            background: 'var(--color-bg)',
-            borderBottom: '1px solid var(--color-border, #e5e7eb)',
+            background: 'var(--dashboard-color-surface)',
+            borderBottom: '1px solid var(--dashboard-color-border)',
             position: 'sticky',
             top: 0,
             zIndex: 30,
@@ -20,28 +20,28 @@ export default function Header({ onMenuClick, onLogout }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 <button
                     onClick={onMenuClick}
-                    className="btn btn-ghost"
-                    style={{ padding: '0.5rem', display: 'none' }} // Mostrar en mobile con media query si necesario
+                    className="dashboard-btn"
+                    style={{ padding: '0.5rem', display: 'none', background: 'transparent' }}
                     aria-label="Menu"
                 >
-                    <Menu size={24} />
+                    <Menu size={24} color="var(--dashboard-color-text)" />
                 </button>
-                <h2 className="heading-3" style={{ margin: 0 }}>
+                <h2 className="dashboard-heading" style={{ margin: 0, fontSize: '1.25rem' }}>
                     Dashboard
                 </h2>
             </div>
 
             {/* Right side */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <button className="btn btn-ghost" style={{ position: 'relative', padding: '0.5rem' }}>
-                    <Bell size={20} style={{ color: 'var(--color-text-light)' }} />
+                <button className="dashboard-btn" style={{ position: 'relative', padding: '0.5rem', background: 'transparent' }}>
+                    <Bell size={20} style={{ color: 'var(--dashboard-color-text-muted)' }} />
                     <span style={{
                         position: 'absolute',
                         top: 2,
                         right: 2,
                         width: 8,
                         height: 8,
-                        background: '#ef4444',
+                        background: 'var(--dashboard-color-danger)',
                         borderRadius: '50%'
                     }}></span>
                 </button>
@@ -51,29 +51,27 @@ export default function Header({ onMenuClick, onLogout }) {
                     alignItems: 'center',
                     gap: '0.75rem',
                     paddingLeft: '1rem',
-                    borderLeft: '1px solid var(--color-border, #e5e7eb)'
+                    borderLeft: '1px solid var(--dashboard-color-border)'
                 }}>
                     <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column' }}>
-                        <span style={{ fontSize: 'var(--text-sm)', fontWeight: 500, color: 'var(--color-text)' }}>
+                        <span style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--dashboard-color-text)' }}>
                             {user?.name || 'Usuario'}
                         </span>
-                        <span style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-light)' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--dashboard-color-text-muted)' }}>
                             {user?.email || 'admin@gestasai.com'}
                         </span>
                     </div>
                     <button
                         onClick={onLogout}
+                        className="dashboard-btn dashboard-btn-primary"
                         style={{
                             width: 40,
                             height: 40,
-                            background: 'var(--color-primary)',
                             borderRadius: '50%',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            color: 'white',
-                            border: 'none',
-                            cursor: 'pointer'
+                            padding: 0
                         }}
                     >
                         <User size={20} />

@@ -1,0 +1,93 @@
+{
+    "version": 1,
+    "type": "template",
+    "slug": "index",
+    "title": "Página de Inicio",
+    "blocks": [
+        {
+            "type": "core/template-part",
+            "slug": "header"
+        },
+        {
+            "type": "core/section",
+            "className": "hero",
+            "blocks": [
+                {
+                    "type": "core/container",
+                    "className": "container hero-content",
+                    "blocks": [
+                        {
+                            "type": "core/heading",
+                            "level": 1,
+                            "content": "Bienvenido a Marco CMS",
+                            "className": ""
+                        },
+                        {
+                            "type": "core/paragraph",
+                            "content": "Sistema de Gestión de Contenidos moderno y potente",
+                            "className": "text-lead"
+                        },
+                        {
+                            "type": "core/search",
+                            "placeholder": "Buscar contenidos...",
+                            "className": "card mt-xl"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "core/section",
+            "className": "section",
+            "blocks": [
+                {
+                    "type": "core/container",
+                    "className": "container",
+                    "blocks": [
+                        {
+                            "type": "core/heading",
+                            "level": 2,
+                            "content": "Últimas Publicaciones",
+                            "className": "text-center"
+                        },
+                        {
+                            "type": "core/paragraph",
+                            "content": "Explora nuestro contenido más reciente",
+                            "className": "text-body text-center mb-2xl"
+                        },
+                        {
+                            "type": "core/query-loop",
+                            "collection": "posts",
+                            "limit": 6,
+                            "className": "",
+                            "innerBlocks": [
+                                {
+                                    "type": "core/post-featured-image",
+                                    "className": "mb-md"
+                                },
+                                {
+                                    "type": "core/post-title",
+                                    "tag": "h3",
+                                    "className": ""
+                                },
+                                {
+                                    "type": "core/post-excerpt",
+                                    "className": "text-body"
+                                },
+                                {
+                                    "type": "core/read-more",
+                                    "text": "Leer más →",
+                                    "className": "btn btn-primary mt-md"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "core/template-part",
+            "slug": "footer"
+        }
+    ]
+}

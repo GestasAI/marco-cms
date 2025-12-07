@@ -1,0 +1,184 @@
+/* Editable Element Wrapper */
+.editable-element-wrapper {
+    position: relative;
+    margin: 4px 0;
+}
+
+.editable-element-content {
+    position: relative;
+}
+
+/* Hover Effect */
+.element-hovering {
+    outline: 1px dashed rgba(99, 102, 241, 0.3);
+    outline-offset: 2px;
+}
+
+/* Add Block Triggers (botones +) */
+.add-block-trigger {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.editable-element-wrapper:hover .add-block-trigger {
+    opacity: 1;
+}
+
+.add-block-before {
+    top: -12px;
+}
+
+.add-block-after {
+    bottom: -12px;
+}
+
+.add-block-inside {
+    top: 8px;
+    right: 8px;
+    left: auto;
+    transform: none;
+}
+
+.add-block-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--dashboard-color-primary);
+    color: white;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s;
+}
+
+.add-block-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Empty Container */
+.empty-container {
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--dashboard-color-border);
+    border-radius: var(--radius-md);
+    background: var(--dashboard-color-bg);
+    padding: var(--spacing-xl);
+}
+
+.add-block-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: white;
+    border: 1px solid var(--dashboard-color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--dashboard-color-text-secondary);
+}
+
+.add-block-btn:hover {
+    border-color: var(--dashboard-color-primary);
+    color: var(--dashboard-color-primary);
+    background: var(--dashboard-color-primary-light);
+}
+
+/* Block Selector Menu */
+.block-selector-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.block-selector-menu {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.block-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--spacing-sm);
+}
+
+.block-selector-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-md);
+    background: var(--dashboard-color-bg);
+    border: 1px solid var(--dashboard-color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.block-selector-item:hover {
+    border-color: var(--dashboard-color-primary);
+    background: var(--dashboard-color-primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.block-selector-item svg {
+    color: var(--dashboard-color-primary);
+}
+
+.block-selector-item span {
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.block-selector-design {
+    grid-column: span 2;
+}

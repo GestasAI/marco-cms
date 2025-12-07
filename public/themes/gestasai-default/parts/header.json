@@ -1,0 +1,47 @@
+{
+    "blocks": [
+        {
+            "element": "container",
+            "id": "header-container-0001",
+            "class": "header-content",
+            "content": [
+                {
+                    "element": "logo",
+                    "id": "logo-0002",
+                    "class": "logo",
+                    "content": [
+                        {
+                            "element": "text",
+                            "id": "logo-text-0003",
+                            "class": "brand",
+                            "tag": "span",
+                            "text": "M"
+                        }
+                    ]
+                },
+                {
+                    "element": "heading",
+                    "id": "site-title-0004",
+                    "class": "heading-1",
+                    "tag": "h1",
+                    "text": "Marco CMS"
+                },
+                {
+                    "element": "text",
+                    "id": "tagline-0005",
+                    "class": "tagline",
+                    "tag": "p",
+                    "text": "Powered by GestasAI"
+                },
+                {
+                    "element": "button",
+                    "id": "admin-btn-0006",
+                    "class": "btn btn-primary btn-sm",
+                    "text": "Admin",
+                    "link": "/dashboard",
+                    "target": "_self"
+                }
+            ]
+        }
+    ]
+}

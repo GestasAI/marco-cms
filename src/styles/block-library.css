@@ -1,0 +1,156 @@
+/* Biblioteca de Bloques */
+.block-library {
+    width: 280px;
+    background: var(--dashboard-color-surface);
+    border-right: 1px solid var(--dashboard-color-border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.block-library-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--dashboard-color-border);
+    background: var(--dashboard-color-bg);
+}
+
+.block-library-tabs .tab {
+    flex: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--dashboard-color-text-secondary);
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+}
+
+.block-library-tabs .tab:hover {
+    background: var(--dashboard-color-surface);
+    color: var(--dashboard-color-text);
+}
+
+.block-library-tabs .tab.active {
+    color: var(--dashboard-color-primary);
+    border-bottom-color: var(--dashboard-color-primary);
+    background: var(--dashboard-color-surface);
+}
+
+.block-library-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+}
+
+.block-library-info {
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--dashboard-color-border);
+    background: var(--dashboard-color-bg);
+}
+
+.block-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+/* Block Item Básico */
+.block-item {
+    background: white;
+    border: 1px solid var(--dashboard-color-border);
+    border-radius: var(--radius-md);
+    cursor: grab;
+    transition: all 0.2s;
+}
+
+.block-item:active {
+    cursor: grabbing;
+}
+
+.block-item:hover {
+    border-color: var(--dashboard-color-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Cuando se está arrastrando */
+body.dragging-block {
+    cursor: grabbing !important;
+}
+
+body.dragging-block * {
+    cursor: grabbing !important;
+}
+
+body.dragging-block .drop-zone {
+    outline: 2px dashed rgba(99, 102, 241, 0.3);
+    outline-offset: 4px;
+}
+
+.block-item-basic {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.block-item-basic svg {
+    color: var(--dashboard-color-primary);
+}
+
+.block-item-basic span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Block Item Diseño */
+.block-item-design {
+    padding: var(--spacing-sm);
+}
+
+.block-preview {
+    width: 100%;
+    height: 120px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: var(--spacing-xs);
+    background: var(--dashboard-color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.block-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.block-preview-placeholder {
+    color: var(--dashboard-color-text-secondary);
+    font-size: 12px;
+    text-align: center;
+    padding: var(--spacing-md);
+}
+
+.block-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--dashboard-color-text);
+}
+
+/* Editor Workspace con Biblioteca */
+.editor-workspace {
+    display: flex;
+    height: calc(100vh - 60px);
+}
+
+.editor-canvas-container {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--dashboard-color-bg);
+    position: relative;
+}
