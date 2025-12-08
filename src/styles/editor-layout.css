@@ -1,12 +1,13 @@
 /* Editor Right Sidebar */
 .editor-right-sidebar {
-    width: 320px;
+    width: 380px;
     background: var(--dashboard-color-surface);
     border-left: 1px solid var(--dashboard-color-border);
     display: flex;
     flex-direction: column;
     height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* Editor Workspace Layout */

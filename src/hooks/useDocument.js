@@ -48,6 +48,13 @@ export function useDocument(collection, id) {
                 setPageData(docData.page);
                 const content = docData.page.sections?.find(s => s.section === 'content');
                 setContentSection(content || null);
+
+                console.log('📄 Documento cargado:');
+                console.log('  ContentSection:', content);
+                console.log('  Elementos con customStyles:',
+                    content?.content?.filter(el => el.customStyles && Object.keys(el.customStyles).length > 0)
+                        .map(el => ({ id: el.id, element: el.element, customStyles: el.customStyles }))
+                );
             } else {
                 setPageData({ id: `page-${id}-0001`, class: 'body', sections: [] });
                 setContentSection(null);

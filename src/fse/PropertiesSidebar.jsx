@@ -63,17 +63,17 @@ export function PropertiesSidebar({ selectedElement, onUpdate, onDelete, onMoveU
             </div>
 
             <div className="element-actions">
-                <button className="action-btn" onClick={() => onMoveUp(selectedElement.id)} title="Mover arriba">
-                    <ArrowUp size={16} />
+                <button className="action-btn-text" onClick={() => onMoveUp(selectedElement.id)} title="Mover arriba">
+                    ↑ Subir
                 </button>
-                <button className="action-btn" onClick={() => onMoveDown(selectedElement.id)} title="Mover abajo">
-                    <ArrowDown size={16} />
+                <button className="action-btn-text" onClick={() => onMoveDown(selectedElement.id)} title="Mover abajo">
+                    ↓ Bajar
                 </button>
-                <button className="action-btn" onClick={() => onDuplicate(selectedElement.id)} title="Duplicar">
-                    <Copy size={16} />
+                <button className="action-btn-text" onClick={() => onDuplicate(selectedElement.id)} title="Duplicar">
+                    ⎘ Duplicar
                 </button>
-                <button className="action-btn action-btn-delete" onClick={() => onDelete(selectedElement.id)} title="Eliminar">
-                    <Trash2 size={16} />
+                <button className="action-btn-text action-btn-delete" onClick={() => onDelete(selectedElement.id)} title="Eliminar">
+                    ✕ Eliminar
                 </button>
             </div>
 

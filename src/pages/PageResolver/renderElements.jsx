@@ -22,11 +22,17 @@ function formatStyles(styles) {
 export function renderImageElement(element, index) {
     const { id, class: className, src, alt, width, height, customStyles } = element;
 
-    const rawStyles = customStyles || {};
+    // Combinar customStyles con width/height base
+    const baseStyles = {
+        width: width || '100%',
+        height: height || 'auto',
+        display: 'block'
+    };
+
+    // customStyles tienen prioridad sobre baseStyles
     const imgStyles = formatStyles({
-        ...rawStyles,
-        width: rawStyles.width || width || '',
-        height: rawStyles.height || height || ''
+        ...baseStyles,
+        ...customStyles
     });
 
     return (
@@ -45,20 +51,61 @@ export function renderImageElement(element, index) {
  * Renderiza un elemento de video (YouTube o upload)
  */
 export function renderVideoElement(element, index) {
-    const { id, class: className, type, youtubeId, src, controls, autoplay, loop, customStyles } = element;
-    const styles = formatStyles(customStyles);
+    const { id, class: className, type, youtubeId, src, controls, autoplay, loop, muted, poster, width, height, customStyles } = element;
+
+    // Estilos base para videos
+    const baseStyles = {
+        width: width || '100%',
+        height: height || 'auto',
+        display: 'block'
+    };
+
+    // customStyles tienen prioridad
+    const videoStyles = formatStyles({
+        ...baseStyles,
+        ...customStyles
+    });
 
     // YouTube video
     if (type === 'youtube' && youtubeId) {
+        // Si hay height personalizado, usar ese; si no, usar aspect ratio 16:9
+        const hasCustomHeight = customStyles?.height || height;
+
+        // Estilos base del contenedor
+        let containerStyles = {
+            position: 'relative',
+            ...videoStyles
+        };
+
+        // Si NO hay height personalizado, usar aspect ratio 16:9
+        if (!hasCustomHeight) {
+            containerStyles = {
+                ...containerStyles,
+                paddingBottom: '56.25%',
+                height: 0,
+                overflow: 'hidden'
+            };
+        }
+
+        // Añadir poster si existe
+        if (poster) {
+            containerStyles = {
+                ...containerStyles,
+                backgroundImage: `url(${poster})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+            };
+        }
+
         return (
             <div
                 key={id || index}
                 id={id}
                 className={className}
-                style={{ ...styles, position: 'relative', paddingBottom: '56.25%', height: 0 }}
+                style={containerStyles}
             >
                 <iframe
-                    src={`https://www.youtube.com/embed/${youtubeId}`}
+                    src={`https://www.youtube.com/embed/${youtubeId}${autoplay ? '?autoplay=1' : ''}${muted ? '&mute=1' : ''}`}
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -75,10 +122,12 @@ export function renderVideoElement(element, index) {
             id={id}
             src={src || ''}
             className={className}
-            style={styles}
+            style={videoStyles}
             controls={controls !== false}
             autoPlay={autoplay || false}
             loop={loop || false}
+            muted={muted || false}
+            poster={poster || ''}
         >
             Tu navegador no soporta el elemento de video.
         </video>

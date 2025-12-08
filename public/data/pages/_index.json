@@ -7,7 +7,7 @@
         "template": "index",
         "author": "admin",
         "created_at": "2024-12-07T12:00:00+00:00",
-        "updated_at": "2025-12-07T22:48:04.219Z",
+        "updated_at": "2025-12-08T16:42:07.812Z",
         "seo": {
             "meta_title": "Marco CMS - Sistema de Gesti\u00f3n de Contenidos Moderno",
             "meta_description": "Marco CMS es un sistema de gesti\u00f3n de contenidos moderno, potente y f\u00e1cil de usar. Crea y gestiona tu sitio web de forma visual.",
@@ -115,34 +115,6 @@
                             ]
                         },
                         {
-                            "element": "image",
-                            "id": "image-1765146263135-36",
-                            "class": "w-full image-image-1765146263135-36 text-center grid",
-                            "src": "https:\/\/images.unsplash.comhttps:\/\/www.youtube.com\/watch?v=aobQxcoUlNo\/photo-1617791160536-598cf32026fb?w=400",
-                            "alt": "Imagen",
-                            "width": "",
-                            "height": "",
-                            "customStyles": {
-                                "display": "flex",
-                                "max-width": "50px",
-                                "flex-direction": "row",
-                                "justify-content": "center",
-                                "align-items": "center",
-                                "gap": "1rem"
-                            }
-                        },
-                        {
-                            "element": "video",
-                            "id": "video-1765147609418-9703",
-                            "class": "w-full",
-                            "src": "https:\/\/www.youtube.com\/watch?v=aobQxcoUlNo",
-                            "type": "youtube",
-                            "youtubeId": "aobQxcoUlNo",
-                            "controls": true,
-                            "autoplay": false,
-                            "loop": false
-                        },
-                        {
                             "element": "section",
                             "id": "publications-0015",
                             "class": "section",
@@ -177,6 +149,44 @@
                                     ]
                                 }
                             ]
+                        },
+                        {
+                            "element": "image",
+                            "id": "image-1765193154072-7007",
+                            "class": "w-full",
+                            "src": "\/uploads\/2025\/12\/fondo-ondulado-hermoso-23-2148465606-media_6935724bcc543.jpg",
+                            "alt": "borrador",
+                            "width": "50%",
+                            "height": "auto",
+                            "mediaId": "media_6935724bcc543",
+                            "mediaData": {
+                                "id": "media_6935724bcc543",
+                                "filename": "fondo-ondulado-hermoso-23-2148465606-media_6935724bcc543.jpg",
+                                "title": "borrador",
+                                "type": "image\/jpeg",
+                                "size": 17417,
+                                "url": "\/uploads\/2025\/12\/fondo-ondulado-hermoso-23-2148465606-media_6935724bcc543.jpg",
+                                "created_at": "2025-12-07T12:25:47+00:00"
+                            },
+                            "customStyles": {
+                                "margin": "0 0 0 auto"
+                            }
+                        },
+                        {
+                            "element": "video",
+                            "id": "video-1765195380661-7434",
+                            "class": "w-full",
+                            "src": "",
+                            "type": "youtube",
+                            "youtubeId": "byYlC2cagLw",
+                            "controls": true,
+                            "autoplay": false,
+                            "loop": false,
+                            "poster": "https:\/\/effvision.com\/wp-content\/uploads\/2024\/06\/artificial-intelligence-new-technology-science-futuristic-abstract-human-brain-ai-technology-cpu-central-processor-unit-chipset-big-data-machine-learning-cyber-mind-domination-generative-ai-scaled-1.jpg",
+                            "customStyles": {
+                                "margin": "0 auto",
+                                "border-radius": "25pxpx"
+                            }
                         }
                     ]
                 },
@@ -210,7 +220,7 @@
                 }
             ]
         },
-        "_updatedAt": "2025-12-07T22:48:04+00:00",
+        "_updatedAt": "2025-12-08T16:42:07+00:00",
         "_createdAt": "2025-12-07T19:04:36+00:00"
     }
 ]

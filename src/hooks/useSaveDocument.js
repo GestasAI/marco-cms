@@ -44,6 +44,11 @@ export function useSaveDocument() {
             console.log('  Collection:', collection);
             console.log('  ID:', id);
             console.log('  Data size:', JSON.stringify(dataToSave).length, 'bytes');
+            console.log('  ContentSection:', contentSection);
+            console.log('  Elementos con customStyles:',
+                contentSection.content?.filter(el => el.customStyles && Object.keys(el.customStyles).length > 0)
+                    .map(el => ({ id: el.id, element: el.element, customStyles: el.customStyles }))
+            );
 
             const result = await acideService.update(collection, id, dataToSave);
             console.log('✅ Respuesta ACIDE:', result);

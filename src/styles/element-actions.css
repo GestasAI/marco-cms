@@ -34,3 +34,33 @@
     border-color: #ef4444;
     background: #fee2e2;
 }
+
+/* Botones de texto compactos */
+.action-btn-text {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--dashboard-color-border);
+    background: white;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--dashboard-color-text);
+    white-space: nowrap;
+}
+
+.action-btn-text:hover {
+    border-color: var(--dashboard-color-primary);
+    background: var(--dashboard-color-primary-light);
+    transform: translateY(-1px);
+}
+
+.action-btn-text.action-btn-delete {
+    color: #ef4444;
+}
+
+.action-btn-text.action-btn-delete:hover {
+    border-color: #ef4444;
+    background: #fee2e2;
+}

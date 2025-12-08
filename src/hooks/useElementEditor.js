@@ -61,6 +61,37 @@ export function useElementEditor(contentSection, setContentSection) {
     };
 
     /**
+     * Actualizar múltiples campos de un elemento a la vez
+     */
+    const updateMultipleFields = (elementId, fields) => {
+        const updateInContent = (content) => {
+            if (!content || !Array.isArray(content)) return content;
+            return content.map(el => {
+                if (el.id === elementId) {
+                    return { ...el, ...fields };
+                }
+                if (el.content) {
+                    return { ...el, content: updateInContent(el.content) };
+                }
+                return el;
+            });
+        };
+
+        const updatedContent = {
+            ...contentSection,
+            content: updateInContent(contentSection.content)
+        };
+
+        setContentSection(updatedContent);
+        setHasChanges(true);
+
+        const updated = findElementInContent(updatedContent.content, elementId);
+        if (updated) setSelectedElement(updated);
+
+        console.log('✅ Elemento actualizado:', updated);
+    };
+
+    /**
      * Actualizar estilo personalizado de un elemento
      */
     const updateCustomStyle = (elementId, property, value) => {
@@ -108,6 +139,7 @@ export function useElementEditor(contentSection, setContentSection) {
         hasChanges,
         setHasChanges,
         updateElement,
+        updateMultipleFields,
         updateCustomStyle,
         selectElement,
         findElementInContent

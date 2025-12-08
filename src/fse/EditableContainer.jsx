@@ -62,31 +62,77 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                 );
             }
 
-            case 'image':
+            case 'image': {
+                // Combinar customStyles con width/height
+                const imageStyles = {
+                    ...customStyles,
+                    width: element.width || customStyles.width || '100%',
+                    height: element.height || customStyles.height || 'auto',
+                    display: customStyles.display || 'block',
+                    margin: customStyles.margin || (customStyles.textAlign === 'center' ? '0 auto' : '0')
+                };
+
                 return (
                     <img
                         src={element.src || '/placeholder-image.jpg'}
                         alt={element.alt || 'Imagen'}
                         className={element.class}
-                        style={customStyles}
-                        width={element.width || ''}
-                        height={element.height || ''}
+                        style={imageStyles}
                         onClick={handleClick}
                         onDoubleClick={handleDoubleClick}
                     />
                 );
+            }
 
-            case 'video':
+            case 'video': {
+                // Combinar customStyles con width/height
+                const videoStyles = {
+                    ...customStyles,
+                    width: element.width || customStyles.width || '100%',
+                    height: element.height || customStyles.height || 'auto',
+                    display: customStyles.display || 'block',
+                    margin: customStyles.margin || '0'
+                };
+
                 if (element.type === 'youtube' && element.youtubeId) {
+                    // Si hay height personalizado, usar ese; si no, usar aspect ratio 16:9
+                    const hasCustomHeight = customStyles.height || element.height;
+
+                    // Estilos base del contenedor
+                    let containerStyles = {
+                        position: 'relative',
+                        ...videoStyles
+                    };
+
+                    // Si NO hay height personalizado, usar aspect ratio 16:9
+                    if (!hasCustomHeight) {
+                        containerStyles = {
+                            ...containerStyles,
+                            paddingBottom: '56.25%',
+                            height: 0,
+                            overflow: 'hidden'
+                        };
+                    }
+
+                    // Añadir poster si existe
+                    if (element.poster) {
+                        containerStyles = {
+                            ...containerStyles,
+                            backgroundImage: `url(${element.poster})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center'
+                        };
+                    }
+
                     return (
                         <div
                             className={element.class}
-                            style={{ ...customStyles, position: 'relative', paddingBottom: '56.25%', height: 0 }}
+                            style={containerStyles}
                             onClick={handleClick}
                             onDoubleClick={handleDoubleClick}
                         >
                             <iframe
-                                src={`https://www.youtube.com/embed/${element.youtubeId}`}
+                                src={`https://www.youtube.com/embed/${element.youtubeId}${element.autoplay ? '?autoplay=1' : ''}${element.muted ? '&mute=1' : ''}`}
                                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -95,20 +141,24 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                         </div>
                     );
                 }
+
                 return (
                     <video
                         src={element.src || ''}
                         className={element.class}
-                        style={customStyles}
+                        style={videoStyles}
                         controls={element.controls !== false}
                         autoPlay={element.autoplay || false}
                         loop={element.loop || false}
+                        muted={element.muted || false}
+                        poster={element.poster || ''}
                         onClick={handleClick}
                         onDoubleClick={handleDoubleClick}
                     >
                         Tu navegador no soporta el elemento de video.
                     </video>
                 );
+            }
 
             case 'button':
                 return (
@@ -211,6 +261,7 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
     return (
         <div
             className={`editable-element-wrapper ${isSelected ? 'selected' : ''} ${hovering ? 'hovering' : ''}`}
+            data-element-id={element.id}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
         >

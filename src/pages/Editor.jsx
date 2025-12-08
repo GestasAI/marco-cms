@@ -8,17 +8,16 @@ import { useBlockManager } from '../hooks/useBlockManager';
 import { EditorToolbar } from '../fse/EditorToolbar';
 import { BlockLibrary } from '../fse/BlockLibrary';
 import { EditableContainer } from '../fse/EditableContainer';
-import { PropertiesSidebar } from '../fse/PropertiesSidebar';
-import { StylesPanel } from '../fse/StylesPanel';
+import { UnifiedSidebar } from '../fse/UnifiedSidebar';
 import { basicBlocks, designBlocks } from '../fse/blocks';
 import '../styles/editor-selection.css';
 import '../styles/block-library.css';
-import '../styles/styles-panel.css';
 import '../styles/editor-layout.css';
 import '../styles/drop-zones.css';
 import '../styles/editable-elements.css';
 import '../styles/element-actions.css';
 import '../styles/media-library.css';
+import '../styles/unified-sidebar.css';
 
 export default function Editor() {
     const { collection, id } = useParams();
@@ -42,6 +41,7 @@ export default function Editor() {
         hasChanges,
         setHasChanges,
         updateElement,
+        updateMultipleFields,
         updateCustomStyle,
         selectElement
     } = useElementEditor(contentSection, setContentSection);
@@ -166,18 +166,18 @@ export default function Editor() {
                 </div>
 
                 <div className="editor-right-sidebar">
-                    <PropertiesSidebar
+                    <UnifiedSidebar
                         selectedElement={selectedElement}
+                        contentSection={contentSection}
                         onUpdate={updateElement}
+                        onUpdateMultiple={updateMultipleFields}
+                        onUpdateStyle={updateElement}
+                        onUpdateCustomStyle={updateCustomStyle}
+                        onSelectElement={selectElement}
                         onDelete={removeBlock}
                         onMoveUp={moveUp}
                         onMoveDown={moveDown}
                         onDuplicate={duplicateBlock}
-                    />
-                    <StylesPanel
-                        selectedElement={selectedElement}
-                        onUpdateStyle={updateElement}
-                        onUpdateCustomStyle={updateCustomStyle}
                     />
                 </div>
             </div>
