@@ -30,6 +30,7 @@ import AcademyAdmin from './pages/AcademyAdmin';
 import AcademyLayout from './components/layout/AcademyLayout';
 import AcademyHome from './pages/AcademyHome';
 import Users from './pages/Users';
+import BuildSite from './pages/BuildSite';
 
 // Placeholder components for Academy student sections
 const AcademyPlaceholder = ({ title }) => (
@@ -93,6 +94,7 @@ function App() {
                         <Route path="settings" element={<Settings />} />
                         <Route path="academy" element={<AcademyAdmin />} />
                         <Route path="users" element={<Users />} />
+                        \u003cRoute path="build" element={\u003cBuildSite /\u003e} /\u003e
                     </Route>
 
                     {/* FSE Editor (Full Screen - Protected) */}

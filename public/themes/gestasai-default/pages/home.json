@@ -1,76 +1,70 @@
 {
-    "id":  "inicio",
-    "title":  "Gestas Academy - El futuro no se predice. Se lidera.",
-    "slug":  "inicio",
+    "id":  "home",
+    "title":  "Inicio - Marco CMS",
+    "slug":  "home",
     "status":  "published",
     "template":  "index",
     "author":  "admin",
-    "created_at":  "2025-12-21T20:00:00+00:00",
-    "updated_at":  "2025-12-21T20:00:00+00:00",
+    "created_at":  "2024-12-07T12:00:00+00:00",
+    "updated_at":  "2025-12-08T16:42:07.812Z",
     "seo":  {
-                "meta_title":  "Gestas Academy - Lidera la Soberanía Digital",
-                "meta_description":  "Donde la Inteligencia Artificial potencia el talento humano. Aprende a dominar las herramientas que definirán la soberanía tecnológica de tu empresa.",
-                "meta_keywords":  "ia, inteligencia artificial, academy, formación, prompt engineering, soberanía digital",
-                "og_title":  "Gestas Academy - El futuro no se predice. Se lidera.",
-                "og_description":  "Aprende a dominar las herramientas que definirán la soberanía tecnológica de tu empresa",
-                "og_image":  "/themes/academia/assets/og-image.jpg",
-                "canonical":  "https://academy.gestasai.com/"
+                "meta_title":  "Marco CMS - Sistema de Gesti�n de Contenidos Moderno",
+                "meta_description":  "Marco CMS es un sistema de gesti�n de contenidos moderno, potente y f�cil de usar. Crea y gestiona tu sitio web de forma visual.",
+                "meta_keywords":  "cms, gestor de contenidos, marco cms, gestasai, editor visual",
+                "og_title":  "Marco CMS - Sistema de Gesti�n de Contenidos",
+                "og_description":  "Sistema de gesti�n de contenidos moderno y potente",
+                "og_image":  "/images/og-image.jpg",
+                "canonical":  "https://marcocms.com/"
             },
     "page":  {
-                 "id":  "page-academia-home",
+                 "id":  "page-inicio-0001",
                  "class":  "body",
                  "sections":  [
                                   {
                                       "section":  "header",
-                                      "id":  "header-academia",
+                                      "id":  "header-0002",
                                       "class":  "header",
                                       "content":  [
                                                       {
                                                           "element":  "container",
-                                                          "id":  "header-container",
-                                                          "class":  "container",
+                                                          "id":  "header-container-0003",
+                                                          "class":  "header-content",
                                                           "content":  [
                                                                           {
-                                                                              "element":  "heading",
-                                                                              "id":  "logo",
+                                                                              "element":  "logo",
+                                                                              "id":  "logo-0004",
                                                                               "class":  "logo",
-                                                                              "tag":  "h1",
-                                                                              "text":  "Gestas Academy"
-                                                                          },
-                                                                          {
-                                                                              "element":  "nav",
-                                                                              "id":  "nav",
-                                                                              "class":  "nav",
                                                                               "content":  [
                                                                                               {
-                                                                                                  "element":  "link",
-                                                                                                  "id":  "nav-link-1",
-                                                                                                  "class":  "nav-link",
-                                                                                                  "text":  "Inicio",
-                                                                                                  "link":  "/"
-                                                                                              },
-                                                                                              {
-                                                                                                  "element":  "link",
-                                                                                                  "id":  "nav-link-2",
-                                                                                                  "class":  "nav-link",
-                                                                                                  "text":  "Cursos Gratuitos",
-                                                                                                  "link":  "#cursos"
-                                                                                              },
-                                                                                              {
-                                                                                                  "element":  "link",
-                                                                                                  "id":  "nav-link-3",
-                                                                                                  "class":  "nav-link",
-                                                                                                  "text":  "Premium",
-                                                                                                  "link":  "#premium"
-                                                                                              },
-                                                                                              {
-                                                                                                  "element":  "link",
-                                                                                                  "id":  "nav-link-4",
-                                                                                                  "class":  "nav-link",
-                                                                                                  "text":  "Contacto",
-                                                                                                  "link":  "/contact"
+                                                                                                  "element":  "text",
+                                                                                                  "id":  "logo-text-0005",
+                                                                                                  "class":  "brand",
+                                                                                                  "tag":  "span",
+                                                                                                  "text":  "M"
                                                                                               }
                                                                                           ]
+                                                                          },
+                                                                          {
+                                                                              "element":  "heading",
+                                                                              "id":  "site-title-0006",
+                                                                              "class":  "heading-1",
+                                                                              "tag":  "h1",
+                                                                              "text":  "Marco CMS"
+                                                                          },
+                                                                          {
+                                                                              "element":  "text",
+                                                                              "id":  "tagline-0007",
+                                                                              "class":  "tagline",
+                                                                              "tag":  "p",
+                                                                              "text":  "Powered by GestasAI"
+                                                                          },
+                                                                          {
+                                                                              "element":  "button",
+                                                                              "id":  "admin-btn-0008",
+                                                                              "class":  "btn btn-primary btn-sm",
+                                                                              "text":  "Admin",
+                                                                              "link":  "/dashboard",
+                                                                              "target":  "_self"
                                                                           }
                                                                       ]
                                                       }
@@ -78,39 +72,44 @@
                                   },
                                   {
                                       "section":  "content",
-                                      "id":  "content-academia",
+                                      "id":  "content-0009",
                                       "class":  "content",
                                       "content":  [
                                                       {
                                                           "element":  "section",
-                                                          "id":  "hero-academia",
+                                                          "id":  "hero-0010",
                                                           "class":  "hero",
                                                           "content":  [
                                                                           {
                                                                               "element":  "container",
-                                                                              "id":  "hero-container",
+                                                                              "id":  "hero-container-0011",
                                                                               "class":  "container hero-content",
                                                                               "content":  [
                                                                                               {
                                                                                                   "element":  "heading",
-                                                                                                  "id":  "hero-title",
-                                                                                                  "class":  "heading-1",
+                                                                                                  "id":  "hero-title-0012",
+                                                                                                  "class":  "heading-1 heading-hero-title-0012 text-white text-black",
                                                                                                   "tag":  "h1",
-                                                                                                  "text":  "El futuro no se predice. Se lidera."
+                                                                                                  "text":  "Bienvenido a Marco CMS",
+                                                                                                  "customStyles":  {
+                                                                                                                       "color":  "#ffffff"
+                                                                                                                   }
                                                                                               },
                                                                                               {
                                                                                                   "element":  "text",
-                                                                                                  "id":  "hero-subtitle",
-                                                                                                  "class":  "text-lead",
+                                                                                                  "id":  "hero-subtitle-0013",
+                                                                                                  "class":  "text-black p-md text-hero-subtitle-0013 text-right",
                                                                                                   "tag":  "p",
-                                                                                                  "text":  "Gestas Academy: Donde la Inteligencia Artificial potencia el talento humano. Aprende a dominar las herramientas que definirán la soberanía tecnológica de tu empresa."
+                                                                                                  "text":  "Sistema de Gesti�n de Contenidos moderno y potentes",
+                                                                                                  "customStyles":  [
+
+                                                                                                                   ]
                                                                                               },
                                                                                               {
-                                                                                                  "element":  "button",
-                                                                                                  "id":  "hero-cta",
-                                                                                                  "class":  "btn btn-primary btn-lg",
-                                                                                                  "text":  "Empezar ahora — Es gratuito",
-                                                                                                  "link":  "#cursos"
+                                                                                                  "element":  "search",
+                                                                                                  "id":  "search-0014",
+                                                                                                  "class":  "card search-box",
+                                                                                                  "placeholder":  "Buscar contenidos..."
                                                                                               }
                                                                                           ]
                                                                           }
@@ -118,204 +117,103 @@
                                                       },
                                                       {
                                                           "element":  "section",
-                                                          "id":  "cursos-gratuitos",
+                                                          "id":  "publications-0015",
                                                           "class":  "section",
                                                           "content":  [
                                                                           {
                                                                               "element":  "container",
-                                                                              "id":  "cursos-container",
+                                                                              "id":  "pubs-container-0016",
                                                                               "class":  "container",
                                                                               "content":  [
                                                                                               {
                                                                                                   "element":  "heading",
-                                                                                                  "id":  "cursos-title",
-                                                                                                  "class":  "heading-2 text-center mb-2xl",
+                                                                                                  "id":  "pubs-title-0017",
+                                                                                                  "class":  "heading-2 text-center mb-xl",
                                                                                                   "tag":  "h2",
-                                                                                                  "text":  "Programas de Acceso Abierto (Gratuitos)"
-                                                                                              },
-                                                                                              {
-                                                                                                  "element":  "grid",
-                                                                                                  "id":  "cursos-grid",
-                                                                                                  "class":  "grid grid-3",
-                                                                                                  "content":  [
-                                                                                                                  {
-                                                                                                                      "element":  "card",
-                                                                                                                      "id":  "curso-1",
-                                                                                                                      "class":  "card",
-                                                                                                                      "content":  [
-                                                                                                                                      {
-                                                                                                                                          "element":  "heading",
-                                                                                                                                          "id":  "curso-1-title",
-                                                                                                                                          "class":  "card-title",
-                                                                                                                                          "tag":  "h3",
-                                                                                                                                          "text":  "Digitalización y Tecnología Empresarial"
-                                                                                                                                      },
-                                                                                                                                      {
-                                                                                                                                          "element":  "text",
-                                                                                                                                          "id":  "curso-1-desc",
-                                                                                                                                          "class":  "card-text",
-                                                                                                                                          "tag":  "p",
-                                                                                                                                          "text":  "Una inmersión estratégica en los cimientos de la Industria 4.0. Entiende cómo la infraestructura segura y el motor ACIDE protegen el activo más valioso de tu negocio: el dato."
-                                                                                                                                      }
-                                                                                                                                  ]
-                                                                                                                  },
-                                                                                                                  {
-                                                                                                                      "element":  "card",
-                                                                                                                      "id":  "curso-2",
-                                                                                                                      "class":  "card",
-                                                                                                                      "content":  [
-                                                                                                                                      {
-                                                                                                                                          "element":  "heading",
-                                                                                                                                          "id":  "curso-2-title",
-                                                                                                                                          "class":  "card-title",
-                                                                                                                                          "tag":  "h3",
-                                                                                                                                          "text":  "Iniciativa Emprendedora en la Era de la IA"
-                                                                                                                                      },
-                                                                                                                                      {
-                                                                                                                                          "element":  "text",
-                                                                                                                                          "id":  "curso-2-desc",
-                                                                                                                                          "class":  "card-text",
-                                                                                                                                          "tag":  "p",
-                                                                                                                                          "text":  "Convierte ideas en modelos de negocio escalables utilizando el ecosistema modular de Gestas OS. Aprende a crear soluciones que crecen con tu comunidad."
-                                                                                                                                      }
-                                                                                                                                  ]
-                                                                                                                  },
-                                                                                                                  {
-                                                                                                                      "element":  "card",
-                                                                                                                      "id":  "curso-3",
-                                                                                                                      "class":  "card",
-                                                                                                                      "content":  [
-                                                                                                                                      {
-                                                                                                                                          "element":  "heading",
-                                                                                                                                          "id":  "curso-3-title",
-                                                                                                                                          "class":  "card-title",
-                                                                                                                                          "tag":  "h3",
-                                                                                                                                          "text":  "IA \u0026 Habilidades Blandas (Soft Skills)"
-                                                                                                                                      },
-                                                                                                                                      {
-                                                                                                                                          "element":  "text",
-                                                                                                                                          "id":  "curso-3-desc",
-                                                                                                                                          "class":  "card-text",
-                                                                                                                                          "tag":  "p",
-                                                                                                                                          "text":  "Descubre cómo la IA potencia tu pensamiento crítico y comunicación. Un entorno interactivo donde humanos y algoritmos colaboran para alcanzar el éxito profesional sin perder la esencia humana."
-                                                                                                                                      }
-                                                                                                                                  ]
-                                                                                                                  }
-                                                                                                              ]
+                                                                                                  "text":  "�ltimas Publicaciones"
                                                                                               },
                                                                                               {
                                                                                                   "element":  "text",
-                                                                                                  "id":  "cursos-note",
-                                                                                                  "class":  "text-small text-center mt-xl",
+                                                                                                  "id":  "pubs-subtitle-0018",
+                                                                                                  "class":  "text-body text-center mb-2xl",
                                                                                                   "tag":  "p",
-                                                                                                  "text":  "Todos los cursos introductorios requieren registro previo para garantizar un entorno de aprendizaje seguro y personalizado."
+                                                                                                  "text":  "Explora nuestro contenido m�s reciente"
+                                                                                              },
+                                                                                              {
+                                                                                                  "element":  "query-loop",
+                                                                                                  "id":  "posts-loop-0019",
+                                                                                                  "class":  "grid grid-3",
+                                                                                                  "collection":  "posts",
+                                                                                                  "limit":  6,
+                                                                                                  "empty_message":  "Sin contenidos"
                                                                                               }
                                                                                           ]
                                                                           }
                                                                       ]
                                                       },
                                                       {
-                                                          "element":  "section",
-                                                          "id":  "premium",
-                                                          "class":  "section section-premium",
-                                                          "content":  [
-                                                                          {
-                                                                              "element":  "container",
-                                                                              "id":  "premium-container",
-                                                                              "class":  "container",
-                                                                              "content":  [
-                                                                                              {
-                                                                                                  "element":  "heading",
-                                                                                                  "id":  "premium-title",
-                                                                                                  "class":  "heading-2 text-center mb-2xl",
-                                                                                                  "tag":  "h2",
-                                                                                                  "text":  "Gestas Academy Premium"
-                                                                                              },
-                                                                                              {
-                                                                                                  "element":  "grid",
-                                                                                                  "id":  "premium-grid",
-                                                                                                  "class":  "grid grid-2",
-                                                                                                  "content":  [
-                                                                                                                  {
-                                                                                                                      "element":  "card",
-                                                                                                                      "id":  "premium-1",
-                                                                                                                      "class":  "card card-premium",
-                                                                                                                      "content":  [
-                                                                                                                                      {
-                                                                                                                                          "element":  "heading",
-                                                                                                                                          "id":  "premium-1-title",
-                                                                                                                                          "class":  "card-title",
-                                                                                                                                          "tag":  "h3",
-                                                                                                                                          "text":  "Prompt Engineering: Mejora tus Habilidades"
-                                                                                                                                      },
-                                                                                                                                      {
-                                                                                                                                          "element":  "text",
-                                                                                                                                          "id":  "premium-1-desc",
-                                                                                                                                          "class":  "card-text",
-                                                                                                                                          "tag":  "p",
-                                                                                                                                          "text":  "Domina el arte de comunicarte con los modelos de lenguaje. Aprende a estructurar instrucciones que extraigan el máximo valor de la IA de forma ética y precisa."
-                                                                                                                                      },
-                                                                                                                                      {
-                                                                                                                                          "element":  "button",
-                                                                                                                                          "id":  "premium-1-cta",
-                                                                                                                                          "class":  "btn btn-primary mt-lg",
-                                                                                                                                          "text":  "49€/mes - Comenzar",
-                                                                                                                                          "link":  "/premium/prompt-engineering"
-                                                                                                                                      }
-                                                                                                                                  ]
-                                                                                                                  },
-                                                                                                                  {
-                                                                                                                      "element":  "card",
-                                                                                                                      "id":  "premium-2",
-                                                                                                                      "class":  "card card-premium",
-                                                                                                                      "content":  [
-                                                                                                                                      {
-                                                                                                                                          "element":  "heading",
-                                                                                                                                          "id":  "premium-2-title",
-                                                                                                                                          "class":  "card-title",
-                                                                                                                                          "tag":  "h3",
-                                                                                                                                          "text":  "Prompt Engineering Avanzado: Potencia tu Productividad"
-                                                                                                                                      },
-                                                                                                                                      {
-                                                                                                                                          "element":  "text",
-                                                                                                                                          "id":  "premium-2-desc",
-                                                                                                                                          "class":  "card-text",
-                                                                                                                                          "tag":  "p",
-                                                                                                                                          "text":  "Optimización de flujos de trabajo de alto rendimiento. Integra la IA en procesos complejos de toma de decisiones y automatización industrial bajo el marco del EU AI Act."
-                                                                                                                                      },
-                                                                                                                                      {
-                                                                                                                                          "element":  "button",
-                                                                                                                                          "id":  "premium-2-cta",
-                                                                                                                                          "class":  "btn btn-primary mt-lg",
-                                                                                                                                          "text":  "99€/mes - Comenzar",
-                                                                                                                                          "link":  "/premium/prompt-engineering-avanzado"
-                                                                                                                                      }
-                                                                                                                                  ]
-                                                                                                                  }
-                                                                                                              ]
-                                                                                              }
-                                                                                          ]
-                                                                          }
-                                                                      ]
+                                                          "element":  "image",
+                                                          "id":  "image-1765193154072-7007",
+                                                          "class":  "w-full",
+                                                          "src":  "/uploads/2025/12/fondo-ondulado-hermoso-23-2148465606-media_6935724bcc543.jpg",
+                                                          "alt":  "borrador",
+                                                          "width":  "50%",
+                                                          "height":  "auto",
+                                                          "mediaId":  "media_6935724bcc543",
+                                                          "mediaData":  {
+                                                                            "id":  "media_6935724bcc543",
+                                                                            "filename":  "fondo-ondulado-hermoso-23-2148465606-media_6935724bcc543.jpg",
+                                                                            "title":  "borrador",
+                                                                            "type":  "image/jpeg",
+                                                                            "size":  17417,
+                                                                            "url":  "/uploads/2025/12/fondo-ondulado-hermoso-23-2148465606-media_6935724bcc543.jpg",
+                                                                            "created_at":  "2025-12-07T12:25:47+00:00"
+                                                                        },
+                                                          "customStyles":  {
+                                                                               "margin":  "0 0 0 auto"
+                                                                           }
+                                                      },
+                                                      {
+                                                          "element":  "video",
+                                                          "id":  "video-1765195380661-7434",
+                                                          "class":  "w-full",
+                                                          "src":  "",
+                                                          "type":  "youtube",
+                                                          "youtubeId":  "byYlC2cagLw",
+                                                          "controls":  true,
+                                                          "autoplay":  false,
+                                                          "loop":  false,
+                                                          "poster":  "https://effvision.com/wp-content/uploads/2024/06/artificial-intelligence-new-technology-science-futuristic-abstract-human-brain-ai-technology-cpu-central-processor-unit-chipset-big-data-machine-learning-cyber-mind-domination-generative-ai-scaled-1.jpg",
+                                                          "customStyles":  {
+                                                                               "margin":  "0 auto",
+                                                                               "border-radius":  "25pxpx"
+                                                                           }
                                                       }
                                                   ]
                                   },
                                   {
                                       "section":  "footer",
-                                      "id":  "footer-academia",
+                                      "id":  "footer-0020",
                                       "class":  "footer",
                                       "content":  [
                                                       {
                                                           "element":  "container",
-                                                          "id":  "footer-container",
-                                                          "class":  "container",
+                                                          "id":  "footer-container-0021",
+                                                          "class":  "footer-content",
                                                           "content":  [
                                                                           {
                                                                               "element":  "text",
-                                                                              "id":  "copyright",
-                                                                              "class":  "footer-text text-center",
+                                                                              "id":  "copyright-0022",
+                                                                              "class":  "footer-text",
                                                                               "tag":  "p",
-                                                                              "text":  "© 2025 Gestas Academy. Todos los derechos reservados. Lidera la soberanía digital."
+                                                                              "text":  "� 2024 GestasAI. Todos los derechos reservados."
+                                                                          },
+                                                                          {
+                                                                              "element":  "text",
+                                                                              "id":  "version-0023",
+                                                                              "class":  "footer-version",
+                                                                              "tag":  "p",
+                                                                              "text":  "Marco CMS v1.0 Alpha"
                                                                           }
                                                                       ]
                                                       }
@@ -323,6 +221,6 @@
                                   }
                               ]
              },
-    "_updatedAt":  "2025-12-21T20:00:00+00:00",
-    "_createdAt":  "2025-12-21T20:00:00+00:00"
+    "_updatedAt":  "2025-12-08T16:42:07+00:00",
+    "_createdAt":  "2025-12-07T19:04:36+00:00"
 }

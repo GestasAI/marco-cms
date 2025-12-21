@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react()],
+    publicDir: 'public',
     server: {
       proxy: {
         '/api': {
@@ -31,7 +32,15 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           secure: false
         }
+      },
+      // Middleware para servir archivos JSON correctamente
+      middlewareMode: false,
+      fs: {
+        strict: false,
+        allow: ['..']
       }
-    }
+    },
+    // Asegurar que los archivos estáticos se sirvan correctamente
+    assetsInclude: ['**/*.json']
   };
 });

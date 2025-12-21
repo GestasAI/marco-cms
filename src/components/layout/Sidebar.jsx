@@ -1,4 +1,6 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation ,
+    Download
+} from 'react-router-dom';
 import {
     LayoutDashboard,
     FileText,
@@ -13,6 +15,8 @@ import {
     Image,
     GraduationCap,
     Users
+,
+    Download
 } from 'lucide-react';
 
 export default function Sidebar({ isOpen, onClose }) {
@@ -33,6 +37,7 @@ export default function Sidebar({ isOpen, onClose }) {
         { icon: Palette, label: 'Temas', path: '/dashboard/themes' },
         { icon: Palette, label: 'Partes de Tema', path: '/dashboard/theme-parts' },
         { icon: Search, label: 'SEO', path: '/dashboard/seo' },
+        { icon: Download, label: 'Generar Sitio', path: '/dashboard/build' },
         { icon: Settings, label: 'Sistema', path: '/dashboard/settings' }
     ];
 
@@ -77,3 +82,4 @@ export default function Sidebar({ isOpen, onClose }) {
         </aside>
     );
 }
+

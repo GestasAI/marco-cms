@@ -212,9 +212,48 @@ export const acideService = {
     // Plugin Management (Local)
     listPlugins: async () => acideService.list('plugins'),
 
+    
+    // Static Site Generation
+    buildSite: async () => {
+        const payload = { action: 'build_site' };
+        const headers = { 'Content-Type': 'application/json' };
+        const token = localStorage.getItem('marco_token');
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+        const json = await response.json();
+        if (json.status === 'error') throw new Error(json.message);
+        return json.data;
+    },
+
+    generateSitemap: async (baseUrl = 'https://example.com') => {
+        const payload = { action: 'generate_sitemap', base_url: baseUrl };
+        const headers = { 'Content-Type': 'application/json' };
+        const token = localStorage.getItem('marco_token');
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+        const json = await response.json();
+        if (json.status === 'error') throw new Error(json.message);
+        return json.data;
+    },
+
     // Legacy Aliases
     request: async (action, collection, id, data) => acideService._phpRequest(action, collection, id, data),
     findById: async (collection, id) => acideService.get(collection, id)
 };
+
 
 

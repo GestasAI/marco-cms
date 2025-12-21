@@ -24,39 +24,6 @@ export function normalizeSlug(slug) {
 }
 
 /**
- * Obtiene el tema activo desde settings
- */
-async function getActiveTheme() {
-    try {
-        const settings = await acideService.get('theme_settings', 'current');
-        return settings?.active_theme || 'gestasai-default';
-    } catch (err) {
-        console.warn('No se pudo obtener tema activo, usando default');
-        return 'gestasai-default';
-    }
-}
-
-/**
- * Intenta cargar una página desde el tema activo
- */
-export async function loadPageFromTheme(slug) {
-    try {
-        const activeTheme = await getActiveTheme();
-        const response = await fetch(`/themes/${activeTheme}/pages/${slug}.json`);
-
-        if (response.ok) {
-            const pageData = await response.json();
-            console.log(`✅ Cargado desde tema: ${activeTheme}/pages/${slug}.json`);
-            return pageData;
-        }
-        return null;
-    } catch (err) {
-        console.warn('Carga desde tema falló:', err);
-        return null;
-    }
-}
-
-/**
  * Intenta cargar una página desde ACIDE
  */
 export async function loadPageFromACIDE(slug) {
@@ -85,7 +52,7 @@ export async function loadPageFromJSON(slug) {
         const response = await fetch(`/data/pages/${slug}.json`);
         if (response.ok) {
             const pageData = await response.json();
-            console.log('✅ Cargado desde /data/pages');
+            console.log(`✅ Cargado desde /data/pages/${slug}.json`);
             return pageData;
         }
         return null;
@@ -97,9 +64,11 @@ export async function loadPageFromJSON(slug) {
 
 /**
  * Carga una página con el siguiente orden de prioridad:
- * 1. Desde el tema activo (para 'home' y páginas específicas del tema)
- * 2. Desde ACIDE (contenido creado por el usuario)
- * 3. Desde /data/pages (fallback)
+ * 1. Desde ACIDE (contenido creado por el usuario)
+ * 2. Desde /data/pages (fallback para desarrollo)
+ * 
+ * NOTA: En producción, ACIDE generará HTML estático del tema activo.
+ * El tema se aplica mediante theme.css que se carga dinámicamente.
  */
 export async function loadPageData(slug) {
     const normalizedSlug = normalizeSlug(slug);
@@ -109,15 +78,11 @@ export async function loadPageData(slug) {
         return null;
     }
 
-    // 1. Intentar cargar desde el tema activo (especialmente para 'home')
-    let pageData = await loadPageFromTheme(normalizedSlug);
+    // 1. Intentar cargar desde ACIDE (contenido del usuario)
+    let pageData = await loadPageFromACIDE(normalizedSlug);
     if (pageData) return pageData;
 
-    // 2. Intentar cargar desde ACIDE (contenido del usuario)
-    pageData = await loadPageFromACIDE(normalizedSlug);
-    if (pageData) return pageData;
-
-    // 3. Fallback: cargar desde /data/pages
+    // 2. Fallback: cargar desde /data/pages
     pageData = await loadPageFromJSON(normalizedSlug);
 
     return pageData;

@@ -6,6 +6,7 @@ require_once 'FileManager.php';
 require_once 'QueryEngine.php';
 require_once 'ThemeManager.php';
 require_once 'ThemeFileManager.php';
+require_once 'StaticGenerator.php';
 
 class ACIDE
 {
@@ -16,6 +17,7 @@ class ACIDE
     private $queryEngine;
     private $themeManager;
     private $themeFileManager;
+    private $staticGenerator;
 
     public function __construct()
     {
@@ -25,6 +27,7 @@ class ACIDE
         $this->queryEngine = new QueryEngine();
         $this->themeManager = new ThemeManager();
         $this->themeFileManager = new ThemeFileManager();
+        $this->staticGenerator = new StaticGenerator(DATA_ROOT . '/../themes', DATA_ROOT, DATA_ROOT . '/../dist', $this->crud);
     }
 
     /**
@@ -123,3 +126,5 @@ class ACIDE
         }
     }
 }
+
+
