@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // Layouts
@@ -94,7 +94,7 @@ function App() {
                         <Route path="settings" element={<Settings />} />
                         <Route path="academy" element={<AcademyAdmin />} />
                         <Route path="users" element={<Users />} />
-                        \u003cRoute path="build" element={\u003cBuildSite /\u003e} /\u003e
+                        <Route path="build" element={<BuildSite />} />
                     </Route>
 
                     {/* FSE Editor (Full Screen - Protected) */}
@@ -122,3 +122,4 @@ function App() {
 }
 
 export default App;
+
