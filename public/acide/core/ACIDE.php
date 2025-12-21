@@ -7,6 +7,7 @@ require_once 'QueryEngine.php';
 require_once 'ThemeManager.php';
 require_once 'ThemeFileManager.php';
 require_once 'StaticGenerator.php';
+require_once 'AIContentGenerator.php';
 
 class ACIDE
 {
@@ -126,5 +127,6 @@ class ACIDE
         }
     }
 }
+
 
 

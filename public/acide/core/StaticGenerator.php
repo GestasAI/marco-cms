@@ -12,6 +12,7 @@
 
 class StaticGenerator
 {
+    private $aiGenerator;
     private $themesDir;
     private $dataDir;
     private $outputDir;
@@ -23,6 +24,7 @@ class StaticGenerator
         $this->dataDir = $dataDir;
         $this->outputDir = $outputDir;
         $this->crud = $crud;
+        $this->aiGenerator = new AIContentGenerator();
     }
 
     /**
@@ -189,6 +191,11 @@ class StaticGenerator
         $ogImage = $pageData['seo']['og_image'] ?? '';
         $canonical = $pageData['seo']['canonical'] ?? '';
 
+        // Generar contenido para IA
+        $schema = $this->aiGenerator->generateSchema($pageData, $canonical ?: 'https://gestasai.com');
+        $aiMetaTags = $this->aiGenerator->generateAIMetaTags($pageData);
+        $breadcrumbSchema = $this->aiGenerator->generateBreadcrumbSchema($pageData, $canonical ?: 'https://gestasai.com');
+
         // Renderizar contenido
         $bodyContent = '';
         if (isset($pageData['page']['sections'])) {
@@ -213,6 +220,9 @@ class StaticGenerator
     <meta name="description" content="$description">
     <meta name="keywords" content="$keywords">
     
+    <!-- AI-Optimized Meta Tags -->
+    $aiMetaTags
+    
     <!-- Open Graph -->
     <meta property="og:title" content="$title">
     <meta property="og:description" content="$description">
@@ -221,6 +231,16 @@ class StaticGenerator
     
     <!-- Canonical -->
     <link rel="canonical" href="$canonical">
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+$schema
+    </script>
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+$breadcrumbSchema
+    </script>
     
     <!-- Theme CSS -->
     <style>
@@ -334,3 +354,5 @@ HTML;
         return '✅ Generated: sitemap.xml';
     }
 }
+
+
