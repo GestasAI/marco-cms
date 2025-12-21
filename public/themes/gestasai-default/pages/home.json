@@ -1,226 +1,56 @@
-{
-    "id":  "home",
-    "title":  "Inicio - Marco CMS",
-    "slug":  "home",
-    "status":  "published",
-    "template":  "index",
-    "author":  "admin",
-    "created_at":  "2024-12-07T12:00:00+00:00",
-    "updated_at":  "2025-12-08T16:42:07.812Z",
-    "seo":  {
-                "meta_title":  "Marco CMS - Sistema de Gestión de Contenidos Moderno",
-                "meta_description":  "Marco CMS es un sistema de gestión de contenidos moderno, potente y fácil de usar. Crea y gestiona tu sitio web de forma visual.",
-                "meta_keywords":  "cms, gestor de contenidos, marco cms, gestasai, editor visual",
-                "og_title":  "Marco CMS - Sistema de Gestión de Contenidos",
-                "og_description":  "Sistema de gestión de contenidos moderno y potente",
-                "og_image":  "/images/og-image.jpg",
-                "canonical":  "https://marcocms.com/"
-            },
-    "page":  {
-                 "id":  "page-inicio-0001",
-                 "class":  "body",
-                 "sections":  [
-                                  {
-                                      "section":  "header",
-                                      "id":  "header-0002",
-                                      "class":  "header",
-                                      "content":  [
-                                                      {
-                                                          "element":  "container",
-                                                          "id":  "header-container-0003",
-                                                          "class":  "header-content",
-                                                          "content":  [
-                                                                          {
-                                                                              "element":  "logo",
-                                                                              "id":  "logo-0004",
-                                                                              "class":  "logo",
-                                                                              "content":  [
-                                                                                              {
-                                                                                                  "element":  "text",
-                                                                                                  "id":  "logo-text-0005",
-                                                                                                  "class":  "brand",
-                                                                                                  "tag":  "span",
-                                                                                                  "text":  "M"
-                                                                                              }
-                                                                                          ]
-                                                                          },
-                                                                          {
-                                                                              "element":  "heading",
-                                                                              "id":  "site-title-0006",
-                                                                              "class":  "heading-1",
-                                                                              "tag":  "h1",
-                                                                              "text":  "Marco CMS"
-                                                                          },
-                                                                          {
-                                                                              "element":  "text",
-                                                                              "id":  "tagline-0007",
-                                                                              "class":  "tagline",
-                                                                              "tag":  "p",
-                                                                              "text":  "Powered by GestasAI"
-                                                                          },
-                                                                          {
-                                                                              "element":  "button",
-                                                                              "id":  "admin-btn-0008",
-                                                                              "class":  "btn btn-primary btn-sm",
-                                                                              "text":  "Admin",
-                                                                              "link":  "/dashboard",
-                                                                              "target":  "_self"
-                                                                          }
-                                                                      ]
-                                                      }
-                                                  ]
-                                  },
-                                  {
-                                      "section":  "content",
-                                      "id":  "content-0009",
-                                      "class":  "content",
-                                      "content":  [
-                                                      {
-                                                          "element":  "section",
-                                                          "id":  "hero-0010",
-                                                          "class":  "hero",
-                                                          "content":  [
-                                                                          {
-                                                                              "element":  "container",
-                                                                              "id":  "hero-container-0011",
-                                                                              "class":  "container hero-content",
-                                                                              "content":  [
-                                                                                              {
-                                                                                                  "element":  "heading",
-                                                                                                  "id":  "hero-title-0012",
-                                                                                                  "class":  "heading-1 heading-hero-title-0012 text-white text-black",
-                                                                                                  "tag":  "h1",
-                                                                                                  "text":  "Bienvenido a Marco CMS",
-                                                                                                  "customStyles":  {
-                                                                                                                       "color":  "#ffffff"
-                                                                                                                   }
-                                                                                              },
-                                                                                              {
-                                                                                                  "element":  "text",
-                                                                                                  "id":  "hero-subtitle-0013",
-                                                                                                  "class":  "text-black p-md text-hero-subtitle-0013 text-right",
-                                                                                                  "tag":  "p",
-                                                                                                  "text":  "Sistema de Gestión de Contenidos moderno y potentes",
-                                                                                                  "customStyles":  [
-
-                                                                                                                   ]
-                                                                                              },
-                                                                                              {
-                                                                                                  "element":  "search",
-                                                                                                  "id":  "search-0014",
-                                                                                                  "class":  "card search-box",
-                                                                                                  "placeholder":  "Buscar contenidos..."
-                                                                                              }
-                                                                                          ]
-                                                                          }
-                                                                      ]
-                                                      },
-                                                      {
-                                                          "element":  "section",
-                                                          "id":  "publications-0015",
-                                                          "class":  "section",
-                                                          "content":  [
-                                                                          {
-                                                                              "element":  "container",
-                                                                              "id":  "pubs-container-0016",
-                                                                              "class":  "container",
-                                                                              "content":  [
-                                                                                              {
-                                                                                                  "element":  "heading",
-                                                                                                  "id":  "pubs-title-0017",
-                                                                                                  "class":  "heading-2 text-center mb-xl",
-                                                                                                  "tag":  "h2",
-                                                                                                  "text":  "Últimas Publicaciones"
-                                                                                              },
-                                                                                              {
-                                                                                                  "element":  "text",
-                                                                                                  "id":  "pubs-subtitle-0018",
-                                                                                                  "class":  "text-body text-center mb-2xl",
-                                                                                                  "tag":  "p",
-                                                                                                  "text":  "Explora nuestro contenido más reciente"
-                                                                                              },
-                                                                                              {
-                                                                                                  "element":  "query-loop",
-                                                                                                  "id":  "posts-loop-0019",
-                                                                                                  "class":  "grid grid-3",
-                                                                                                  "collection":  "posts",
-                                                                                                  "limit":  6,
-                                                                                                  "empty_message":  "Sin contenidos"
-                                                                                              }
-                                                                                          ]
-                                                                          }
-                                                                      ]
-                                                      },
-                                                      {
-                                                          "element":  "image",
-                                                          "id":  "image-1765193154072-7007",
-                                                          "class":  "w-full",
-                                                          "src":  "/uploads/2025/12/fondo-ondulado-hermoso-23-2148465606-media_6935724bcc543.jpg",
-                                                          "alt":  "borrador",
-                                                          "width":  "50%",
-                                                          "height":  "auto",
-                                                          "mediaId":  "media_6935724bcc543",
-                                                          "mediaData":  {
-                                                                            "id":  "media_6935724bcc543",
-                                                                            "filename":  "fondo-ondulado-hermoso-23-2148465606-media_6935724bcc543.jpg",
-                                                                            "title":  "borrador",
-                                                                            "type":  "image/jpeg",
-                                                                            "size":  17417,
-                                                                            "url":  "/uploads/2025/12/fondo-ondulado-hermoso-23-2148465606-media_6935724bcc543.jpg",
-                                                                            "created_at":  "2025-12-07T12:25:47+00:00"
-                                                                        },
-                                                          "customStyles":  {
-                                                                               "margin":  "0 0 0 auto"
-                                                                           }
-                                                      },
-                                                      {
-                                                          "element":  "video",
-                                                          "id":  "video-1765195380661-7434",
-                                                          "class":  "w-full",
-                                                          "src":  "",
-                                                          "type":  "youtube",
-                                                          "youtubeId":  "byYlC2cagLw",
-                                                          "controls":  true,
-                                                          "autoplay":  false,
-                                                          "loop":  false,
-                                                          "poster":  "https://effvision.com/wp-content/uploads/2024/06/artificial-intelligence-new-technology-science-futuristic-abstract-human-brain-ai-technology-cpu-central-processor-unit-chipset-big-data-machine-learning-cyber-mind-domination-generative-ai-scaled-1.jpg",
-                                                          "customStyles":  {
-                                                                               "margin":  "0 auto",
-                                                                               "border-radius":  "25pxpx"
-                                                                           }
-                                                      }
-                                                  ]
-                                  },
-                                  {
-                                      "section":  "footer",
-                                      "id":  "footer-0020",
-                                      "class":  "footer",
-                                      "content":  [
-                                                      {
-                                                          "element":  "container",
-                                                          "id":  "footer-container-0021",
-                                                          "class":  "footer-content",
-                                                          "content":  [
-                                                                          {
-                                                                              "element":  "text",
-                                                                              "id":  "copyright-0022",
-                                                                              "class":  "footer-text",
-                                                                              "tag":  "p",
-                                                                              "text":  "© 2024 GestasAI. Todos los derechos reservados."
-                                                                          },
-                                                                          {
-                                                                              "element":  "text",
-                                                                              "id":  "version-0023",
-                                                                              "class":  "footer-version",
-                                                                              "tag":  "p",
-                                                                              "text":  "Marco CMS v1.0 Alpha"
-                                                                          }
-                                                                      ]
-                                                      }
-                                                  ]
-                                  }
-                              ]
-             },
-    "_updatedAt":  "2025-12-08T16:42:07+00:00",
-    "_createdAt":  "2025-12-07T19:04:36+00:00"
+ï»¿{
+    "id": "home",
+    "title": "Bienvenido a Marco CMS",
+    "slug": "home",
+    "status": "published",
+    "template": "index",
+    "author": "admin",
+    "created_at": "2024-12-07T12:00:00+00:00",
+    "updated_at": "2025-12-21T22:00:00+00:00",
+    "seo": {
+        "meta_title": "Marco CMS - El CMS mÃ¡s rÃ¡pido del mundo",
+        "meta_description": "Marco CMS es un sistema de gestiÃ³n de contenidos ultrarrÃ¡pido.",
+        "meta_keywords": "cms, marco, gestasai",
+        "og_image": "/media/marco-og.jpg",
+        "canonical": "https://gestasai.com/"
+    },
+    "page": {
+        "sections": [
+            {
+                "section": "section",
+                "id": "hero",
+                "class": "hero",
+                "content": [
+                    {
+                        "element": "container",
+                        "id": "hero-container",
+                        "class": "container",
+                        "content": [
+                            {
+                                "element": "heading",
+                                "id": "hero-title",
+                                "class": "hero-title",
+                                "tag": "h1",
+                                "text": "Bienvenido a Marco CMS"
+                            },
+                            {
+                                "element": "text",
+                                "id": "hero-subtitle",
+                                "class": "hero-subtitle",
+                                "tag": "p",
+                                "text": "El CMS mÃ¡s rÃ¡pido del mundo"
+                            },
+                            {
+                                "element": "button",
+                                "id": "hero-cta",
+                                "class": "btn btn-primary",
+                                "text": "Comenzar Ahora",
+                                "link": "/dashboard"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 }
