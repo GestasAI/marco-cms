@@ -125,7 +125,27 @@ export const ThemeProvider = ({ children }) => {
         }
     };
 
-    const value = { settings, isLoading, error, applySettings, saveSettings, loadSettings };
+    
+    const changeTheme = async (themeId) => {
+        try {
+            // Activate theme via ACIDE
+            await acideService.activateTheme(themeId);
+            
+            // Reload settings to get new theme
+            await loadSettings();
+            
+            // Force reload to clear any cached content
+            window.location.reload();
+            
+            return true;
+        } catch (err) {
+            console.error("Error changing theme:", err);
+            setError('No se pudo cambiar el tema.');
+            return false;
+        }
+    };
+
+    const value = { settings, isLoading, error, applySettings, saveSettings, loadSettings , changeTheme };
 
     return (
         <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>

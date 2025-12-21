@@ -40,6 +40,8 @@ const SiteSettings = () => {
             // Reload settings to apply changes (ThemeContext will pick up new active_theme)
             await loadSettings();
             alert(`Tema ${themeId} activado correctamente.`);
+            // Reload page to apply new theme
+            window.location.reload();
         } catch (e) {
             alert('Error al activar el tema.');
             console.error(e);
