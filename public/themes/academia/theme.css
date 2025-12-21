@@ -1,0 +1,626 @@
+/* 
+ * Gestas Academy Theme - Premium Apple-Inspired Design
+ * Elegante, Minimalista y Tecnológico
+ */
+
+/* ========================================
+   CSS VARIABLES (Design Tokens)
+   ======================================== */
+
+:root {
+    /* Colors */
+    --color-primary: #5B8FF9;
+    --color-primary-dark: #4A7FE8;
+    --color-secondary: #A78BFA;
+    --color-accent: #60A5FA;
+    
+    --color-bg: #FFFFFF;
+    --color-bg-dark: #1A1D2E;
+    --color-surface: #F8FAFC;
+    --color-surface-dark: #252A3F;
+    
+    --color-text: #0F172A;
+    --color-text-secondary: #475569;
+    --color-text-muted: #94A3B8;
+    --color-text-inverse: #FFFFFF;
+    
+    --color-border: #E2E8F0;
+    --color-border-dark: #334155;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, #5B8FF9 0%, #A78BFA 100%);
+    --gradient-card: linear-gradient(135deg, rgba(91, 143, 249, 0.05) 0%, rgba(167, 139, 250, 0.05) 100%);
+    --gradient-premium: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+    --gradient-radial: radial-gradient(circle at center, rgba(91, 143, 249, 0.15) 0%, transparent 70%);
+    
+    /* Typography */
+    --font-sans: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+    
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    --text-6xl: 3.75rem;
+    --text-7xl: 4.5rem;
+    
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+    --space-4xl: 6rem;
+    --space-5xl: 8rem;
+    --space-6xl: 12rem;
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-3xl: 2rem;
+    --radius-full: 9999px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    --shadow-glow: 0 0 20px rgba(91, 143, 249, 0.3);
+    
+    /* Effects */
+    --blur-sm: 4px;
+    --blur-md: 8px;
+    --blur-lg: 16px;
+    --blur-xl: 24px;
+}
+
+/* ========================================
+   RESET & BASE
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-text);
+    background: var(--color-bg);
+    overflow-x: hidden;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
+.heading-1 {
+    font-size: var(--text-7xl);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.05em;
+    margin-bottom: var(--space-lg);
+    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.heading-2 {
+    font-size: var(--text-6xl);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    margin-bottom: var(--space-lg);
+}
+
+.heading-3 {
+    font-size: var(--text-5xl);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+}
+
+.heading-4 {
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: var(--space-md);
+}
+
+.heading-5 {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: var(--space-sm);
+}
+
+.heading-6 {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: var(--space-sm);
+}
+
+.text-lead {
+    font-size: var(--text-xl);
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
+.text-body {
+    font-size: var(--text-lg);
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.text-small {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+/* ========================================
+   LAYOUT
+   ======================================== */
+
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+}
+
+.section {
+    padding: var(--space-5xl) 0;
+    position: relative;
+}
+
+.section-premium {
+    background: var(--gradient-premium);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* ========================================
+   HERO SECTION (Apple Style)
+   ======================================== */
+
+.hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg);
+    overflow: hidden;
+    padding: var(--space-6xl) 0;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150%;
+    height: 150%;
+    background: var(--gradient-radial);
+    pointer-events: none;
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.8; transform: translateX(-50%) scale(1.1); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero .heading-1 {
+    font-size: var(--text-7xl);
+    margin-bottom: var(--space-xl);
+}
+
+.hero .text-lead {
+    font-size: var(--text-2xl);
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2xl);
+}
+
+/* ========================================
+   CARDS (Glassmorphism)
+   ======================================== */
+
+.card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-glass);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-hero);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-2xl);
+    border-color: rgba(91, 143, 249, 0.3);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card-title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
+}
+
+.card-text {
+    font-size: var(--text-base);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+}
+
+/* Card Premium (para cursos de pago) */
+.card-premium {
+    background: linear-gradient(135deg, rgba(91, 143, 249, 0.05) 0%, rgba(167, 139, 250, 0.05) 100%);
+    border: 2px solid var(--color-primary);
+}
+
+.card-premium::before {
+    opacity: 1;
+}
+
+/* ========================================
+   BUTTONS (Minimalista Apple)
+   ======================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-2xl);
+    font-size: var(--text-base);
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: var(--gradient-hero);
+    color: var(--color-text-inverse);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px) scale(1.02);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+}
+
+.btn-lg {
+    padding: var(--space-lg) var(--space-3xl);
+    font-size: var(--text-lg);
+}
+
+.btn-sm {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--text-sm);
+}
+
+/* ========================================
+   GRID SYSTEM
+   ======================================== */
+
+.grid {
+    display: grid;
+    gap: var(--space-2xl);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* ========================================
+   HEADER (Glassmorphism Navbar)
+   ======================================== */
+
+.header {
+    position: fixed;
+    top: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - var(--space-4xl));
+    max-width: 1200px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-3xl);
+    padding: var(--space-md) var(--space-xl);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-glass);
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.logo {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--gradient-hero);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+}
+
+.nav {
+    display: flex;
+    gap: var(--space-xl);
+    align-items: center;
+}
+
+.nav-link {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--color-primary);
+}
+
+.nav-link.active {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.footer {
+    background: var(--color-bg-dark);
+    color: var(--color-text-inverse);
+    padding: var(--space-4xl) 0 var(--space-2xl);
+    margin-top: var(--space-6xl);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3xl);
+    margin-bottom: var(--space-3xl);
+}
+
+.footer-section h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-inverse);
+}
+
+.footer-section p,
+.footer-section a {
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    line-height: 2;
+    transition: color 0.2s ease;
+}
+
+.footer-section a:hover {
+    color: var(--color-primary);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--color-border-dark);
+    padding-top: var(--space-xl);
+    text-align: center;
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ========================================
+   UTILITIES
+   ======================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.text-gradient {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+.mb-2xl { margin-bottom: var(--space-2xl); }
+
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+.mt-2xl { margin-top: var(--space-2xl); }
+
+.py-xl { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
+.py-2xl { padding-top: var(--space-2xl); padding-bottom: var(--space-2xl); }
+.py-3xl { padding-top: var(--space-3xl); padding-bottom: var(--space-3xl); }
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .grid-3, .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .heading-1 {
+        font-size: var(--text-5xl);
+    }
+    
+    .heading-2 {
+        font-size: var(--text-4xl);
+    }
+    
+    .hero {
+        min-height: 70vh;
+        padding: var(--space-4xl) 0;
+    }
+    
+    .hero .heading-1 {
+        font-size: var(--text-5xl);
+    }
+    
+    .hero .text-lead {
+        font-size: var(--text-lg);
+    }
+    
+    .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .header {
+        width: calc(100% - var(--space-xl));
+        top: var(--space-sm);
+    }
+    
+    .nav {
+        gap: var(--space-md);
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.float {
+    animation: float 6s ease-in-out infinite;
+}

@@ -38,8 +38,20 @@ export default function Media() {
 
         try {
             setLoading(true);
-            const uploadedFile = await acideService.upload(file);
-            setFiles(prev => [uploadedFile, ...prev]);
+            const result = await acideService.upload(file);
+            if (result && result.url) {
+                const newMediaEntry = {
+                    id: `media-${Date.now()}`,
+                    title: file.name,
+                    filename: result.url.split('/').pop(),
+                    url: result.url,
+                    type: file.type || 'application/octet-stream',
+                    size: file.size,
+                    created_at: new Date().toISOString()
+                };
+                await acideService.create('media', newMediaEntry);
+                setFiles(prev => [newMediaEntry, ...prev]);
+            }
         } catch (error) {
             console.error(error);
             alert(`Error al subir archivo: ${error.message}`);
@@ -157,7 +169,9 @@ export default function Media() {
                                 <div className="font-bold truncate text-gray-800" title={file.title}>{file.title}</div>
                                 <div className="flex-between mt-1 text-secondary">
                                     <span>{formatSize(file.size)}</span>
-                                    <span className="uppercase text-[10px]">{file.filename.split('.').pop()}</span>
+                                    <span className="uppercase text-[10px]">
+                                        {(file.filename || file.url || '').split('.').pop()}
+                                    </span>
                                 </div>
                             </div>
                         </div>

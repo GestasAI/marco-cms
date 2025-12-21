@@ -1,81 +1,126 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
+import { acideService } from './acide/acideService';
 
 // 1. Crear el Contexto
 export const ThemeContext = createContext();
-
-// Valores por defecto que coinciden con tu theme.css
-const defaultSettings = {
-    colors: {
-        primary: '#3b82f6',
-        secondary: '#8b5cf6',
-        accent: '#10b981',
-        bg: '#ffffff',
-        surface: '#f9fafb',
-        dark: '#1f2937',
-        text: '#1f2937',
-        textLight: '#6b7280',
-    },
-    // Aquí podrías añadir tipografía, espaciado, etc.
-};
 
 /**
  * 2. Crear el Proveedor (Provider)
  * Este componente envolverá tu aplicación y proveerá el estado y las funciones del tema.
  */
 export const ThemeProvider = ({ children }) => {
-    const [settings, setSettings] = useState(defaultSettings);
+    const [activeTheme, setActiveTheme] = useState('gestasai-default');
+    const [themeConfig, setThemeConfig] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Función para aplicar los estilos al DOM
-    const applySettings = useCallback((newSettings) => {
-        const root = document.documentElement;
-        Object.entries(newSettings.colors).forEach(([key, value]) => {
-            // Convertimos camelCase (e.g., textLight) a kebab-case (e.g., --color-text-light)
-            const cssVarName = `--color-${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
-            root.style.setProperty(cssVarName, value);
-        });
+    // Función para cargar el CSS del tema
+    const loadThemeCSS = useCallback((themeId) => {
+        // Remover CSS del tema anterior
+        const oldLink = document.getElementById('theme-css');
+        if (oldLink) {
+            oldLink.remove();
+        }
+
+        // Cargar CSS del nuevo tema
+        const link = document.createElement('link');
+        link.id = 'theme-css';
+        link.rel = 'stylesheet';
+        link.href = `/themes/${themeId}/theme.css`;
+        document.head.appendChild(link);
+
+        console.log(`✅ Tema "${themeId}" cargado`);
     }, []);
 
-    // Cargar configuración inicial (simulado, podría venir de una API)
-    useEffect(() => {
+    // Función para cargar la configuración del tema
+    const loadThemeConfig = useCallback(async (themeId) => {
         try {
-            // Intenta cargar desde localStorage o una API
-            const savedSettings = localStorage.getItem('themeSettings');
-            if (savedSettings) {
-                const parsedSettings = JSON.parse(savedSettings);
-                setSettings(parsedSettings);
-                applySettings(parsedSettings);
-            } else {
-                // Si no hay nada guardado, aplica los por defecto
-                applySettings(settings);
+            const response = await fetch(`/themes/${themeId}/theme.json`);
+            if (!response.ok) {
+                throw new Error(`No se pudo cargar theme.json para ${themeId}`);
             }
+            const config = await response.json();
+            setThemeConfig(config);
+            return config;
         } catch (err) {
-            setError('No se pudo cargar la configuración del tema.');
-            console.error(err);
-        } finally {
-            setIsLoading(false);
+            console.error('Error cargando configuración del tema:', err);
+            return null;
         }
-    }, [applySettings]);
+    }, []);
 
-    // Función para guardar la configuración
-    const saveSettings = async (newSettings) => {
+    // Cargar tema activo al iniciar
+    useEffect(() => {
+        const loadActiveTheme = async () => {
+            try {
+                setIsLoading(true);
+
+                // Intentar obtener el tema activo desde ACIDE
+                let themeId = 'gestasai-default';
+
+                try {
+                    const settings = await acideService.getSettings();
+                    if (settings && settings.active_theme) {
+                        themeId = settings.active_theme;
+                    }
+                } catch (err) {
+                    console.warn('No se pudo obtener tema activo desde ACIDE, usando default');
+                }
+
+                // Cargar CSS y configuración del tema
+                loadThemeCSS(themeId);
+                await loadThemeConfig(themeId);
+                setActiveTheme(themeId);
+
+            } catch (err) {
+                setError('No se pudo cargar el tema.');
+                console.error(err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        loadActiveTheme();
+    }, [loadThemeCSS, loadThemeConfig]);
+
+    // Función para cambiar el tema activo
+    const changeTheme = useCallback(async (themeId) => {
         try {
-            // Aquí harías la llamada a tu API para guardar en backend
-            // Por ahora, lo guardamos en localStorage
-            localStorage.setItem('themeSettings', JSON.stringify(newSettings));
-            setSettings(newSettings);
-            applySettings(newSettings);
-            return true; // Éxito
-        } catch (err) {
-            console.error("Error al guardar la configuración:", err);
-            return false; // Fallo
-        }
-    };
+            // Activar tema en ACIDE
+            await acideService.activateTheme(themeId);
 
-    const value = { settings, setSettings, isLoading, error, applySettings, saveSettings };
+            // Cargar CSS y configuración del nuevo tema
+            loadThemeCSS(themeId);
+            await loadThemeConfig(themeId);
+            setActiveTheme(themeId);
+
+            console.log(`✅ Tema cambiado a "${themeId}"`);
+            return true;
+        } catch (err) {
+            console.error('Error cambiando tema:', err);
+            return false;
+        }
+    }, [loadThemeCSS, loadThemeConfig]);
+
+    const value = {
+        activeTheme,
+        themeConfig,
+        isLoading,
+        error,
+        changeTheme,
+        loadThemeCSS,
+        loadThemeConfig
+    };
 
     return (
         <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
     );
+};
+
+// Hook personalizado para usar el contexto fácilmente
+export const useTheme = () => {
+    const context = React.useContext(ThemeContext);
+    if (!context) {
+        throw new Error('useTheme debe usarse dentro de ThemeProvider');
+    }
+    return context;
 };

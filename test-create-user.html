@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Crear Usuario desde Marco CMS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test - Crear Usuario</h1>
+        <p>Prueba de creación de usuario usando la API Universal de GestasAI</p>
+        
+        <form id="createUserForm">
+            <div class="form-group">
+                <label for="name">Nombre Completo:</label>
+                <input type="text" id="name" required value="Usuario Test Marco">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required value="test.marco@gestasai.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" required value="Test123!">
+            </div>
+            
+            <div class="form-group">
+                <label for="roles">Rol:</label>
+                <select id="roles" required>
+                    <option value="viewer">Viewer</option>
+                    <option value="editor" selected>Editor</option>
+                    <option value="admin">Admin</option>
+                    <option value="super_admin">Super Admin</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="status">Estado:</label>
+                <select id="status" required>
+                    <option value="active" selected>Activo</option>
+                    <option value="inactive">Inactivo</option>
+                    <option value="suspended">Suspendido</option>
+                    <option value="pending">Pendiente</option>
+                </select>
+            </div>
+            
+            <button type="submit">Crear Usuario</button>
+        </form>
+        
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5558';
+        
+        // Obtener token del localStorage (debe estar logueado en Marco CMS primero)
+        function getToken() {
+            return localStorage.getItem('marco_token');
+        }
+        
+        document.getElementById('createUserForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'none';
+            
+            const token = getToken();
+            if (!token) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = '<strong>Error:</strong> No hay token de autenticación. Debes hacer login primero en Marco CMS.';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            const userData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                roles: [document.getElementById('roles').value],
+                status: document.getElementById('status').value,
+                tenantId: '00000000-0000-0000-0000-000000000000' // SonnativeAI
+            };
+            
+            try {
+                console.log('📤 Enviando petición:', userData);
+                
+                const response = await fetch(`${API_BASE}/api/data/insert`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        collection: 'users',
+                        document: userData
+                    })
+                });
+                
+                const data = await response.json();
+                console.log('📥 Respuesta:', data);
+                
+                if (response.ok && data.status === 'success') {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <strong>✅ Usuario creado exitosamente!</strong>
+                        <pre>${JSON.stringify(data.data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `
+                        <strong>❌ Error al crear usuario:</strong>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                console.error('❌ Error:', error);
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <strong>❌ Error de conexión:</strong>
+                    <pre>${error.message}</pre>
+                `;
+            }
+            
+            resultDiv.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

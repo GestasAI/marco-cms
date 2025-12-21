@@ -1,0 +1,27 @@
+{
+    "id": "principito-cap-1",
+    "course_id": "curso-principito",
+    "title": "Capítulo 1: El dibujo de la boa",
+    "slug": "capitulo-1",
+    "video_url": "https://www.youtube.com/watch?v=example1",
+    "content": "# Capítulo 1\n\nCuando yo tenía seis años vi una vez una imagen magnífica en un libro sobre la Selva Virgen que se llamaba 'Historias Vividas'. Representaba una serpiente boa que se tragaba a una fiera...\n\nEn el libro se afirmaba: 'Las serpientes boas tragan sus presas enteras, sin masticarlas. Luego no pueden moverse y duermen durante los seis meses que dura su digestión'.\n\nReflexioné mucho entonces sobre las aventuras de la selva y, a mi vez, logré trazar con un lápiz de colores mi primer dibujo. Mi dibujo número 1. Era así:\n\n[Imagen del sombrero/boa]\n\nMostré mi obra de arte a las personas mayores y les pregunté si mi dibujo les daba miedo.",
+    "ai_config": {
+        "system_prompt": "Eres un experto literario en El Principito. Tu tono es poético, profundo y amable. Ayudas al alumno a entender las metáforas de Saint-Exupéry.",
+        "knowledge_base": "En el capítulo 1, el narrador habla de su dibujo de una boa que se tragó un elefante, el cual los adultos confundieron con un sombrero. Esto representa la pérdida de la imaginación al crecer.",
+        "triggers": []
+    },
+    "test_questions": [
+        {
+            "id": "q1",
+            "question": "¿Qué creían ver los adultos en el dibujo del narrador?",
+            "options": [
+                "A) Una serpiente",
+                "B) Un sombrero",
+                "C) Una montaña"
+            ],
+            "correct_answer": "B",
+            "explanation": "Los adultos carecen de imaginación y solo ven la forma exterior, que parece un sombrero."
+        }
+    ],
+    "resources": []
+}

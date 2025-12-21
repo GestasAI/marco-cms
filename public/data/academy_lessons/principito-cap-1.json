@@ -1,0 +1,98 @@
+{
+    "id": "principito-cap-1",
+    "course_id": "curso-principito",
+    "title": "Cap\u00edtulo 1: El dibujo de la boa",
+    "slug": "capitulo-1",
+    "video_url": "https:\/\/www.youtube.com\/watch?v=YYNDsjwujeY",
+    "content": "# Cap\u00edtulo 1\n\nCuando yo ten\u00eda seis a\u00f1os vi una vez una imagen magn\u00edfica en un libro sobre la Selva Virgen que se llamaba 'Historias Vividas'. Representaba una serpiente boa que se tragaba a una fiera...\n\nEn el libro se afirmaba: 'Las serpientes boas tragan sus presas enteras, sin masticarlas. Luego no pueden moverse y duermen durante los seis meses que dura su digesti\u00f3n'.\n\nReflexion\u00e9 mucho entonces sobre las aventuras de la selva y, a mi vez, logr\u00e9 trazar con un l\u00e1piz de colores mi primer dibujo. Mi dibujo n\u00famero 1. Era as\u00ed:\n\n[Imagen del sombrero\/boa]\n\nMostr\u00e9 mi obra de arte a las personas mayores y les pregunt\u00e9 si mi dibujo les daba miedo.",
+    "ai_config": {
+        "system_prompt": "Eres un experto literario en El Principito. Tu tono es po\u00e9tico, profundo y amable. Ayudas al alumno a entender las met\u00e1foras de Saint-Exup\u00e9ry.",
+        "knowledge_base": "En el cap\u00edtulo 1, el narrador habla de su dibujo de una boa que se trag\u00f3 un elefante, el cual los adultos confundieron con un sombrero. Esto representa la p\u00e9rdida de la imaginaci\u00f3n al crecer.",
+        "triggers": []
+    },
+    "test_questions": [
+        {
+            "id": "q1",
+            "question": "\u00bfQu\u00e9 cre\u00edan ver los adultos en el dibujo del narrador?",
+            "options": [
+                "A) Una serpiente",
+                "B) Un sombrero",
+                "C) Una monta\u00f1a"
+            ],
+            "correct_answer": "B",
+            "explanation": "Los adultos carecen de imaginaci\u00f3n y solo ven la forma exterior, que parece un sombrero."
+        }
+    ],
+    "resources": [],
+    "_updatedAt": "2025-12-20T21:46:07+00:00",
+    "_createdAt": "2025-12-20T11:25:59+00:00",
+    "videos": [
+        {
+            "url": "https:\/\/www.youtube.com\/watch?v=YYNDsjwujeY",
+            "title": "Cap\u00edtulo 1: An\u00e1lisis Visual"
+        }
+    ],
+    "summary": "En este primer cap\u00edtulo, el narrador nos cuenta su frustraci\u00f3n infantil cuando los adultos no comprendieron su dibujo de una boa que diger\u00eda un elefante, confundi\u00e9ndolo con un sombrero. Esta experiencia lo llev\u00f3 a abandonar su carrera de pintor para convertirse en piloto, subrayando la brecha entre la imaginaci\u00f3n de los ni\u00f1os y la l\u00f3gica limitada de los adultos.",
+    "flashcards": [
+        {
+            "question": "\u00bfQu\u00e9 animal dibuj\u00f3 el narrador a los 6 a\u00f1os?",
+            "answer": "Una serpiente boa que diger\u00eda un elefante.."
+        },
+        {
+            "question": "\u00bfQu\u00e9 creyeron ver los adultos en el dibujo?",
+            "answer": "Un sombrero.-"
+        },
+        {
+            "question": "\u00bfPor qu\u00e9 el narrador dej\u00f3 de ser pintor?",
+            "answer": "Porque los adultos le aconsejaron dedicarse a cosas 'serias' como la geograf\u00eda o el c\u00e1lculo.|"
+        }
+    ],
+    "quiz": [
+        {
+            "question": "\u00bfCu\u00e1l es el tema central del Cap\u00edtulo 1?",
+            "options": [
+                "La vida en la selva",
+                "La falta de imaginaci\u00f3n de los adultos",
+                "C\u00f3mo pilotar un avi\u00f3n",
+                "La digesti\u00f3n de las boas"
+            ],
+            "correct": 1,
+            "explanation": "El cap\u00edtulo resalta c\u00f3mo los adultos pierden la capacidad de ver m\u00e1s all\u00e1 de las apariencias."
+        },
+        {
+            "question": "\u00bfQu\u00e9 libro inspir\u00f3 el primer dibujo del narrador?",
+            "options": [
+                "El Principito",
+                "Historias Vividas",
+                "Manual de Vuelo",
+                "Geograf\u00eda para Ni\u00f1os"
+            ],
+            "correct": 1,
+            "explanation": "El narrador menciona que vio una imagen en un libro llamado 'Historias Vividas'."
+        }
+    ],
+    "pdf_url": "\/uploads\/2025\/12\/pam-media_694718f404355.pdf",
+    "mind_map_image": "\/uploads\/2025\/12\/mapa-mental-principito-capitulo-1-media_6947191a093c9.png",
+    "video_description": "Este video resume visualmente el primer cap\u00edtulo de El Principito, mostrando los dibujos originales de Saint-Exup\u00e9ry y explicando la met\u00e1fora del sombrero y la boa.",
+    "knowledge_chunks": [
+        {
+            "id": "chunk-1",
+            "title": "El dibujo de la boa",
+            "content": "El narrador dibuja una boa abierta y una cerrada para que los adultos entiendan.",
+            "tags": [
+                "dibujo",
+                "imaginaci\u00f3n"
+            ]
+        },
+        {
+            "id": "chunk-2",
+            "title": "Cr\u00edtica a los adultos",
+            "content": "Los adultos siempre necesitan explicaciones y prefieren las cosas \u00fatiles sobre las hermosas.",
+            "tags": [
+                "adultos",
+                "cr\u00edtica"
+            ]
+        }
+    ],
+    "module_id": "mod-1"
+}

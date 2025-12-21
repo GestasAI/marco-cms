@@ -1,194 +1,198 @@
 /**
- * MARCO CMS - ACIDE Service
- * Sistema de almacenamiento PERSISTENTE en servidor
+ * ACIDE Service - Hybrid Client (Static Read / Dynamic Write)
  * 
- * Usa GestasCore-ACIDE (SchemaValidator + QueryEngine)
- * Almacenamiento: Archivos JSON en servidor (como WordPress usa MySQL)
+ * ARCHITECTURE COMPLIANCE:
+ * - Reads: Fetch static JSON files directly (ZERO PHP)
+ * - Writes: Call ACIDE-PHP backend (Admin only)
  */
 
-import axios from 'axios';
+const API_URL = '/acide/index.php';
 
-// URL del backend de Marco CMS (Node.js server)
-const API_URL = import.meta.env.VITE_MARCO_API_URL || 'http://localhost:4000';
+// Determine base URL for static assets (deploy agnostic)
+const BASE_URL = import.meta.env.BASE_URL;
+const CLEAN_BASE = BASE_URL.endsWith('/') ? BASE_URL : `${BASE_URL}/`;
+const DATA_URL = `${CLEAN_BASE}data`;
 
-class ACIDEService {
-    constructor() {
-        this.cache = new Map();
-    }
+export const acideService = {
 
     /**
-     * Crear documento
-     * Guarda en servidor como archivo JSON
+     * PRIVATE: Low-level request to PHP Backend (Admin Write Operations)
      */
-    async create(collection, data) {
+    async _phpRequest(action, collection, id = null, data = null) {
+        const payload = { action, collection, id, data };
+        const headers = { 'Content-Type': 'application/json' };
+
+        // Use 'marco_token' to match authService convention
+        const token = localStorage.getItem('marco_token');
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
         try {
-            const response = await axios.post(`${API_URL}/acide/create`, {
-                collection,
-                data
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify(payload)
             });
 
-            // Invalidar cache
-            this.cache.delete(collection);
-
-            return response.data.document;
-        } catch (error) {
-            console.error('Error creating document:', error);
-            throw error;
-        }
-    }
-
-    /**
-     * Consultar documentos
-     * Lee desde servidor (archivos JSON)
-     */
-    async query(collection, where = {}, options = {}) {
-        try {
-            // Verificar cache
-            const cacheKey = `${collection}:${JSON.stringify(where)}:${JSON.stringify(options)}`;
-            if (this.cache.has(cacheKey)) {
-                return this.cache.get(cacheKey);
+            if (!response.ok) {
+                // Try to read error text
+                const errorText = await response.text();
+                throw new Error(`ACIDE Error ${response.status}: ${errorText}`);
             }
 
-            const response = await axios.post(`${API_URL}/acide/query`, {
-                collection,
-                where,
-                options
-            });
+            const json = await response.json();
+            if (json.status === 'error') throw new Error(json.message);
 
-            const results = response.data.documents || [];
-
-            // Guardar en cache
-            this.cache.set(cacheKey, results);
-
-            return results;
+            return json.data;
         } catch (error) {
-            console.error('Error querying documents:', error);
-            return [];
-        }
-    }
-
-    /**
-     * Obtener por ID
-     */
-    async findById(collection, id) {
-        try {
-            const response = await axios.get(`${API_URL}/acide/${collection}/${id}`);
-            return response.data.document;
-        } catch (error) {
-            console.error('Error finding document:', error);
-            return null;
-        }
-    }
-
-    /**
-     * Actualizar documento
-     * Actualiza archivo JSON en servidor
-     */
-    async update(collection, id, updates) {
-        try {
-            const response = await axios.put(`${API_URL}/acide/update`, {
-                collection,
-                id,
-                updates
-            });
-
-            // Invalidar cache
-            this.cache.delete(collection);
-
-            return response.data.document;
-        } catch (error) {
-            console.error('Error updating document:', error);
+            console.error("ACIDE Write Error:", error);
             throw error;
         }
-    }
+    },
 
     /**
-     * Eliminar documento
-     * Elimina archivo JSON en servidor
+     * PUBLIC: Read static JSON file (Visitor Read Operations)
+     * Bypasses PHP completely.
      */
-    async delete(collection, id) {
+    async _staticRead(collection, filename) {
+        // Cache busting only if explicitly needed, otherwise let browser cache
+        // For 'current.json' logic, we might want fresh data.
+        const url = `${DATA_URL}/${collection}/${filename}.json?t=${Date.now()}`;
+
         try {
-            await axios.delete(`${API_URL}/acide/${collection}/${id}`);
+            const response = await fetch(url);
+            if (!response.ok) {
+                if (response.status === 404) return null; // Not found
+                throw new Error(`Static Read Error ${response.status}`);
+            }
 
-            // Invalidar cache
-            this.cache.delete(collection);
+            // ROBUSTNESS: Check if response is HTML (happens on 404 fallback)
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('text/html')) {
+                return null;
+            }
 
-            return true;
+            return await response.json();
         } catch (error) {
-            console.error('Error deleting document:', error);
-            throw error;
+            console.warn(`Failed to read static file: ${url}`, error);
+            return null; // Return null on any parse/fetch error to avoid crashing
         }
-    }
+    },
 
-    /**
-     * Contar documentos
-     */
-    async count(collection, where = {}) {
-        try {
-            const response = await axios.post(`${API_URL}/acide/count`, {
-                collection,
-                where
+    // =========================================================================
+    // CRUD INTERFACE
+    // =========================================================================
+
+    // READ (Static)
+    get: async (collection, id) => {
+        const data = await acideService._staticRead(collection, id);
+        if (!data) throw new Error(`Document not found: ${collection}/${id}`);
+        return data;
+    },
+
+    // LIST (Static - Reads _index.json)
+    list: async (collection) => {
+        // Try to read the generated index
+        const indexData = await acideService._staticRead(collection, '_index');
+        return indexData || [];
+    },
+
+    // QUERY (Static - Reads index + Client-side Filter)
+    query: async (collection, params = {}) => {
+        let items = await acideService.list(collection);
+
+        // 1. Filtering
+        if (params.where) {
+            items = items.filter(item => {
+                return params.where.every(([field, operator, value]) => {
+                    if (operator === '==') return item[field] == value;
+                    if (operator === 'contains') return item[field]?.includes(value);
+                    return true;
+                });
             });
-            return response.data.count;
-        } catch (error) {
-            console.error('Error counting documents:', error);
-            return 0;
         }
-    }
 
-    /**
-     * Búsqueda de texto
-     */
-    async search(collection, searchTerm, fields = []) {
-        try {
-            const response = await axios.post(`${API_URL}/acide/search`, {
-                collection,
-                searchTerm,
-                fields
+        // 2. Sorting
+        if (params.orderBy) {
+            const [field, direction] = Object.entries(params.orderBy)[0];
+            items.sort((a, b) => {
+                const valA = a[field];
+                const valB = b[field];
+                if (valA < valB) return direction === 'asc' ? -1 : 1;
+                if (valA > valB) return direction === 'asc' ? 1 : -1;
+                return 0;
             });
-            return response.data.documents || [];
-        } catch (error) {
-            console.error('Error searching documents:', error);
-            return [];
         }
-    }
 
-    /**
-     * Exportar todos los datos
-     */
-    async exportAll() {
-        try {
-            const response = await axios.get(`${API_URL}/acide/export`);
-            return response.data;
-        } catch (error) {
-            console.error('Error exporting data:', error);
-            throw error;
+        // 3. Pagination
+        if (params.limit || params.offset) {
+            const offset = params.offset || 0;
+            const limit = params.limit || items.length;
+            items = items.slice(offset, offset + limit);
         }
-    }
 
-    /**
-     * Importar datos
-     */
-    async importAll(data) {
-        try {
-            await axios.post(`${API_URL}/acide/import`, { data });
-            this.cache.clear();
-            return true;
-        } catch (error) {
-            console.error('Error importing data:', error);
-            throw error;
-        }
-    }
+        return items;
+    },
 
-    /**
-     * Limpiar cache
-     */
-    clearCache() {
-        this.cache.clear();
-    }
-}
+    // WRITE OPERATIONS (Dynamic - calls PHP)
 
-// Singleton
-const acideService = new ACIDEService();
+    update: async (collection, id, data) => {
+        return acideService._phpRequest('update', collection, id, data);
+    },
 
-export default acideService;
+    create: async (collection, data) => { // Alias
+        const id = data.id || null;
+        return acideService._phpRequest('update', collection, id, data); // PHP 'update' handles creation
+    },
+
+    delete: async (collection, id) => {
+        return acideService._phpRequest('delete', collection, id);
+    },
+
+    upload: async (file) => {
+        // Validation handled by backend, but we need FormData
+        const formData = new FormData();
+        formData.append('action', 'upload');
+        formData.append('file', file);
+
+        const headers = {};
+        const token = localStorage.getItem('marco_token');
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers,
+            body: formData
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+        const json = await response.json();
+        if (json.status === 'error') throw new Error(json.message);
+        return json.data;
+    },
+
+    // Theme Management
+    listThemes: async () => acideService._phpRequest('list_themes'),
+    activateTheme: async (themeId) => acideService._phpRequest('activate_theme', null, null, { theme_id: themeId }),
+
+    // Theme Parts Management
+    saveThemePart: async (themeId, partName, data) => {
+        return acideService._phpRequest('save_theme_part', null, null, {
+            theme_id: themeId,
+            part_name: partName,
+            ...data
+        });
+    },
+    loadThemePart: async (themeId, partName) => {
+        return acideService._phpRequest('load_theme_part', null, null, {
+            theme_id: themeId,
+            part_name: partName
+        });
+    },
+
+    // Plugin Management (Local)
+    listPlugins: async () => acideService.list('plugins'),
+
+    // Legacy Aliases
+    request: async (action, collection, id, data) => acideService._phpRequest(action, collection, id, data),
+    findById: async (collection, id) => acideService.get(collection, id)
+};

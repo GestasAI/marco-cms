@@ -1,0 +1,12 @@
+{
+    "site_title": "Marco CMS",
+    "site_description": "Gestión de contenidos inteligente con ACIDE",
+    "permalink_structure": "post_name",
+    "seo_separator": "|",
+    "social_twitter": "",
+    "social_facebook": "",
+    "index_site": true,
+    "admin_email": "admin@gestasai.com",
+    "maintenance_mode": false,
+    "debug_mode": false
+}

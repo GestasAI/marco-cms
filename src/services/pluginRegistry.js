@@ -1,15 +1,15 @@
 /**
  * Plugin Registry Service for Marco CMS
  * 
- * Handles registration and communication with GestasAI Universal API
+ * Handles registration and communication with GestasAI System Service
  */
 
 import api from './api';
 
 export const pluginRegistry = {
     /**
-     * Register Marco CMS with GestasAI Universal API
-     * Endpoint: /api/universal/register
+     * Register Marco CMS with GestasAI System Service
+     * Endpoint: /api/plugins/register
      */
     async register() {
         try {
@@ -33,20 +33,19 @@ export const pluginRegistry = {
                     'content:update',
                     'content:delete',
                     'auth:client',
-                    'universal_api:query',
-                    'universal_api:insert',
-                    'universal_api:update',
-                    'universal_api:delete'
+                    'admin:users',
+                    'admin:roles',
+                    'admin:permissions'
                 ],
                 permissions: [
                     'auth:login',
                     'content:read',
                     'content:write',
                     'content:delete',
-                    'bridge:query',
-                    'bridge:insert',
-                    'bridge:update',
-                    'bridge:delete'
+                    'users:read',
+                    'users:write',
+                    'roles:read',
+                    'permissions:read'
                 ],
                 network: {
                     strategy: 'external_client',
@@ -68,10 +67,8 @@ export const pluginRegistry = {
                 }
             };
 
-            // Register via Universal API
-            const response = await api.post('/api/universal/register', {
-                manifest
-            });
+            // Register via System Service
+            const response = await api.post('/api/plugins/register', manifest);
 
             console.log('✅ Marco CMS registered successfully!');
             console.log('Registration data:', response.data);
@@ -83,39 +80,21 @@ export const pluginRegistry = {
 
             return response.data;
         } catch (error) {
-            console.error('❌ Error registering Marco CMS:', error.response?.data || error.message);
+            console.warn('⚠️ Plugin registration failed (Marco CMS works standalone):', error.response?.data || error.message);
             // Don't throw - Marco CMS works standalone even if registration fails
             return null;
         }
     },
 
     /**
-     * Send heartbeat to keep plugin alive
-     * Endpoint: /api/universal/heartbeat
-     */
-    async heartbeat() {
-        try {
-            const response = await api.post('/api/universal/heartbeat', {
-                key: 'marco-cms'
-            });
-
-            console.log('💓 Heartbeat sent:', response.data);
-            return response.data;
-        } catch (error) {
-            console.error('❌ Heartbeat error:', error.response?.data || error.message);
-            return null;
-        }
-    },
-
-    /**
      * Get list of all plugins
-     * Endpoint: /api/universal/plugins
+     * Endpoint: /api/system/plugins
      */
     async listPlugins() {
         try {
-            const response = await api.get('/api/universal/plugins');
+            const response = await api.get('/api/system/plugins');
             console.log('📋 Plugins list:', response.data);
-            return response.data.plugins || [];
+            return response.data || [];
         } catch (error) {
             console.error('❌ Error listing plugins:', error.response?.data || error.message);
             return [];

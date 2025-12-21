@@ -10,7 +10,9 @@ import {
     FolderTree,
     Tags,
     Search,
-    Image
+    Image,
+    GraduationCap,
+    Users
 } from 'lucide-react';
 
 export default function Sidebar({ isOpen, onClose }) {
@@ -25,6 +27,8 @@ export default function Sidebar({ isOpen, onClose }) {
         { icon: FolderTree, label: 'Categorías', path: '/dashboard/categories' },
         { icon: Tags, label: 'Etiquetas', path: '/dashboard/tags' },
         { icon: Image, label: 'Medios', path: '/dashboard/media' },
+        { icon: GraduationCap, label: 'Academia', path: '/dashboard/academy' },
+        { icon: Users, label: 'Usuarios', path: '/dashboard/users' },
         { divider: true },
         { icon: Palette, label: 'Temas', path: '/dashboard/themes' },
         { icon: Palette, label: 'Partes de Tema', path: '/dashboard/theme-parts' },

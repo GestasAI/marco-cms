@@ -40,7 +40,10 @@ async function ensureDataDir() {
         'theme_settings',
         'site_config',
         'users',
-        'media'
+        'media',
+        'academy_courses',
+        'academy_lessons',
+        'academy_progress'
     ];
 
     for (const collection of collections) {

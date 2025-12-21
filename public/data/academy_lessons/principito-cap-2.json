@@ -1,0 +1,72 @@
+{
+    "id": "principito-cap-2",
+    "course_id": "curso-principito",
+    "title": "Cap\u00edtulo 2: El encuentro en el desierto",
+    "slug": "capitulo-2",
+    "video_url": "https:\/\/www.youtube.com\/watch?v=nR2qiVIHrdE",
+    "content": "# Cap\u00edtulo 2\n\nViv\u00ed as\u00ed, solo, sin nadie con quien hablar verdaderamente, hasta que tuve una aver\u00eda en el desierto del Sahara, hace seis a\u00f1os. Algo se hab\u00eda roto en mi motor...\n\nLa primera noche me dorm\u00ed sobre la arena a mil millas de toda tierra habitada. Estaba m\u00e1s aislado que un n\u00e1ufrago sobre una balsa en medio del oc\u00e9ano. Imaginen, pues, mi sorpresa cuando, al romper el d\u00eda, me despert\u00f3 una extra\u00f1a vocecita que dec\u00eda:\n\n\u2014Por favor... \u00a1dib\u00fajame un cordero!",
+    "ai_config": {
+        "system_prompt": "Eres un experto literario en El Principito. Tu tono es po\u00e9tico, profundo y amable. Ayudas al alumno a entender las met\u00e1foras de Saint-Exup\u00e9ry.",
+        "knowledge_base": "En el cap\u00edtulo 2, el narrador conoce al Principito en el desierto del Sahara tras un accidente de avi\u00f3n. El Principito le pide que dibuje un cordero, lo que marca el inicio de su amistad.",
+        "triggers": []
+    },
+    "test_questions": [
+        {
+            "id": "q1",
+            "question": "\u00bfD\u00f3nde se encuentran el narrador y el Principito?",
+            "options": [
+                "A) En un bosque",
+                "B) En el desierto del Sahara",
+                "C) En un asteroide"
+            ],
+            "correct_answer": "B",
+            "explanation": "El encuentro ocurre tras una aver\u00eda del avi\u00f3n en el desierto del Sahara."
+        }
+    ],
+    "resources": [],
+    "_updatedAt": "2025-12-20T21:47:21+00:00",
+    "_createdAt": "2025-12-20T11:27:24+00:00",
+    "videos": [
+        {
+            "url": "https:\/\/www.youtube.com\/watch?v=nR2qiVIHrdE",
+            "title": "Nuevo Video"
+        }
+    ],
+    "flashcards": [
+        {
+            "question": "\u00bfC\u00f3mo ocurre el encuentro inicial entre el narrador y el principito?",
+            "answer": "El narrador se encuentra en el desierto del Sahara tras sufrir una aver\u00eda en el motor de su avi\u00f3n. Al amanecer, una extra\u00f1a vocecita lo despierta pidi\u00e9ndole: \"Por favor... \u00a1dib\u00fajame un cordero!\". Es aqu\u00ed donde descubrimos que el principito no parece ni perdido, ni muerto de hambre, ni asustado, a pesar de estar en medio del desierto."
+        },
+        {
+            "question": "\u00bfPor qu\u00e9 el dibujo de la \"caja\" es el que finalmente deja satisfecho al principito?",
+            "answer": "Tras varios intentos fallidos donde el principito rechaza los corderos (por estar enfermos, ser viejos o tener cuernos), el narrador, impaciente por arreglar su motor, dibuja una caja con tres agujeros.\n\nLa clave: Le dice que el cordero est\u00e1 adentro.\n\nSignificado: Esto satisface al principito porque apela a la imaginaci\u00f3n. Demuestra la tesis central de la obra: que los adultos necesitan explicaciones concretas, mientras que los ni\u00f1os (y el principito) pueden ver lo esencial a trav\u00e9s de la fantas\u00eda."
+        }
+    ],
+    "quiz": [
+        {
+            "question": "\u00bfCu\u00e1l es la primera petici\u00f3n que le hace el Principito al aviador cuando se encuentran en el desierto?",
+            "options": [
+                "A. Que le explique qu\u00e9 es una boa.",
+                "C. Que le dibuje un cordero.",
+                "B. Que le ayude a encontrar agua."
+            ],
+            "correct": 1,
+            "explanation": "Respuesta correcta\nEsta es la famosa frase que inicia la interacci\u00f3n entre ambos personajes y marca el inicio de su amistad."
+        },
+        {
+            "question": "\u00bfPor qu\u00e9 el Principito queda satisfecho con el dibujo de una caja?",
+            "options": [
+                "A. Porque as\u00ed puede llevar al cordero en su bolsillo.",
+                "C. Porque le permite imaginar al cordero tal como \u00e9l lo desea.",
+                "B. Porque el aviador le prometi\u00f3 que la caja era m\u00e1gica."
+            ],
+            "correct": 1,
+            "explanation": "Respuesta correcta\nLa caja representa la imaginaci\u00f3n pura, permitiendo que el cordero sea perfecto en la mente del ni\u00f1o."
+        }
+    ],
+    "knowledge_chunks": [],
+    "module_id": "mod-1",
+    "summary": "El narrador se encuentra solo en el desierto del Sahara despu\u00e9s de que su avi\u00f3n sufriera una aver\u00eda. Mientras intenta reparar el motor, una extra\u00f1a vocecita lo despierta al amanecer pidi\u00e9ndole: \"Por favor... \u00a1dib\u00fajame un cordero!\". As\u00ed conoce al Principito.\n\nEl narrador, que no sabe dibujar otra cosa que una boa cerrada y una boa abierta, intenta cumplir el deseo. Sin embargo, el Principito rechaza los tres primeros dibujos (uno por parecer un elefante dentro de una boa, otro por estar enfermo, otro por ser un carnero y el \u00faltimo por ser muy viejo). Frustrado y con prisa, el aviador dibuja una caja con agujeros y le dice que el cordero est\u00e1 adentro. Para su sorpresa, esto encanta al Principito, demostrando que lo esencial se ve con la imaginaci\u00f3n.",
+    "mind_map_image": "\/uploads\/2025\/12\/mapa-mental-principito-capitulo-2-media_69471955f0745.png",
+    "pdf_url": "\/uploads\/2025\/12\/pam-media_694718f404355.pdf"
+}

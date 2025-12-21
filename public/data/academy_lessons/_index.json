@@ -1,0 +1,285 @@
+[
+    {
+        "id": "clase-1-1",
+        "course_id": "curso-ods-13",
+        "title": "Qu\u00e9 es el Cambio Clim\u00e1tico",
+        "slug": "que-es-el-cambio-climatico",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=example",
+        "content": "# Introducci\u00f3n al Cambio Clim\u00e1tico\n\nEl cambio clim\u00e1tico se refiere a los cambios a largo plazo de las temperaturas y los patrones clim\u00e1ticos...",
+        "ai_config": {
+            "system_prompt": "Eres un instructor experto en el ODS 13. Tu objetivo es explicar conceptos complejos de forma sencilla y socr\u00e1tica. Responde bas\u00e1ndote exclusivamente en el contexto proporcionado.",
+            "knowledge_base": "Fragmentos clave: El efecto invernadero es un proceso natural... Las actividades humanas han aumentado la concentraci\u00f3n de CO2... El Acuerdo de Par\u00eds busca limitar el calentamiento a 1.5 grados.",
+            "triggers": [
+                {
+                    "condition": "user_completes_reading",
+                    "action": "unlock_resource",
+                    "resource_id": "pdf-resumen-ods13"
+                }
+            ]
+        },
+        "test_questions": [
+            {
+                "id": "q1",
+                "question": "\u00bfCu\u00e1l es el objetivo principal del Acuerdo de Par\u00eds?",
+                "options": [
+                    "A) Aumentar la producci\u00f3n industrial",
+                    "B) Limitar el calentamiento global a 1.5 grados",
+                    "C) Eliminar todos los coches"
+                ],
+                "correct_answer": "B",
+                "explanation": "El Acuerdo de Par\u00eds es un tratado internacional sobre el cambio clim\u00e1tico que busca limitar el calentamiento global."
+            }
+        ],
+        "resources": [
+            {
+                "id": "pdf-resumen-ods13",
+                "title": "Gu\u00eda Resumen ODS 13",
+                "type": "pdf",
+                "url": "\/downloads\/ods13-guia.pdf",
+                "locked": true
+            }
+        ]
+    },
+    {
+        "title": "capitulo 3 \u00bfDe d\u00f3nde vienes, hombrecito?",
+        "slug": "capitulo-3",
+        "content": "El primer encuentro detallado entre el aviador y el principito en el desierto, donde el ni\u00f1o le pide al aviador que le dibuje un cordero, y tras varios intentos fallidos (dibujos de boas, corderos enfermos, etc.), el aviador dibuja una caja y el principito se contenta, revelando as\u00ed la pureza y la imaginaci\u00f3n infantil frente a la l\u00f3gica adulta, y estableciendo el tono de curiosidad y extra\u00f1eza que marca su relaci\u00f3n. ",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=WtvgLvGsckE",
+        "ai_config": {
+            "system_prompt": "Eres un agente de inteligencia artificial especializado en an\u00e1lisis literario y narraci\u00f3n interpretativa.\nTu tarea es describir de forma clara, evocadora y fiel el contenido del cap\u00edtulo 3 de El Principito, centr\u00e1ndote en el primer encuentro entre el aviador y el Principito en el desierto.\n\nExplica el contexto del accidente del aviador, la aparici\u00f3n inesperada del ni\u00f1o y su actitud serena y misteriosa. Detalla la petici\u00f3n del dibujo del cordero y los sucesivos intentos fallidos del aviador, subrayando el contraste entre la l\u00f3gica adulta y la imaginaci\u00f3n infantil.\n\nAnaliza el significado simb\u00f3lico de la caja que contiene al cordero invisible, destacando c\u00f3mo este gesto revela la pureza, la creatividad y la libertad imaginativa del Principito.\n\nMant\u00e9n un tono reflexivo y accesible, evita citas textuales de la obra y no reproduzcas fragmentos literales. Prioriza la interpretaci\u00f3n tem\u00e1tica, el simbolismo y la relaci\u00f3n incipiente entre los personajes, resaltando c\u00f3mo este episodio establece el tono de curiosidad, extra\u00f1eza y aprendizaje mutuo que marcar\u00e1 su v\u00ednculo a lo largo de la historia.",
+            "knowledge_base": "Obra: El Principito\nAutor: Antoine de Saint-Exup\u00e9ry\nG\u00e9nero: Novela corta \/ f\u00e1bula filos\u00f3fica\nPublicaci\u00f3n: 1943\n\nContexto narrativo general\n\nLa historia se presenta como un relato en primera persona desde la perspectiva del aviador.\n\nEl desierto simboliza el aislamiento, el silencio y la ruptura con la civilizaci\u00f3n adulta.\n\nEl encuentro con el Principito ocurre en un espacio liminal: lejos del mundo racional y cotidiano.\n\nCap\u00edtulo 3 \u2013 Claves tem\u00e1ticas\n\nPrimer contacto real entre los protagonistas: se consolida la relaci\u00f3n aviador\u2013Principito.\n\nComunicaci\u00f3n no convencional: el ni\u00f1o no responde a las preguntas del adulto, pero insiste en lo que para \u00e9l es esencial.\n\nChoque de visiones del mundo:\n\nAdulto \u2192 l\u00f3gica, funcionalidad, frustraci\u00f3n.\n\nNi\u00f1o \u2192 imaginaci\u00f3n, simplicidad, aceptaci\u00f3n.\n\nEl dibujo del cordero:\n\nLos intentos fallidos reflejan la incapacidad adulta de comprender la mirada infantil.\n\nLa caja simboliza la libertad de la imaginaci\u00f3n: lo invisible puede ser m\u00e1s verdadero que lo visible.\n\nSimbolismo relevante\n\nEl cordero: inocencia, deseo, responsabilidad futura.\n\nLa caja: apertura a m\u00faltiples interpretaciones; el lector tambi\u00e9n imagina.\n\nEl silencio del Principito: sabidur\u00eda no racional, escucha interior.\n\nEl desierto: espacio de revelaci\u00f3n y aprendizaje.\n\nFunci\u00f3n del cap\u00edtulo en la obra\n\nEstablece el tono filos\u00f3fico y po\u00e9tico del libro.\n\nIntroduce el tema central: \u201clo esencial no es visible a los ojos\u201d.\n\nPrepara al lector para los relatos posteriores sobre los planetas y los adultos."
+        },
+        "id": "lesson-1766229355044",
+        "course_id": "curso-principito",
+        "test_questions": [],
+        "resources": [],
+        "_updatedAt": "2025-12-20T21:59:26+00:00",
+        "_createdAt": "2025-12-20T11:15:55+00:00",
+        "videos": [
+            {
+                "url": "https:\/\/www.youtube.com\/watch?v=WtvgLvGsckE",
+                "title": "Nuevo Video"
+            }
+        ],
+        "flashcards": [
+            {
+                "question": "\u00bfC\u00f3mo deduce el aviador que el Principito viene de otro planeta?",
+                "answer": "Por las preguntas que hace el Principito sobre el avi\u00f3n y su reacci\u00f3n al saber que el aviador \"cay\u00f3 del cielo\". El Principito menciona que su propio hogar es tan peque\u00f1o que \"caminando siempre adelante no se puede ir muy lejos\", lo que indica que vive en un asteroide."
+            },
+            {
+                "question": "\u00bfPor qu\u00e9 el Principito rechaza la idea de atar al cordero con una cuerda?",
+                "answer": "Porque en su planeta todo es tan peque\u00f1o que el cordero no tiene a d\u00f3nde ir. La idea de \"atar\" algo le parece extra\u00f1a y un poco triste, ya que no hay peligro de que el animal se pierda en un espacio tan reducido."
+            }
+        ],
+        "quiz": [
+            {
+                "question": "\u00bfQu\u00e9 objeto del aviador despierta la curiosidad y la risa del Principito en este cap\u00edtulo?",
+                "options": [
+                    "A. Su reloj de pulsera.",
+                    "C. El avi\u00f3n (su 'm\u00e1quina').",
+                    "B. Un mapa del desierto."
+                ],
+                "correct": 1,
+                "explanation": "Respuesta correcta\nEl Principito pregunta qu\u00e9 es esa cosa, y al saber que vuela y que el aviador cay\u00f3 del cielo con ella, se r\u00ede con mucha gracia."
+            },
+            {
+                "question": "\u00bfQu\u00e9 revela la frase 'derecho ante uno mismo, no se puede ir muy lejos' sobre el hogar del Principito?",
+                "options": [
+                    "A. Que el Principito siempre camina en c\u00edrculos.",
+                    "C. Que es un lugar lleno de laberintos.",
+                    "B. Que es un planeta extremadamente peque\u00f1o."
+                ],
+                "correct": 2,
+                "explanation": "Respuesta correcta\nEsta frase confirma la sospecha del aviador de que el Principito proviene de un asteroide donde el espacio es \u00ednfimo."
+            }
+        ],
+        "knowledge_chunks": [
+            {
+                "id": 1766267910928,
+                "title": "El Encuentro con la Tecnolog\u00eda (El Avi\u00f3n)",
+                "content": "Contenido: El Principito se interesa por el avi\u00f3n del piloto, pero no lo ve como una m\u00e1quina compleja, sino como una \"cosa\" que vuela. Al enterarse de que el piloto \"cay\u00f3 del cielo\", el ni\u00f1o se r\u00ede y pregunta si \u00e9l tambi\u00e9n viene de otro planeta, lo que marca el inicio de la revelaci\u00f3n sobre su origen.\n\nConcepto clave: La curiosidad infantil frente al pragmatismo t\u00e9cnico del adulto.\n\nMetadata: {unidad: 3, tema: \"el_avion\", tipo: \"narrativo\"}",
+                "tags": ""
+            },
+            {
+                "id": 1766267932395,
+                "title": "El Planeta Natal y la Libertad (La Cuerda y la Estaca)",
+                "content": "Contenido: El piloto ofrece una cuerda y una estaca para atar al cordero durante el d\u00eda y evitar que se pierda. Esta propuesta disgusta al Principito, quien responde con melancol\u00eda que en su casa todo es tan peque\u00f1o que \"derecho siempre adelante de uno no se puede ir muy lejos\".\n\nConcepto clave: La libertad y la escala de valores; lo que para el adulto es seguridad (atar), para el ni\u00f1o es una idea \"rara\".\n\nMetadata: {unidad: 3, tema: \"el_planeta_natal\", tipo: \"filosofico\"}",
+                "tags": ""
+            }
+        ],
+        "module_id": "mod-1",
+        "summary": "El aviador intenta averiguar de d\u00f3nde viene el Principito, pero este prefiere hacer preguntas en lugar de responderlas. Al ver el avi\u00f3n (que para \u00e9l es un objeto extra\u00f1o), el Principito se r\u00ede de que el aviador haya \"ca\u00eddo del cielo\", comentando que \u00e9l tambi\u00e9n viene de otro lugar. A trav\u00e9s de peque\u00f1as pistas, el aviador comprende que el planeta del Principito es apenas m\u00e1s grande que una casa. Cuando el aviador le ofrece una cuerda para atar al cordero durante el d\u00eda y que no se pierda, el Principito se siente un poco ofendido y responde con una frase melanc\u00f3lica: \"Caminando en l\u00ednea recta no se puede ir muy lejos\".",
+        "mind_map_image": "\/uploads\/2025\/12\/mapa-mental-principito-capitulo-3-media_6947193b0589a.png",
+        "pdf_url": "\/uploads\/2025\/12\/pam-media_694718f404355.pdf"
+    },
+    {
+        "id": "principito-cap-1",
+        "course_id": "curso-principito",
+        "title": "Cap\u00edtulo 1: El dibujo de la boa",
+        "slug": "capitulo-1",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=YYNDsjwujeY",
+        "content": "# Cap\u00edtulo 1\n\nCuando yo ten\u00eda seis a\u00f1os vi una vez una imagen magn\u00edfica en un libro sobre la Selva Virgen que se llamaba 'Historias Vividas'. Representaba una serpiente boa que se tragaba a una fiera...\n\nEn el libro se afirmaba: 'Las serpientes boas tragan sus presas enteras, sin masticarlas. Luego no pueden moverse y duermen durante los seis meses que dura su digesti\u00f3n'.\n\nReflexion\u00e9 mucho entonces sobre las aventuras de la selva y, a mi vez, logr\u00e9 trazar con un l\u00e1piz de colores mi primer dibujo. Mi dibujo n\u00famero 1. Era as\u00ed:\n\n[Imagen del sombrero\/boa]\n\nMostr\u00e9 mi obra de arte a las personas mayores y les pregunt\u00e9 si mi dibujo les daba miedo.",
+        "ai_config": {
+            "system_prompt": "Eres un experto literario en El Principito. Tu tono es po\u00e9tico, profundo y amable. Ayudas al alumno a entender las met\u00e1foras de Saint-Exup\u00e9ry.",
+            "knowledge_base": "En el cap\u00edtulo 1, el narrador habla de su dibujo de una boa que se trag\u00f3 un elefante, el cual los adultos confundieron con un sombrero. Esto representa la p\u00e9rdida de la imaginaci\u00f3n al crecer.",
+            "triggers": []
+        },
+        "test_questions": [
+            {
+                "id": "q1",
+                "question": "\u00bfQu\u00e9 cre\u00edan ver los adultos en el dibujo del narrador?",
+                "options": [
+                    "A) Una serpiente",
+                    "B) Un sombrero",
+                    "C) Una monta\u00f1a"
+                ],
+                "correct_answer": "B",
+                "explanation": "Los adultos carecen de imaginaci\u00f3n y solo ven la forma exterior, que parece un sombrero."
+            }
+        ],
+        "resources": [],
+        "_updatedAt": "2025-12-20T21:46:07+00:00",
+        "_createdAt": "2025-12-20T11:25:59+00:00",
+        "videos": [
+            {
+                "url": "https:\/\/www.youtube.com\/watch?v=YYNDsjwujeY",
+                "title": "Cap\u00edtulo 1: An\u00e1lisis Visual"
+            }
+        ],
+        "summary": "En este primer cap\u00edtulo, el narrador nos cuenta su frustraci\u00f3n infantil cuando los adultos no comprendieron su dibujo de una boa que diger\u00eda un elefante, confundi\u00e9ndolo con un sombrero. Esta experiencia lo llev\u00f3 a abandonar su carrera de pintor para convertirse en piloto, subrayando la brecha entre la imaginaci\u00f3n de los ni\u00f1os y la l\u00f3gica limitada de los adultos.",
+        "flashcards": [
+            {
+                "question": "\u00bfQu\u00e9 animal dibuj\u00f3 el narrador a los 6 a\u00f1os?",
+                "answer": "Una serpiente boa que diger\u00eda un elefante.."
+            },
+            {
+                "question": "\u00bfQu\u00e9 creyeron ver los adultos en el dibujo?",
+                "answer": "Un sombrero.-"
+            },
+            {
+                "question": "\u00bfPor qu\u00e9 el narrador dej\u00f3 de ser pintor?",
+                "answer": "Porque los adultos le aconsejaron dedicarse a cosas 'serias' como la geograf\u00eda o el c\u00e1lculo.|"
+            }
+        ],
+        "quiz": [
+            {
+                "question": "\u00bfCu\u00e1l es el tema central del Cap\u00edtulo 1?",
+                "options": [
+                    "La vida en la selva",
+                    "La falta de imaginaci\u00f3n de los adultos",
+                    "C\u00f3mo pilotar un avi\u00f3n",
+                    "La digesti\u00f3n de las boas"
+                ],
+                "correct": 1,
+                "explanation": "El cap\u00edtulo resalta c\u00f3mo los adultos pierden la capacidad de ver m\u00e1s all\u00e1 de las apariencias."
+            },
+            {
+                "question": "\u00bfQu\u00e9 libro inspir\u00f3 el primer dibujo del narrador?",
+                "options": [
+                    "El Principito",
+                    "Historias Vividas",
+                    "Manual de Vuelo",
+                    "Geograf\u00eda para Ni\u00f1os"
+                ],
+                "correct": 1,
+                "explanation": "El narrador menciona que vio una imagen en un libro llamado 'Historias Vividas'."
+            }
+        ],
+        "pdf_url": "\/uploads\/2025\/12\/pam-media_694718f404355.pdf",
+        "mind_map_image": "\/uploads\/2025\/12\/mapa-mental-principito-capitulo-1-media_6947191a093c9.png",
+        "video_description": "Este video resume visualmente el primer cap\u00edtulo de El Principito, mostrando los dibujos originales de Saint-Exup\u00e9ry y explicando la met\u00e1fora del sombrero y la boa.",
+        "knowledge_chunks": [
+            {
+                "id": "chunk-1",
+                "title": "El dibujo de la boa",
+                "content": "El narrador dibuja una boa abierta y una cerrada para que los adultos entiendan.",
+                "tags": [
+                    "dibujo",
+                    "imaginaci\u00f3n"
+                ]
+            },
+            {
+                "id": "chunk-2",
+                "title": "Cr\u00edtica a los adultos",
+                "content": "Los adultos siempre necesitan explicaciones y prefieren las cosas \u00fatiles sobre las hermosas.",
+                "tags": [
+                    "adultos",
+                    "cr\u00edtica"
+                ]
+            }
+        ],
+        "module_id": "mod-1"
+    },
+    {
+        "id": "principito-cap-2",
+        "course_id": "curso-principito",
+        "title": "Cap\u00edtulo 2: El encuentro en el desierto",
+        "slug": "capitulo-2",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=nR2qiVIHrdE",
+        "content": "# Cap\u00edtulo 2\n\nViv\u00ed as\u00ed, solo, sin nadie con quien hablar verdaderamente, hasta que tuve una aver\u00eda en el desierto del Sahara, hace seis a\u00f1os. Algo se hab\u00eda roto en mi motor...\n\nLa primera noche me dorm\u00ed sobre la arena a mil millas de toda tierra habitada. Estaba m\u00e1s aislado que un n\u00e1ufrago sobre una balsa en medio del oc\u00e9ano. Imaginen, pues, mi sorpresa cuando, al romper el d\u00eda, me despert\u00f3 una extra\u00f1a vocecita que dec\u00eda:\n\n\u2014Por favor... \u00a1dib\u00fajame un cordero!",
+        "ai_config": {
+            "system_prompt": "Eres un experto literario en El Principito. Tu tono es po\u00e9tico, profundo y amable. Ayudas al alumno a entender las met\u00e1foras de Saint-Exup\u00e9ry.",
+            "knowledge_base": "En el cap\u00edtulo 2, el narrador conoce al Principito en el desierto del Sahara tras un accidente de avi\u00f3n. El Principito le pide que dibuje un cordero, lo que marca el inicio de su amistad.",
+            "triggers": []
+        },
+        "test_questions": [
+            {
+                "id": "q1",
+                "question": "\u00bfD\u00f3nde se encuentran el narrador y el Principito?",
+                "options": [
+                    "A) En un bosque",
+                    "B) En el desierto del Sahara",
+                    "C) En un asteroide"
+                ],
+                "correct_answer": "B",
+                "explanation": "El encuentro ocurre tras una aver\u00eda del avi\u00f3n en el desierto del Sahara."
+            }
+        ],
+        "resources": [],
+        "_updatedAt": "2025-12-20T21:47:21+00:00",
+        "_createdAt": "2025-12-20T11:27:24+00:00",
+        "videos": [
+            {
+                "url": "https:\/\/www.youtube.com\/watch?v=nR2qiVIHrdE",
+                "title": "Nuevo Video"
+            }
+        ],
+        "flashcards": [
+            {
+                "question": "\u00bfC\u00f3mo ocurre el encuentro inicial entre el narrador y el principito?",
+                "answer": "El narrador se encuentra en el desierto del Sahara tras sufrir una aver\u00eda en el motor de su avi\u00f3n. Al amanecer, una extra\u00f1a vocecita lo despierta pidi\u00e9ndole: \"Por favor... \u00a1dib\u00fajame un cordero!\". Es aqu\u00ed donde descubrimos que el principito no parece ni perdido, ni muerto de hambre, ni asustado, a pesar de estar en medio del desierto."
+            },
+            {
+                "question": "\u00bfPor qu\u00e9 el dibujo de la \"caja\" es el que finalmente deja satisfecho al principito?",
+                "answer": "Tras varios intentos fallidos donde el principito rechaza los corderos (por estar enfermos, ser viejos o tener cuernos), el narrador, impaciente por arreglar su motor, dibuja una caja con tres agujeros.\n\nLa clave: Le dice que el cordero est\u00e1 adentro.\n\nSignificado: Esto satisface al principito porque apela a la imaginaci\u00f3n. Demuestra la tesis central de la obra: que los adultos necesitan explicaciones concretas, mientras que los ni\u00f1os (y el principito) pueden ver lo esencial a trav\u00e9s de la fantas\u00eda."
+            }
+        ],
+        "quiz": [
+            {
+                "question": "\u00bfCu\u00e1l es la primera petici\u00f3n que le hace el Principito al aviador cuando se encuentran en el desierto?",
+                "options": [
+                    "A. Que le explique qu\u00e9 es una boa.",
+                    "C. Que le dibuje un cordero.",
+                    "B. Que le ayude a encontrar agua."
+                ],
+                "correct": 1,
+                "explanation": "Respuesta correcta\nEsta es la famosa frase que inicia la interacci\u00f3n entre ambos personajes y marca el inicio de su amistad."
+            },
+            {
+                "question": "\u00bfPor qu\u00e9 el Principito queda satisfecho con el dibujo de una caja?",
+                "options": [
+                    "A. Porque as\u00ed puede llevar al cordero en su bolsillo.",
+                    "C. Porque le permite imaginar al cordero tal como \u00e9l lo desea.",
+                    "B. Porque el aviador le prometi\u00f3 que la caja era m\u00e1gica."
+                ],
+                "correct": 1,
+                "explanation": "Respuesta correcta\nLa caja representa la imaginaci\u00f3n pura, permitiendo que el cordero sea perfecto en la mente del ni\u00f1o."
+            }
+        ],
+        "knowledge_chunks": [],
+        "module_id": "mod-1",
+        "summary": "El narrador se encuentra solo en el desierto del Sahara despu\u00e9s de que su avi\u00f3n sufriera una aver\u00eda. Mientras intenta reparar el motor, una extra\u00f1a vocecita lo despierta al amanecer pidi\u00e9ndole: \"Por favor... \u00a1dib\u00fajame un cordero!\". As\u00ed conoce al Principito.\n\nEl narrador, que no sabe dibujar otra cosa que una boa cerrada y una boa abierta, intenta cumplir el deseo. Sin embargo, el Principito rechaza los tres primeros dibujos (uno por parecer un elefante dentro de una boa, otro por estar enfermo, otro por ser un carnero y el \u00faltimo por ser muy viejo). Frustrado y con prisa, el aviador dibuja una caja con agujeros y le dice que el cordero est\u00e1 adentro. Para su sorpresa, esto encanta al Principito, demostrando que lo esencial se ve con la imaginaci\u00f3n.",
+        "mind_map_image": "\/uploads\/2025\/12\/mapa-mental-principito-capitulo-2-media_69471955f0745.png",
+        "pdf_url": "\/uploads\/2025\/12\/pam-media_694718f404355.pdf"
+    }
+]

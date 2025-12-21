@@ -53,8 +53,23 @@ export default function DataManager({ collection, title, singularTitle, basePath
         return name.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
-    const handleCreate = () => {
-        navigate(`/editor/${collection}/new`);
+    const handleCreate = async () => {
+        try {
+            // Create empty document first
+            const newDoc = {
+                id: `${collection.slice(0, -1)}-${Date.now()}`,
+                title: `Nuevo ${singularTitle}`,
+                content: '',
+                created_at: new Date().toISOString(),
+                author: 'Admin'
+            };
+
+            await acideService.create(collection, newDoc);
+            navigate(`/editor/${collection}/${newDoc.id}`);
+        } catch (error) {
+            console.error('Error creating document:', error);
+            alert('Error al crear el documento');
+        }
     };
 
     const handleEdit = (id) => {

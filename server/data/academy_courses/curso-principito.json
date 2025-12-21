@@ -1,0 +1,19 @@
+{
+    "id": "curso-principito",
+    "title": "Entiende El Principito",
+    "slug": "el-principito",
+    "description": "Un viaje filosófico a través de la obra maestra de Antoine de Saint-Exupéry.",
+    "featured_image": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1000&auto=format&fit=crop",
+    "modules": [
+        {
+            "id": "mod-1",
+            "title": "Primeros Pasos",
+            "lessons": [
+                "principito-cap-1",
+                "principito-cap-2"
+            ]
+        }
+    ],
+    "status": "published",
+    "author": "Gestas AI Academy"
+}

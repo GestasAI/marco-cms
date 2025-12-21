@@ -16,8 +16,17 @@ export default function Login() {
 
     try {
       // Use centralized AuthService (handles marco_token, api interceptors, etc)
-      await authService.login(email, password);
-      navigate('/admin');
+      const { user } = await authService.login(email, password);
+
+      // Redirección basada en rol
+      const roleName = (user.roleName || user.role_name || '').toLowerCase();
+      console.log(`👤 [Login] Usuario autenticado: ${user.email} (Rol: ${roleName})`);
+
+      if (roleName === 'estudiante' || roleName === 'cliente') {
+        navigate('/academy');
+      } else {
+        navigate('/admin');
+      }
     } catch (err) {
       console.error(err);
       setError(err.message || 'Error al iniciar sesión');

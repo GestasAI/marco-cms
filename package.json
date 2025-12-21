@@ -19,7 +19,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "php": "php -S localhost:8000 -t public",
+    "php": "php -S localhost:9000 -t public",
     "dev:full": "concurrently \"npm run dev\" \"npm run php\"",
     "build": "vite build",
     "lint": "eslint .",

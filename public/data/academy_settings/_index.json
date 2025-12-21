@@ -1,0 +1,10 @@
+[
+    {
+        "gemini_api_key": "AIzaSyDDQLbQgV_-thUKdaCxm3VWQ9jHE-jHO7M",
+        "gemini_model": "gemini-2.5-flash",
+        "default_system_prompt": "Eres un tutor experto de GestasAI.",
+        "_updatedAt": "2025-12-20T16:14:37+00:00",
+        "_createdAt": "2025-12-20T15:14:45+00:00",
+        "id": "current"
+    }
+]

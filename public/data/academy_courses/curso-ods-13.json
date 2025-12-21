@@ -1,0 +1,26 @@
+{
+    "id": "curso-ods-13",
+    "title": "ODS 13: Acción por el Clima",
+    "slug": "accion-por-el-clima",
+    "description": "Aprende todo sobre el cambio climático y cómo podemos actuar para frenarlo.",
+    "featured_image": "/assets/ods13.jpg",
+    "modules": [
+        {
+            "id": "mod-1",
+            "title": "Introducción al Cambio Climático",
+            "lessons": [
+                "clase-1-1",
+                "clase-1-2"
+            ]
+        },
+        {
+            "id": "mod-2",
+            "title": "Impacto en la Industria",
+            "lessons": [
+                "clase-2-1"
+            ]
+        }
+    ],
+    "status": "published",
+    "author": "Gestas AI Academy"
+}

@@ -1,0 +1,41 @@
+{
+    "id": "clase-1-1",
+    "course_id": "curso-ods-13",
+    "title": "Qué es el Cambio Climático",
+    "slug": "que-es-el-cambio-climatico",
+    "video_url": "https://www.youtube.com/watch?v=example",
+    "content": "# Introducción al Cambio Climático\n\nEl cambio climático se refiere a los cambios a largo plazo de las temperaturas y los patrones climáticos...",
+    "ai_config": {
+        "system_prompt": "Eres un instructor experto en el ODS 13. Tu objetivo es explicar conceptos complejos de forma sencilla y socrática. Responde basándote exclusivamente en el contexto proporcionado.",
+        "knowledge_base": "Fragmentos clave: El efecto invernadero es un proceso natural... Las actividades humanas han aumentado la concentración de CO2... El Acuerdo de París busca limitar el calentamiento a 1.5 grados.",
+        "triggers": [
+            {
+                "condition": "user_completes_reading",
+                "action": "unlock_resource",
+                "resource_id": "pdf-resumen-ods13"
+            }
+        ]
+    },
+    "test_questions": [
+        {
+            "id": "q1",
+            "question": "¿Cuál es el objetivo principal del Acuerdo de París?",
+            "options": [
+                "A) Aumentar la producción industrial",
+                "B) Limitar el calentamiento global a 1.5 grados",
+                "C) Eliminar todos los coches"
+            ],
+            "correct_answer": "B",
+            "explanation": "El Acuerdo de París es un tratado internacional sobre el cambio climático que busca limitar el calentamiento global."
+        }
+    ],
+    "resources": [
+        {
+            "id": "pdf-resumen-ods13",
+            "title": "Guía Resumen ODS 13",
+            "type": "pdf",
+            "url": "/downloads/ods13-guia.pdf",
+            "locked": true
+        }
+    ]
+}

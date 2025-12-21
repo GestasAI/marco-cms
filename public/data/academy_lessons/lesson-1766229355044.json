@@ -1,0 +1,72 @@
+{
+    "title": "capitulo 3 \u00bfDe d\u00f3nde vienes, hombrecito?",
+    "slug": "capitulo-3",
+    "content": "El primer encuentro detallado entre el aviador y el principito en el desierto, donde el ni\u00f1o le pide al aviador que le dibuje un cordero, y tras varios intentos fallidos (dibujos de boas, corderos enfermos, etc.), el aviador dibuja una caja y el principito se contenta, revelando as\u00ed la pureza y la imaginaci\u00f3n infantil frente a la l\u00f3gica adulta, y estableciendo el tono de curiosidad y extra\u00f1eza que marca su relaci\u00f3n. ",
+    "video_url": "https:\/\/www.youtube.com\/watch?v=WtvgLvGsckE",
+    "ai_config": {
+        "system_prompt": "Eres un agente de inteligencia artificial especializado en an\u00e1lisis literario y narraci\u00f3n interpretativa.\nTu tarea es describir de forma clara, evocadora y fiel el contenido del cap\u00edtulo 3 de El Principito, centr\u00e1ndote en el primer encuentro entre el aviador y el Principito en el desierto.\n\nExplica el contexto del accidente del aviador, la aparici\u00f3n inesperada del ni\u00f1o y su actitud serena y misteriosa. Detalla la petici\u00f3n del dibujo del cordero y los sucesivos intentos fallidos del aviador, subrayando el contraste entre la l\u00f3gica adulta y la imaginaci\u00f3n infantil.\n\nAnaliza el significado simb\u00f3lico de la caja que contiene al cordero invisible, destacando c\u00f3mo este gesto revela la pureza, la creatividad y la libertad imaginativa del Principito.\n\nMant\u00e9n un tono reflexivo y accesible, evita citas textuales de la obra y no reproduzcas fragmentos literales. Prioriza la interpretaci\u00f3n tem\u00e1tica, el simbolismo y la relaci\u00f3n incipiente entre los personajes, resaltando c\u00f3mo este episodio establece el tono de curiosidad, extra\u00f1eza y aprendizaje mutuo que marcar\u00e1 su v\u00ednculo a lo largo de la historia.",
+        "knowledge_base": "Obra: El Principito\nAutor: Antoine de Saint-Exup\u00e9ry\nG\u00e9nero: Novela corta \/ f\u00e1bula filos\u00f3fica\nPublicaci\u00f3n: 1943\n\nContexto narrativo general\n\nLa historia se presenta como un relato en primera persona desde la perspectiva del aviador.\n\nEl desierto simboliza el aislamiento, el silencio y la ruptura con la civilizaci\u00f3n adulta.\n\nEl encuentro con el Principito ocurre en un espacio liminal: lejos del mundo racional y cotidiano.\n\nCap\u00edtulo 3 \u2013 Claves tem\u00e1ticas\n\nPrimer contacto real entre los protagonistas: se consolida la relaci\u00f3n aviador\u2013Principito.\n\nComunicaci\u00f3n no convencional: el ni\u00f1o no responde a las preguntas del adulto, pero insiste en lo que para \u00e9l es esencial.\n\nChoque de visiones del mundo:\n\nAdulto \u2192 l\u00f3gica, funcionalidad, frustraci\u00f3n.\n\nNi\u00f1o \u2192 imaginaci\u00f3n, simplicidad, aceptaci\u00f3n.\n\nEl dibujo del cordero:\n\nLos intentos fallidos reflejan la incapacidad adulta de comprender la mirada infantil.\n\nLa caja simboliza la libertad de la imaginaci\u00f3n: lo invisible puede ser m\u00e1s verdadero que lo visible.\n\nSimbolismo relevante\n\nEl cordero: inocencia, deseo, responsabilidad futura.\n\nLa caja: apertura a m\u00faltiples interpretaciones; el lector tambi\u00e9n imagina.\n\nEl silencio del Principito: sabidur\u00eda no racional, escucha interior.\n\nEl desierto: espacio de revelaci\u00f3n y aprendizaje.\n\nFunci\u00f3n del cap\u00edtulo en la obra\n\nEstablece el tono filos\u00f3fico y po\u00e9tico del libro.\n\nIntroduce el tema central: \u201clo esencial no es visible a los ojos\u201d.\n\nPrepara al lector para los relatos posteriores sobre los planetas y los adultos."
+    },
+    "id": "lesson-1766229355044",
+    "course_id": "curso-principito",
+    "test_questions": [],
+    "resources": [],
+    "_updatedAt": "2025-12-20T21:59:26+00:00",
+    "_createdAt": "2025-12-20T11:15:55+00:00",
+    "videos": [
+        {
+            "url": "https:\/\/www.youtube.com\/watch?v=WtvgLvGsckE",
+            "title": "Nuevo Video"
+        }
+    ],
+    "flashcards": [
+        {
+            "question": "\u00bfC\u00f3mo deduce el aviador que el Principito viene de otro planeta?",
+            "answer": "Por las preguntas que hace el Principito sobre el avi\u00f3n y su reacci\u00f3n al saber que el aviador \"cay\u00f3 del cielo\". El Principito menciona que su propio hogar es tan peque\u00f1o que \"caminando siempre adelante no se puede ir muy lejos\", lo que indica que vive en un asteroide."
+        },
+        {
+            "question": "\u00bfPor qu\u00e9 el Principito rechaza la idea de atar al cordero con una cuerda?",
+            "answer": "Porque en su planeta todo es tan peque\u00f1o que el cordero no tiene a d\u00f3nde ir. La idea de \"atar\" algo le parece extra\u00f1a y un poco triste, ya que no hay peligro de que el animal se pierda en un espacio tan reducido."
+        }
+    ],
+    "quiz": [
+        {
+            "question": "\u00bfQu\u00e9 objeto del aviador despierta la curiosidad y la risa del Principito en este cap\u00edtulo?",
+            "options": [
+                "A. Su reloj de pulsera.",
+                "C. El avi\u00f3n (su 'm\u00e1quina').",
+                "B. Un mapa del desierto."
+            ],
+            "correct": 1,
+            "explanation": "Respuesta correcta\nEl Principito pregunta qu\u00e9 es esa cosa, y al saber que vuela y que el aviador cay\u00f3 del cielo con ella, se r\u00ede con mucha gracia."
+        },
+        {
+            "question": "\u00bfQu\u00e9 revela la frase 'derecho ante uno mismo, no se puede ir muy lejos' sobre el hogar del Principito?",
+            "options": [
+                "A. Que el Principito siempre camina en c\u00edrculos.",
+                "C. Que es un lugar lleno de laberintos.",
+                "B. Que es un planeta extremadamente peque\u00f1o."
+            ],
+            "correct": 2,
+            "explanation": "Respuesta correcta\nEsta frase confirma la sospecha del aviador de que el Principito proviene de un asteroide donde el espacio es \u00ednfimo."
+        }
+    ],
+    "knowledge_chunks": [
+        {
+            "id": 1766267910928,
+            "title": "El Encuentro con la Tecnolog\u00eda (El Avi\u00f3n)",
+            "content": "Contenido: El Principito se interesa por el avi\u00f3n del piloto, pero no lo ve como una m\u00e1quina compleja, sino como una \"cosa\" que vuela. Al enterarse de que el piloto \"cay\u00f3 del cielo\", el ni\u00f1o se r\u00ede y pregunta si \u00e9l tambi\u00e9n viene de otro planeta, lo que marca el inicio de la revelaci\u00f3n sobre su origen.\n\nConcepto clave: La curiosidad infantil frente al pragmatismo t\u00e9cnico del adulto.\n\nMetadata: {unidad: 3, tema: \"el_avion\", tipo: \"narrativo\"}",
+            "tags": ""
+        },
+        {
+            "id": 1766267932395,
+            "title": "El Planeta Natal y la Libertad (La Cuerda y la Estaca)",
+            "content": "Contenido: El piloto ofrece una cuerda y una estaca para atar al cordero durante el d\u00eda y evitar que se pierda. Esta propuesta disgusta al Principito, quien responde con melancol\u00eda que en su casa todo es tan peque\u00f1o que \"derecho siempre adelante de uno no se puede ir muy lejos\".\n\nConcepto clave: La libertad y la escala de valores; lo que para el adulto es seguridad (atar), para el ni\u00f1o es una idea \"rara\".\n\nMetadata: {unidad: 3, tema: \"el_planeta_natal\", tipo: \"filosofico\"}",
+            "tags": ""
+        }
+    ],
+    "module_id": "mod-1",
+    "summary": "El aviador intenta averiguar de d\u00f3nde viene el Principito, pero este prefiere hacer preguntas en lugar de responderlas. Al ver el avi\u00f3n (que para \u00e9l es un objeto extra\u00f1o), el Principito se r\u00ede de que el aviador haya \"ca\u00eddo del cielo\", comentando que \u00e9l tambi\u00e9n viene de otro lugar. A trav\u00e9s de peque\u00f1as pistas, el aviador comprende que el planeta del Principito es apenas m\u00e1s grande que una casa. Cuando el aviador le ofrece una cuerda para atar al cordero durante el d\u00eda y que no se pierda, el Principito se siente un poco ofendido y responde con una frase melanc\u00f3lica: \"Caminando en l\u00ednea recta no se puede ir muy lejos\".",
+    "mind_map_image": "\/uploads\/2025\/12\/mapa-mental-principito-capitulo-3-media_6947193b0589a.png",
+    "pdf_url": "\/uploads\/2025\/12\/pam-media_694718f404355.pdf"
+}

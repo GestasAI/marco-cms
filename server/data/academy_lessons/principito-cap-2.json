@@ -1,0 +1,27 @@
+{
+    "id": "principito-cap-2",
+    "course_id": "curso-principito",
+    "title": "Capítulo 2: El encuentro en el desierto",
+    "slug": "capitulo-2",
+    "video_url": "https://www.youtube.com/watch?v=example2",
+    "content": "# Capítulo 2\n\nViví así, solo, sin nadie con quien hablar verdaderamente, hasta que tuve una avería en el desierto del Sahara, hace seis años. Algo se había roto en mi motor...\n\nLa primera noche me dormí sobre la arena a mil millas de toda tierra habitada. Estaba más aislado que un náufrago sobre una balsa en medio del océano. Imaginen, pues, mi sorpresa cuando, al romper el día, me despertó una extraña vocecita que decía:\n\n—Por favor... ¡dibújame un cordero!",
+    "ai_config": {
+        "system_prompt": "Eres un experto literario en El Principito. Tu tono es poético, profundo y amable. Ayudas al alumno a entender las metáforas de Saint-Exupéry.",
+        "knowledge_base": "En el capítulo 2, el narrador conoce al Principito en el desierto del Sahara tras un accidente de avión. El Principito le pide que dibuje un cordero, lo que marca el inicio de su amistad.",
+        "triggers": []
+    },
+    "test_questions": [
+        {
+            "id": "q1",
+            "question": "¿Dónde se encuentran el narrador y el Principito?",
+            "options": [
+                "A) En un bosque",
+                "B) En el desierto del Sahara",
+                "C) En un asteroide"
+            ],
+            "correct_answer": "B",
+            "explanation": "El encuentro ocurre tras una avería del avión en el desierto del Sahara."
+        }
+    ],
+    "resources": []
+}
