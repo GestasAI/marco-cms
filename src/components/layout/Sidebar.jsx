@@ -1,6 +1,4 @@
-﻿import { Link, useLocation ,
-    Download
-} from 'react-router-dom';
+﻿import { Link, useLocation } from 'react-router-dom';
 import {
     LayoutDashboard,
     FileText,
@@ -14,8 +12,7 @@ import {
     Search,
     Image,
     GraduationCap,
-    Users
-,
+    Users,
     Download
 } from 'lucide-react';
 
