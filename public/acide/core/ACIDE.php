@@ -39,12 +39,19 @@ class ACIDE
      */
     public function execute($request)
     {
-        // Enforce Authentication for ALL PHP operations
-        // Since Reads are static, PHP is only used for Admin tasks.
-        $user = $this->auth->validateRequest();
-        if (!$user) {
-            Utils::sendError("Unauthorized access.", 401);
+        // Public endpoints that don't require authentication
+        $publicActions = ['get_active_theme_home', 'get_active_theme_id'];
+        $action = isset($request['action']) ? $request['action'] : '';
+        
+        // Skip authentication for public endpoints
+        if (!in_array($action, $publicActions)) {
+            // Enforce Authentication for ALL other PHP operations
+            $user = $this->auth->validateRequest();
+            if (!$user) {
+                Utils::sendError("Unauthorized access.", 401);
+            }
         }
+
 
         // Handling Multipart/Form-Data (File Uploads)
         if (!empty($_FILES)) {
@@ -133,6 +140,7 @@ class ACIDE
         }
     }
 }
+
 
 
 
