@@ -172,7 +172,27 @@ export const acideService = {
 
     // Theme Management
     listThemes: async () => acideService._phpRequest('list_themes'),
-    activateTheme: async (themeId) => acideService._phpRequest('activate_theme', null, null, { theme_id: themeId }),
+    activateTheme: async (themeId) => {
+        const payload = { action: 'activate_theme', theme_id: themeId };
+        const headers = { 'Content-Type': 'application/json' };
+        const token = localStorage.getItem('marco_token');
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`ACIDE Error ${response.status}: ${errorText}`);
+        }
+
+        const json = await response.json();
+        if (json.status === 'error') throw new Error(json.message);
+        return json.data;
+    },
 
     // Theme Parts Management
     saveThemePart: async (themeId, partName, data) => {
@@ -196,3 +216,5 @@ export const acideService = {
     request: async (action, collection, id, data) => acideService._phpRequest(action, collection, id, data),
     findById: async (collection, id) => acideService.get(collection, id)
 };
+
+

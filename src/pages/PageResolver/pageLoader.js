@@ -17,10 +17,43 @@ export function isReservedSlug(slug) {
 }
 
 /**
- * Normaliza el slug (convierte vacío a 'inicio')
+ * Normaliza el slug (convierte vacío a 'home')
  */
 export function normalizeSlug(slug) {
-    return !slug || slug === '' ? 'inicio' : slug;
+    return !slug || slug === '' ? 'home' : slug;
+}
+
+/**
+ * Obtiene el tema activo desde settings
+ */
+async function getActiveTheme() {
+    try {
+        const settings = await acideService.get('theme_settings', 'current');
+        return settings?.active_theme || 'gestasai-default';
+    } catch (err) {
+        console.warn('No se pudo obtener tema activo, usando default');
+        return 'gestasai-default';
+    }
+}
+
+/**
+ * Intenta cargar una página desde el tema activo
+ */
+export async function loadPageFromTheme(slug) {
+    try {
+        const activeTheme = await getActiveTheme();
+        const response = await fetch(`/themes/${activeTheme}/pages/${slug}.json`);
+
+        if (response.ok) {
+            const pageData = await response.json();
+            console.log(`✅ Cargado desde tema: ${activeTheme}/pages/${slug}.json`);
+            return pageData;
+        }
+        return null;
+    } catch (err) {
+        console.warn('Carga desde tema falló:', err);
+        return null;
+    }
 }
 
 /**
@@ -45,25 +78,28 @@ export async function loadPageFromACIDE(slug) {
 }
 
 /**
- * Intenta cargar una página desde archivo JSON
+ * Intenta cargar una página desde archivo JSON en /data/pages
  */
 export async function loadPageFromJSON(slug) {
     try {
         const response = await fetch(`/data/pages/${slug}.json`);
         if (response.ok) {
             const pageData = await response.json();
-            console.log('✅ Cargado directamente desde archivo JSON');
+            console.log('✅ Cargado desde /data/pages');
             return pageData;
         }
         return null;
     } catch (err) {
-        console.warn('Carga directa desde JSON falló:', err);
+        console.warn('Carga desde /data/pages falló:', err);
         return null;
     }
 }
 
 /**
- * Carga una página intentando primero ACIDE y luego JSON
+ * Carga una página con el siguiente orden de prioridad:
+ * 1. Desde el tema activo (para 'home' y páginas específicas del tema)
+ * 2. Desde ACIDE (contenido creado por el usuario)
+ * 3. Desde /data/pages (fallback)
  */
 export async function loadPageData(slug) {
     const normalizedSlug = normalizeSlug(slug);
@@ -73,13 +109,16 @@ export async function loadPageData(slug) {
         return null;
     }
 
-    // Intentar cargar desde ACIDE
-    let pageData = await loadPageFromACIDE(normalizedSlug);
+    // 1. Intentar cargar desde el tema activo (especialmente para 'home')
+    let pageData = await loadPageFromTheme(normalizedSlug);
+    if (pageData) return pageData;
 
-    // Si no se encuentra, intentar desde JSON
-    if (!pageData) {
-        pageData = await loadPageFromJSON(normalizedSlug);
-    }
+    // 2. Intentar cargar desde ACIDE (contenido del usuario)
+    pageData = await loadPageFromACIDE(normalizedSlug);
+    if (pageData) return pageData;
+
+    // 3. Fallback: cargar desde /data/pages
+    pageData = await loadPageFromJSON(normalizedSlug);
 
     return pageData;
 }
