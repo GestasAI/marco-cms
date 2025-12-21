@@ -213,6 +213,40 @@ export const acideService = {
     listPlugins: async () => acideService.list('plugins'),
 
     
+    
+    // Theme Home Page
+    getActiveThemeHome: async () => {
+        const payload = { action: 'get_active_theme_home' };
+        const headers = { 'Content-Type': 'application/json' };
+
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+        const json = await response.json();
+        if (json.status === 'error') throw new Error(json.message);
+        return json.data;
+    },
+
+    getActiveThemeId: async () => {
+        const payload = { action: 'get_active_theme_id' };
+        const headers = { 'Content-Type': 'application/json' };
+
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+        const json = await response.json();
+        if (json.status === 'error') throw new Error(json.message);
+        return json.data;
+    },
+
     // Static Site Generation
     buildSite: async () => {
         const payload = { action: 'build_site' };
@@ -254,6 +288,7 @@ export const acideService = {
     request: async (action, collection, id, data) => acideService._phpRequest(action, collection, id, data),
     findById: async (collection, id) => acideService.get(collection, id)
 };
+
 
 
 

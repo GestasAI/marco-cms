@@ -74,6 +74,12 @@ class ACIDE
             case 'list_themes':
                 return $this->themeManager->listThemes();
 
+                        case 'get_active_theme_home':
+                return $this->themeManager->getActiveThemeHome();
+
+            case 'get_active_theme_id':
+                return $this->themeManager->getActiveThemeId();
+
             case 'activate_theme':
                 if (!isset($request['theme_id']))
                     throw new Exception("Theme ID is required.");
@@ -127,6 +133,7 @@ class ACIDE
         }
     }
 }
+
 
 
 

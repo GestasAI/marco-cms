@@ -70,4 +70,46 @@ class ThemeManager
         // Save
         return $this->crud->update('theme_settings', 'current', $current);
     }
+
+    /**
+     * Get the home page from the active theme
+     */
+    public function getActiveThemeHome()
+    {
+        // Get active theme
+        try {
+            $settings = $this->crud->read('theme_settings', 'current');
+            $themeId = $settings['active_theme'] ?? 'gestasai-default';
+        } catch (Exception $e) {
+            $themeId = 'gestasai-default';
+        }
+
+        // Load home.json from theme
+        $homePath = $this->themesDir . '/' . $themeId . '/pages/home.json';
+
+        if (!file_exists($homePath)) {
+            throw new Exception("Home page not found for theme: $themeId");
+        }
+
+        $homeData = json_decode(file_get_contents($homePath), true);
+
+        if (!$homeData) {
+            throw new Exception("Invalid home.json for theme: $themeId");
+        }
+
+        return $homeData;
+    }
+
+    /**
+     * Get the active theme ID
+     */
+    public function getActiveThemeId()
+    {
+        try {
+            $settings = $this->crud->read('theme_settings', 'current');
+            return $settings['active_theme'] ?? 'gestasai-default';
+        } catch (Exception $e) {
+            return 'gestasai-default';
+        }
+    }
 }
