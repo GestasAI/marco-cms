@@ -1,0 +1,24 @@
+{
+    "id": "home",
+    "title": "ShootAndRun - Laser Tag",
+    "slug": "home",
+    "status": "published",
+    "page": {
+        "sections": [
+            {
+                "section": "section",
+                "id": "hero",
+                "class": "hero",
+                "content": [
+                    {
+                        "element": "heading",
+                        "id": "main-title",
+                        "class": "hero-title",
+                        "tag": "h1",
+                        "text": "BIENVENIDO A SHOOTANDRUN LASER TAG"
+                    }
+                ]
+            }
+        ]
+    }
+}

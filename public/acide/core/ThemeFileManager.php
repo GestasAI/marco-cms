@@ -22,7 +22,7 @@ class ThemeFileManager
         $filePath = $themePath . '/' . $partName . '.json';
 
         // Save the file
-        if (file_put_contents($filePath, json_encode($data, JSON_PRETTY_PRINT))) {
+        if (file_put_contents($filePath, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
             return [
                 'success' => true,
                 'message' => "Theme part '$partName' saved successfully",

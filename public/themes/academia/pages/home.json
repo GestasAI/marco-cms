@@ -1,63 +1,42 @@
 {
     "id": "home",
-    "title": "Gestas Academy - El futuro no se predice. Se lidera.",
+    "title": "Gestas Academy - Tecnología para el bienestar empresarial",
     "slug": "home",
-    "status": "published",
-    "template": "index",
-    "author": "admin",
-    "created_at": "2025-12-21T20:00:00+00:00",
-    "updated_at": "2025-12-21T20:00:00+00:00",
-    "seo": {
-        "meta_title": "Gestas Academy - Lidera la Soberanía Digital",
-        "meta_description": "Donde la Inteligencia Artificial potencia el talento humano.",
-        "meta_keywords": "ia, academy, formación, prompt engineering",
-        "og_title": "Gestas Academy",
-        "og_description": "Lidera la soberanía digital",
-        "og_image": "/themes/academia/assets/og-image.jpg"
-    },
     "page": {
-        "id": "page-home",
-        "class": "page-home",
         "sections": [
             {
-                "section": "header",
+                "element": "section",
                 "id": "header",
                 "class": "header",
                 "content": [
                     {
                         "element": "container",
-                        "id": "header-container",
                         "class": "container",
                         "content": [
                             {
                                 "element": "heading",
-                                "id": "logo",
-                                "class": "logo",
                                 "tag": "h1",
+                                "class": "logo",
                                 "text": "Gestas Academy"
                             },
                             {
                                 "element": "nav",
-                                "id": "main-nav",
                                 "class": "nav",
                                 "content": [
                                     {
                                         "element": "link",
-                                        "id": "nav-link-home",
-                                        "class": "nav-link active",
+                                        "class": "nav-link",
                                         "text": "Inicio",
                                         "link": "/"
                                     },
                                     {
                                         "element": "link",
-                                        "id": "nav-link-courses",
                                         "class": "nav-link",
                                         "text": "Cursos",
                                         "link": "#cursos"
                                     },
                                     {
                                         "element": "link",
-                                        "id": "nav-link-premium",
                                         "class": "nav-link",
                                         "text": "Premium",
                                         "link": "#premium"
@@ -69,213 +48,106 @@
                 ]
             },
             {
-                "section": "content",
-                "id": "main-content",
-                "class": "content",
+                "element": "section",
+                "id": "hero",
+                "class": "hero",
                 "content": [
                     {
-                        "element": "section",
-                        "id": "hero",
-                        "class": "hero",
+                        "element": "container",
+                        "class": "container",
                         "content": [
                             {
-                                "element": "container",
-                                "id": "hero-container",
-                                "class": "container hero-content",
-                                "content": [
-                                    {
-                                        "element": "heading",
-                                        "id": "hero-title",
-                                        "class": "heading-1",
-                                        "tag": "h1",
-                                        "text": "El futuro no se predice. Se lidera."
-                                    },
-                                    {
-                                        "element": "text",
-                                        "id": "hero-subtitle",
-                                        "class": "text-lead",
-                                        "tag": "p",
-                                        "text": "Gestas Academy: Donde la Inteligencia Artificial potencia el talento humano. Aprende a dominar las herramientas que definirán la soberanía tecnológica de tu empresa."
-                                    },
-                                    {
-                                        "element": "button",
-                                        "id": "hero-cta",
-                                        "class": "btn btn-primary btn-lg",
-                                        "text": "Empezar ahora — Es gratuito",
-                                        "link": "#cursos"
-                                    }
-                                ]
+                                "element": "heading",
+                                "tag": "h1",
+                                "class": "heading-1",
+                                "text": "Tecnología para el bienestar empresarial."
+                            },
+                            {
+                                "element": "text",
+                                "tag": "p",
+                                "class": "text-lead",
+                                "text": "Formación diseñada para entender la digitalización real."
+                            },
+                            {
+                                "element": "button",
+                                "class": "btn btn-primary",
+                                "text": "Empezar ahora — Es gratuito",
+                                "link": "#cursos"
                             }
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "element": "section",
+                "id": "cursos",
+                "class": "section section-free",
+                "content": [
                     {
-                        "element": "section",
-                        "id": "courses-section",
-                        "class": "section",
+                        "element": "container",
+                        "class": "container",
                         "content": [
                             {
-                                "element": "container",
-                                "id": "courses-container",
-                                "class": "container",
+                                "element": "heading",
+                                "tag": "h2",
+                                "class": "heading-2 text-center",
+                                "text": "El Valor del Conocimiento Compartido"
+                            },
+                            {
+                                "element": "grid",
+                                "class": "grid grid-3",
                                 "content": [
                                     {
-                                        "element": "heading",
-                                        "id": "courses-title",
-                                        "class": "heading-2 text-center mb-2xl",
-                                        "tag": "h2",
-                                        "text": "Programas de Acceso Abierto (Gratuitos)"
-                                    },
-                                    {
-                                        "element": "grid",
-                                        "id": "courses-grid",
-                                        "class": "grid grid-3",
+                                        "element": "card",
+                                        "class": "card",
                                         "content": [
                                             {
-                                                "element": "card",
-                                                "id": "course-1",
-                                                "class": "card",
-                                                "content": [
-                                                    {
-                                                        "element": "heading",
-                                                        "id": "course-1-title",
-                                                        "class": "card-title",
-                                                        "tag": "h3",
-                                                        "text": "Digitalización y Tecnología Empresarial"
-                                                    },
-                                                    {
-                                                        "element": "text",
-                                                        "id": "course-1-desc",
-                                                        "class": "card-text",
-                                                        "tag": "p",
-                                                        "text": "Una inmersión estratégica en los cimientos de la Industria 4.0. Entiende cómo la infraestructura segura y el motor ACIDE protegen el activo más valioso de tu negocio: el dato."
-                                                    }
-                                                ]
+                                                "element": "heading",
+                                                "tag": "h3",
+                                                "class": "card-title",
+                                                "text": "Digitalización y Tecnología Empresarial"
                                             },
                                             {
-                                                "element": "card",
-                                                "id": "course-2",
-                                                "class": "card",
-                                                "content": [
-                                                    {
-                                                        "element": "heading",
-                                                        "id": "course-2-title",
-                                                        "class": "card-title",
-                                                        "tag": "h3",
-                                                        "text": "Iniciativa Emprendedora en la Era de la IA"
-                                                    },
-                                                    {
-                                                        "element": "text",
-                                                        "id": "course-2-desc",
-                                                        "class": "card-text",
-                                                        "tag": "p",
-                                                        "text": "Convierte ideas en modelos de negocio escalables utilizando el ecosistema modular de Gestas OS."
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "element": "card",
-                                                "id": "course-3",
-                                                "class": "card",
-                                                "content": [
-                                                    {
-                                                        "element": "heading",
-                                                        "id": "course-3-title",
-                                                        "class": "card-title",
-                                                        "tag": "h3",
-                                                        "text": "IA & Habilidades Blandas"
-                                                    },
-                                                    {
-                                                        "element": "text",
-                                                        "id": "course-3-desc",
-                                                        "class": "card-text",
-                                                        "tag": "p",
-                                                        "text": "Descubre cómo la IA potencia tu pensamiento crítico y comunicación."
-                                                    }
-                                                ]
+                                                "element": "text",
+                                                "tag": "p",
+                                                "class": "card-text",
+                                                "text": "El Valor: La adopción consciente de nuevas tecnologías y normativas no es solo una obligación, es una oportunidad. Impacto: Entender estos procesos beneficia la reducción de la huella de carbono y mejora significativamente la producción en las empresas. Un equipo que comprende el \"por qué\" de la tecnología es un equipo más eficiente."
                                             }
                                         ]
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "element": "section",
-                        "id": "premium-section",
-                        "class": "section section-premium",
-                        "content": [
-                            {
-                                "element": "container",
-                                "id": "premium-container",
-                                "class": "container",
-                                "content": [
-                                    {
-                                        "element": "heading",
-                                        "id": "premium-title",
-                                        "class": "heading-2 text-center mb-2xl",
-                                        "tag": "h2",
-                                        "text": "Gestas Academy Premium"
                                     },
                                     {
-                                        "element": "grid",
-                                        "id": "premium-grid",
-                                        "class": "grid grid-2",
+                                        "element": "card",
+                                        "class": "card",
                                         "content": [
                                             {
-                                                "element": "card",
-                                                "id": "premium-course-1",
-                                                "class": "card card-premium",
-                                                "content": [
-                                                    {
-                                                        "element": "heading",
-                                                        "id": "premium-1-title",
-                                                        "class": "card-title",
-                                                        "tag": "h3",
-                                                        "text": "Prompt Engineering: Mejora tus Habilidades"
-                                                    },
-                                                    {
-                                                        "element": "text",
-                                                        "id": "premium-1-desc",
-                                                        "class": "card-text",
-                                                        "tag": "p",
-                                                        "text": "Domina el arte de comunicarte con los modelos de lenguaje."
-                                                    },
-                                                    {
-                                                        "element": "button",
-                                                        "id": "premium-1-cta",
-                                                        "class": "btn btn-primary mt-lg",
-                                                        "text": "49€/mes - Comenzar",
-                                                        "link": "/premium/prompt-engineering"
-                                                    }
-                                                ]
+                                                "element": "heading",
+                                                "tag": "h3",
+                                                "class": "card-title",
+                                                "text": "Iniciativa Emprendedora desde un punto de vista de la IA"
                                             },
                                             {
-                                                "element": "card",
-                                                "id": "premium-course-2",
-                                                "class": "card card-premium",
-                                                "content": [
-                                                    {
-                                                        "element": "heading",
-                                                        "id": "premium-2-title",
-                                                        "class": "card-title",
-                                                        "tag": "h3",
-                                                        "text": "Prompt Engineering Avanzado"
-                                                    },
-                                                    {
-                                                        "element": "text",
-                                                        "id": "premium-2-desc",
-                                                        "class": "card-text",
-                                                        "tag": "p",
-                                                        "text": "Optimización de flujos de trabajo de alto rendimiento."
-                                                    },
-                                                    {
-                                                        "element": "button",
-                                                        "id": "premium-2-cta",
-                                                        "class": "btn btn-primary mt-lg",
-                                                        "text": "99€/mes - Comenzar",
-                                                        "link": "/premium/advanced"
-                                                    }
-                                                ]
+                                                "element": "text",
+                                                "tag": "p",
+                                                "class": "card-text",
+                                                "text": "El Valor: Fomentar la iniciativa emprendedora dentro de la propia organización. Impacto: El impulso de buenas prácticas combinadas con la inteligencia artificial aporta bienestar tanto a los empleados como a la empresa, creando un entorno dinámico y entregado."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "element": "card",
+                                        "class": "card",
+                                        "content": [
+                                            {
+                                                "element": "heading",
+                                                "tag": "h3",
+                                                "class": "card-title",
+                                                "text": "IA & Soft Skills: Rendimiento Aumentado con Gemini y ChatGPT"
+                                            },
+                                            {
+                                                "element": "text",
+                                                "tag": "p",
+                                                "class": "card-text",
+                                                "text": "El Valor: La IA como herramienta de mejora personal y colectiva. Impacto: Herramientas como los modelos de lenguaje (ChatGPT, Gemini) son aliados potentes para mejorar las habilidades individuales y fortalecer la comunidad de trabajo. El éxito se construye en la interacción inteligente entre humanos y máquinas."
                                             }
                                         ]
                                     }
@@ -286,21 +158,207 @@
                 ]
             },
             {
-                "section": "footer",
+                "element": "section",
+                "id": "premium",
+                "class": "section section-premium",
+                "content": [
+                    {
+                        "element": "container",
+                        "class": "container",
+                        "content": [
+                            {
+                                "element": "heading",
+                                "tag": "h2",
+                                "class": "heading-2 text-center",
+                                "text": "Especialización: Profundizando en la Herramienta"
+                            },
+                            {
+                                "element": "grid",
+                                "class": "grid grid-2",
+                                "content": [
+                                    {
+                                        "element": "card",
+                                        "class": "card",
+                                        "content": [
+                                            {
+                                                "element": "heading",
+                                                "tag": "h3",
+                                                "class": "card-title",
+                                                "text": "Prompt Engineering: Mejora tus habilidades"
+                                            },
+                                            {
+                                                "element": "text",
+                                                "tag": "p",
+                                                "class": "card-text",
+                                                "text": "Aprende a comunicarte con precisión con los modelos de lenguaje para optimizar tus tareas diarias."
+                                            },
+                                            {
+                                                "element": "button",
+                                                "class": "btn btn-primary",
+                                                "text": "Más información",
+                                                "link": "/registro"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "element": "card",
+                                        "class": "card",
+                                        "content": [
+                                            {
+                                                "element": "heading",
+                                                "tag": "h3",
+                                                "class": "card-title",
+                                                "text": "Prompt Engineering Avanzado: Potencia tu productividad"
+                                            },
+                                            {
+                                                "element": "text",
+                                                "tag": "p",
+                                                "class": "card-text",
+                                                "text": "Técnicas avanzadas para aquellos que buscan llevar su eficiencia al siguiente nivel, impactando positivamente en los objetivos de la empresa."
+                                            },
+                                            {
+                                                "element": "button",
+                                                "class": "btn btn-primary",
+                                                "text": "Más información",
+                                                "link": "/registro"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "element": "section",
+                "id": "pricing",
+                "class": "section section-pricing",
+                "content": [
+                    {
+                        "element": "container",
+                        "class": "container",
+                        "content": [
+                            {
+                                "element": "heading",
+                                "tag": "h2",
+                                "class": "heading-2 text-center mb-2xl",
+                                "text": "Planes de Suscripción"
+                            },
+                            {
+                                "element": "grid",
+                                "class": "grid grid-3",
+                                "content": [
+                                    {
+                                        "element": "card",
+                                        "class": "card pricing-card",
+                                        "content": [
+                                            {
+                                                "element": "heading",
+                                                "tag": "h3",
+                                                "class": "plan-name",
+                                                "text": "Plan Básico"
+                                            },
+                                            {
+                                                "element": "text",
+                                                "tag": "p",
+                                                "class": "plan-price",
+                                                "text": "14.50€ /mes"
+                                            },
+                                            {
+                                                "element": "text",
+                                                "tag": "p",
+                                                "class": "plan-desc",
+                                                "text": "Acceso a cursos por carrera elegida."
+                                            },
+                                            {
+                                                "element": "button",
+                                                "class": "btn btn-outline",
+                                                "text": "Empezar",
+                                                "link": "/checkout/basico"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "element": "card",
+                                        "class": "card pricing-card featured",
+                                        "content": [
+                                            {
+                                                "element": "heading",
+                                                "tag": "h3",
+                                                "class": "plan-name",
+                                                "text": "Plan Inteligente"
+                                            },
+                                            {
+                                                "element": "text",
+                                                "tag": "p",
+                                                "class": "plan-price",
+                                                "text": "25€ /mes"
+                                            },
+                                            {
+                                                "element": "text",
+                                                "tag": "p",
+                                                "class": "plan-desc",
+                                                "text": "Accesos a las carreras y al asesoramiento de la comunidad."
+                                            },
+                                            {
+                                                "element": "button",
+                                                "class": "btn btn-primary",
+                                                "text": "Recomendado",
+                                                "link": "/checkout/inteligente"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "element": "card",
+                                        "class": "card pricing-card",
+                                        "content": [
+                                            {
+                                                "element": "heading",
+                                                "tag": "h3",
+                                                "class": "plan-name",
+                                                "text": "Plan Maestro"
+                                            },
+                                            {
+                                                "element": "text",
+                                                "tag": "p",
+                                                "class": "plan-price",
+                                                "text": "244€ /año"
+                                            },
+                                            {
+                                                "element": "text",
+                                                "tag": "p",
+                                                "class": "plan-desc",
+                                                "text": "Todo el contenido, primicias y herramientas avanzadas más 10G de almacenamiento."
+                                            },
+                                            {
+                                                "element": "button",
+                                                "class": "btn btn-outline",
+                                                "text": "Acceso Total",
+                                                "link": "/checkout/maestro"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "element": "section",
                 "id": "footer",
                 "class": "footer",
                 "content": [
                     {
                         "element": "container",
-                        "id": "footer-container",
                         "class": "container",
                         "content": [
                             {
                                 "element": "text",
-                                "id": "copyright",
-                                "class": "footer-text text-center",
                                 "tag": "p",
-                                "text": "© 2025 Gestas Academy. Lidera la soberanía digital."
+                                "class": "footer-text",
+                                "text": "© 2025 Gestas Academy. Tecnología para el bienestar empresarial."
                             }
                         ]
                     }

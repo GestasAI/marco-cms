@@ -51,7 +51,7 @@ class CRUDOperations
         }
 
         // Save the index file
-        file_put_contents($collectionPath . '/_index.json', json_encode($indexData, JSON_PRETTY_PRINT));
+        file_put_contents($collectionPath . '/_index.json', json_encode($indexData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
 
     /**
@@ -88,7 +88,7 @@ class CRUDOperations
             $data['_createdAt'] = date('c');
         }
 
-        if (file_put_contents($filePath, json_encode($data, JSON_PRETTY_PRINT))) {
+        if (file_put_contents($filePath, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
             // Rebuild index after write
             $this->rebuildIndex($collection);
             return $data;

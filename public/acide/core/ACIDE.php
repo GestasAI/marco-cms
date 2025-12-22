@@ -39,10 +39,13 @@ class ACIDE
      */
     public function execute($request)
     {
+        // Forzar siempre salida UTF-8 para evitar errores de acentos
+        header('Content-Type: application/json; charset=utf-8');
+
         // Public endpoints that don't require authentication
         $publicActions = ['get_active_theme_home', 'get_active_theme_id'];
         $action = isset($request['action']) ? $request['action'] : '';
-        
+
         // Skip authentication for public endpoints
         if (!in_array($action, $publicActions)) {
             // Enforce Authentication for ALL other PHP operations
@@ -81,7 +84,7 @@ class ACIDE
             case 'list_themes':
                 return $this->themeManager->listThemes();
 
-                        case 'get_active_theme_home':
+            case 'get_active_theme_home':
                 return $this->themeManager->getActiveThemeHome();
 
             case 'get_active_theme_id':
@@ -107,7 +110,17 @@ class ACIDE
                 if (!$id) {
                     $id = uniqid();
                 }
-                return $this->crud->update($collection, $id, $data);
+                $result = $this->crud->update($collection, $id, $data);
+
+                // Trigger Rebuild: Si actualizamos una página, regeneramos el sitio
+                if ($collection === 'pages') {
+                    try {
+                        $this->staticGenerator->buildSite();
+                    } catch (Exception $e) {
+                        // Log error but don't stop the update
+                    }
+                }
+                return $result;
 
             case 'list':
                 if (!$collection)
