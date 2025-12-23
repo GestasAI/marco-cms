@@ -10,42 +10,50 @@ const RENDERER_MAP = {
     'heading': Renderers.renderHeadingElement,
     'text': Renderers.renderTextElement,
     'button': Renderers.renderButtonElement,
+    'list': Renderers.renderListElement,
+    'html': Renderers.renderHtmlElement,
+    'code': Renderers.renderCodeElement,
     'search': Renderers.renderSearchElement,
     'container': Renderers.renderContainerElement,
     'section': Renderers.renderSectionElement,
-    'logo': Renderers.renderLogoElement
+    'logo': Renderers.renderLogoElement,
+    'columns': Renderers.renderColumnsElement,
+    'column': Renderers.renderColumnElement,
+    'card': Renderers.renderCardElement,
+    'nav': Renderers.renderNavElement,
+    'grid': Renderers.renderGridElement
 };
 
 /**
  * Función principal para renderizar un elemento recursivamente
  */
-export function renderElement(element, index) {
+export function renderElement(element, index, doc) {
     if (!element) return null;
 
     const type = element.element;
     const Renderer = RENDERER_MAP[type];
 
     if (Renderer) {
-        // Para contenedores y secciones, pasamos renderElement para recursividad
-        if (type === 'container' || type === 'section' || type === 'logo') {
-            return Renderer(element, index, renderElement);
+        // Para contenedores, secciones y columnas, pasamos renderElement para recursividad
+        if (['container', 'section', 'logo', 'columns', 'column', 'card', 'nav', 'grid'].includes(type)) {
+            return Renderer(element, index, renderElement, doc);
         }
-        return Renderer(element, index);
+        return Renderer(element, index, doc);
     }
 
     // Elementos no reconocidos o genéricos
-    return Renderers.renderGenericElement(element, index, renderElement);
+    return Renderers.renderGenericElement(element, index, renderElement, doc);
 }
 
 /**
  * Renderiza una sección completa de la página (header, content, footer)
  */
-export function renderPageSection(section, index) {
+export function renderPageSection(section, index, doc) {
     if (!section) return null;
 
     const { section: sectionType, id, class: className, content, customStyles } = section;
     const contentElements = content && Array.isArray(content)
-        ? content.map((el, i) => renderElement(el, i))
+        ? content.map((el, i) => renderElement(el, i, doc))
         : null;
 
     // Props comunes (sin key)

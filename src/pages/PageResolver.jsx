@@ -64,11 +64,11 @@ export default function PageResolver() {
 
             {/* Renderizar Secciones (Header, Content, Footer) */}
             {page.page && Array.isArray(page.page.sections) ? (
-                page.page.sections.map((section, index) => renderPageSection(section, index))
+                page.page.sections.map((section, index) => renderPageSection(section, index, page))
             ) : (
                 // Fallback por si la estructura es antigua (page como array directo)
                 Array.isArray(page.page) ? (
-                    page.page.map((section, index) => renderPageSection(section, index))
+                    page.page.map((section, index) => renderPageSection(section, index, page))
                 ) : (
                     <div className="container py-xl text-center">
                         <p className="text-red-500">Error: Estructura de página no válida</p>

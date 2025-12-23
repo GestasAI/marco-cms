@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { basicBlocks, designBlocks, assignIds } from './blocks';
+import { basicBlocks, designBlocks } from './blocks';
+import { Plus, X } from 'lucide-react';
 
-/**
- * Biblioteca de bloques - Con drag visual nativo
- */
 export function BlockLibrary({ onAddBlock }) {
-    const [activeTab, setActiveTab] = useState('elements');
+    const [showDesignPanel, setShowDesignPanel] = useState(false);
 
     const handleDragStart = (e, block) => {
         e.dataTransfer.effectAllowed = 'copy';
@@ -21,94 +19,84 @@ export function BlockLibrary({ onAddBlock }) {
     };
 
     return (
-        <div className="block-library">
-            <div className="block-library-tabs">
+        <div className={`block-library-container ${showDesignPanel ? 'panel-open' : ''}`}>
+            {/* BARRA LATERAL FINA (ELEMENTOS) */}
+            <div className="block-library-sidebar">
                 <button
-                    className={`tab ${activeTab === 'elements' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('elements')}
+                    className={`sidebar-btn design-toggle ${showDesignPanel ? 'active' : ''}`}
+                    onClick={() => setShowDesignPanel(!showDesignPanel)}
+                    title="Explorar Bloques de Diseño"
                 >
-                    Elementos
+                    <Plus size={24} />
                 </button>
-                <button
-                    className={`tab ${activeTab === 'blocks' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('blocks')}
-                >
-                    Bloques
-                </button>
-            </div>
 
-            <div className="block-library-content">
-                {activeTab === 'elements' && (
-                    <BlockList
-                        blocks={basicBlocks}
-                        onDragStart={handleDragStart}
-                        onDragEnd={handleDragEnd}
-                    />
-                )}
-                {activeTab === 'blocks' && (
-                    <BlockList
-                        blocks={designBlocks}
-                        isDesign
-                        onDragStart={handleDragStart}
-                        onDragEnd={handleDragEnd}
-                    />
-                )}
-            </div>
+                <div className="sidebar-divider" />
 
-            <div className="block-library-info">
-                <p className="text-xs text-secondary text-center">
-                    🖱️ <strong>Arrastra</strong> bloques al canvas o <strong>doble click</strong> en elementos para usar botones +
-                </p>
-            </div>
-        </div>
-    );
-}
-
-function BlockList({ blocks, isDesign = false, onDragStart, onDragEnd }) {
-    return (
-        <div className="block-list">
-            {blocks.map((block) => (
-                <div
-                    key={block.id}
-                    className="block-item"
-                    draggable="true"
-                    onDragStart={(e) => onDragStart(e, block)}
-                    onDragEnd={onDragEnd}
-                >
-                    {!isDesign ? (
-                        <BlockItemBasic block={block} />
-                    ) : (
-                        <BlockItemDesign block={block} />
-                    )}
+                <div className="element-icons-list">
+                    {basicBlocks.map((block) => {
+                        const Icon = block.icon;
+                        return (
+                            <div
+                                key={block.id}
+                                className="block-item"
+                                draggable="true"
+                                onDragStart={(e) => handleDragStart(e, block)}
+                                onDragEnd={handleDragEnd}
+                                onClick={() => onAddBlock && onAddBlock(block)}
+                                data-label={block.label}
+                                title={block.label}
+                            >
+                                <Icon size={20} />
+                            </div>
+                        );
+                    })}
                 </div>
-            ))}
-        </div>
-    );
-}
-
-function BlockItemBasic({ block }) {
-    const Icon = block.icon;
-    return (
-        <div className="block-item-basic">
-            <Icon size={20} />
-            <span>{block.label}</span>
-        </div>
-    );
-}
-
-function BlockItemDesign({ block }) {
-    return (
-        <div className="block-item-design">
-            <div className="block-preview">
-                {block.preview ? (
-                    <img src={block.preview} alt={block.label} />
-                ) : (
-                    <div className="block-preview-placeholder">
-                        {block.label}
-                    </div>
-                )}
             </div>
-            <span className="block-label">{block.label}</span>
+
+            {/* PANEL DESPLEGABLE (BLOQUES DE DISEÑO) */}
+            {showDesignPanel && (
+                <div className="block-library-flyout">
+                    <div className="flyout-header">
+                        <h3>Bloques</h3>
+                        <button className="close-btn" onClick={() => setShowDesignPanel(false)}>
+                            <X size={20} />
+                        </button>
+                    </div>
+
+                    <div className="flyout-content">
+                        <p className="flyout-intro">Arrastra y suelta patrones en el lienzo.</p>
+
+                        <div className="design-blocks-grid">
+                            {designBlocks.map((block) => {
+                                return (
+                                    <div
+                                        key={block.id}
+                                        className="design-block-card"
+                                        draggable="true"
+                                        onDragStart={(e) => handleDragStart(e, block)}
+                                        onDragEnd={handleDragEnd}
+                                        onClick={() => {
+                                            onAddBlock && onAddBlock(block);
+                                            setShowDesignPanel(false);
+                                        }}
+                                    >
+                                        <div className="design-preview">
+                                            {block.preview ? (
+                                                <img src={block.preview} alt={block.label} />
+                                            ) : (
+                                                <div className="preview-placeholder">
+                                                    <block.icon size={32} />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="design-label">{block.label}</div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

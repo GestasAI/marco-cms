@@ -1,17 +1,20 @@
 /* Editable Element Wrapper */
 .editable-element-wrapper {
     position: relative;
-    margin: 4px 0;
-}
-
-.editable-element-content {
-    position: relative;
+    margin: 0;
+    /* No añadir display o padding aquí para no romper el layout del tema */
 }
 
 /* Hover Effect */
 .element-hovering {
     outline: 1px dashed rgba(99, 102, 241, 0.3);
     outline-offset: 2px;
+}
+
+.element-selected {
+    outline: 2px solid var(--dashboard-color-primary);
+    outline-offset: 2px;
+    z-index: 10;
 }
 
 /* Add Block Triggers (botones +) */
@@ -24,7 +27,7 @@
     transition: opacity 0.2s;
 }
 
-.editable-element-wrapper:hover .add-block-trigger {
+.editable-element-wrapper:hover>.add-block-trigger {
     opacity: 1;
 }
 
@@ -73,25 +76,6 @@
     border-radius: var(--radius-md);
     background: var(--dashboard-color-bg);
     padding: var(--spacing-xl);
-}
-
-.add-block-btn {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-sm) var(--spacing-md);
-    background: white;
-    border: 1px solid var(--dashboard-color-border);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all 0.2s;
-    color: var(--dashboard-color-text-secondary);
-}
-
-.add-block-btn:hover {
-    border-color: var(--dashboard-color-primary);
-    color: var(--dashboard-color-primary);
-    background: var(--dashboard-color-primary-light);
 }
 
 /* Block Selector Menu */
@@ -179,21 +163,100 @@
     text-align: center;
 }
 
-.block-selector-design {
-    grid-column: span 2;
+/* Dynamic Content Styles */
+.is-dynamic {
+    position: relative;
+    outline: 1px dashed var(--dashboard-color-primary) !important;
+    background-color: rgba(79, 70, 229, 0.03) !important;
 }
 
-/* Dragging State */
-.dragging-element {
-    opacity: 0.4;
-    border: 2px dashed var(--dashboard-color-primary);
-    cursor: grabbing;
+.dynamic-placeholder {
+    color: var(--dashboard-color-primary);
+    font-size: 11px;
+    font-weight: 600;
+    font-style: italic;
+    padding: 4px 8px;
+    background: rgba(79, 70, 229, 0.1);
+    border-radius: 4px;
+    display: inline-block;
 }
 
-.editable-element-wrapper[draggable="true"] {
-    cursor: grab;
+.dynamic-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--dashboard-color-primary);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    pointer-events: none;
 }
 
-.editable-element-wrapper[draggable="true"]:active {
-    cursor: grabbing;
+/* --- Advanced Layout Styles --- */
+
+.empty-layout-placeholder {
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed rgba(99, 102, 241, 0.2);
+    border-radius: var(--radius-md);
+    background: rgba(99, 102, 241, 0.02);
+    padding: var(--spacing-xl);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 8px;
+}
+
+.empty-layout-placeholder:hover {
+    background: rgba(99, 102, 241, 0.05);
+    border-color: var(--dashboard-color-primary);
+    transform: translateY(-2px);
+}
+
+.empty-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dashboard-color-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: var(--spacing-sm);
+}
+
+.empty-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dashboard-color-text);
+    margin: 0;
+}
+
+.empty-subtext {
+    font-size: 12px;
+    color: var(--dashboard-color-text-secondary);
+    margin-top: 4px;
+}
+
+/* Eliminar estilos hardcoded que deben venir del tema */
+.section,
+.container,
+.columns,
+.column,
+.grid,
+.card,
+.nav {
+    /* Dejar que el tema mande */
+}
+
+.background-overlay,
+.background-video {
+    pointer-events: none;
 }

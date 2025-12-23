@@ -1,443 +1,166 @@
-import React, { useState } from 'react';
-import { Plus } from 'lucide-react';
-import { basicBlocks, designBlocks } from './blocks';
-import { formatStyles } from '../utils/styleUtils';
+import React, { useState, useEffect, useRef } from 'react';
+import { ElementRenderer } from './components/ElementRenderer';
+import { AddBlockTriggers } from './components/AddBlockTriggers';
+import { BlockSelectorMenu } from './components/BlockSelectorMenu';
 
 /**
- * Contenedor editable con modo de edición al hacer doble click
+ * Contenedor principal para elementos editables en el FSE
  */
-export function EditableContainer({ element, selectedElementId, onSelect, onAddBlock, onUpdate, parentPath = [] }) {
+export function EditableContainer({
+    element,
+    document: doc,
+    selectedElementId,
+    onSelect,
+    onAddBlock,
+    onUpdate,
+    parentPath = ''
+}) {
     const [isEditing, setIsEditing] = useState(false);
+    const [showAddMenu, setShowAddMenu] = useState(null); // 'before', 'after', 'inside'
     const [hovering, setHovering] = useState(false);
-    const [showAddMenu, setShowAddMenu] = useState(null);
+    const containerRef = useRef(null);
 
     const isSelected = selectedElementId === element.id;
-    const currentPath = [...parentPath, element.id];
-    const isContainer = ['container', 'section', 'logo', 'grid', 'card', 'nav'].includes(element.element);
-    const customStyles = element.customStyles || {};
+    const currentPath = parentPath ? `${parentPath}.${element.id}` : element.id;
 
+    // Manejar clics
     const handleClick = (e) => {
         e.stopPropagation();
-        onSelect(element, currentPath);
+        onSelect(element);
     };
 
     const handleDoubleClick = (e) => {
         e.stopPropagation();
-        if (['heading', 'text', 'button'].includes(element.element)) {
+        if (['heading', 'text', 'button', 'link', 'list', 'html', 'code'].includes(element.element)) {
             setIsEditing(true);
         }
     };
 
     const handleTextBlur = (e) => {
+        setIsEditing(false);
         const newText = e.target.innerText;
-        if (newText !== element.text) {
+        if (element.element === 'code') {
+            onUpdate(element.id, 'code', newText);
+        } else if (element.element === 'html') {
+            onUpdate(element.id, 'content', newText);
+        } else {
             onUpdate(element.id, 'text', newText);
         }
-        setIsEditing(false);
     };
 
-    const handleDragStart = (e) => {
-        // Solo permitir arrastrar si no estamos editando texto
-        if (isEditing) {
-            e.preventDefault();
-            return;
+    // Renderizar video de fondo
+    const renderBackgroundVideo = () => {
+        const bg = element.settings?.background;
+        if (bg?.type === 'video' && bg.video) {
+            return (
+                <video
+                    className="background-video"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        zIndex: 0,
+                        pointerEvents: 'none'
+                    }}
+                >
+                    <source src={bg.video} type="video/mp4" />
+                </video>
+            );
         }
-
-        // Detener propagación para evitar que padres también inicien arrastre
-        e.stopPropagation();
-
-        e.dataTransfer.setData('element-id', element.id);
-        e.dataTransfer.setData('text/plain', element.id); // Compatibilidad
-        e.dataTransfer.effectAllowed = 'move';
-
-        console.log('📤 handleDragStart:', element.id);
-
-        // Añadir clase visual al arrastrar
-        const target = e.currentTarget;
-        setTimeout(() => {
-            target.classList.add('dragging-element');
-        }, 0);
+        return null;
     };
 
-    const handleDragEnd = (e) => {
-        e.currentTarget.classList.remove('dragging-element');
-    };
-
-    const handleAddBlock = (block, position) => {
-        onAddBlock(block, element.id, position);
-        setShowAddMenu(null);
-        setIsEditing(false);
-    };
-
-    // Renderizar según tipo
-    const renderContent = () => {
-        const styles = formatStyles(customStyles);
-
-        switch (element.element) {
-            case 'heading': {
-                const Tag = element.tag || 'h2';
-                return (
-                    <Tag
-                        id={element.id}
-                        className={element.class}
-                        style={{
-                            ...styles,
-                            outline: isEditing ? '2px solid #2196f3' : 'none',
-                            minWidth: '20px'
-                        }}
-                        contentEditable={isEditing}
-                        suppressContentEditableWarning={true}
-                        onBlur={handleTextBlur}
-                        onClick={handleClick}
-                        onDoubleClick={handleDoubleClick}
-                    >
-                        {element.text || 'Título'}
-                    </Tag>
-                );
-            }
-
-            case 'text': {
-                const Tag = element.tag || 'p';
-                return (
-                    <Tag
-                        id={element.id}
-                        className={element.class}
-                        style={{
-                            ...styles,
-                            outline: isEditing ? '2px solid #2196f3' : 'none',
-                            minWidth: '20px'
-                        }}
-                        contentEditable={isEditing}
-                        suppressContentEditableWarning={true}
-                        onBlur={handleTextBlur}
-                        onClick={handleClick}
-                        onDoubleClick={handleDoubleClick}
-                    >
-                        {element.text || 'Texto'}
-                    </Tag>
-                );
-            }
-
-            case 'image': {
-                // Combinar customStyles con width/height
-                const imageStyles = formatStyles({
-                    ...customStyles,
-                    width: element.width || customStyles.width || '100%',
-                    height: element.height || customStyles.height || 'auto',
-                    display: customStyles.display || 'block',
-                    margin: customStyles.margin || (customStyles.textAlign === 'center' ? '0 auto' : '0')
-                });
-
-                return (
-                    <img
-                        id={element.id}
-                        src={element.src || '/placeholder-image.jpg'}
-                        alt={element.alt || 'Imagen'}
-                        className={element.class}
-                        style={imageStyles}
-                        onClick={handleClick}
-                        onDoubleClick={handleDoubleClick}
-                    />
-                );
-            }
-
-            case 'video': {
-                // Combinar customStyles con width/height
-                const videoStyles = formatStyles({
-                    ...customStyles,
-                    width: element.width || customStyles.width || '100%',
-                    height: element.height || customStyles.height || 'auto',
-                    display: customStyles.display || 'block',
-                    margin: customStyles.margin || '0'
-                });
-
-                if (element.type === 'youtube' && element.youtubeId) {
-                    // Si hay height personalizado, usar ese; si no, usar aspect ratio 16:9
-                    const hasCustomHeight = customStyles.height || element.height;
-
-                    // Estilos base del contenedor
-                    let containerStyles = {
-                        position: 'relative',
-                        ...videoStyles
-                    };
-
-                    // Si NO hay height personalizado, usar aspect ratio 16:9
-                    if (!hasCustomHeight) {
-                        containerStyles = {
-                            ...containerStyles,
-                            paddingBottom: '56.25%',
-                            height: 0,
-                            overflow: 'hidden'
-                        };
-                    }
-
-                    // Añadir poster si existe
-                    if (element.poster) {
-                        containerStyles = {
-                            ...containerStyles,
-                            backgroundImage: `url(${element.poster})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center'
-                        };
-                    }
-
-                    return (
-                        <div
-                            className={element.class}
-                            style={containerStyles}
-                            onClick={handleClick}
-                            onDoubleClick={handleDoubleClick}
-                        >
-                            <iframe
-                                src={`https://www.youtube.com/embed/${element.youtubeId}${element.autoplay ? '?autoplay=1' : ''}${element.muted ? '&mute=1' : ''}`}
-                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            ></iframe>
-                        </div>
-                    );
-                }
-
-                return (
-                    <video
-                        src={element.src || ''}
-                        className={element.class}
-                        style={videoStyles}
-                        controls={element.controls !== false}
-                        autoPlay={element.autoplay || false}
-                        loop={element.loop || false}
-                        muted={element.muted || false}
-                        poster={element.poster || ''}
-                        onClick={handleClick}
-                        onDoubleClick={handleDoubleClick}
-                    >
-                        Tu navegador no soporta el elemento de video.
-                    </video>
-                );
-            }
-
-            case 'button':
-            case 'link':
-                return (
-                    <a
-                        id={element.id}
-                        href={element.link || '#'}
-                        className={element.class}
-                        style={{
-                            ...styles,
-                            outline: isEditing ? '2px solid #2196f3' : 'none',
-                            display: styles.display || 'inline-block'
-                        }}
-                        target={element.target || '_self'}
-                        contentEditable={isEditing}
-                        suppressContentEditableWarning={true}
-                        onBlur={handleTextBlur}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleClick(e);
-                        }}
-                        onDoubleClick={handleDoubleClick}
-                    >
-                        {element.text || (element.element === 'link' ? 'Enlace' : 'Botón')}
-                    </a>
-                );
-
-            case 'search':
-                return (
-                    <div
-                        className={element.class}
-                        style={styles}
-                        onClick={handleClick}
-                        onDoubleClick={handleDoubleClick}
-                    >
-                        <input
-                            type="text"
-                            placeholder={element.placeholder || 'Buscar...'}
-                            className="w-full"
-                            readOnly
-                        />
-                    </div>
-                );
-
-            case 'container':
-            case 'logo':
-            case 'grid':
-            case 'card':
-            case 'nav':
-                const ContainerTag = element.element === 'nav' ? 'nav' : 'div';
-                return (
-                    <ContainerTag
-                        id={element.id}
-                        className={`${element.class} drop-zone`}
-                        style={styles}
-                        onClick={handleClick}
-                        onDoubleClick={handleDoubleClick}
-                        data-drop-target={element.id}
-                    >
-                        {element.content && element.content.length > 0 ? (
-                            element.content.map(child => (
-                                <EditableContainer
-                                    key={child.id || `child-${Math.random()}`}
-                                    element={child}
-                                    selectedElementId={selectedElementId}
-                                    onSelect={onSelect}
-                                    onAddBlock={onAddBlock}
-                                    onUpdate={onUpdate}
-                                    parentPath={currentPath}
-                                />
-                            ))
-                        ) : (
-                            <div className="empty-container">
-                                <p className="text-sm text-secondary">{element.element.charAt(0).toUpperCase() + element.element.slice(1)} vacío</p>
-                                <p className="text-xs text-secondary">Arrastra bloques aquí</p>
-                            </div>
-                        )}
-                    </ContainerTag>
-                );
-
-            case 'section':
-                return (
-                    <section
-                        id={element.id}
-                        className={`${element.class} drop-zone`}
-                        style={styles}
-                        onClick={handleClick}
-                        onDoubleClick={handleDoubleClick}
-                        data-drop-target={element.id}
-                    >
-                        {element.content && element.content.length > 0 ? (
-                            element.content.map(child => (
-                                <EditableContainer
-                                    key={child.id || `child-${Math.random()}`}
-                                    element={child}
-                                    selectedElementId={selectedElementId}
-                                    onSelect={onSelect}
-                                    onAddBlock={onAddBlock}
-                                    onUpdate={onUpdate}
-                                    parentPath={currentPath}
-                                />
-                            ))
-                        ) : (
-                            <div className="empty-container">
-                                <p className="text-sm text-secondary">Sección vacía</p>
-                                <p className="text-xs text-secondary">Arrastra bloques aquí</p>
-                            </div>
-                        )}
-                    </section>
-                );
-
-            default:
-                return null;
+    // Renderizar overlay
+    const renderOverlay = () => {
+        const bg = element.settings?.background;
+        if (bg?.overlay?.enabled) {
+            return (
+                <div
+                    className="background-overlay"
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: bg.overlay.color || 'rgba(0,0,0,0.5)',
+                        opacity: bg.overlay.opacity || 0.5,
+                        zIndex: 1,
+                        pointerEvents: 'none'
+                    }}
+                />
+            );
         }
+        return null;
+    };
+
+    // Estilos especiales para el wrapper si es un elemento de layout
+    const getWrapperStyles = () => {
+        const styles = {};
+        if (element.element === 'column') {
+            styles.flex = 1;
+            styles.display = 'flex';
+            styles.flexDirection = 'column';
+        }
+        if (element.element === 'columns') {
+            styles.width = '100%';
+        }
+        return styles;
     };
 
     return (
         <div
-            className={`editable-element-wrapper drop-zone ${isSelected ? 'element-selected' : ''} ${hovering ? 'hovering' : ''}`}
-            data-element-id={element.id}
-            data-element-type={element.element}
-            data-drop-target={element.id}
-            draggable={!isEditing}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
+            ref={containerRef}
+            className={`editable-element-wrapper ${isSelected ? 'element-selected' : ''} ${hovering ? 'element-hovering' : ''}`}
+            style={getWrapperStyles()}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
+            onClick={handleClick}
         >
-            {/* Botones + solo en modo edición (doble click) */}
-            {isEditing && (
-                <>
-                    <div className="add-block-trigger add-block-before">
-                        <button
-                            className="add-block-icon"
-                            onClick={() => setShowAddMenu('before')}
-                            title="Añadir antes"
-                        >
-                            <Plus size={16} />
-                        </button>
-                    </div>
-
-                    {isContainer && (
-                        <div className="add-block-trigger add-block-inside">
-                            <button
-                                className="add-block-icon"
-                                onClick={() => setShowAddMenu('inside')}
-                                title="Añadir dentro"
-                            >
-                                <Plus size={16} />
-                            </button>
-                        </div>
-                    )}
-
-                    <div className="add-block-trigger add-block-after">
-                        <button
-                            className="add-block-icon"
-                            onClick={() => setShowAddMenu('after')}
-                            title="Añadir después"
-                        >
-                            <Plus size={16} />
-                        </button>
-                    </div>
-                </>
-            )}
-
-            {/* Contenido */}
-            <div className="editable-element-content">
-                {renderContent()}
-            </div>
-
-            {/* Menú selector */}
-            {showAddMenu && (
-                <BlockSelectorMenu
-                    onSelect={(block) => handleAddBlock(block, showAddMenu)}
-                    onClose={() => {
-                        setShowAddMenu(null);
-                        setIsEditing(false);
-                    }}
+            {/* Triggers de edición (solo si está seleccionado o hovering) */}
+            {(isSelected || hovering) && (
+                <AddBlockTriggers
+                    onAddClick={setShowAddMenu}
+                    showInside={['container', 'section', 'column', 'grid', 'card'].includes(element.element)}
                 />
             )}
-        </div>
-    );
-}
 
-/**
- * Menú selector de bloques
- */
-function BlockSelectorMenu({ onSelect, onClose }) {
-    return (
-        <div className="block-selector-overlay" onClick={onClose}>
-            <div className="block-selector-menu" onClick={(e) => e.stopPropagation()}>
-                <h4 className="heading-5 mb-md">Selecciona un bloque</h4>
+            {/* Renderizado del elemento real */}
+            <ElementRenderer
+                element={element}
+                doc={doc}
+                isEditing={isEditing}
+                handleTextBlur={handleTextBlur}
+                handleClick={handleClick}
+                handleDoubleClick={handleDoubleClick}
+                renderBackgroundVideo={renderBackgroundVideo}
+                renderOverlay={renderOverlay}
+                EditableContainer={EditableContainer}
+                selectedElementId={selectedElementId}
+                onSelect={onSelect}
+                onAddBlock={onAddBlock}
+                onUpdate={onUpdate}
+                currentPath={currentPath}
+                setShowAddMenu={setShowAddMenu}
+            />
 
-                <div className="block-selector-grid">
-                    {basicBlocks.map(block => {
-                        const Icon = block.icon;
-                        return (
-                            <button
-                                key={block.id}
-                                className="block-selector-item"
-                                onClick={() => onSelect(block)}
-                            >
-                                <Icon size={24} />
-                                <span>{block.label}</span>
-                            </button>
-                        );
-                    })}
-                </div>
-
-                <h5 className="heading-6 mt-lg mb-sm">Bloques de Diseño</h5>
-                <div className="block-selector-grid">
-                    {designBlocks.map(block => (
-                        <button
-                            key={block.id}
-                            className="block-selector-item block-selector-design"
-                            onClick={() => onSelect(block)}
-                        >
-                            <span>{block.label}</span>
-                        </button>
-                    ))}
-                </div>
-            </div>
+            {/* Menú de selección de bloques */}
+            {showAddMenu && (
+                <BlockSelectorMenu
+                    onSelect={(blockTemplate) => {
+                        onAddBlock(element.id, showAddMenu, blockTemplate);
+                        setShowAddMenu(null);
+                    }}
+                    onClose={() => setShowAddMenu(null)}
+                />
+            )}
         </div>
     );
 }

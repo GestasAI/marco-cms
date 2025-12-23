@@ -1,6 +1,6 @@
 /* Editor Right Sidebar */
 .editor-right-sidebar {
-    width: 380px;
+    width: 300px;
     background: var(--dashboard-color-surface);
     border-left: 1px solid var(--dashboard-color-border);
     display: flex;
@@ -22,7 +22,6 @@
     background: var(--dashboard-color-bg);
     position: relative;
     min-width: 0;
-    /* Permite que flex shrink funcione */
 }
 
 .editor-canvas {

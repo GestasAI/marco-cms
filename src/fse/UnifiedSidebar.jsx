@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { FileText, Layout, Palette, Image as ImageIcon, Layers } from 'lucide-react';
+import { FileText, Layout, Palette, Image as ImageIcon, Layers, Database } from 'lucide-react';
 import { DocumentTab } from './unified-tabs/DocumentTab';
 import { ContentTab } from './unified-tabs/ContentTab';
 import { StyleTab } from './unified-tabs/StyleTab';
 import { MediaTab } from './unified-tabs/MediaTab';
 import { HierarchyTab } from './unified-tabs/HierarchyTab';
+import { DynamicTab } from './unified-tabs/DynamicTab';
 
 /**
  * Sidebar unificado que combina PropertiesSidebar y StylesPanel
@@ -34,6 +35,7 @@ export function UnifiedSidebar({
         { id: 'document', label: 'Document', icon: FileText },
         { id: 'content', label: 'Block', icon: Layout },
         { id: 'style', label: 'Style', icon: Palette },
+        { id: 'dynamic', label: 'Dynamic', icon: Database },
         { id: 'media', label: 'Media', icon: ImageIcon },
         { id: 'hierarchy', label: 'Hierarchy', icon: Layers }
     ];
@@ -97,10 +99,18 @@ export function UnifiedSidebar({
                         selectedElement={selectedElement}
                         onUpdateStyle={onUpdateStyle}
                         onUpdateCustomStyle={onUpdateCustomStyle}
+                        onUpdateMultiple={onUpdateMultiple}
                         onDelete={onDelete}
                         onMoveUp={onMoveUp}
                         onMoveDown={onMoveDown}
                         onDuplicate={onDuplicate}
+                    />
+                );
+            case 'dynamic':
+                return (
+                    <DynamicTab
+                        selectedElement={selectedElement}
+                        onUpdate={onUpdate}
                     />
                 );
             case 'media':

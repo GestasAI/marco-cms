@@ -503,7 +503,7 @@
                                         "id": "text-1766511809114-5224",
                                         "class": "text-lead",
                                         "tag": "p",
-                                        "text": "Subtítulo descriptivosss",
+                                        "text": "Subtítulo descriptivoss",
                                         "customStyles": {
                                             "color": "#000000"
                                         }
@@ -522,6 +522,71 @@
                             }
                         ],
                         "customStyles": []
+                    },
+                    {
+                        "element": "heading",
+                        "id": "heading-1766521888091-6786",
+                        "class": "heading-2",
+                        "tag": "h2",
+                        "text": "Nuevo Título",
+                        "dynamic": {
+                            "enabled": true,
+                            "source": "post_title",
+                            "field": ""
+                        },
+                        "customStyles": []
+                    },
+                    {
+                        "element": "image",
+                        "id": "image-1766522995889-7043",
+                        "class": "w-full",
+                        "src": "",
+                        "alt": "Imagen",
+                        "width": "",
+                        "height": "",
+                        "dynamic": {
+                            "enabled": true,
+                            "source": "featured_image",
+                            "field": ""
+                        },
+                        "customStyles": []
+                    },
+                    {
+                        "element": "columns",
+                        "id": "columns-1766524804245-2552",
+                        "class": "columns-wrapper",
+                        "columnCount": 2,
+                        "content": [
+                            {
+                                "element": "column",
+                                "id": "column-1766524804245-2921",
+                                "class": "column",
+                                "content": []
+                            },
+                            {
+                                "element": "column",
+                                "id": "column-1766524804245-616",
+                                "class": "column",
+                                "content": [
+                                    {
+                                        "element": "heading",
+                                        "id": "heading-1766525285505-1301",
+                                        "class": "heading-2",
+                                        "tag": "h2",
+                                        "text": "Nuevo Título",
+                                        "dynamic": {
+                                            "enabled": false,
+                                            "source": "",
+                                            "field": ""
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "settings": {
+                            "gap": "20px",
+                            "align": "stretch"
+                        }
                     }
                 ]
             },
@@ -550,8 +615,9 @@
             }
         ]
     },
-    "updated_at": "2025-12-23T18:02:05.045Z",
+    "updated_at": "2025-12-23T21:31:47.323Z",
     "visibility": {
         "tablet": true
-    }
+    },
+    "featured_image": "\/uploads\/2025\/12\/gestasailogocarboncillo-media_693701ad43183.png"
 }

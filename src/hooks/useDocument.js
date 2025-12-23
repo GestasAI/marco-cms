@@ -29,14 +29,15 @@ export function useDocument(collection, id) {
                 const response = await fetch(`/themes/${activeTheme}/parts/${id}.json`);
                 if (response.ok) {
                     const partData = await response.json();
-                    setDocument({ id, title: `Editando: ${id}`, type: 'theme-part' });
-                    setPageData({ sections: partData.blocks || [] });
-                    setContentSection({
+                    const sectionObj = {
                         section: id,
                         id: `${id}-section`,
                         class: id,
                         content: partData.blocks || []
-                    });
+                    };
+                    setDocument({ id, title: `Editando: ${id}`, type: 'theme-part' });
+                    setPageData({ sections: [sectionObj] });
+                    setContentSection(sectionObj);
                 } else {
                     setError(`No se pudo cargar: ${id}`);
                 }
