@@ -111,6 +111,30 @@ export const basicBlocks = [
             class: 'section',
             content: []
         }
+    },
+    {
+        id: 'grid',
+        label: 'Cuadrícula (Grid)',
+        icon: Layout,
+        category: 'layout',
+        template: {
+            element: 'grid',
+            id: '',
+            class: 'grid grid-3 gap-md',
+            content: []
+        }
+    },
+    {
+        id: 'card',
+        label: 'Tarjeta (Card)',
+        icon: Box,
+        category: 'layout',
+        template: {
+            element: 'card',
+            id: '',
+            class: 'card',
+            content: []
+        }
     }
 ];
 

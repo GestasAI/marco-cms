@@ -46,15 +46,38 @@ export function useDocument(collection, id) {
 
             if (docData.page) {
                 setPageData(docData.page);
-                const content = docData.page.sections?.find(s => s.section === 'content');
+                const sections = docData.page.sections || [];
+
+                // Standard: Look for section: "content"
+                let content = sections.find(s => s.section === 'content');
+
+                // Fallback 1: Look for id: "content"
+                if (!content) {
+                    content = sections.find(s => s.id === 'content');
+                }
+
+                // Fallback 2: Find first section that isn't header or footer
+                if (!content && sections.length > 0) {
+                    content = sections.find(s =>
+                        s.section !== 'header' && s.id !== 'header' &&
+                        s.section !== 'footer' && s.id !== 'footer'
+                    );
+                }
+
+                // Fallback 3: Just take the first section
+                if (!content && sections.length > 0) {
+                    content = sections[0];
+                }
+
                 setContentSection(content || null);
 
-                console.log('📄 Documento cargado:');
-                console.log('  ContentSection:', content);
-                console.log('  Elementos con customStyles:',
-                    content?.content?.filter(el => el.customStyles && Object.keys(el.customStyles).length > 0)
-                        .map(el => ({ id: el.id, element: el.element, customStyles: el.customStyles }))
-                );
+                console.log('📄 Documento cargado:', {
+                    id: docData.id,
+                    hasPage: !!docData.page,
+                    sectionsCount: sections.length,
+                    foundContent: !!content,
+                    contentId: content?.id
+                });
             } else {
                 setPageData({ id: `page-${id}-0001`, class: 'body', sections: [] });
                 setContentSection(null);

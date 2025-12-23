@@ -13,30 +13,41 @@ import {
     Image,
     GraduationCap,
     Users,
-    Download
+    Download,
+    Book
 } from 'lucide-react';
 
-export default function Sidebar({ isOpen, onClose }) {
+import { authService } from '../../services/auth/authService';
+
+export default function Sidebar({ isOpen, onClose, user: propUser }) {
     const location = useLocation();
+
+    // Usar el usuario de props si existe, si no el del servicio
+    const user = propUser || authService.getUser();
+
+    const isSuperAdmin = authService.isSuperAdmin(user);
+    const isAdmin = authService.isAdmin(user);
+    const isEditor = authService.isEditor(user);
 
     const menuItems = [
         { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
-        { icon: BarChart3, label: 'Posts', path: '/dashboard/posts' },
-        { icon: FileText, label: 'Páginas', path: '/dashboard/pages' },
-        { icon: ShoppingBag, label: 'Productos', path: '/dashboard/products' },
-        { icon: Megaphone, label: 'Anuncios', path: '/dashboard/ads' },
-        { icon: FolderTree, label: 'Categorías', path: '/dashboard/categories' },
-        { icon: Tags, label: 'Etiquetas', path: '/dashboard/tags' },
-        { icon: Image, label: 'Medios', path: '/dashboard/media' },
+        { icon: BarChart3, label: 'Posts', path: '/dashboard/posts', show: isEditor },
+        { icon: FileText, label: 'Páginas', path: '/dashboard/pages', show: isEditor },
+        { icon: ShoppingBag, label: 'Productos', path: '/dashboard/products', show: isEditor },
+        { icon: Megaphone, label: 'Anuncios', path: '/dashboard/ads', show: isEditor },
+        { icon: FolderTree, label: 'Categorías', path: '/dashboard/categories', show: isEditor },
+        { icon: Tags, label: 'Etiquetas', path: '/dashboard/tags', show: isEditor },
+        { icon: Image, label: 'Medios', path: '/dashboard/media', show: isEditor },
         { icon: GraduationCap, label: 'Academia', path: '/dashboard/academy' },
-        { icon: Users, label: 'Usuarios', path: '/dashboard/users' },
-        { divider: true },
-        { icon: Palette, label: 'Temas', path: '/dashboard/themes' },
-        { icon: Palette, label: 'Partes de Tema', path: '/dashboard/theme-parts' },
-        { icon: Search, label: 'SEO', path: '/dashboard/seo' },
-        { icon: Download, label: 'Generar Sitio', path: '/dashboard/build' },
-        { icon: Settings, label: 'Sistema', path: '/dashboard/settings' }
-    ];
+        { icon: Users, label: 'Usuarios', path: '/dashboard/users', show: isAdmin },
+        { divider: true, show: isEditor },
+        { icon: Palette, label: 'Temas', path: '/dashboard/themes', show: isEditor },
+        { icon: Palette, label: 'Partes de Tema', path: '/dashboard/theme-parts', show: isEditor },
+        { icon: Search, label: 'SEO', path: '/dashboard/seo', show: isEditor },
+        { icon: Download, label: 'Generar Sitio', path: '/dashboard/build', show: isAdmin },
+        { icon: Settings, label: 'Sistema', path: '/dashboard/settings', show: isAdmin },
+        { icon: Book, label: 'Documentación', path: '/dashboard/documentation', show: isAdmin }
+    ].filter(item => item.show !== false);
 
     const isActive = (path) => location.pathname === path;
 

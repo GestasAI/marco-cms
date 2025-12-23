@@ -61,6 +61,113 @@ export function StyleTab({ selectedElement, onUpdateStyle, onUpdateCustomStyle }
 
     return (
         <div className="tab-content">
+            {/* Layout & Display */}
+            <div className="section-header-compact">Layout</div>
+
+            <div className="form-group-compact">
+                <label className="form-label-compact">Display</label>
+                <select
+                    className="form-input-compact"
+                    value={customStyles['display'] || ''}
+                    onChange={(e) => handleCustomStyleChange('display', e.target.value)}
+                >
+                    <option value="">Por defecto</option>
+                    <option value="block">Block</option>
+                    <option value="inline-block">Inline Block</option>
+                    <option value="flex">Flex</option>
+                    <option value="grid">Grid</option>
+                    <option value="none">None (Ocultar)</option>
+                </select>
+            </div>
+
+            {/* Flexbox Options */}
+            {customStyles['display'] === 'flex' && (
+                <div style={{ paddingLeft: '8px', borderLeft: '2px solid #eee', marginBottom: '10px' }}>
+                    <div className="form-group-compact">
+                        <label className="form-label-compact">Flex Direction</label>
+                        <select
+                            className="form-input-compact"
+                            value={customStyles['flex-direction'] || 'row'}
+                            onChange={(e) => handleCustomStyleChange('flex-direction', e.target.value)}
+                        >
+                            <option value="row">Row</option>
+                            <option value="column">Column</option>
+                        </select>
+                    </div>
+
+                    <div className="form-group-compact">
+                        <label className="form-label-compact">Justify Content</label>
+                        <select
+                            className="form-input-compact"
+                            value={customStyles['justify-content'] || ''}
+                            onChange={(e) => handleCustomStyleChange('justify-content', e.target.value)}
+                        >
+                            <option value="">Default</option>
+                            <option value="flex-start">Start</option>
+                            <option value="center">Center</option>
+                            <option value="flex-end">End</option>
+                            <option value="space-between">Space Between</option>
+                            <option value="space-around">Space Around</option>
+                        </select>
+                    </div>
+
+                    <div className="form-group-compact">
+                        <label className="form-label-compact">Align Items</label>
+                        <select
+                            className="form-input-compact"
+                            value={customStyles['align-items'] || ''}
+                            onChange={(e) => handleCustomStyleChange('align-items', e.target.value)}
+                        >
+                            <option value="">Default</option>
+                            <option value="flex-start">Start</option>
+                            <option value="center">Center</option>
+                            <option value="flex-end">End</option>
+                            <option value="stretch">Stretch</option>
+                        </select>
+                    </div>
+
+                    <div className="form-group-compact">
+                        <label className="form-label-compact">Gap</label>
+                        <input
+                            type="text"
+                            className="form-input-compact"
+                            value={customStyles['gap'] || ''}
+                            onChange={(e) => handleCustomStyleChange('gap', e.target.value)}
+                            placeholder="16px"
+                        />
+                    </div>
+                </div>
+            )}
+
+            {/* Grid Options */}
+            {customStyles['display'] === 'grid' && (
+                <div style={{ paddingLeft: '8px', borderLeft: '2px solid #eee', marginBottom: '10px' }}>
+                    <div className="form-group-compact">
+                        <label className="form-label-compact">Grid Columns</label>
+                        <input
+                            type="text"
+                            className="form-input-compact"
+                            value={customStyles['grid-template-columns'] || ''}
+                            onChange={(e) => handleCustomStyleChange('grid-template-columns', e.target.value)}
+                            placeholder="repeat(3, 1fr)"
+                        />
+                    </div>
+
+                    <div className="form-group-compact">
+                        <label className="form-label-compact">Gap</label>
+                        <input
+                            type="text"
+                            className="form-input-compact"
+                            value={customStyles['gap'] || ''}
+                            onChange={(e) => handleCustomStyleChange('gap', e.target.value)}
+                            placeholder="16px"
+                        />
+                    </div>
+                </div>
+            )}
+
+            <div className="divider-compact"></div>
+
             {/* Colores del Tema */}
             <div className="section-header-compact">Colores del Tema</div>
             {renderClassButtons('colors')}
@@ -146,82 +253,91 @@ export function StyleTab({ selectedElement, onUpdateStyle, onUpdateCustomStyle }
 
             <div className="divider-compact"></div>
 
-            {/* Alineación y Dimensiones (para imágenes y videos) */}
+            {/* Alineación y Dimensiones */}
+            <div className="section-header-compact">Alineación</div>
+
+            <div className="form-group-compact">
+                <label className="form-label-compact">Posición (Margin)</label>
+                <div className="button-grid-compact">
+                    <button
+                        className={customStyles['margin'] === '0' ? 'active' : ''}
+                        onClick={() => handleCustomStyleChange('margin', '0')}
+                        title="Izquierda"
+                    >
+                        ← Izq
+                    </button>
+                    <button
+                        className={customStyles['margin'] === '0 auto' ? 'active' : ''}
+                        onClick={() => handleCustomStyleChange('margin', '0 auto')}
+                        title="Centro"
+                    >
+                        ↔ Centro
+                    </button>
+                    <button
+                        className={customStyles['margin'] === '0 0 0 auto' ? 'active' : ''}
+                        onClick={() => handleCustomStyleChange('margin', '0 0 0 auto')}
+                        title="Derecha"
+                    >
+                        Der →
+                    </button>
+                </div>
+            </div>
+
+            <div className="divider-compact"></div>
+
+            <div className="section-header-compact">Dimensiones</div>
+
+            <div className="form-group-compact">
+                <label className="form-label-compact">Ancho (Width)</label>
+                <input
+                    type="text"
+                    className="form-input-compact"
+                    value={customStyles['width'] || selectedElement.width || ''}
+                    onChange={(e) => handleCustomStyleChange('width', e.target.value)}
+                    placeholder="100%, 500px, auto"
+                />
+            </div>
+
+            <div className="form-group-compact">
+                <label className="form-label-compact">Alto (Height)</label>
+                <input
+                    type="text"
+                    className="form-input-compact"
+                    value={customStyles['height'] || selectedElement.height || ''}
+                    onChange={(e) => handleCustomStyleChange('height', e.target.value)}
+                    placeholder="auto, 300px"
+                />
+            </div>
+
+            <div className="form-group-compact">
+                <label className="form-label-compact">Ancho Máximo (Max Width)</label>
+                <input
+                    type="text"
+                    className="form-input-compact"
+                    value={customStyles['max-width'] || ''}
+                    onChange={(e) => handleCustomStyleChange('max-width', e.target.value)}
+                    placeholder="1200px, 100%"
+                />
+            </div>
+
             {(selectedElement.element === 'image' || selectedElement.element === 'video') && (
-                <>
-                    <div className="section-header-compact">Alineación</div>
-
-                    <div className="form-group-compact">
-                        <label className="form-label-compact">Posición</label>
-                        <div className="button-grid-compact">
-                            <button
-                                className={customStyles['margin'] === '0' ? 'active' : ''}
-                                onClick={() => handleCustomStyleChange('margin', '0')}
-                                title="Izquierda"
-                            >
-                                ← Izq
-                            </button>
-                            <button
-                                className={customStyles['margin'] === '0 auto' ? 'active' : ''}
-                                onClick={() => handleCustomStyleChange('margin', '0 auto')}
-                                title="Centro"
-                            >
-                                ↔ Centro
-                            </button>
-                            <button
-                                className={customStyles['margin'] === '0 0 0 auto' ? 'active' : ''}
-                                onClick={() => handleCustomStyleChange('margin', '0 0 0 auto')}
-                                title="Derecha"
-                            >
-                                Der →
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className="divider-compact"></div>
-
-                    <div className="section-header-compact">Dimensiones</div>
-
-                    <div className="form-group-compact">
-                        <label className="form-label-compact">Ancho</label>
-                        <input
-                            type="text"
-                            className="form-input-compact"
-                            value={customStyles['width'] || selectedElement.width || ''}
-                            onChange={(e) => handleCustomStyleChange('width', e.target.value)}
-                            placeholder="100%, 500px, auto"
-                        />
-                    </div>
-
-                    <div className="form-group-compact">
-                        <label className="form-label-compact">Alto</label>
-                        <input
-                            type="text"
-                            className="form-input-compact"
-                            value={customStyles['height'] || selectedElement.height || ''}
-                            onChange={(e) => handleCustomStyleChange('height', e.target.value)}
-                            placeholder="auto, 300px"
-                        />
-                    </div>
-
-                    <div className="form-group-compact">
-                        <label className="form-label-compact">Object Fit</label>
-                        <select
-                            className="form-input-compact"
-                            value={customStyles['object-fit'] || ''}
-                            onChange={(e) => handleCustomStyleChange('object-fit', e.target.value)}
-                        >
-                            <option value="">Default</option>
-                            <option value="contain">Contain</option>
-                            <option value="cover">Cover</option>
-                            <option value="fill">Fill</option>
-                            <option value="none">None</option>
-                        </select>
-                    </div>
-
-                    <div className="divider-compact"></div>
-                </>
+                <div className="form-group-compact">
+                    <label className="form-label-compact">Object Fit</label>
+                    <select
+                        className="form-input-compact"
+                        value={customStyles['object-fit'] || ''}
+                        onChange={(e) => handleCustomStyleChange('object-fit', e.target.value)}
+                    >
+                        <option value="">Default</option>
+                        <option value="contain">Contain</option>
+                        <option value="cover">Cover</option>
+                        <option value="fill">Fill</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
             )}
+
+            <div className="divider-compact"></div>
 
             {/* Spacing */}
             <div className="section-header-compact">Spacing</div>

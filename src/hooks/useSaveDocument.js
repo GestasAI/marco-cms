@@ -25,9 +25,12 @@ export function useSaveDocument() {
             }
 
             // PAGES / POSTS / PRODUCTS etc.
-            const updatedSections = pageData.sections.map(s =>
-                s.section === 'content' ? contentSection : s
-            );
+            const updatedSections = pageData.sections.map(s => {
+                // Match by ID or by section name
+                const isMatch = (s.id && s.id === contentSection.id) ||
+                    (s.section && s.section === contentSection.section);
+                return isMatch ? contentSection : s;
+            });
 
             const updatedPageData = {
                 ...pageData,

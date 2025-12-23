@@ -6,12 +6,10 @@
  * - Writes: Call ACIDE-PHP backend (Admin only)
  */
 
-const API_URL = '/acide/index.php';
-
-// Determine base URL for static assets (deploy agnostic)
 const BASE_URL = import.meta.env.BASE_URL;
 const CLEAN_BASE = BASE_URL.endsWith('/') ? BASE_URL : `${BASE_URL}/`;
 const DATA_URL = `${CLEAN_BASE}data`;
+const API_URL = `${CLEAN_BASE}acide/index.php`;
 
 export const acideService = {
 
@@ -82,18 +80,14 @@ export const acideService = {
     // CRUD INTERFACE
     // =========================================================================
 
-    // READ (Static)
+    // READ (Dynamic via PHP to support theme-aware pages and fresh data)
     get: async (collection, id) => {
-        const data = await acideService._staticRead(collection, id);
-        if (!data) throw new Error(`Document not found: ${collection}/${id}`);
-        return data;
+        return acideService._phpRequest('get', collection, id);
     },
 
-    // LIST (Static - Reads _index.json)
+    // LIST (Dynamic via PHP to support theme-aware pages and fresh data)
     list: async (collection) => {
-        // Try to read the generated index
-        const indexData = await acideService._staticRead(collection, '_index');
-        return indexData || [];
+        return acideService._phpRequest('list', collection);
     },
 
     // QUERY (Static - Reads index + Client-side Filter)
@@ -212,8 +206,8 @@ export const acideService = {
     // Plugin Management (Local)
     listPlugins: async () => acideService.list('plugins'),
 
-    
-    
+
+
     // Theme Home Page
     getActiveThemeHome: async () => {
         const payload = { action: 'get_active_theme_home' };
@@ -226,6 +220,13 @@ export const acideService = {
         });
 
         if (!response.ok) throw new Error(await response.text());
+
+        // ROBUSTNESS: Check if response is actually JSON
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('text/html')) {
+            throw new Error("Se esperaba JSON pero el servidor devolvió HTML (posible error de ruta o PHP)");
+        }
+
         const json = await response.json();
         if (json.status === 'error') throw new Error(json.message);
         return json.data;
@@ -288,7 +289,3 @@ export const acideService = {
     request: async (action, collection, id, data) => acideService._phpRequest(action, collection, id, data),
     findById: async (collection, id) => acideService.get(collection, id)
 };
-
-
-
-

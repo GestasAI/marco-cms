@@ -18,6 +18,7 @@ import '../styles/editable-elements.css';
 import '../styles/element-actions.css';
 import '../styles/media-library.css';
 import '../styles/unified-sidebar.css';
+import '../styles/fse-improvements.css';
 
 export default function Editor() {
     const { collection, id } = useParams();
@@ -167,6 +168,10 @@ export default function Editor() {
 
                 <div className="editor-right-sidebar">
                     <UnifiedSidebar
+                        document={document}
+                        setDocument={setDocument}
+                        pageData={pageData}
+                        setPageData={setPageData}
                         selectedElement={selectedElement}
                         contentSection={contentSection}
                         onUpdate={updateElement}

@@ -3,7 +3,9 @@
 const RESERVED_SLUGS = [
     'admin', 'dashboard', 'login', 'editor',
     'pages', 'posts', 'media', 'products',
-    'categories', 'tags', 'settings'
+    'categories', 'tags', 'settings', 'documentation',
+    'theme-parts', 'theme-settings', 'themes', 'build',
+    'seo', 'academy', 'users', 'ads'
 ];
 
 export function isReservedSlug(slug) {
@@ -47,6 +49,13 @@ export async function loadPageFromJSON(slug) {
     try {
         const response = await fetch(`/data/pages/${slug}.json`);
         if (response.ok) {
+            // ROBUSTNESS: Check if response is actually JSON
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('text/html')) {
+                console.warn(`Se esperaba JSON pero se recibió HTML para /data/pages/${slug}.json`);
+                return null;
+            }
+
             const pageData = await response.json();
             console.log(` Cargado desde /data/pages/${slug}.json`);
             return pageData;
@@ -74,6 +83,6 @@ export async function loadPageData(slug) {
     if (pageData) return pageData;
 
     pageData = await loadPageFromJSON(normalizedSlug);
-    
+
     return pageData;
 }

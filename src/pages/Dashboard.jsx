@@ -5,6 +5,7 @@ import { acideService } from '../acide/acideService';
 import { useThemeSettings } from '../hooks/useThemeSettings';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
+import { authService } from '../services/auth/authService';
 
 export default function Dashboard() {
     const navigate = useNavigate();
@@ -85,110 +86,130 @@ export default function Dashboard() {
 
             {/* Stats Cards - Grid System del Tema */}
             <div className="grid grid-4 mb-xl">
+                {authService.isEditor() && (
+                    <StatCard
+                        icon={FileText}
+                        title="Páginas"
+                        value={stats.pages}
+                        color={colors.primary || '#3b82f6'}
+                        onClick={() => navigate('/dashboard/pages')}
+                    />
+                )}
+                {authService.isEditor() && (
+                    <StatCard
+                        icon={BarChart3}
+                        title="Posts"
+                        value={stats.posts}
+                        color={colors.secondary || '#8b5cf6'}
+                        onClick={() => navigate('/dashboard/posts')}
+                    />
+                )}
+                {authService.isEditor() && (
+                    <StatCard
+                        icon={Image}
+                        title="Media"
+                        value={stats.media}
+                        color={colors.accent || '#10b981'}
+                    />
+                )}
+                {authService.isAdmin() && (
+                    <StatCard
+                        icon={Users}
+                        title="Usuarios"
+                        value={stats.users}
+                        color="#f59e0b"
+                        onClick={() => navigate('/dashboard/users')}
+                    />
+                )}
                 <StatCard
-                    icon={FileText}
-                    title="Páginas"
-                    value={stats.pages}
-                    color={colors.primary || '#3b82f6'}
-                    onClick={() => navigate('/pages')}
-                />
-                <StatCard
-                    icon={BarChart3}
-                    title="Posts"
-                    value={stats.posts}
-                    color={colors.secondary || '#8b5cf6'}
-                    onClick={() => navigate('/posts')}
-                />
-                <StatCard
-                    icon={Image}
-                    title="Media"
-                    value={stats.media}
-                    color={colors.accent || '#10b981'}
-                />
-                <StatCard
-                    icon={Users}
-                    title="Usuarios"
-                    value={stats.users}
-                    color="#f59e0b"
+                    icon={Palette}
+                    title="Estándar"
+                    value="v1.0"
+                    color="#ec4899"
+                    onClick={() => navigate('/dashboard/documentation')}
                 />
             </div>
 
             <div className="grid grid-2">
                 {/* Themes Section */}
-                <div className="mb-xl">
-                    <div className="flex-between mb-md">
-                        <div>
-                            <h2 className="heading-3">Temas</h2>
-                            <p className="text-secondary text-sm">Gestiona la apariencia</p>
+                {authService.isEditor() && (
+                    <div className="mb-xl">
+                        <div className="flex-between mb-md">
+                            <div>
+                                <h2 className="heading-3">Temas</h2>
+                                <p className="text-secondary text-sm">Gestiona la apariencia</p>
+                            </div>
+                            <Button
+                                variant="primary"
+                                size="sm"
+                                icon={Palette}
+                                onClick={() => navigate('/dashboard/theme-settings')}
+                            >
+                                Personalizar
+                            </Button>
                         </div>
-                        <Button
-                            variant="primary"
-                            size="sm"
-                            icon={Palette}
-                            onClick={() => navigate('/theme-settings')}
-                        >
-                            Personalizar
-                        </Button>
-                    </div>
 
-                    <div className="themes-grid" style={{ display: 'grid', gap: '1rem' }}>
-                        {themes.map((theme) => (
-                            <Card key={theme.id} style={{ display: 'flex', overflow: 'hidden' }}>
-                                <div style={{ width: '100px', background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', fontSize: '2rem' }}>
-                                    🎨
-                                </div>
-                                <div style={{ padding: '1rem', flex: 1 }}>
-                                    <div className="flex-between mb-sm">
-                                        <h3 className="heading-4" style={{ margin: 0 }}>{theme.name}</h3>
-                                        {theme.id === activeTheme && <span className="badge badge-success">Activo</span>}
+                        <div className="themes-grid" style={{ display: 'grid', gap: '1rem' }}>
+                            {themes.map((theme) => (
+                                <Card key={theme.id} style={{ display: 'flex', overflow: 'hidden' }}>
+                                    <div style={{ width: '100px', background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', fontSize: '2rem' }}>
+                                        🎨
                                     </div>
-                                    <p className="text-small text-secondary mb-md">{theme.description}</p>
-                                    <div className="flex gap-sm">
-                                        {theme.id !== activeTheme && (
-                                            <Button size="sm" onClick={() => handleActivateTheme(theme.id)}>
-                                                Activar
-                                            </Button>
-                                        )}
-                                    </div>
-                                </div>
-                            </Card>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Plugins Section */}
-                <div>
-                    <div className="flex-between mb-md">
-                        <div>
-                            <h2 className="heading-3">Plugins</h2>
-                            <p className="text-secondary text-sm">Extensiones activas</p>
-                        </div>
-                    </div>
-
-                    {plugins.length === 0 ? (
-                        <Card className="text-center p-lg">
-                            <Search size={32} className="text-secondary mb-sm mx-auto" style={{ display: 'block' }} />
-                            <p className="text-secondary">No hay plugins conectados</p>
-                        </Card>
-                    ) : (
-                        <div className="grid gap-sm">
-                            {plugins.map((plugin, index) => (
-                                <Card key={index} className="flex-between p-md">
-                                    <div className="flex items-center gap-md">
-                                        <div className="plugin-icon bg-primary-light rounded p-xs">
-                                            {plugin.name?.charAt(0) || 'P'}
+                                    <div style={{ padding: '1rem', flex: 1 }}>
+                                        <div className="flex-between mb-sm">
+                                            <h3 className="heading-4" style={{ margin: 0 }}>{theme.name}</h3>
+                                            {theme.id === activeTheme && <span className="badge badge-success">Activo</span>}
                                         </div>
-                                        <div>
-                                            <h4 className="font-bold">{plugin.name || 'Unknown'}</h4>
-                                            <p className="text-xs text-secondary">{plugin.type}</p>
+                                        <p className="text-small text-secondary mb-md">{theme.description}</p>
+                                        <div className="flex gap-sm">
+                                            {theme.id !== activeTheme && (
+                                                <Button size="sm" onClick={() => handleActivateTheme(theme.id)}>
+                                                    Activar
+                                                </Button>
+                                            )}
                                         </div>
                                     </div>
-                                    <span className="badge badge-success">Conectado</span>
                                 </Card>
                             ))}
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
+
+                {/* Plugins Section */}
+                {authService.isAdmin() && (
+                    <div>
+                        <div className="flex-between mb-md">
+                            <div>
+                                <h2 className="heading-3">Plugins</h2>
+                                <p className="text-secondary text-sm">Extensiones activas</p>
+                            </div>
+                        </div>
+
+                        {plugins.length === 0 ? (
+                            <Card className="text-center p-lg">
+                                <Search size={32} className="text-secondary mb-sm mx-auto" style={{ display: 'block' }} />
+                                <p className="text-secondary">No hay plugins conectados</p>
+                            </Card>
+                        ) : (
+                            <div className="grid gap-sm">
+                                {plugins.map((plugin, index) => (
+                                    <Card key={index} className="flex-between p-md">
+                                        <div className="flex items-center gap-md">
+                                            <div className="plugin-icon bg-primary-light rounded p-xs">
+                                                {plugin.name?.charAt(0) || 'P'}
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold">{plugin.name || 'Unknown'}</h4>
+                                                <p className="text-xs text-secondary">{plugin.type}</p>
+                                            </div>
+                                        </div>
+                                        <span className="badge badge-success">Conectado</span>
+                                    </Card>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );

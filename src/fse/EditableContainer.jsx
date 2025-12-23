@@ -12,7 +12,7 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
 
     const isSelected = selectedElementId === element.id;
     const currentPath = [...parentPath, element.id];
-    const isContainer = ['container', 'section', 'logo'].includes(element.element);
+    const isContainer = ['container', 'section', 'logo', 'grid', 'card', 'nav'].includes(element.element);
     const customStyles = element.customStyles || {};
 
     const handleClick = (e) => {
@@ -161,6 +161,7 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
             }
 
             case 'button':
+            case 'link':
                 return (
                     <a
                         href={element.link || '#'}
@@ -173,7 +174,7 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                         }}
                         onDoubleClick={handleDoubleClick}
                     >
-                        {element.text || 'Botón'}
+                        {element.text || (element.element === 'link' ? 'Enlace' : 'Botón')}
                     </a>
                 );
 
@@ -196,8 +197,12 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
 
             case 'container':
             case 'logo':
+            case 'grid':
+            case 'card':
+            case 'nav':
+                const ContainerTag = element.element === 'nav' ? 'nav' : 'div';
                 return (
-                    <div
+                    <ContainerTag
                         className={`${element.class} drop-zone`}
                         style={customStyles}
                         onClick={handleClick}
@@ -207,7 +212,7 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                         {element.content && element.content.length > 0 ? (
                             element.content.map(child => (
                                 <EditableContainer
-                                    key={child.id}
+                                    key={child.id || `child-${Math.random()}`}
                                     element={child}
                                     selectedElementId={selectedElementId}
                                     onSelect={onSelect}
@@ -217,11 +222,11 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                             ))
                         ) : (
                             <div className="empty-container">
-                                <p className="text-sm text-secondary">Contenedor vacío</p>
+                                <p className="text-sm text-secondary">{element.element.charAt(0).toUpperCase() + element.element.slice(1)} vacío</p>
                                 <p className="text-xs text-secondary">Arrastra bloques aquí</p>
                             </div>
                         )}
-                    </div>
+                    </ContainerTag>
                 );
 
             case 'section':
@@ -236,7 +241,7 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                         {element.content && element.content.length > 0 ? (
                             element.content.map(child => (
                                 <EditableContainer
-                                    key={child.id}
+                                    key={child.id || `child-${Math.random()}`}
                                     element={child}
                                     selectedElementId={selectedElementId}
                                     onSelect={onSelect}
@@ -260,8 +265,9 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
 
     return (
         <div
-            className={`editable-element-wrapper ${isSelected ? 'selected' : ''} ${hovering ? 'hovering' : ''}`}
+            className={`editable-element-wrapper ${isSelected ? 'element-selected' : ''} ${hovering ? 'hovering' : ''}`}
             data-element-id={element.id}
+            data-element-type={element.element}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
         >

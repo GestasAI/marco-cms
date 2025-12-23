@@ -6,12 +6,10 @@
  * - Writes: Call ACIDE-PHP backend (Admin only)
  */
 
-const API_URL = '/acide/index.php';
-
-// Determine base URL for static assets (deploy agnostic)
 const BASE_URL = import.meta.env.BASE_URL;
 const CLEAN_BASE = BASE_URL.endsWith('/') ? BASE_URL : `${BASE_URL}/`;
 const DATA_URL = `${CLEAN_BASE}data`;
+const API_URL = `${CLEAN_BASE}acide/index.php`;
 
 export const acideService = {
 

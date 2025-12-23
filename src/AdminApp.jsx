@@ -7,6 +7,7 @@ import Settings from './pages/Settings';
 import SiteSettings from './components/SiteSettings.jsx';
 import Posts from './pages/Posts.jsx';
 import ThemeParts from './pages/ThemeParts.jsx';
+import Documentation from './pages/Documentation.jsx';
 import MainLayout from './components/layout/MainLayout.jsx';
 import './styles/dashboard/variables.css';
 import './styles/dashboard/dashboard.css';
@@ -74,6 +75,7 @@ function AdminApp() {
                         <Route path="/theme-parts" element={<ThemeParts />} />
                         <Route path="/theme-settings" element={<SiteSettings />} />
                         <Route path="/settings" element={<Settings />} />
+                        <Route path="/documentation" element={<Documentation />} />
 
                         {/* Default Redirect */}
                         <Route path="/" element={<Navigate to="/dashboard" />} />

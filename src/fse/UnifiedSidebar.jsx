@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FileText, Layout, Palette, Image as ImageIcon, Layers } from 'lucide-react';
+import { DocumentTab } from './unified-tabs/DocumentTab';
 import { ContentTab } from './unified-tabs/ContentTab';
-import { SectionsTab } from './unified-tabs/SectionsTab';
 import { StyleTab } from './unified-tabs/StyleTab';
 import { MediaTab } from './unified-tabs/MediaTab';
 import { HierarchyTab } from './unified-tabs/HierarchyTab';
@@ -11,6 +11,10 @@ import { HierarchyTab } from './unified-tabs/HierarchyTab';
  * Mantiene TODA la funcionalidad existente, solo reorganiza la UI
  */
 export function UnifiedSidebar({
+    document,
+    setDocument,
+    pageData,
+    setPageData,
     selectedElement,
     contentSection,
     onUpdate,
@@ -23,18 +27,18 @@ export function UnifiedSidebar({
     onDuplicate,
     onSelectElement
 }) {
-    const [activeTab, setActiveTab] = useState('content');
+    const [activeTab, setActiveTab] = useState('document');
 
     const tabs = [
-        { id: 'content', label: 'Content', icon: FileText },
-        { id: 'sections', label: 'Sections', icon: Layout },
+        { id: 'document', label: 'Document', icon: FileText },
+        { id: 'content', label: 'Block', icon: Layout },
         { id: 'style', label: 'Style', icon: Palette },
         { id: 'media', label: 'Media', icon: ImageIcon },
         { id: 'hierarchy', label: 'Hierarchy', icon: Layers }
     ];
 
     const renderTabContent = () => {
-        // HierarchyTab se muestra siempre, incluso sin elemento seleccionado
+        // HierarchyTab se muestra siempre
         if (activeTab === 'hierarchy') {
             return (
                 <HierarchyTab
@@ -46,6 +50,18 @@ export function UnifiedSidebar({
                     onMoveUp={onMoveUp}
                     onMoveDown={onMoveDown}
                     onDuplicate={onDuplicate}
+                />
+            );
+        }
+
+        // DocumentTab se muestra siempre
+        if (activeTab === 'document') {
+            return (
+                <DocumentTab
+                    document={document}
+                    setDocument={setDocument}
+                    pageData={pageData}
+                    setPageData={setPageData}
                 />
             );
         }
@@ -65,18 +81,11 @@ export function UnifiedSidebar({
                     <ContentTab
                         selectedElement={selectedElement}
                         onUpdate={onUpdate}
+                        onUpdateCustomStyle={onUpdateCustomStyle}
                         onDelete={onDelete}
                         onMoveUp={onMoveUp}
                         onMoveDown={onMoveDown}
                         onDuplicate={onDuplicate}
-                    />
-                );
-            case 'sections':
-                return (
-                    <SectionsTab
-                        selectedElement={selectedElement}
-                        onUpdateStyle={onUpdateStyle}
-                        onUpdateCustomStyle={onUpdateCustomStyle}
                     />
                 );
             case 'style':

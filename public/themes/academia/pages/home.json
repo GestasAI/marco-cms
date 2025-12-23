@@ -5,7 +5,7 @@
     "page": {
         "sections": [
             {
-                "element": "section",
+                "section": "header",
                 "id": "header",
                 "class": "header",
                 "content": [
@@ -48,106 +48,301 @@
                 ]
             },
             {
-                "element": "section",
-                "id": "hero",
-                "class": "hero",
+                "section": "content",
+                "id": "main-content",
+                "class": "main-content",
                 "content": [
                     {
-                        "element": "container",
-                        "class": "container",
+                        "element": "section",
+                        "id": "hero",
+                        "class": "hero",
                         "content": [
                             {
-                                "element": "heading",
-                                "tag": "h1",
-                                "class": "heading-1",
-                                "text": "Tecnología para el bienestar empresarial."
-                            },
-                            {
-                                "element": "text",
-                                "tag": "p",
-                                "class": "text-lead",
-                                "text": "Formación diseñada para entender la digitalización real."
-                            },
-                            {
-                                "element": "button",
-                                "class": "btn btn-primary",
-                                "text": "Empezar ahora — Es gratuito",
-                                "link": "#cursos"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "element": "section",
-                "id": "cursos",
-                "class": "section section-free",
-                "content": [
-                    {
-                        "element": "container",
-                        "class": "container",
-                        "content": [
-                            {
-                                "element": "heading",
-                                "tag": "h2",
-                                "class": "heading-2 text-center",
-                                "text": "El Valor del Conocimiento Compartido"
-                            },
-                            {
-                                "element": "grid",
-                                "class": "grid grid-3",
+                                "element": "container",
+                                "class": "container",
                                 "content": [
                                     {
-                                        "element": "card",
-                                        "class": "card",
-                                        "content": [
-                                            {
-                                                "element": "heading",
-                                                "tag": "h3",
-                                                "class": "card-title",
-                                                "text": "Digitalización y Tecnología Empresarial"
-                                            },
-                                            {
-                                                "element": "text",
-                                                "tag": "p",
-                                                "class": "card-text",
-                                                "text": "El Valor: La adopción consciente de nuevas tecnologías y normativas no es solo una obligación, es una oportunidad. Impacto: Entender estos procesos beneficia la reducción de la huella de carbono y mejora significativamente la producción en las empresas. Un equipo que comprende el \"por qué\" de la tecnología es un equipo más eficiente."
-                                            }
-                                        ]
+                                        "element": "heading",
+                                        "tag": "h1",
+                                        "class": "heading-1",
+                                        "text": "Tecnología para el bienestar empresarial."
                                     },
                                     {
-                                        "element": "card",
-                                        "class": "card",
-                                        "content": [
-                                            {
-                                                "element": "heading",
-                                                "tag": "h3",
-                                                "class": "card-title",
-                                                "text": "Iniciativa Emprendedora desde un punto de vista de la IA"
-                                            },
-                                            {
-                                                "element": "text",
-                                                "tag": "p",
-                                                "class": "card-text",
-                                                "text": "El Valor: Fomentar la iniciativa emprendedora dentro de la propia organización. Impacto: El impulso de buenas prácticas combinadas con la inteligencia artificial aporta bienestar tanto a los empleados como a la empresa, creando un entorno dinámico y entregado."
-                                            }
-                                        ]
+                                        "element": "text",
+                                        "tag": "p",
+                                        "class": "text-lead",
+                                        "text": "Formación diseñada para entender la digitalización real."
                                     },
                                     {
-                                        "element": "card",
-                                        "class": "card",
+                                        "element": "button",
+                                        "class": "btn btn-primary",
+                                        "text": "Empezar ahora — Es gratuito",
+                                        "link": "#cursos"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "element": "section",
+                        "id": "cursos",
+                        "class": "section section-free",
+                        "content": [
+                            {
+                                "element": "container",
+                                "class": "container",
+                                "content": [
+                                    {
+                                        "element": "heading",
+                                        "tag": "h2",
+                                        "class": "heading-2 text-center",
+                                        "text": "El Valor del Conocimiento Compartido"
+                                    },
+                                    {
+                                        "element": "grid",
+                                        "class": "grid grid-3",
                                         "content": [
                                             {
-                                                "element": "heading",
-                                                "tag": "h3",
-                                                "class": "card-title",
-                                                "text": "IA & Soft Skills: Rendimiento Aumentado con Gemini y ChatGPT"
+                                                "element": "card",
+                                                "class": "card",
+                                                "content": [
+                                                    {
+                                                        "element": "heading",
+                                                        "tag": "h3",
+                                                        "class": "card-title",
+                                                        "text": "Digitalización y Tecnología Empresarial"
+                                                    },
+                                                    {
+                                                        "element": "text",
+                                                        "tag": "p",
+                                                        "class": "card-text",
+                                                        "text": "El Valor: La adopción consciente de nuevas tecnologías y normativas no es solo una obligación, es una oportunidad. Impacto: Entender estos procesos beneficia la reducción de la huella de carbono y mejora significativamente la producción en las empresas. Un equipo que comprende el \"por qué\" de la tecnología es un equipo más eficiente."
+                                                    }
+                                                ]
                                             },
                                             {
-                                                "element": "text",
-                                                "tag": "p",
-                                                "class": "card-text",
-                                                "text": "El Valor: La IA como herramienta de mejora personal y colectiva. Impacto: Herramientas como los modelos de lenguaje (ChatGPT, Gemini) son aliados potentes para mejorar las habilidades individuales y fortalecer la comunidad de trabajo. El éxito se construye en la interacción inteligente entre humanos y máquinas."
+                                                "element": "card",
+                                                "class": "card",
+                                                "content": [
+                                                    {
+                                                        "element": "heading",
+                                                        "tag": "h3",
+                                                        "class": "card-title",
+                                                        "text": "Iniciativa Emprendedora desde un punto de vista de la IA"
+                                                    },
+                                                    {
+                                                        "element": "text",
+                                                        "tag": "p",
+                                                        "class": "card-text",
+                                                        "text": "El Valor: Fomentar la iniciativa emprendedora dentro de la propia organización. Impacto: El impulso de buenas prácticas combinadas con la inteligencia artificial aporta bienestar tanto a los empleados como a la empresa, creando un entorno dinámico y entregado."
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "element": "card",
+                                                "class": "card",
+                                                "content": [
+                                                    {
+                                                        "element": "heading",
+                                                        "tag": "h3",
+                                                        "class": "card-title",
+                                                        "text": "IA & Soft Skills: Rendimiento Aumentado con Gemini y ChatGPT"
+                                                    },
+                                                    {
+                                                        "element": "text",
+                                                        "tag": "p",
+                                                        "class": "card-text",
+                                                        "text": "El Valor: La IA como herramienta de mejora personal y colectiva. Impacto: Herramientas como los modelos de lenguaje (ChatGPT, Gemini) son aliados potentes para mejorar las habilidades individuales y fortalecer la comunidad de trabajo. El éxito se construye en la interacción inteligente entre humanos y máquinas."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "element": "section",
+                        "id": "premium",
+                        "class": "section section-premium",
+                        "content": [
+                            {
+                                "element": "container",
+                                "class": "container",
+                                "content": [
+                                    {
+                                        "element": "heading",
+                                        "tag": "h2",
+                                        "class": "heading-2 text-center",
+                                        "text": "Especialización: Profundizando en la Herramienta"
+                                    },
+                                    {
+                                        "element": "grid",
+                                        "class": "grid grid-2",
+                                        "content": [
+                                            {
+                                                "element": "card",
+                                                "class": "card",
+                                                "content": [
+                                                    {
+                                                        "element": "heading",
+                                                        "tag": "h3",
+                                                        "class": "card-title",
+                                                        "text": "Prompt Engineering: Mejora tus habilidades"
+                                                    },
+                                                    {
+                                                        "element": "text",
+                                                        "tag": "p",
+                                                        "class": "card-text",
+                                                        "text": "Aprende a comunicarte con precisión con los modelos de lenguaje para optimizar tus tareas diarias."
+                                                    },
+                                                    {
+                                                        "element": "button",
+                                                        "class": "btn btn-primary",
+                                                        "text": "Más información",
+                                                        "link": "/registro"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "element": "card",
+                                                "class": "card",
+                                                "content": [
+                                                    {
+                                                        "element": "heading",
+                                                        "tag": "h3",
+                                                        "class": "card-title",
+                                                        "text": "Prompt Engineering Avanzado: Potencia tu productividad"
+                                                    },
+                                                    {
+                                                        "element": "text",
+                                                        "tag": "p",
+                                                        "class": "card-text",
+                                                        "text": "Técnicas avanzadas para aquellos que buscan llevar su eficiencia al siguiente nivel, impactando positivamente en los objetivos de la empresa."
+                                                    },
+                                                    {
+                                                        "element": "button",
+                                                        "class": "btn btn-primary",
+                                                        "text": "Más información",
+                                                        "link": "/registro"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "element": "section",
+                        "id": "pricing",
+                        "class": "section section-pricing",
+                        "content": [
+                            {
+                                "element": "container",
+                                "class": "container",
+                                "content": [
+                                    {
+                                        "element": "heading",
+                                        "tag": "h2",
+                                        "class": "heading-2 text-center mb-2xl",
+                                        "text": "Planes de Suscripción"
+                                    },
+                                    {
+                                        "element": "grid",
+                                        "class": "grid grid-3",
+                                        "content": [
+                                            {
+                                                "element": "card",
+                                                "class": "card pricing-card",
+                                                "content": [
+                                                    {
+                                                        "element": "heading",
+                                                        "tag": "h3",
+                                                        "class": "plan-name",
+                                                        "text": "Plan Básico"
+                                                    },
+                                                    {
+                                                        "element": "text",
+                                                        "tag": "p",
+                                                        "class": "plan-price",
+                                                        "text": "14.50€ /mes"
+                                                    },
+                                                    {
+                                                        "element": "text",
+                                                        "tag": "p",
+                                                        "class": "plan-desc",
+                                                        "text": "Acceso a cursos por carrera elegida."
+                                                    },
+                                                    {
+                                                        "element": "button",
+                                                        "class": "btn btn-outline",
+                                                        "text": "Empezar",
+                                                        "link": "/checkout/basico"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "element": "card",
+                                                "class": "card pricing-card featured",
+                                                "content": [
+                                                    {
+                                                        "element": "heading",
+                                                        "tag": "h3",
+                                                        "class": "plan-name",
+                                                        "text": "Plan Inteligente"
+                                                    },
+                                                    {
+                                                        "element": "text",
+                                                        "tag": "p",
+                                                        "class": "plan-price",
+                                                        "text": "25€ /mes"
+                                                    },
+                                                    {
+                                                        "element": "text",
+                                                        "tag": "p",
+                                                        "class": "plan-desc",
+                                                        "text": "Accesos a las carreras y al asesoramiento de la comunidad."
+                                                    },
+                                                    {
+                                                        "element": "button",
+                                                        "class": "btn btn-primary",
+                                                        "text": "Recomendado",
+                                                        "link": "/checkout/inteligente"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "element": "card",
+                                                "class": "card pricing-card",
+                                                "content": [
+                                                    {
+                                                        "element": "heading",
+                                                        "tag": "h3",
+                                                        "class": "plan-name",
+                                                        "text": "Plan Maestro"
+                                                    },
+                                                    {
+                                                        "element": "text",
+                                                        "tag": "p",
+                                                        "class": "plan-price",
+                                                        "text": "244€ /año"
+                                                    },
+                                                    {
+                                                        "element": "text",
+                                                        "tag": "p",
+                                                        "class": "plan-desc",
+                                                        "text": "Todo el contenido, primicias y herramientas avanzadas más 10G de almacenamiento."
+                                                    },
+                                                    {
+                                                        "element": "button",
+                                                        "class": "btn btn-outline",
+                                                        "text": "Acceso Total",
+                                                        "link": "/checkout/maestro"
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
@@ -158,195 +353,7 @@
                 ]
             },
             {
-                "element": "section",
-                "id": "premium",
-                "class": "section section-premium",
-                "content": [
-                    {
-                        "element": "container",
-                        "class": "container",
-                        "content": [
-                            {
-                                "element": "heading",
-                                "tag": "h2",
-                                "class": "heading-2 text-center",
-                                "text": "Especialización: Profundizando en la Herramienta"
-                            },
-                            {
-                                "element": "grid",
-                                "class": "grid grid-2",
-                                "content": [
-                                    {
-                                        "element": "card",
-                                        "class": "card",
-                                        "content": [
-                                            {
-                                                "element": "heading",
-                                                "tag": "h3",
-                                                "class": "card-title",
-                                                "text": "Prompt Engineering: Mejora tus habilidades"
-                                            },
-                                            {
-                                                "element": "text",
-                                                "tag": "p",
-                                                "class": "card-text",
-                                                "text": "Aprende a comunicarte con precisión con los modelos de lenguaje para optimizar tus tareas diarias."
-                                            },
-                                            {
-                                                "element": "button",
-                                                "class": "btn btn-primary",
-                                                "text": "Más información",
-                                                "link": "/registro"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "element": "card",
-                                        "class": "card",
-                                        "content": [
-                                            {
-                                                "element": "heading",
-                                                "tag": "h3",
-                                                "class": "card-title",
-                                                "text": "Prompt Engineering Avanzado: Potencia tu productividad"
-                                            },
-                                            {
-                                                "element": "text",
-                                                "tag": "p",
-                                                "class": "card-text",
-                                                "text": "Técnicas avanzadas para aquellos que buscan llevar su eficiencia al siguiente nivel, impactando positivamente en los objetivos de la empresa."
-                                            },
-                                            {
-                                                "element": "button",
-                                                "class": "btn btn-primary",
-                                                "text": "Más información",
-                                                "link": "/registro"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "element": "section",
-                "id": "pricing",
-                "class": "section section-pricing",
-                "content": [
-                    {
-                        "element": "container",
-                        "class": "container",
-                        "content": [
-                            {
-                                "element": "heading",
-                                "tag": "h2",
-                                "class": "heading-2 text-center mb-2xl",
-                                "text": "Planes de Suscripción"
-                            },
-                            {
-                                "element": "grid",
-                                "class": "grid grid-3",
-                                "content": [
-                                    {
-                                        "element": "card",
-                                        "class": "card pricing-card",
-                                        "content": [
-                                            {
-                                                "element": "heading",
-                                                "tag": "h3",
-                                                "class": "plan-name",
-                                                "text": "Plan Básico"
-                                            },
-                                            {
-                                                "element": "text",
-                                                "tag": "p",
-                                                "class": "plan-price",
-                                                "text": "14.50€ /mes"
-                                            },
-                                            {
-                                                "element": "text",
-                                                "tag": "p",
-                                                "class": "plan-desc",
-                                                "text": "Acceso a cursos por carrera elegida."
-                                            },
-                                            {
-                                                "element": "button",
-                                                "class": "btn btn-outline",
-                                                "text": "Empezar",
-                                                "link": "/checkout/basico"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "element": "card",
-                                        "class": "card pricing-card featured",
-                                        "content": [
-                                            {
-                                                "element": "heading",
-                                                "tag": "h3",
-                                                "class": "plan-name",
-                                                "text": "Plan Inteligente"
-                                            },
-                                            {
-                                                "element": "text",
-                                                "tag": "p",
-                                                "class": "plan-price",
-                                                "text": "25€ /mes"
-                                            },
-                                            {
-                                                "element": "text",
-                                                "tag": "p",
-                                                "class": "plan-desc",
-                                                "text": "Accesos a las carreras y al asesoramiento de la comunidad."
-                                            },
-                                            {
-                                                "element": "button",
-                                                "class": "btn btn-primary",
-                                                "text": "Recomendado",
-                                                "link": "/checkout/inteligente"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "element": "card",
-                                        "class": "card pricing-card",
-                                        "content": [
-                                            {
-                                                "element": "heading",
-                                                "tag": "h3",
-                                                "class": "plan-name",
-                                                "text": "Plan Maestro"
-                                            },
-                                            {
-                                                "element": "text",
-                                                "tag": "p",
-                                                "class": "plan-price",
-                                                "text": "244€ /año"
-                                            },
-                                            {
-                                                "element": "text",
-                                                "tag": "p",
-                                                "class": "plan-desc",
-                                                "text": "Todo el contenido, primicias y herramientas avanzadas más 10G de almacenamiento."
-                                            },
-                                            {
-                                                "element": "button",
-                                                "class": "btn btn-outline",
-                                                "text": "Acceso Total",
-                                                "link": "/checkout/maestro"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "element": "section",
+                "section": "footer",
                 "id": "footer",
                 "class": "footer",
                 "content": [
@@ -365,5 +372,6 @@
                 ]
             }
         ]
-    }
+    },
+    "updated_at": "2025-12-22T19:47:00Z"
 }

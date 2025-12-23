@@ -126,7 +126,7 @@ class StaticGenerator
                 break;
 
             case 'video':
-                if ($element['type'] === 'youtube') {
+                if (isset($element['type']) && $element['type'] === 'youtube') {
                     $youtubeId = $element['youtubeId'] ?? '';
                     $html = "<iframe id=\"$id\" class=\"$class\"$styleAttr src=\"https://www.youtube.com/embed/$youtubeId\" frameborder=\"0\" allowfullscreen></iframe>";
                 } else {
@@ -181,7 +181,6 @@ class StaticGenerator
             $themeId = $this->getActiveTheme();
         }
 
-        $themeConfig = $this->loadThemeConfig($themeId);
         $themeCSS = $this->loadThemeCSS($themeId);
 
         // SEO
@@ -204,7 +203,7 @@ class StaticGenerator
                 $sectionId = $section['id'] ?? '';
                 $sectionClass = $section['class'] ?? '';
                 $sectionContent = $this->renderContent($section['content'] ?? []);
-                
+
                 $bodyContent .= "<$sectionTag id=\"$sectionId\" class=\"$sectionClass\">$sectionContent</$sectionTag>";
             }
         }
@@ -269,32 +268,65 @@ HTML;
             mkdir($this->outputDir, 0755, true);
         }
 
-        // Generar home desde el tema
-        $homeJsonPath = $this->themesDir . '/' . $themeId . '/pages/home.json';
-        if (file_exists($homeJsonPath)) {
-            $homeData = json_decode(file_get_contents($homeJsonPath), true);
-            $homeHTML = $this->generatePage($homeData, $themeId);
-            
-            $outputPath = $this->outputDir . '/index.html';
-            file_put_contents($outputPath, $homeHTML);
-            $results[] = "✅ Generated: index.html";
+        // 1. Determinar qué página es la HOME (index.html)
+        $homeData = null;
+        $homeSource = '';
+
+        // Prioridad 1: Página en /data/pages con slug 'home' o nombre 'home.json'
+        $pagesDir = $this->dataDir . '/pages';
+        if (is_dir($pagesDir)) {
+            if (file_exists($pagesDir . '/home.json')) {
+                $homeData = json_decode(file_get_contents($pagesDir . '/home.json'), true);
+                $homeSource = $pagesDir . '/home.json';
+            } else {
+                // Buscar por slug
+                $files = glob($pagesDir . '/*.json');
+                foreach ($files as $file) {
+                    $data = json_decode(file_get_contents($file), true);
+                    if (isset($data['slug']) && $data['slug'] === 'home') {
+                        $homeData = $data;
+                        $homeSource = $file;
+                        break;
+                    }
+                }
+            }
         }
 
-        // Generar todas las páginas de /data/pages
-        $pagesDir = $this->dataDir . '/pages';
+        // Prioridad 2: home.json del tema
+        if (!$homeData) {
+            $themeHomePath = $this->themesDir . '/' . $themeId . '/pages/home.json';
+            if (file_exists($themeHomePath)) {
+                $homeData = json_decode(file_get_contents($themeHomePath), true);
+                $homeSource = $themeHomePath;
+            }
+        }
+
+        // Generar index.html si tenemos datos de home
+        if ($homeData) {
+            $homeHTML = $this->generatePage($homeData, $themeId);
+            file_put_contents($this->outputDir . '/index.html', $homeHTML);
+            $results[] = "✅ Generated: index.html (from $homeSource)";
+        }
+
+        // 2. Generar el resto de páginas
         if (is_dir($pagesDir)) {
             $files = glob($pagesDir . '/*.json');
             foreach ($files as $file) {
                 $filename = basename($file, '.json');
-                
-                // Saltar archivos especiales
-                if ($filename === '_index' || $filename === 'home') {
+
+                // Saltar archivos especiales y la que ya usamos como home
+                if ($filename === '_index' || $file === $homeSource || ($homeData && isset($homeData['id']) && $filename === $homeData['id'])) {
                     continue;
                 }
 
                 $pageData = json_decode(file_get_contents($file), true);
+
+                // Si el slug es 'home', ya lo procesamos como index.html
+                if (isset($pageData['slug']) && $pageData['slug'] === 'home') {
+                    continue;
+                }
+
                 $pageHTML = $this->generatePage($pageData, $themeId);
-                
                 $outputPath = $this->outputDir . '/' . $filename . '.html';
                 file_put_contents($outputPath, $pageHTML);
                 $results[] = "✅ Generated: $filename.html";
@@ -310,7 +342,7 @@ HTML;
     public function generateSitemap($baseUrl = 'https://example.com')
     {
         $urls = [];
-        
+
         // Home
         $urls[] = [
             'loc' => $baseUrl . '/',
@@ -339,7 +371,7 @@ HTML;
         // Construir XML
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-        
+
         foreach ($urls as $url) {
             $xml .= "  <url>\n";
             $xml .= "    <loc>{$url['loc']}</loc>\n";
@@ -347,12 +379,10 @@ HTML;
             $xml .= "    <changefreq>{$url['changefreq']}</changefreq>\n";
             $xml .= "  </url>\n";
         }
-        
+
         $xml .= '</urlset>';
 
         file_put_contents($this->outputDir . '/sitemap.xml', $xml);
         return '✅ Generated: sitemap.xml';
     }
 }
-
-

@@ -101,6 +101,16 @@ class ACIDE
                     throw new Exception("Collection is required.");
                 if (!$id)
                     throw new Exception("ID is required for read operations.");
+
+                // Special case: If it's a page, check if it exists in the active theme
+                if ($collection === 'pages') {
+                    $activeThemeId = $this->themeManager->getActiveThemeId();
+                    $themePage = $this->themeFileManager->loadThemePage($activeThemeId, $id);
+                    if ($themePage) {
+                        return $themePage;
+                    }
+                }
+
                 return $this->crud->read($collection, $id);
 
             case 'create':
@@ -110,6 +120,22 @@ class ACIDE
                 if (!$id) {
                     $id = uniqid();
                 }
+
+                // Special case: If it's a page, check if it exists in the active theme
+                if ($collection === 'pages') {
+                    $activeThemeId = $this->themeManager->getActiveThemeId();
+                    $themePage = $this->themeFileManager->loadThemePage($activeThemeId, $id);
+                    if ($themePage) {
+                        $result = $this->themeFileManager->saveThemePage($activeThemeId, $id, $data);
+                        // Trigger Rebuild
+                        try {
+                            $this->staticGenerator->buildSite();
+                        } catch (Exception $e) {
+                        }
+                        return $result;
+                    }
+                }
+
                 $result = $this->crud->update($collection, $id, $data);
 
                 // Trigger Rebuild: Si actualizamos una página, regeneramos el sitio
@@ -125,7 +151,24 @@ class ACIDE
             case 'list':
                 if (!$collection)
                     throw new Exception("Collection is required.");
-                return $this->crud->list($collection);
+
+                $results = $this->crud->list($collection);
+
+                // Special case: If listing pages, include theme-specific pages
+                if ($collection === 'pages') {
+                    $activeThemeId = $this->themeManager->getActiveThemeId();
+                    $themePages = $this->themeFileManager->listThemePages($activeThemeId);
+
+                    // Merge and avoid duplicates by ID
+                    $existingIds = array_column($results, 'id');
+                    foreach ($themePages as $tPage) {
+                        if (!in_array($tPage['id'], $existingIds)) {
+                            $results[] = $tPage;
+                        }
+                    }
+                }
+
+                return $results;
 
             case 'delete':
                 if (!$collection)
@@ -153,8 +196,3 @@ class ACIDE
         }
     }
 }
-
-
-
-
-

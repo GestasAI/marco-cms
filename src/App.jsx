@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // Layouts
@@ -31,6 +31,11 @@ import AcademyLayout from './components/layout/AcademyLayout';
 import AcademyHome from './pages/AcademyHome';
 import Users from './pages/Users';
 import BuildSite from './pages/BuildSite';
+import Documentation from './pages/Documentation';
+
+// Context
+import { ThemeProvider } from './contexts/ThemeContext';
+import { authService } from './services/auth/authService';
 
 // Placeholder components for Academy student sections
 const AcademyPlaceholder = ({ title }) => (
@@ -41,24 +46,24 @@ const AcademyPlaceholder = ({ title }) => (
     </div>
 );
 
-// Context
-import { ThemeProvider } from './contexts/ThemeContext';
-
 // Protected Route Component
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
-    const token = localStorage.getItem('marco_token');
-    const user = JSON.parse(localStorage.getItem('marco_user') || '{}');
+    const token = authService.getToken();
 
     if (!token) {
         return <Navigate to="/login" replace />;
     }
 
-    const roleName = (user.roleName || user.role_name || '').toLowerCase();
-    const isStudent = roleName === 'estudiante' || roleName === 'cliente';
+    // Si requiere admin (acceso al dashboard), permitimos el acceso si el usuario tiene un rol válido 
+    // (SuperAdmin, Admin, Editor, Viewer, Cliente).
+    // La visibilidad de elementos específicos se manejará en el Sidebar y componentes.
+    if (requireAdmin) {
+        const canAccessDashboard = authService.isViewer() || authService.isClient();
 
-    // Si es estudiante e intenta entrar a admin, redirigir a academia
-    if (isStudent && requireAdmin) {
-        return <Navigate to="/academy" replace />;
+        if (!canAccessDashboard) {
+            // Si por alguna razón no tiene ningún rol reconocido, redirigir a academia
+            return <Navigate to="/academy" replace />;
+        }
     }
 
     return children;
@@ -95,6 +100,9 @@ function App() {
                         <Route path="academy" element={<AcademyAdmin />} />
                         <Route path="users" element={<Users />} />
                         <Route path="build" element={<BuildSite />} />
+                        <Route path="documentation" element={
+                            authService.isAdmin() ? <Documentation /> : <Navigate to="/dashboard" replace />
+                        } />
                     </Route>
 
                     {/* FSE Editor (Full Screen - Protected) */}
@@ -122,4 +130,3 @@ function App() {
 }
 
 export default App;
-

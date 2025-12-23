@@ -1,0 +1,71 @@
+/* FSE Improvements Styles */
+
+.element-id-badge {
+    background: #f3f4f6;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.tab-section-divider {
+    height: 1px;
+    background: var(--dashboard-color-border);
+    margin: 16px 0;
+}
+
+.tab-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--dashboard-color-text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.form-row-compact {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.form-group-compact.half {
+    flex: 1;
+}
+
+.flex-options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.mt-xs {
+    margin-top: 4px;
+}
+
+/* Ajustes para inputs compactos */
+.form-input-compact {
+    width: 100%;
+    padding: 6px 8px;
+    font-size: 12px;
+    border: 1px solid var(--dashboard-color-border);
+    border-radius: 4px;
+    background: #f9fafb;
+    transition: all 0.2s;
+}
+
+.form-input-compact:focus {
+    border-color: #96c8a2;
+    background: white;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(150, 200, 162, 0.2);
+}
+
+.form-label-compact {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--dashboard-color-text-secondary);
+    margin-bottom: 4px;
+}
