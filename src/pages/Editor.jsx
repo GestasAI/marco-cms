@@ -57,7 +57,10 @@ export default function Editor() {
 
         const handleDragOver = (e) => {
             e.preventDefault();
-            e.dataTransfer.dropEffect = 'copy';
+
+            // Detectar si viene de la biblioteca o del canvas
+            const isFromLibrary = e.dataTransfer.types.includes('block-id');
+            e.dataTransfer.dropEffect = isFromLibrary ? 'copy' : 'move';
 
             const dropZone = e.target.closest('.drop-zone, .empty-container');
             if (!dropZone) return;
@@ -106,13 +109,26 @@ export default function Editor() {
             }
 
             const blockId = e.dataTransfer.getData('block-id');
+            const draggedElementId = e.dataTransfer.getData('element-id') || e.dataTransfer.getData('text/plain');
+            const targetId = dropZone?.dataset.dropTarget || null;
+
+            console.log('🎯 handleDrop:', { blockId, draggedElementId, targetId, position });
+
+            // CASO 1: Mover elemento existente
+            if (draggedElementId && !blockId) {
+                // No hacer nada si se suelta sobre sí mismo
+                if (draggedElementId === targetId) return;
+
+                moveBlock(draggedElementId, targetId, position);
+                return;
+            }
+
+            // CASO 2: Añadir nuevo bloque
             if (!blockId) return;
 
             let block = basicBlocks.find(b => b.id === blockId);
             if (!block) block = designBlocks.find(b => b.id === blockId);
             if (!block) return;
-
-            const targetId = dropZone?.dataset.dropTarget || null;
 
             // REGLA DE ORO: Si el bloque es una sección y el destino es una sección, 
             // NUNCA anidar, siempre antes o después.
@@ -209,6 +225,7 @@ export default function Editor() {
                                         selectedElementId={selectedElementId}
                                         onSelect={selectElement}
                                         onAddBlock={addBlock}
+                                        onUpdate={updateElement}
                                     />
                                 ))}
                             </main>

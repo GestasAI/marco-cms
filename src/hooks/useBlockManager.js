@@ -155,6 +155,8 @@ export function useBlockManager(contentSection, setContentSection, setHasChanges
         // Ejecutar extracción
         const contentAfterExtraction = extractBlock(contentSection.content);
 
+        console.log('🔄 moveBlock:', { blockId, targetElementId, position, found: !!blockToMove });
+
         if (!blockToMove) {
             console.warn('⚠️ No se encontró el bloque a mover:', blockId);
             return;
@@ -162,7 +164,7 @@ export function useBlockManager(contentSection, setContentSection, setHasChanges
 
         // Caso especial: Mover a la raíz (si el target es el ID de la sección)
         let finalContent;
-        if (targetElementId === contentSection.id) {
+        if (targetElementId === contentSection.id || !targetElementId) {
             finalContent = [...contentAfterExtraction, blockToMove];
         } else {
             finalContent = insertBlock(contentAfterExtraction);

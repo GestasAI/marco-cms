@@ -182,3 +182,18 @@
 .block-selector-design {
     grid-column: span 2;
 }
+
+/* Dragging State */
+.dragging-element {
+    opacity: 0.4;
+    border: 2px dashed var(--dashboard-color-primary);
+    cursor: grabbing;
+}
+
+.editable-element-wrapper[draggable="true"] {
+    cursor: grab;
+}
+
+.editable-element-wrapper[draggable="true"]:active {
+    cursor: grabbing;
+}

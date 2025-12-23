@@ -480,39 +480,48 @@
                     },
                     {
                         "element": "section",
-                        "id": "section-1766511084595-444",
+                        "id": "section-1766511809114-663",
                         "class": "hero",
                         "content": [
                             {
                                 "element": "container",
-                                "id": "container-1766511084595-3202",
+                                "id": "container-1766511809114-8897",
                                 "class": "container hero-content",
                                 "content": [
                                     {
                                         "element": "heading",
-                                        "id": "heading-1766511084595-1728",
+                                        "id": "heading-1766511809114-7390",
                                         "class": "heading-1",
                                         "tag": "h1",
-                                        "text": "Título Principal"
+                                        "text": "Título Principalll",
+                                        "customStyles": {
+                                            "color": "#030303"
+                                        }
                                     },
                                     {
                                         "element": "text",
-                                        "id": "text-1766511084595-5883",
+                                        "id": "text-1766511809114-5224",
                                         "class": "text-lead",
                                         "tag": "p",
-                                        "text": "Subtítulo descriptivo"
+                                        "text": "Subtítulo descriptivosss",
+                                        "customStyles": {
+                                            "color": "#000000"
+                                        }
                                     },
                                     {
                                         "element": "button",
-                                        "id": "button-1766511084595-2431",
+                                        "id": "button-1766511809114-9570",
                                         "class": "btn btn-primary btn-lg",
                                         "text": "Comenzar",
                                         "link": "#",
-                                        "target": "_self"
+                                        "target": "_self",
+                                        "customStyles": []
                                     }
-                                ]
+                                ],
+                                "customStyles": []
                             }
-                        ]
+                        ],
+                        "customStyles": []
                     }
                 ]
             },
@@ -541,7 +550,7 @@
             }
         ]
     },
-    "updated_at": "2025-12-23T17:31:47.804Z",
+    "updated_at": "2025-12-23T18:02:05.045Z",
     "visibility": {
         "tablet": true
     }

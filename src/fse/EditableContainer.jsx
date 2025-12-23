@@ -6,7 +6,7 @@ import { formatStyles } from '../utils/styleUtils';
 /**
  * Contenedor editable con modo de edición al hacer doble click
  */
-export function EditableContainer({ element, selectedElementId, onSelect, onAddBlock, parentPath = [] }) {
+export function EditableContainer({ element, selectedElementId, onSelect, onAddBlock, onUpdate, parentPath = [] }) {
     const [isEditing, setIsEditing] = useState(false);
     const [hovering, setHovering] = useState(false);
     const [showAddMenu, setShowAddMenu] = useState(null);
@@ -23,7 +23,44 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
 
     const handleDoubleClick = (e) => {
         e.stopPropagation();
-        setIsEditing(true);
+        if (['heading', 'text', 'button'].includes(element.element)) {
+            setIsEditing(true);
+        }
+    };
+
+    const handleTextBlur = (e) => {
+        const newText = e.target.innerText;
+        if (newText !== element.text) {
+            onUpdate(element.id, 'text', newText);
+        }
+        setIsEditing(false);
+    };
+
+    const handleDragStart = (e) => {
+        // Solo permitir arrastrar si no estamos editando texto
+        if (isEditing) {
+            e.preventDefault();
+            return;
+        }
+
+        // Detener propagación para evitar que padres también inicien arrastre
+        e.stopPropagation();
+
+        e.dataTransfer.setData('element-id', element.id);
+        e.dataTransfer.setData('text/plain', element.id); // Compatibilidad
+        e.dataTransfer.effectAllowed = 'move';
+
+        console.log('📤 handleDragStart:', element.id);
+
+        // Añadir clase visual al arrastrar
+        const target = e.currentTarget;
+        setTimeout(() => {
+            target.classList.add('dragging-element');
+        }, 0);
+    };
+
+    const handleDragEnd = (e) => {
+        e.currentTarget.classList.remove('dragging-element');
     };
 
     const handleAddBlock = (block, position) => {
@@ -36,15 +73,6 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
     const renderContent = () => {
         const styles = formatStyles(customStyles);
 
-        if (isSelected && Object.keys(customStyles).length > 0) {
-            console.log('🖼️ EditableContainer - Rendering element:', {
-                id: element.id,
-                type: element.element,
-                customStyles,
-                formattedStyles: styles
-            });
-        }
-
         switch (element.element) {
             case 'heading': {
                 const Tag = element.tag || 'h2';
@@ -52,7 +80,14 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                     <Tag
                         id={element.id}
                         className={element.class}
-                        style={styles}
+                        style={{
+                            ...styles,
+                            outline: isEditing ? '2px solid #2196f3' : 'none',
+                            minWidth: '20px'
+                        }}
+                        contentEditable={isEditing}
+                        suppressContentEditableWarning={true}
+                        onBlur={handleTextBlur}
                         onClick={handleClick}
                         onDoubleClick={handleDoubleClick}
                     >
@@ -67,7 +102,14 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                     <Tag
                         id={element.id}
                         className={element.class}
-                        style={styles}
+                        style={{
+                            ...styles,
+                            outline: isEditing ? '2px solid #2196f3' : 'none',
+                            minWidth: '20px'
+                        }}
+                        contentEditable={isEditing}
+                        suppressContentEditableWarning={true}
+                        onBlur={handleTextBlur}
                         onClick={handleClick}
                         onDoubleClick={handleDoubleClick}
                     >
@@ -182,8 +224,15 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                         id={element.id}
                         href={element.link || '#'}
                         className={element.class}
-                        style={styles}
+                        style={{
+                            ...styles,
+                            outline: isEditing ? '2px solid #2196f3' : 'none',
+                            display: styles.display || 'inline-block'
+                        }}
                         target={element.target || '_self'}
+                        contentEditable={isEditing}
+                        suppressContentEditableWarning={true}
+                        onBlur={handleTextBlur}
                         onClick={(e) => {
                             e.preventDefault();
                             handleClick(e);
@@ -234,6 +283,7 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                                     selectedElementId={selectedElementId}
                                     onSelect={onSelect}
                                     onAddBlock={onAddBlock}
+                                    onUpdate={onUpdate}
                                     parentPath={currentPath}
                                 />
                             ))
@@ -264,6 +314,7 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                                     selectedElementId={selectedElementId}
                                     onSelect={onSelect}
                                     onAddBlock={onAddBlock}
+                                    onUpdate={onUpdate}
                                     parentPath={currentPath}
                                 />
                             ))
@@ -287,6 +338,9 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
             data-element-id={element.id}
             data-element-type={element.element}
             data-drop-target={element.id}
+            draggable={!isEditing}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
         >
