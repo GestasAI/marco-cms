@@ -21,24 +21,29 @@ export function useElementEditor(contentSection, setContentSection) {
     };
 
     const updateElement = (elementId, field, value) => {
+        // 1. Si el elemento es la propia sección raíz
+        if (contentSection.id === elementId) {
+            const updated = { ...contentSection, [field]: value };
+            setContentSection(updated);
+            setSelectedElement(updated);
+            setHasChanges(true);
+            return;
+        }
+
+        // 2. Si es un elemento hijo
         const updateInContent = (content) => {
             if (!content || !Array.isArray(content)) return content;
             return content.map(el => {
                 if (el.id === elementId) {
                     const updated = { ...el, [field]: value };
-
-                    // Si se actualiza la clase, asegurar que tiene clase única
                     if (field === 'class') {
                         const uniqueClass = `${el.element}-${el.id}`;
                         const classes = value.split(' ').filter(c => c.trim());
-
-                        // Añadir clase única si no existe
                         if (!classes.includes(uniqueClass)) {
                             classes.push(uniqueClass);
                             updated.class = classes.join(' ');
                         }
                     }
-
                     return updated;
                 }
                 if (el.content) {
@@ -55,7 +60,6 @@ export function useElementEditor(contentSection, setContentSection) {
 
         setContentSection(updatedContent);
         setHasChanges(true);
-
         const updated = findElementInContent(updatedContent.content, elementId);
         if (updated) setSelectedElement(updated);
     };
@@ -64,6 +68,16 @@ export function useElementEditor(contentSection, setContentSection) {
      * Actualizar múltiples campos de un elemento a la vez
      */
     const updateMultipleFields = (elementId, fields) => {
+        // 1. Si el elemento es la propia sección raíz
+        if (contentSection.id === elementId) {
+            const updated = { ...contentSection, ...fields };
+            setContentSection(updated);
+            setSelectedElement(updated);
+            setHasChanges(true);
+            return;
+        }
+
+        // 2. Si es un elemento hijo
         const updateInContent = (content) => {
             if (!content || !Array.isArray(content)) return content;
             return content.map(el => {
@@ -84,29 +98,41 @@ export function useElementEditor(contentSection, setContentSection) {
 
         setContentSection(updatedContent);
         setHasChanges(true);
-
         const updated = findElementInContent(updatedContent.content, elementId);
         if (updated) setSelectedElement(updated);
-
-        console.log('✅ Elemento actualizado:', updated);
     };
 
     /**
      * Actualizar estilo personalizado de un elemento
      */
     const updateCustomStyle = (elementId, property, value) => {
+
+        // 1. Si el elemento es la propia sección raíz
+        if (contentSection.id === elementId) {
+            const customStyles = { ...(contentSection.customStyles || {}) };
+            if (value === null || value === '' || value === undefined) {
+                delete customStyles[property];
+            } else {
+                customStyles[property] = value;
+            }
+            const updated = { ...contentSection, customStyles };
+            setContentSection(updated);
+            setSelectedElement(updated);
+            setHasChanges(true);
+            return;
+        }
+
+        // 2. Si es un elemento hijo
         const updateInContent = (content) => {
             if (!content || !Array.isArray(content)) return content;
             return content.map(el => {
                 if (el.id === elementId) {
                     const customStyles = { ...(el.customStyles || {}) };
-
                     if (value === null || value === '' || value === undefined) {
                         delete customStyles[property];
                     } else {
                         customStyles[property] = value;
                     }
-
                     return { ...el, customStyles };
                 }
                 if (el.content) {
@@ -123,7 +149,6 @@ export function useElementEditor(contentSection, setContentSection) {
 
         setContentSection(updatedContent);
         setHasChanges(true);
-
         const updated = findElementInContent(updatedContent.content, elementId);
         if (updated) setSelectedElement(updated);
     };

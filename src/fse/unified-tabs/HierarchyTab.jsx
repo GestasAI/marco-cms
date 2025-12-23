@@ -227,7 +227,8 @@ export function HierarchyTab({
     onDelete,
     onMoveUp,
     onMoveDown,
-    onDuplicate
+    onDuplicate,
+    onMoveBlock
 }) {
     const [expandedIds, setExpandedIds] = useState(new Set());
 
@@ -318,25 +319,27 @@ export function HierarchyTab({
         const { active, over } = event;
 
         if (over && active.id !== over.id) {
-            // Encontrar índices en el array plano
-            const allIds = getAllIds(contentSection.content);
-            const oldIndex = allIds.indexOf(active.id);
-            const newIndex = allIds.indexOf(over.id);
-
-            if (oldIndex !== -1 && newIndex !== -1) {
-                // Usar onMoveUp/onMoveDown para mover
-                const steps = newIndex - oldIndex;
-                if (steps > 0) {
-                    // Mover hacia abajo
-                    for (let i = 0; i < steps; i++) {
-                        onMoveDown(active.id);
-                    }
-                } else if (steps < 0) {
-                    // Mover hacia arriba
-                    for (let i = 0; i < Math.abs(steps); i++) {
-                        onMoveUp(active.id);
+            // Buscar el tipo de elemento sobre el que estamos soltando
+            const findElement = (content, id) => {
+                for (const el of content) {
+                    if (el.id === id) return el;
+                    if (el.content) {
+                        const found = findElement(el.content, id);
+                        if (found) return found;
                     }
                 }
+                return null;
+            };
+
+            const overElement = findElement(contentSection.content, over.id);
+            const isContainer = ['section', 'container', 'card', 'grid'].includes(overElement?.element);
+
+            // Usar moveBlock para un re-parenting real
+            if (onMoveBlock) {
+                // Si es un contenedor, lo metemos dentro (al final)
+                // Si es un elemento normal, lo ponemos justo después
+                const position = isContainer ? 'inside' : 'after';
+                onMoveBlock(active.id, over.id, position);
             }
         }
     };

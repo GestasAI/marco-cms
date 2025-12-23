@@ -1,0 +1,151 @@
+/* =========================================
+   FSE Editor Specific Styles
+   ========================================= */
+
+.editor-root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background: white;
+}
+
+.editor-toolbar {
+    height: 56px;
+    background: white;
+    border-bottom: 1px solid var(--dashboard-color-border, #e2e8f0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+    z-index: 100;
+}
+
+.editor-workspace {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.editor-canvas-container {
+    flex: 1;
+    overflow-y: auto;
+    background-color: #f1f5f9;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.editor-canvas {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #ffffff;
+    min-height: 100%;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding: 0 !important;
+}
+
+/* Minimalist Save Button - Premium */
+.btn-save-minimal {
+    background: #4f46e5 !important;
+    color: white !important;
+    border: none !important;
+    padding: 6px 16px !important;
+    border-radius: 8px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2) !important;
+}
+
+.btn-save-minimal:hover {
+    background: #4338ca !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3) !important;
+}
+
+.btn-save-minimal:active {
+    transform: translateY(0) !important;
+}
+
+/* Selection Styles */
+.block-selected::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid #4f46e5 !important;
+    pointer-events: none;
+    z-index: 100;
+    border-radius: inherit;
+}
+
+/* Drop Zone Styles */
+.drop-zone {
+    min-height: 50px;
+    transition: background-color 0.2s ease;
+}
+
+.drop-zone-active {
+    background-color: rgba(79, 70, 229, 0.05);
+    outline: 2px dashed #4f46e5;
+    outline-offset: -2px;
+}
+
+.editor-right-sidebar {
+    width: 320px;
+    background: white;
+    border-left: 1px solid var(--dashboard-color-border, #e2e8f0);
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+    overflow-y: auto;
+}
+
+/* Utilities for Editor */
+.text-center {
+    text-align: center;
+}
+
+.text-secondary {
+    color: #64748b;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+}
+
+.p-xl {
+    padding: 3rem;
+}
+
+.mt-sm {
+    margin-top: 0.5rem;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

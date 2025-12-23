@@ -109,12 +109,12 @@ export default function DataManager({ collection, title, singularTitle, basePath
                 <>
                     {/* Search & Toolbar */}
                     <div className="mb-lg">
-                        <div className="relative max-w-md">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                        <div className="search-container">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                             <input
                                 type="text"
-                                placeholder={`Buscar ${title.toLowerCase()} por nombre...`}
-                                className="form-input pl-10"
+                                placeholder={`Buscar ${title.toLowerCase()}...`}
+                                className="search-input"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
@@ -122,7 +122,7 @@ export default function DataManager({ collection, title, singularTitle, basePath
                     </div>
 
                     {/* Data List (Table-like Grid) */}
-                    <div className="dashboard-card p-0 overflow-hidden">
+                    <div className="data-table-container">
                         <table className="dashboard-table">
                             <thead>
                                 <tr>
@@ -135,7 +135,7 @@ export default function DataManager({ collection, title, singularTitle, basePath
                             <tbody>
                                 {filteredItems.length === 0 ? (
                                     <tr>
-                                        <td colSpan="4" className="p-lg text-center text-secondary">
+                                        <td colSpan="4" className="p-xl text-center text-secondary">
                                             No se encontraron resultados para "{searchTerm}"
                                         </td>
                                     </tr>
@@ -156,14 +156,14 @@ export default function DataManager({ collection, title, singularTitle, basePath
                                                 <div className="flex justify-end gap-sm">
                                                     <button
                                                         onClick={() => handleEdit(item.id)}
-                                                        className="p-sm text-blue-600 hover:bg-blue-50 rounded"
+                                                        className="p-sm text-blue-600 hover:bg-blue-50 rounded transition-colors"
                                                         title="Editar"
                                                     >
                                                         <Edit size={18} />
                                                     </button>
                                                     <button
                                                         onClick={() => handleDelete(item.id)}
-                                                        className="p-sm text-red-500 hover:bg-red-50 rounded"
+                                                        className="p-sm text-red-500 hover:bg-red-50 rounded transition-colors"
                                                         title="Eliminar"
                                                     >
                                                         <Trash2 size={18} />

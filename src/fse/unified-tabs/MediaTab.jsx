@@ -38,7 +38,7 @@ export function MediaTab({ selectedElement, onUpdate, onUpdateMultiple }) {
         }
     };
 
-    const handleImageUpload = async (e) => {
+    const handleFileUpload = async (e, type = 'image') => {
         const file = e.target.files[0];
         if (!file) return;
 
@@ -49,27 +49,40 @@ export function MediaTab({ selectedElement, onUpdate, onUpdateMultiple }) {
             console.log('📤 Archivo subido:', uploadedFile);
 
             // Actualizar URL inmediatamente
-            onUpdate(selectedElement.id, 'src', uploadedFile.url);
-            onUpdate(selectedElement.id, 'mediaId', uploadedFile.id);
-            onUpdate(selectedElement.id, 'alt', uploadedFile.title || 'Imagen');
-            onUpdate(selectedElement.id, 'mediaData', {
-                id: uploadedFile.id,
-                filename: uploadedFile.filename,
-                title: uploadedFile.title,
-                type: uploadedFile.type,
-                size: uploadedFile.size,
-                url: uploadedFile.url,
-                created_at: uploadedFile.created_at
-            });
+            const updates = {
+                src: uploadedFile.url,
+                mediaId: uploadedFile.id,
+                mediaData: {
+                    id: uploadedFile.id,
+                    filename: uploadedFile.filename,
+                    title: uploadedFile.title,
+                    type: uploadedFile.type,
+                    size: uploadedFile.size,
+                    url: uploadedFile.url,
+                    created_at: uploadedFile.created_at
+                }
+            };
+
+            if (type === 'image') {
+                updates.alt = uploadedFile.title || 'Imagen';
+            }
+
+            if (onUpdateMultiple) {
+                onUpdateMultiple(selectedElement.id, updates);
+            } else {
+                Object.keys(updates).forEach(key => {
+                    onUpdate(selectedElement.id, key, updates[key]);
+                });
+            }
 
             // Recargar biblioteca
             await loadMediaLibrary();
 
-            console.log('✅ Imagen guardada en documento');
-            alert('✅ Imagen subida exitosamente');
+            console.log('✅ Archivo guardado en documento');
+            alert(`✅ ${type === 'image' ? 'Imagen' : 'Video'} subida exitosamente`);
         } catch (error) {
             console.error('Error:', error);
-            alert(`❌ Error al subir imagen: ${error.message}`);
+            alert(`❌ Error al subir archivo: ${error.message}`);
         } finally {
             setUploading(false);
             e.target.value = '';
@@ -83,9 +96,6 @@ export function MediaTab({ selectedElement, onUpdate, onUpdateMultiple }) {
         const updates = {
             src: media.url,
             mediaId: media.id,
-            alt: media.title || 'Imagen',
-            width: selectedElement.width || '100%',
-            height: selectedElement.height || 'auto',
             mediaData: {
                 id: media.id,
                 filename: media.filename,
@@ -96,6 +106,12 @@ export function MediaTab({ selectedElement, onUpdate, onUpdateMultiple }) {
                 created_at: media.created_at
             }
         };
+
+        if (selectedElement.element === 'image') {
+            updates.alt = media.title || 'Imagen';
+            updates.width = selectedElement.width || '100%';
+            updates.height = selectedElement.height || 'auto';
+        }
 
         // UNA SOLA LLAMADA para actualizar TODO
         if (onUpdateMultiple) {
@@ -164,7 +180,7 @@ export function MediaTab({ selectedElement, onUpdate, onUpdateMultiple }) {
                                 type="file"
                                 accept="image/*"
                                 style={{ display: 'none' }}
-                                onChange={handleImageUpload}
+                                onChange={(e) => handleFileUpload(e, 'image')}
                                 disabled={uploading}
                             />
                         </label>
@@ -261,16 +277,44 @@ export function MediaTab({ selectedElement, onUpdate, onUpdateMultiple }) {
                             </p>
                         </div>
                     ) : (
-                        <div className="form-group-compact">
-                            <label className="form-label-compact">URL del Video</label>
-                            <input
-                                type="text"
-                                className="form-input-compact"
-                                placeholder="https://..."
-                                value={selectedElement.src || ''}
-                                onChange={(e) => onUpdate(selectedElement.id, 'src', e.target.value)}
-                            />
-                        </div>
+                        <>
+                            <div className="form-group-compact">
+                                <label className="form-label-compact">Subir Video</label>
+                                <label className="btn btn-sm" style={{ cursor: 'pointer', textAlign: 'center', display: 'block' }}>
+                                    <Upload size={14} style={{ display: 'inline', marginRight: '4px' }} />
+                                    {uploading ? 'Subiendo...' : 'Elegir Archivo'}
+                                    <input
+                                        type="file"
+                                        accept="video/*"
+                                        style={{ display: 'none' }}
+                                        onChange={(e) => handleFileUpload(e, 'video')}
+                                        disabled={uploading}
+                                    />
+                                </label>
+                            </div>
+
+                            <div className="form-group-compact">
+                                <button
+                                    className="btn btn-sm"
+                                    style={{ width: '100%', textAlign: 'center' }}
+                                    onClick={() => setShowMediaLibrary(true)}
+                                >
+                                    <ImageIcon size={14} style={{ display: 'inline', marginRight: '4px' }} />
+                                    Biblioteca de Medios
+                                </button>
+                            </div>
+
+                            <div className="form-group-compact">
+                                <label className="form-label-compact">URL del Video</label>
+                                <input
+                                    type="text"
+                                    className="form-input-compact"
+                                    placeholder="https://..."
+                                    value={selectedElement.src || ''}
+                                    onChange={(e) => onUpdate(selectedElement.id, 'src', e.target.value)}
+                                />
+                            </div>
+                        </>
                     )}
 
                     <div className="divider-compact"></div>
@@ -344,6 +388,7 @@ export function MediaTab({ selectedElement, onUpdate, onUpdateMultiple }) {
                 <MediaLibraryModal
                     mediaLibrary={mediaLibrary}
                     loading={loading}
+                    elementType={selectedElement.element}
                     onSelect={handleSelectFromLibrary}
                     onClose={() => setShowMediaLibrary(false)}
                 />
@@ -355,7 +400,7 @@ export function MediaTab({ selectedElement, onUpdate, onUpdateMultiple }) {
 /**
  * Modal de Biblioteca de Medios
  */
-function MediaLibraryModal({ mediaLibrary, loading, onSelect, onClose }) {
+function MediaLibraryModal({ mediaLibrary, loading, elementType, onSelect, onClose }) {
     return (
         <div style={{
             position: 'fixed',
@@ -415,9 +460,9 @@ function MediaLibraryModal({ mediaLibrary, loading, onSelect, onClose }) {
                 ) : mediaLibrary.length === 0 ? (
                     <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
                         <ImageIcon size={48} style={{ margin: '0 auto 16px', opacity: 0.3 }} />
-                        <p>No hay imágenes en la biblioteca</p>
+                        <p>No hay {elementType === 'image' ? 'imágenes' : 'videos'} en la biblioteca</p>
                         <p style={{ fontSize: '12px', marginTop: '8px' }}>
-                            Sube imágenes desde el Dashboard → Medios
+                            Sube archivos desde el Dashboard → Medios
                         </p>
                     </div>
                 ) : (
@@ -427,7 +472,11 @@ function MediaLibraryModal({ mediaLibrary, loading, onSelect, onClose }) {
                         gap: '12px'
                     }}>
                         {mediaLibrary
-                            .filter(media => media.type?.includes('image'))
+                            .filter(media => {
+                                if (elementType === 'image') return media.type?.includes('image');
+                                if (elementType === 'video') return media.type?.includes('video');
+                                return true;
+                            })
                             .map(media => (
                                 <div
                                     key={media.id}
@@ -456,15 +505,24 @@ function MediaLibraryModal({ mediaLibrary, loading, onSelect, onClose }) {
                                         alignItems: 'center',
                                         justifyContent: 'center'
                                     }}>
-                                        <img
-                                            src={media.url}
-                                            alt={media.title}
-                                            style={{
-                                                width: '100%',
-                                                height: '100%',
-                                                objectFit: 'cover'
-                                            }}
-                                        />
+                                        {media.type?.includes('image') ? (
+                                            <img
+                                                src={media.url}
+                                                alt={media.title}
+                                                style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    objectFit: 'cover'
+                                                }}
+                                            />
+                                        ) : (
+                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                                                <div style={{ color: '#ef4444' }}>
+                                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                                                </div>
+                                                <span style={{ fontSize: '9px', color: '#666' }}>VIDEO</span>
+                                            </div>
+                                        )}
                                     </div>
                                     <div style={{
                                         padding: '6px',

@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { acideService } from '../acide/acideService';
+import { FSEPersistenceManager } from '../services/fse/FSEPersistenceManager';
 
 /**
  * Hook para guardar documentos en ACIDE o theme parts
+ * Ahora utiliza el FSEPersistenceManager para mayor robustez y "magia" automática.
  */
 export function useSaveDocument() {
     const [saving, setSaving] = useState(false);
@@ -11,53 +12,23 @@ export function useSaveDocument() {
         setSaving(true);
 
         try {
+            let result;
+
             // THEME PARTS (header, footer)
             if (collection === 'theme-parts') {
-                const partData = {
-                    blocks: contentSection.content
-                };
-
-                console.log('💾 Guardando theme part:', id);
-                await acideService.saveThemePart('gestasai-default', id, partData);
-
-                alert('✅ Theme part guardado exitosamente');
-                return { success: true };
+                result = await FSEPersistenceManager.saveThemePart(id, contentSection.content);
+            } else {
+                // PAGES / POSTS / PRODUCTS etc.
+                result = await FSEPersistenceManager.savePage(collection, id, document, pageData, contentSection);
             }
 
-            // PAGES / POSTS / PRODUCTS etc.
-            const updatedSections = pageData.sections.map(s => {
-                // Match by ID or by section name
-                const isMatch = (s.id && s.id === contentSection.id) ||
-                    (s.section && s.section === contentSection.section);
-                return isMatch ? contentSection : s;
-            });
+            if (result.success) {
+                // Opcional: Podríamos quitar el alert y usar una notificación más elegante
+                // alert('✅ Cambios guardados y sitio regenerado');
+                return result;
+            }
 
-            const updatedPageData = {
-                ...pageData,
-                sections: updatedSections
-            };
-
-            const dataToSave = {
-                ...document,
-                page: updatedPageData,
-                updated_at: new Date().toISOString()
-            };
-
-            console.log('💾 Guardando en ACIDE:');
-            console.log('  Collection:', collection);
-            console.log('  ID:', id);
-            console.log('  Data size:', JSON.stringify(dataToSave).length, 'bytes');
-            console.log('  ContentSection:', contentSection);
-            console.log('  Elementos con customStyles:',
-                contentSection.content?.filter(el => el.customStyles && Object.keys(el.customStyles).length > 0)
-                    .map(el => ({ id: el.id, element: el.element, customStyles: el.customStyles }))
-            );
-
-            const result = await acideService.update(collection, id, dataToSave);
-            console.log('✅ Respuesta ACIDE:', result);
-
-            alert('✅ Cambios guardados exitosamente');
-            return { success: true, data: dataToSave, updatedPageData };
+            return { success: false, error: 'Error desconocido' };
         } catch (err) {
             console.error('❌ Error guardando:', err);
             alert('❌ Error al guardar: ' + err.message);

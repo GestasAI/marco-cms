@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Plus } from 'lucide-react';
 import { basicBlocks, designBlocks } from './blocks';
+import { formatStyles } from '../utils/styleUtils';
 
 /**
  * Contenedor editable con modo de edición al hacer doble click
@@ -33,13 +34,25 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
 
     // Renderizar según tipo
     const renderContent = () => {
+        const styles = formatStyles(customStyles);
+
+        if (isSelected && Object.keys(customStyles).length > 0) {
+            console.log('🖼️ EditableContainer - Rendering element:', {
+                id: element.id,
+                type: element.element,
+                customStyles,
+                formattedStyles: styles
+            });
+        }
+
         switch (element.element) {
             case 'heading': {
                 const Tag = element.tag || 'h2';
                 return (
                     <Tag
+                        id={element.id}
                         className={element.class}
-                        style={customStyles}
+                        style={styles}
                         onClick={handleClick}
                         onDoubleClick={handleDoubleClick}
                     >
@@ -52,8 +65,9 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                 const Tag = element.tag || 'p';
                 return (
                     <Tag
+                        id={element.id}
                         className={element.class}
-                        style={customStyles}
+                        style={styles}
                         onClick={handleClick}
                         onDoubleClick={handleDoubleClick}
                     >
@@ -64,16 +78,17 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
 
             case 'image': {
                 // Combinar customStyles con width/height
-                const imageStyles = {
+                const imageStyles = formatStyles({
                     ...customStyles,
                     width: element.width || customStyles.width || '100%',
                     height: element.height || customStyles.height || 'auto',
                     display: customStyles.display || 'block',
                     margin: customStyles.margin || (customStyles.textAlign === 'center' ? '0 auto' : '0')
-                };
+                });
 
                 return (
                     <img
+                        id={element.id}
                         src={element.src || '/placeholder-image.jpg'}
                         alt={element.alt || 'Imagen'}
                         className={element.class}
@@ -86,13 +101,13 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
 
             case 'video': {
                 // Combinar customStyles con width/height
-                const videoStyles = {
+                const videoStyles = formatStyles({
                     ...customStyles,
                     width: element.width || customStyles.width || '100%',
                     height: element.height || customStyles.height || 'auto',
                     display: customStyles.display || 'block',
                     margin: customStyles.margin || '0'
-                };
+                });
 
                 if (element.type === 'youtube' && element.youtubeId) {
                     // Si hay height personalizado, usar ese; si no, usar aspect ratio 16:9
@@ -164,9 +179,10 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
             case 'link':
                 return (
                     <a
+                        id={element.id}
                         href={element.link || '#'}
                         className={element.class}
-                        style={customStyles}
+                        style={styles}
                         target={element.target || '_self'}
                         onClick={(e) => {
                             e.preventDefault();
@@ -182,7 +198,7 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                 return (
                     <div
                         className={element.class}
-                        style={customStyles}
+                        style={styles}
                         onClick={handleClick}
                         onDoubleClick={handleDoubleClick}
                     >
@@ -203,8 +219,9 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
                 const ContainerTag = element.element === 'nav' ? 'nav' : 'div';
                 return (
                     <ContainerTag
+                        id={element.id}
                         className={`${element.class} drop-zone`}
-                        style={customStyles}
+                        style={styles}
                         onClick={handleClick}
                         onDoubleClick={handleDoubleClick}
                         data-drop-target={element.id}
@@ -232,8 +249,9 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
             case 'section':
                 return (
                     <section
+                        id={element.id}
                         className={`${element.class} drop-zone`}
-                        style={customStyles}
+                        style={styles}
                         onClick={handleClick}
                         onDoubleClick={handleDoubleClick}
                         data-drop-target={element.id}
@@ -265,9 +283,10 @@ export function EditableContainer({ element, selectedElementId, onSelect, onAddB
 
     return (
         <div
-            className={`editable-element-wrapper ${isSelected ? 'element-selected' : ''} ${hovering ? 'hovering' : ''}`}
+            className={`editable-element-wrapper drop-zone ${isSelected ? 'element-selected' : ''} ${hovering ? 'hovering' : ''}`}
             data-element-id={element.id}
             data-element-type={element.element}
+            data-drop-target={element.id}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
         >

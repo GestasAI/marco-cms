@@ -54,30 +54,25 @@ export default function Sidebar({ isOpen, onClose, user: propUser }) {
     return (
         <aside className={`dashboard-sidebar ${isOpen ? 'open' : ''}`}>
             {/* Header del Sidebar */}
-            <div className="sidebar-header p-lg" style={{ borderBottom: '1px solid var(--dashboard-color-border)' }}>
-                <h2 className="heading-3 mb-xs">Marco CMS</h2>
-                <p className="text-secondary text-xs">GestasAI Admin</p>
+            <div className="sidebar-header">
+                <h2>Marco CMS</h2>
+                <p>GestasAI Admin</p>
             </div>
 
             {/* Navegación */}
-            <nav className="p-md flex-column gap-xs overflow-y-auto flex-1">
+            <nav>
                 {menuItems.map((item, index) => {
                     if (item.divider) {
-                        return <div key={index} className="my-sm border-t border-gray-100" />;
+                        return <div key={index} className="my-sm border-t" />;
                     }
 
                     return (
                         <Link
                             key={index}
                             to={item.path}
-                            className={`dashboard-btn dashboard-btn-ghost justify-start ${isActive(item.path) ? 'active' : ''}`}
-                            style={{
-                                backgroundColor: isActive(item.path) ? 'var(--dashboard-color-bg)' : 'transparent',
-                                color: isActive(item.path) ? 'var(--dashboard-color-primary)' : 'inherit',
-                                fontWeight: isActive(item.path) ? '600' : '500'
-                            }}
+                            className={`dashboard-btn ${isActive(item.path) ? 'active' : ''}`}
                         >
-                            <item.icon size={20} />
+                            <item.icon size={18} />
                             <span>{item.label}</span>
                         </Link>
                     );

@@ -10,6 +10,7 @@ import { BlockLibrary } from '../fse/BlockLibrary';
 import { EditableContainer } from '../fse/EditableContainer';
 import { UnifiedSidebar } from '../fse/UnifiedSidebar';
 import { basicBlocks, designBlocks } from '../fse/blocks';
+import { formatStyles } from '../utils/styleUtils';
 import '../styles/editor-selection.css';
 import '../styles/block-library.css';
 import '../styles/editor-layout.css';
@@ -48,7 +49,7 @@ export default function Editor() {
     } = useElementEditor(contentSection, setContentSection);
 
     const { saving, saveDocument } = useSaveDocument();
-    const { addBlock, removeBlock, moveUp, moveDown, duplicateBlock } = useBlockManager(contentSection, setContentSection, setHasChanges);
+    const { addBlock, removeBlock, moveBlock, moveUp, moveDown, duplicateBlock } = useBlockManager(contentSection, setContentSection, setHasChanges);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -57,20 +58,50 @@ export default function Editor() {
         const handleDragOver = (e) => {
             e.preventDefault();
             e.dataTransfer.dropEffect = 'copy';
+
             const dropZone = e.target.closest('.drop-zone, .empty-container');
-            if (dropZone) dropZone.classList.add('drop-zone-active');
+            if (!dropZone) return;
+
+            // Limpiar clases previas
+            canvasRef.current.querySelectorAll('.drop-zone-active, .drop-before, .drop-after').forEach(el => {
+                el.classList.remove('drop-zone-active', 'drop-before', 'drop-after');
+            });
+
+            const rect = dropZone.getBoundingClientRect();
+            const relativeY = e.clientY - rect.top;
+            const threshold = rect.height * 0.2; // 20% de margen
+
+            // Si es una sección, preferimos añadir antes/después a menos que esté muy en el centro
+            const isSection = dropZone.tagName.toLowerCase() === 'section' || dropZone.classList.contains('section');
+
+            if (relativeY < threshold) {
+                dropZone.classList.add('drop-before');
+                dropZone.dataset.dropPos = 'before';
+            } else if (relativeY > rect.height - threshold) {
+                dropZone.classList.add('drop-after');
+                dropZone.dataset.dropPos = 'after';
+            } else {
+                dropZone.classList.add('drop-zone-active');
+                dropZone.dataset.dropPos = 'inside';
+            }
         };
 
         const handleDragLeave = (e) => {
             const dropZone = e.target.closest('.drop-zone, .empty-container');
-            if (dropZone) dropZone.classList.remove('drop-zone-active');
+            if (dropZone) {
+                dropZone.classList.remove('drop-zone-active', 'drop-before', 'drop-after');
+            }
         };
 
         const handleDrop = (e) => {
             e.preventDefault();
+
+            const dropZone = e.target.closest('.drop-zone, .empty-container');
+            const position = dropZone?.dataset.dropPos || 'inside';
+
             if (canvasRef.current) {
-                canvasRef.current.querySelectorAll('.drop-zone-active').forEach(el => {
-                    el.classList.remove('drop-zone-active');
+                canvasRef.current.querySelectorAll('.drop-zone-active, .drop-before, .drop-after').forEach(el => {
+                    el.classList.remove('drop-zone-active', 'drop-before', 'drop-after');
                 });
             }
 
@@ -81,9 +112,20 @@ export default function Editor() {
             if (!block) block = designBlocks.find(b => b.id === blockId);
             if (!block) return;
 
-            const dropTarget = e.target.closest('[data-drop-target]');
-            const targetId = dropTarget?.dataset.dropTarget || null;
-            addBlock(block, targetId, 'inside');
+            const targetId = dropZone?.dataset.dropTarget || null;
+
+            // REGLA DE ORO: Si el bloque es una sección y el destino es una sección, 
+            // NUNCA anidar, siempre antes o después.
+            let finalPosition = position;
+            if (block.template.element === 'section' && dropZone?.tagName.toLowerCase() === 'section') {
+                if (finalPosition === 'inside') {
+                    // Si soltó en el centro de una sección, decidimos según la mitad superior o inferior
+                    const rect = dropZone.getBoundingClientRect();
+                    finalPosition = (e.clientY - rect.top < rect.height / 2) ? 'before' : 'after';
+                }
+            }
+
+            addBlock(block, targetId, finalPosition);
         };
 
         canvas.addEventListener('dragover', handleDragOver);
@@ -139,17 +181,30 @@ export default function Editor() {
                 <BlockLibrary />
 
                 <div className="editor-canvas-container">
-                    <link rel="stylesheet" href="/themes/gestasai-default/theme.css" />
-                    <div className="editor-canvas" ref={canvasRef}>
+                    <div
+                        className="editor-canvas"
+                        ref={canvasRef}
+                    >
                         {contentSection ? (
                             <main
-                                id={contentSection.id}
-                                className={`${contentSection.class} drop-zone`}
+                                id={contentSection.id || 'canvas-root'}
+                                className={`${contentSection.class || ''} drop-zone ${selectedElementId === contentSection.id ? 'selected-root-section' : ''}`}
                                 data-drop-target={contentSection.id}
+                                onClick={(e) => {
+                                    if (e.target === e.currentTarget) {
+                                        selectElement(contentSection);
+                                    }
+                                }}
+                                style={{
+                                    minHeight: '100%',
+                                    width: '100%',
+                                    position: 'relative',
+                                    ...formatStyles(contentSection.customStyles || {})
+                                }}
                             >
-                                {contentSection.content && contentSection.content.map(el => (
+                                {contentSection.content && contentSection.content.map((el, idx) => (
                                     <EditableContainer
-                                        key={el.id}
+                                        key={`${el.id}-${idx}-${el.tag || el.element}-${Object.keys(el.customStyles || {}).length}`}
                                         element={el}
                                         selectedElementId={selectedElementId}
                                         onSelect={selectElement}
@@ -183,6 +238,7 @@ export default function Editor() {
                         onMoveUp={moveUp}
                         onMoveDown={moveDown}
                         onDuplicate={duplicateBlock}
+                        onMoveBlock={moveBlock}
                     />
                 </div>
             </div>

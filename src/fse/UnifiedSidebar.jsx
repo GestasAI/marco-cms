@@ -25,6 +25,7 @@ export function UnifiedSidebar({
     onMoveUp,
     onMoveDown,
     onDuplicate,
+    onMoveBlock,
     onSelectElement
 }) {
     const [activeTab, setActiveTab] = useState('document');
@@ -50,6 +51,7 @@ export function UnifiedSidebar({
                     onMoveUp={onMoveUp}
                     onMoveDown={onMoveDown}
                     onDuplicate={onDuplicate}
+                    onMoveBlock={onMoveBlock}
                 />
             );
         }
@@ -91,9 +93,14 @@ export function UnifiedSidebar({
             case 'style':
                 return (
                     <StyleTab
+                        key={selectedElement.id}
                         selectedElement={selectedElement}
                         onUpdateStyle={onUpdateStyle}
                         onUpdateCustomStyle={onUpdateCustomStyle}
+                        onDelete={onDelete}
+                        onMoveUp={onMoveUp}
+                        onMoveDown={onMoveDown}
+                        onDuplicate={onDuplicate}
                     />
                 );
             case 'media':

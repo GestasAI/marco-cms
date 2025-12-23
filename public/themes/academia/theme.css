@@ -87,8 +87,21 @@ body {
 .hero {
     padding: 150px 0 100px;
     text-align: center;
-    background: #ffffff !important;
-    /* Force white background */
+    background: #ffffff;
+}
+
+.hero-content {
+    color: inherit;
+}
+
+.hero h1,
+.hero h2,
+.hero h3,
+.hero h4,
+.hero h5,
+.hero h6,
+.hero p {
+    color: inherit;
 }
 
 .heading-1 {
@@ -97,10 +110,8 @@ body {
     font-weight: 700;
     letter-spacing: -0.015em;
     margin-bottom: 15px;
-    color: #000000 !important;
-    /* Negro puro forzado */
-    background: none !important;
-    /* Eliminar cualquier fondo */
+    color: #000000;
+    background: none;
 }
 
 .text-lead {
@@ -108,11 +119,51 @@ body {
     line-height: 1.14286;
     font-weight: 600;
     letter-spacing: 0.007em;
-    color: #333333 !important;
-    /* Gris muy oscuro */
+    color: #333333;
     max-width: 800px;
     margin: 0 auto 40px;
-    background: none !important;
+    background: none;
+}
+
+/* Utility Classes */
+.text-primary {
+    color: var(--accent-color) !important;
+}
+
+.text-secondary {
+    color: var(--text-secondary) !important;
+}
+
+.text-white {
+    color: #ffffff !important;
+}
+
+.text-black {
+    color: #000000 !important;
+}
+
+.bg-primary {
+    background-color: var(--accent-color) !important;
+}
+
+.bg-white {
+    background-color: #ffffff !important;
+}
+
+.bg-light {
+    background-color: #f5f5f7 !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
 }
 
 /* Sections */

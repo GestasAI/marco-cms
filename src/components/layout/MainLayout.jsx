@@ -64,7 +64,7 @@ export default function MainLayout() {
                 user={user}
             />
 
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+            <div className="dashboard-main-container">
                 <Header
                     onMenuClick={toggleMobileMenu}
                     onLogout={handleLogout}

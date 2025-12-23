@@ -17,13 +17,19 @@ export function EditorToolbar({ document, hasChanges, saving, onBack, onSave, on
             </div>
             <div className="flex items-center gap-sm">
                 {document?.slug && (
-                    <Button variant="ghost" onClick={onPreview}>
-                        <Eye size={18} />
+                    <Button variant="ghost" size="sm" onClick={onPreview} title="Vista previa">
+                        <Eye size={16} />
                     </Button>
                 )}
-                <Button variant="primary" onClick={onSave} disabled={saving || !hasChanges}>
-                    {saving ? <Loader2 size={18} className="animate-spin mr-2" /> : <Save size={18} className="mr-2" />}
-                    {saving ? 'Guardando...' : 'Guardar'}
+                <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={onSave}
+                    disabled={saving || !hasChanges}
+                    className="btn-save-minimal"
+                >
+                    {saving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
+                    <span>{saving ? 'Guardando...' : 'Guardar'}</span>
                 </Button>
             </div>
         </div>

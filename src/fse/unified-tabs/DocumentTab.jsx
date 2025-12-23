@@ -129,7 +129,7 @@ export function DocumentTab({ document, setDocument, pageData, setPageData }) {
                         value={document.category || ''}
                         onChange={(e) => handleUpdate('category', e.target.value)}
                     >
-                        <option value="">Sin categoría</option>
+                        <option key="default-cat" value="">Sin categoría</option>
                         {categories.map(cat => (
                             <option key={cat.slug} value={cat.slug}>{cat.name}</option>
                         ))}
@@ -156,9 +156,9 @@ export function DocumentTab({ document, setDocument, pageData, setPageData }) {
                     value={document.parent || ''}
                     onChange={(e) => handleUpdate('parent', e.target.value)}
                 >
-                    <option value="">(Ninguna)</option>
-                    <option value="home">Inicio</option>
-                    <option value="cursos">Cursos</option>
+                    <option key="none" value="">(Ninguna)</option>
+                    <option key="home" value="home">Inicio</option>
+                    <option key="cursos" value="cursos">Cursos</option>
                 </select>
             </div>
 
@@ -199,10 +199,10 @@ export function DocumentTab({ document, setDocument, pageData, setPageData }) {
                     value={document.visibility?.user_role || 'all'}
                     onChange={(e) => handleVisibilityUpdate('user_role', e.target.value)}
                 >
-                    <option value="all">Todos</option>
-                    <option value="logged">Solo registrados</option>
-                    <option value="guest">Solo invitados</option>
-                    <option value="admin">Solo administradores</option>
+                    <option key="all" value="all">Todos</option>
+                    <option key="logged" value="logged">Solo registrados</option>
+                    <option key="guest" value="guest">Solo invitados</option>
+                    <option key="admin" value="admin">Solo administradores</option>
                 </select>
             </div>
 

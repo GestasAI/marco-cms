@@ -67,7 +67,7 @@
     },
     {
         "id": "media_6946987fb2e5d",
-        "title": "Creaci\u00f3n_de_Video_Profesional_con_IA",
+        "title": "Creación_de_Video_Profesional_con_IA",
         "filename": "creaci-n-de-video-profesional-con-ia-media_6946987fb2e5d.mp4",
         "url": "\/uploads\/2025\/12\/creaci-n-de-video-profesional-con-ia-media_6946987fb2e5d.mp4",
         "path": "C:\\Users\\infoj\\Documents\\Proyectoscambio\\gestasai\\marco-cms\\public\/uploads\/2025\/12\/creaci-n-de-video-profesional-con-ia-media_6946987fb2e5d.mp4",
@@ -90,5 +90,18 @@
         "author": "admin",
         "_updatedAt": "2025-12-20T21:46:02+00:00",
         "_createdAt": "2025-12-20T21:46:02+00:00"
+    },
+    {
+        "id": "media_694ac5618ae44",
+        "title": "bienvenidos_IA",
+        "filename": "bienvenidos-ia-media_694ac5618ae44.mp4",
+        "url": "\/uploads\/2025\/12\/bienvenidos-ia-media_694ac5618ae44.mp4",
+        "path": "C:\\Users\\infoj\\Documents\\Proyectoscambio\\gestasai\\marco-cms\\public\/uploads\/2025\/12\/bienvenidos-ia-media_694ac5618ae44.mp4",
+        "type": "video\/mp4",
+        "size": 2781543,
+        "created_at": "2025-12-23T16:37:53+00:00",
+        "author": "admin",
+        "_updatedAt": "2025-12-23T16:37:53+00:00",
+        "_createdAt": "2025-12-23T16:37:53+00:00"
     }
 ]

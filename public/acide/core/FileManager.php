@@ -55,7 +55,22 @@ class FileManager
         $file = $files['file'];
 
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            throw new Exception("File upload error code: " . $file['error']);
+            $errorMsg = "Error desconocido al subir archivo.";
+            switch ($file['error']) {
+                case UPLOAD_ERR_INI_SIZE:
+                    $errorMsg = "El archivo excede el límite permitido por el servidor (upload_max_filesize).";
+                    break;
+                case UPLOAD_ERR_FORM_SIZE:
+                    $errorMsg = "El archivo excede el límite del formulario.";
+                    break;
+                case UPLOAD_ERR_PARTIAL:
+                    $errorMsg = "El archivo se subió solo parcialmente.";
+                    break;
+                case UPLOAD_ERR_NO_FILE:
+                    $errorMsg = "No se subió ningún archivo.";
+                    break;
+            }
+            throw new Exception($errorMsg . " (Código: " . $file['error'] . ")");
         }
 
         // Loose type check or extension check might be needed if MIME is missing

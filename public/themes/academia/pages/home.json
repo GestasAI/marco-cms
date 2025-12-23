@@ -17,7 +17,9 @@
                                 "element": "heading",
                                 "tag": "h1",
                                 "class": "logo",
-                                "text": "Gestas Academy"
+                                "text": "Gestas Academy",
+                                "id": "heading-3bbqc25i1",
+                                "customStyles": []
                             },
                             {
                                 "element": "nav",
@@ -27,23 +29,33 @@
                                         "element": "link",
                                         "class": "nav-link",
                                         "text": "Inicio",
-                                        "link": "/"
+                                        "link": "\/",
+                                        "id": "link-0371mu2m7",
+                                        "customStyles": []
                                     },
                                     {
                                         "element": "link",
                                         "class": "nav-link",
                                         "text": "Cursos",
-                                        "link": "#cursos"
+                                        "link": "#cursos",
+                                        "id": "link-s1vsz4d6r",
+                                        "customStyles": []
                                     },
                                     {
                                         "element": "link",
                                         "class": "nav-link",
                                         "text": "Premium",
-                                        "link": "#premium"
+                                        "link": "#premium",
+                                        "id": "link-3gky2upf2",
+                                        "customStyles": []
                                     }
-                                ]
+                                ],
+                                "id": "nav-s27buwokv",
+                                "customStyles": []
                             }
-                        ]
+                        ],
+                        "id": "container-ri4ucmybz",
+                        "customStyles": []
                     }
                 ]
             },
@@ -65,23 +77,42 @@
                                         "element": "heading",
                                         "tag": "h1",
                                         "class": "heading-1",
-                                        "text": "Tecnología para el bienestar empresarial."
+                                        "text": "Tecnología para el bienestar empresarial.",
+                                        "id": "heading-6of4wjp8q",
+                                        "customStyles": {
+                                            "color": "#0a0a0a"
+                                        }
                                     },
                                     {
                                         "element": "text",
                                         "tag": "p",
                                         "class": "text-lead",
-                                        "text": "Formación diseñada para entender la digitalización real."
+                                        "text": "Formación diseñada para entender la digitalización real...",
+                                        "id": "text-331weevpm",
+                                        "customStyles": []
                                     },
                                     {
                                         "element": "button",
                                         "class": "btn btn-primary",
-                                        "text": "Empezar ahora — Es gratuito",
-                                        "link": "#cursos"
+                                        "text": "Empezar ahora",
+                                        "link": "#cursos",
+                                        "id": "button-yxctplk0x",
+                                        "customStyles": []
                                     }
-                                ]
+                                ],
+                                "text": "Tecnología para el bienestar empresarial..",
+                                "customStyles": {
+                                    "padding": "50px",
+                                    "backgroundColor": "#ffffff",
+                                    "paddingTop": "100px",
+                                    "paddingBottom": "100px"
+                                },
+                                "id": "container-eoyvjvl12"
                             }
-                        ]
+                        ],
+                        "customStyles": {
+                            "padding": "50px"
+                        }
                     },
                     {
                         "element": "section",
@@ -96,7 +127,9 @@
                                         "element": "heading",
                                         "tag": "h2",
                                         "class": "heading-2 text-center",
-                                        "text": "El Valor del Conocimiento Compartido"
+                                        "text": "El Valor del Conocimiento Compartido",
+                                        "id": "heading-z4pq7uxeq",
+                                        "customStyles": []
                                     },
                                     {
                                         "element": "grid",
@@ -110,15 +143,21 @@
                                                         "element": "heading",
                                                         "tag": "h3",
                                                         "class": "card-title",
-                                                        "text": "Digitalización y Tecnología Empresarial"
+                                                        "text": "Digitalización y Tecnología Empresarial",
+                                                        "id": "heading-pq1le2qep",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "text",
                                                         "tag": "p",
                                                         "class": "card-text",
-                                                        "text": "El Valor: La adopción consciente de nuevas tecnologías y normativas no es solo una obligación, es una oportunidad. Impacto: Entender estos procesos beneficia la reducción de la huella de carbono y mejora significativamente la producción en las empresas. Un equipo que comprende el \"por qué\" de la tecnología es un equipo más eficiente."
+                                                        "text": "El Valor: La adopción consciente de nuevas tecnologías y normativas no es solo una obligación, es una oportunidad. Impacto: Entender estos procesos beneficia la reducción de la huella de carbono y mejora significativamente la producción en las empresas. Un equipo que comprende el \"por qué\" de la tecnología es un equipo más eficiente.",
+                                                        "id": "text-gbye2oz4a",
+                                                        "customStyles": []
                                                     }
-                                                ]
+                                                ],
+                                                "id": "card-za9i3o8z1",
+                                                "customStyles": []
                                             },
                                             {
                                                 "element": "card",
@@ -128,15 +167,21 @@
                                                         "element": "heading",
                                                         "tag": "h3",
                                                         "class": "card-title",
-                                                        "text": "Iniciativa Emprendedora desde un punto de vista de la IA"
+                                                        "text": "Iniciativa Emprendedora desde un punto de vista de la IA",
+                                                        "id": "heading-ejhnfistz",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "text",
                                                         "tag": "p",
                                                         "class": "card-text",
-                                                        "text": "El Valor: Fomentar la iniciativa emprendedora dentro de la propia organización. Impacto: El impulso de buenas prácticas combinadas con la inteligencia artificial aporta bienestar tanto a los empleados como a la empresa, creando un entorno dinámico y entregado."
+                                                        "text": "El Valor: Fomentar la iniciativa emprendedora dentro de la propia organización. Impacto: El impulso de buenas prácticas combinadas con la inteligencia artificial aporta bienestar tanto a los empleados como a la empresa, creando un entorno dinámico y entregado.",
+                                                        "id": "text-sipsi142d",
+                                                        "customStyles": []
                                                     }
-                                                ]
+                                                ],
+                                                "id": "card-7cvak583g",
+                                                "customStyles": []
                                             },
                                             {
                                                 "element": "card",
@@ -146,21 +191,38 @@
                                                         "element": "heading",
                                                         "tag": "h3",
                                                         "class": "card-title",
-                                                        "text": "IA & Soft Skills: Rendimiento Aumentado con Gemini y ChatGPT"
+                                                        "text": "IA & Soft Skills: Rendimiento Aumentado con Gemini y ChatGPT",
+                                                        "id": "heading-sevo7o0ac",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "text",
                                                         "tag": "p",
                                                         "class": "card-text",
-                                                        "text": "El Valor: La IA como herramienta de mejora personal y colectiva. Impacto: Herramientas como los modelos de lenguaje (ChatGPT, Gemini) son aliados potentes para mejorar las habilidades individuales y fortalecer la comunidad de trabajo. El éxito se construye en la interacción inteligente entre humanos y máquinas."
+                                                        "text": "El Valor: La IA como herramienta de mejora personal y colectiva. Impacto: Herramientas como los modelos de lenguaje (ChatGPT, Gemini) son aliados potentes para mejorar las habilidades individuales y fortalecer la comunidad de trabajo. El éxito se construye en la interacción inteligente entre humanos y máquinas.",
+                                                        "id": "text-tzex8tyj4",
+                                                        "customStyles": []
                                                     }
-                                                ]
+                                                ],
+                                                "id": "card-76vhq84pi",
+                                                "customStyles": []
                                             }
-                                        ]
+                                        ],
+                                        "id": "grid-lekoqtctp",
+                                        "customStyles": {
+                                            "position": "static"
+                                        }
                                     }
-                                ]
+                                ],
+                                "text": "Tecnología para el bienestar empresarial..",
+                                "customStyles": {
+                                    "padding": "50px",
+                                    "display": "block"
+                                },
+                                "id": "container-qvp0kkswb"
                             }
-                        ]
+                        ],
+                        "customStyles": []
                     },
                     {
                         "element": "section",
@@ -175,7 +237,9 @@
                                         "element": "heading",
                                         "tag": "h2",
                                         "class": "heading-2 text-center",
-                                        "text": "Especialización: Profundizando en la Herramienta"
+                                        "text": "Especialización: Profundizando en la Herramienta",
+                                        "id": "heading-q3lgwwck3",
+                                        "customStyles": []
                                     },
                                     {
                                         "element": "grid",
@@ -189,21 +253,29 @@
                                                         "element": "heading",
                                                         "tag": "h3",
                                                         "class": "card-title",
-                                                        "text": "Prompt Engineering: Mejora tus habilidades"
+                                                        "text": "Prompt Engineering: Mejora tus habilidades",
+                                                        "id": "heading-i4rkonrwf",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "text",
                                                         "tag": "p",
                                                         "class": "card-text",
-                                                        "text": "Aprende a comunicarte con precisión con los modelos de lenguaje para optimizar tus tareas diarias."
+                                                        "text": "Aprende a comunicarte con precisión con los modelos de lenguaje para optimizar tus tareas diarias.",
+                                                        "id": "text-6vpakw9wy",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "button",
                                                         "class": "btn btn-primary",
                                                         "text": "Más información",
-                                                        "link": "/registro"
+                                                        "link": "\/registro",
+                                                        "id": "button-7q3873a8n",
+                                                        "customStyles": []
                                                     }
-                                                ]
+                                                ],
+                                                "id": "card-7wv6xmer8",
+                                                "customStyles": []
                                             },
                                             {
                                                 "element": "card",
@@ -213,27 +285,43 @@
                                                         "element": "heading",
                                                         "tag": "h3",
                                                         "class": "card-title",
-                                                        "text": "Prompt Engineering Avanzado: Potencia tu productividad"
+                                                        "text": "Prompt Engineering Avanzado: Potencia tu productividad",
+                                                        "id": "heading-e99y637z8",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "text",
                                                         "tag": "p",
                                                         "class": "card-text",
-                                                        "text": "Técnicas avanzadas para aquellos que buscan llevar su eficiencia al siguiente nivel, impactando positivamente en los objetivos de la empresa."
+                                                        "text": "Técnicas avanzadas para aquellos que buscan llevar su eficiencia al siguiente nivel, impactando positivamente en los objetivos de la empresa.",
+                                                        "id": "text-boy9jegr2",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "button",
                                                         "class": "btn btn-primary",
                                                         "text": "Más información",
-                                                        "link": "/registro"
+                                                        "link": "\/registro",
+                                                        "id": "button-eppokkd2a",
+                                                        "customStyles": []
                                                     }
-                                                ]
+                                                ],
+                                                "id": "card-6eqv4elx3",
+                                                "customStyles": []
                                             }
-                                        ]
+                                        ],
+                                        "id": "grid-6m9q0dub9",
+                                        "customStyles": []
                                     }
-                                ]
+                                ],
+                                "text": "Tecnología para el bienestar empresarial..",
+                                "customStyles": {
+                                    "padding": "50px"
+                                },
+                                "id": "container-1e2tf2lqg"
                             }
-                        ]
+                        ],
+                        "customStyles": []
                     },
                     {
                         "element": "section",
@@ -248,7 +336,9 @@
                                         "element": "heading",
                                         "tag": "h2",
                                         "class": "heading-2 text-center mb-2xl",
-                                        "text": "Planes de Suscripción"
+                                        "text": "Planes de Suscripción",
+                                        "id": "heading-xcuvlwfyw",
+                                        "customStyles": []
                                     },
                                     {
                                         "element": "grid",
@@ -262,27 +352,37 @@
                                                         "element": "heading",
                                                         "tag": "h3",
                                                         "class": "plan-name",
-                                                        "text": "Plan Básico"
+                                                        "text": "Plan Básico",
+                                                        "id": "heading-h60tjuueo",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "text",
                                                         "tag": "p",
                                                         "class": "plan-price",
-                                                        "text": "14.50€ /mes"
+                                                        "text": "14.50€ \/mes",
+                                                        "id": "text-svlc35shw",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "text",
                                                         "tag": "p",
                                                         "class": "plan-desc",
-                                                        "text": "Acceso a cursos por carrera elegida."
+                                                        "text": "Acceso a cursos por carrera elegida.",
+                                                        "id": "text-u7x7x9eob",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "button",
                                                         "class": "btn btn-outline",
                                                         "text": "Empezar",
-                                                        "link": "/checkout/basico"
+                                                        "link": "\/checkout\/basico",
+                                                        "id": "button-xuo95j2ps",
+                                                        "customStyles": []
                                                     }
-                                                ]
+                                                ],
+                                                "id": "card-us2oyrq3p",
+                                                "customStyles": []
                                             },
                                             {
                                                 "element": "card",
@@ -292,27 +392,37 @@
                                                         "element": "heading",
                                                         "tag": "h3",
                                                         "class": "plan-name",
-                                                        "text": "Plan Inteligente"
+                                                        "text": "Plan Inteligente",
+                                                        "id": "heading-aii9avjga",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "text",
                                                         "tag": "p",
                                                         "class": "plan-price",
-                                                        "text": "25€ /mes"
+                                                        "text": "25€ \/mes",
+                                                        "id": "text-ernphi5k5",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "text",
                                                         "tag": "p",
                                                         "class": "plan-desc",
-                                                        "text": "Accesos a las carreras y al asesoramiento de la comunidad."
+                                                        "text": "Accesos a las carreras y al asesoramiento de la comunidad.",
+                                                        "id": "text-1g90ep37r",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "button",
                                                         "class": "btn btn-primary",
                                                         "text": "Recomendado",
-                                                        "link": "/checkout/inteligente"
+                                                        "link": "\/checkout\/inteligente",
+                                                        "id": "button-cnlx0sqed",
+                                                        "customStyles": []
                                                     }
-                                                ]
+                                                ],
+                                                "id": "card-lklnbv6u6",
+                                                "customStyles": []
                                             },
                                             {
                                                 "element": "card",
@@ -322,29 +432,83 @@
                                                         "element": "heading",
                                                         "tag": "h3",
                                                         "class": "plan-name",
-                                                        "text": "Plan Maestro"
+                                                        "text": "Plan Maestro",
+                                                        "id": "heading-dz0rlrs88",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "text",
                                                         "tag": "p",
                                                         "class": "plan-price",
-                                                        "text": "244€ /año"
+                                                        "text": "244€ \/año",
+                                                        "id": "text-wsxku8vxr",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "text",
                                                         "tag": "p",
                                                         "class": "plan-desc",
-                                                        "text": "Todo el contenido, primicias y herramientas avanzadas más 10G de almacenamiento."
+                                                        "text": "Todo el contenido, primicias y herramientas avanzadas más 10G de almacenamiento.",
+                                                        "id": "text-dbs8oifj9",
+                                                        "customStyles": []
                                                     },
                                                     {
                                                         "element": "button",
                                                         "class": "btn btn-outline",
                                                         "text": "Acceso Total",
-                                                        "link": "/checkout/maestro"
+                                                        "link": "\/checkout\/maestro",
+                                                        "id": "button-kje3mafao",
+                                                        "customStyles": []
                                                     }
-                                                ]
+                                                ],
+                                                "id": "card-nan6gmga4",
+                                                "customStyles": []
                                             }
-                                        ]
+                                        ],
+                                        "id": "grid-h24o6mapd",
+                                        "customStyles": []
+                                    }
+                                ],
+                                "text": "Tecnología para el bienestar empresarial..",
+                                "customStyles": {
+                                    "padding": "50px"
+                                },
+                                "id": "container-vupryg5wq"
+                            }
+                        ],
+                        "customStyles": []
+                    },
+                    {
+                        "element": "section",
+                        "id": "section-1766511084595-444",
+                        "class": "hero",
+                        "content": [
+                            {
+                                "element": "container",
+                                "id": "container-1766511084595-3202",
+                                "class": "container hero-content",
+                                "content": [
+                                    {
+                                        "element": "heading",
+                                        "id": "heading-1766511084595-1728",
+                                        "class": "heading-1",
+                                        "tag": "h1",
+                                        "text": "Título Principal"
+                                    },
+                                    {
+                                        "element": "text",
+                                        "id": "text-1766511084595-5883",
+                                        "class": "text-lead",
+                                        "tag": "p",
+                                        "text": "Subtítulo descriptivo"
+                                    },
+                                    {
+                                        "element": "button",
+                                        "id": "button-1766511084595-2431",
+                                        "class": "btn btn-primary btn-lg",
+                                        "text": "Comenzar",
+                                        "link": "#",
+                                        "target": "_self"
                                     }
                                 ]
                             }
@@ -365,13 +529,20 @@
                                 "element": "text",
                                 "tag": "p",
                                 "class": "footer-text",
-                                "text": "© 2025 Gestas Academy. Tecnología para el bienestar empresarial."
+                                "text": "© 2025 Gestas Academy. Tecnología para el bienestar empresarial.",
+                                "id": "text-sx8iluo84",
+                                "customStyles": []
                             }
-                        ]
+                        ],
+                        "id": "container-d72mxw47u",
+                        "customStyles": []
                     }
                 ]
             }
         ]
     },
-    "updated_at": "2025-12-22T19:47:00Z"
+    "updated_at": "2025-12-23T17:31:47.804Z",
+    "visibility": {
+        "tablet": true
+    }
 }

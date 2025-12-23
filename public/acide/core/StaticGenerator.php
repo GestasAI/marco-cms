@@ -72,87 +72,9 @@ class StaticGenerator
      */
     private function renderElement($element)
     {
-        if (!isset($element['element'])) {
-            return '';
-        }
-
-        $type = $element['element'];
-        $id = $element['id'] ?? '';
-        $class = $element['class'] ?? '';
-        $customStyles = $element['customStyles'] ?? [];
-
-        // Construir atributos style
-        $styleAttr = '';
-        if (!empty($customStyles)) {
-            $styles = [];
-            foreach ($customStyles as $prop => $value) {
-                $styles[] = "$prop: $value";
-            }
-            $styleAttr = ' style="' . implode('; ', $styles) . '"';
-        }
-
-        $html = '';
-
-        switch ($type) {
-            case 'heading':
-                $tag = $element['tag'] ?? 'h2';
-                $text = htmlspecialchars($element['text'] ?? '', ENT_QUOTES, 'UTF-8');
-                $html = "<$tag id=\"$id\" class=\"$class\"$styleAttr>$text</$tag>";
-                break;
-
-            case 'text':
-                $tag = $element['tag'] ?? 'p';
-                $text = htmlspecialchars($element['text'] ?? '', ENT_QUOTES, 'UTF-8');
-                $html = "<$tag id=\"$id\" class=\"$class\"$styleAttr>$text</$tag>";
-                break;
-
-            case 'button':
-                $text = htmlspecialchars($element['text'] ?? 'Button', ENT_QUOTES, 'UTF-8');
-                $link = htmlspecialchars($element['link'] ?? '#', ENT_QUOTES, 'UTF-8');
-                $target = $element['target'] ?? '_self';
-                $html = "<a href=\"$link\" target=\"$target\" id=\"$id\" class=\"$class\"$styleAttr>$text</a>";
-                break;
-
-            case 'link':
-                $text = htmlspecialchars($element['text'] ?? 'Link', ENT_QUOTES, 'UTF-8');
-                $link = htmlspecialchars($element['link'] ?? '#', ENT_QUOTES, 'UTF-8');
-                $html = "<a href=\"$link\" id=\"$id\" class=\"$class\"$styleAttr>$text</a>";
-                break;
-
-            case 'image':
-                $src = htmlspecialchars($element['src'] ?? '', ENT_QUOTES, 'UTF-8');
-                $alt = htmlspecialchars($element['alt'] ?? '', ENT_QUOTES, 'UTF-8');
-                $html = "<img src=\"$src\" alt=\"$alt\" id=\"$id\" class=\"$class\"$styleAttr />";
-                break;
-
-            case 'video':
-                if (isset($element['type']) && $element['type'] === 'youtube') {
-                    $youtubeId = $element['youtubeId'] ?? '';
-                    $html = "<iframe id=\"$id\" class=\"$class\"$styleAttr src=\"https://www.youtube.com/embed/$youtubeId\" frameborder=\"0\" allowfullscreen></iframe>";
-                } else {
-                    $src = htmlspecialchars($element['src'] ?? '', ENT_QUOTES, 'UTF-8');
-                    $html = "<video id=\"$id\" class=\"$class\"$styleAttr controls><source src=\"$src\" /></video>";
-                }
-                break;
-
-            case 'container':
-            case 'section':
-            case 'grid':
-            case 'card':
-            case 'nav':
-                $tag = $type === 'section' ? 'section' : 'div';
-                $content = $this->renderContent($element['content'] ?? []);
-                $html = "<$tag id=\"$id\" class=\"$class\"$styleAttr>$content</$tag>";
-                break;
-
-            default:
-                // Elemento genérico
-                $content = $this->renderContent($element['content'] ?? []);
-                $html = "<div id=\"$id\" class=\"$class\"$styleAttr>$content</div>";
-                break;
-        }
-
-        return $html;
+        return ElementRenderer::render($element, function ($content) {
+            return $this->renderContent($content);
+        });
     }
 
     /**
@@ -199,12 +121,13 @@ class StaticGenerator
         $bodyContent = '';
         if (isset($pageData['page']['sections'])) {
             foreach ($pageData['page']['sections'] as $section) {
-                $sectionTag = $section['section'] ?? 'div';
-                $sectionId = $section['id'] ?? '';
-                $sectionClass = $section['class'] ?? '';
-                $sectionContent = $this->renderContent($section['content'] ?? []);
+                // Normalizar sección como elemento para el renderizador
+                $sectionElement = $section;
+                $sectionElement['element'] = $section['section'] ?? 'section';
 
-                $bodyContent .= "<$sectionTag id=\"$sectionId\" class=\"$sectionClass\">$sectionContent</$sectionTag>";
+                $bodyContent .= ElementRenderer::render($sectionElement, function ($content) {
+                    return $this->renderContent($content);
+                });
             }
         }
 

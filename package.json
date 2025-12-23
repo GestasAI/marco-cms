@@ -19,7 +19,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "php": "php -S localhost:9000 -t public",
+    "php": "php -d upload_max_filesize=100M -d post_max_size=100M -S localhost:9000 -t public",
     "dev:full": "concurrently \"npm run dev\" \"npm run php\"",
     "build": "vite build",
     "lint": "eslint .",

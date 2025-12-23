@@ -21,3 +21,23 @@
     z-index: 1000;
     pointer-events: none;
 }
+
+.selected-root-section {
+    outline: 2px solid #4caf50 !important;
+    outline-offset: -2px;
+    position: relative;
+}
+
+.selected-root-section::after {
+    content: 'SECTION';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #4caf50;
+    color: white;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 4px;
+    z-index: 1000;
+}

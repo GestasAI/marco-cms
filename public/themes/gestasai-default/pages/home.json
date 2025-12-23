@@ -6,13 +6,13 @@
     "template": "index",
     "author": "admin",
     "created_at": "2024-12-07T12:00:00+00:00",
-    "updated_at": "2025-12-21T22:00:00+00:00",
+    "updated_at": "2025-12-23T15:39:42.855Z",
     "seo": {
         "meta_title": "Marco CMS - El CMS más rápido del mundo",
         "meta_description": "Marco CMS es un sistema de gestión de contenidos ultrarrápido.",
         "meta_keywords": "cms, marco, gestasai",
-        "og_image": "/media/marco-og.jpg",
-        "canonical": "https://gestasai.com/"
+        "og_image": "\/media\/marco-og.jpg",
+        "canonical": "https:\/\/gestasai.com\/"
     },
     "page": {
         "sections": [
@@ -31,25 +31,36 @@
                                 "id": "hero-title",
                                 "class": "hero-title",
                                 "tag": "h1",
-                                "text": "Bienvenido a Marco CMS"
+                                "text": "Bienvenido a Marco CMS",
+                                "customStyles": {
+                                    "color": "#000000"
+                                }
                             },
                             {
                                 "element": "text",
                                 "id": "hero-subtitle",
                                 "class": "hero-subtitle",
-                                "tag": "p",
-                                "text": "El CMS más rápido del mundo"
+                                "tag": "span",
+                                "text": "El CMS más rápido del mundo",
+                                "customStyles": {
+                                    "color": "#524c4c"
+                                }
                             },
                             {
                                 "element": "button",
                                 "id": "hero-cta",
                                 "class": "btn btn-primary",
                                 "text": "Comenzar Ahora",
-                                "link": "/dashboard"
+                                "link": "\/dashboard",
+                                "customStyles": {
+                                    "color": "#ffffff"
+                                }
                             }
-                        ]
+                        ],
+                        "customStyles": []
                     }
-                ]
+                ],
+                "customStyles": {}
             }
         ]
     }

@@ -1,20 +1,4 @@
-/**
- * Convierte estilos de snake-case/kebab-case a camelCase para React
- */
-function formatStyles(styles) {
-    if (!styles) return {};
-
-    // Lista de propiedades que suelen dar problemas
-    // const specialProps = ['z-index']; 
-
-    const formatted = {};
-    Object.keys(styles).forEach(key => {
-        // Convertir kebab-case a camelCase (ej: background-color -> backgroundColor)
-        const camelKey = key.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
-        formatted[camelKey] = styles[key];
-    });
-    return formatted;
-}
+import { formatStyles } from '../../utils/styleUtils';
 
 /**
  * Renderiza un elemento de imagen

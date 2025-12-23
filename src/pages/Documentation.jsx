@@ -25,7 +25,7 @@ export default function Documentation() {
             </header>
 
             <div className="dashboard-grid" style={{ gridTemplateColumns: '1fr' }}>
-                <div className="dashboard-card">
+                <div className="tarjetas-dashboard p-xl">
                     <div className="flex items-center gap-3 mb-lg">
                         <div className="p-3 bg-primary/10 text-primary rounded-lg">
                             <ShieldCheck size={24} />

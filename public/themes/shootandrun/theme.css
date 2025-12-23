@@ -4,8 +4,10 @@
 */
 
 /* Reset y Fondo Global del Tema */
-body, .app-container, .page-resolver {
-    background: #ffffff !important;
+body,
+.app-container,
+.page-resolver {
+    background: #ffffff;
     color: #000000;
 }
 
@@ -168,18 +170,18 @@ body {
 .hero-content {
     position: relative;
     z-index: 1;
-    text-center;
-    color: var(--color-text-inverse);
+    text-align: center;
+    color: inherit;
 }
 
-.hero .heading-1,
-.hero .heading-2 {
-    color: var(--color-text-inverse);
-}
-
-.hero .text-body,
-.hero .text-lead {
-    color: rgba(255, 255, 255, 0.9);
+.hero h1,
+.hero h2,
+.hero h3,
+.hero h4,
+.hero h5,
+.hero h6,
+.hero p {
+    color: inherit;
 }
 
 /* Cards */
@@ -314,8 +316,52 @@ body {
 }
 
 /* Utilities */
+.text-primary {
+    color: var(--color-primary) !important;
+}
+
+.text-secondary {
+    color: var(--color-text-secondary) !important;
+}
+
+.text-white {
+    color: #ffffff !important;
+}
+
+.text-black {
+    color: #000000 !important;
+}
+
+.bg-primary {
+    background-color: var(--color-primary) !important;
+}
+
+.bg-secondary {
+    background-color: var(--color-secondary) !important;
+}
+
+.bg-white {
+    background-color: #ffffff !important;
+}
+
+.bg-gradient {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%) !important;
+}
+
 .text-center {
-    text-align: center;
+    text-align: center !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.w-full {
+    width: 100% !important;
 }
 
 .py-xl {
@@ -377,7 +423,7 @@ body {
 
 /* Personalización específica para ShootAndRun */
 .hero {
-    background: #ffffff !important;
+    background: #ffffff;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -389,12 +435,12 @@ body {
     font-weight: 900;
     text-align: center;
     text-transform: uppercase;
-    
+
     /* Degradado Negro-Gris solicitado */
     background: linear-gradient(180deg, #000000 0%, #434343 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    
+
     letter-spacing: -2px;
 }

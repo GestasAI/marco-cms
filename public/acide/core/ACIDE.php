@@ -7,6 +7,7 @@ require_once 'QueryEngine.php';
 require_once 'ThemeManager.php';
 require_once 'ThemeFileManager.php';
 require_once 'StaticGenerator.php';
+require_once 'ElementRenderer.php';
 require_once 'AIContentGenerator.php';
 
 class ACIDE
@@ -177,6 +178,7 @@ class ACIDE
                     throw new Exception("ID is required for delete operations.");
                 return $this->crud->delete($collection, $id);
 
+
             case 'save_theme_part':
                 if (!isset($request['theme_id']))
                     throw new Exception("Theme ID is required.");
@@ -190,6 +192,13 @@ class ACIDE
                 if (!isset($request['part_name']))
                     throw new Exception("Part name is required.");
                 return $this->themeFileManager->loadThemePart($request['theme_id'], $request['part_name']);
+
+            case 'build_site':
+                return $this->staticGenerator->buildSite();
+
+            case 'generate_sitemap':
+                $baseUrl = isset($request['base_url']) ? $request['base_url'] : 'https://example.com';
+                return $this->staticGenerator->generateSitemap($baseUrl);
 
             default:
                 throw new Exception("Unknown action: $action");

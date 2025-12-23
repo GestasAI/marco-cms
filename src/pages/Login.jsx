@@ -43,7 +43,7 @@ export default function Login() {
       minHeight: '100vh',
       background: 'var(--dashboard-color-surface)'
     }}>
-      <div className="dashboard-card" style={{
+      <div className="tarjetas-dashboard" style={{
         maxWidth: '400px',
         width: '100%',
         padding: '2.5rem',

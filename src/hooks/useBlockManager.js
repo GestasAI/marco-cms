@@ -17,15 +17,15 @@ export function useBlockManager(contentSection, setContentSection, setHasChanges
         // Asignar IDs únicos
         const newBlock = assignIds(block.template);
 
-        // Si no hay targetElementId, añadir al final
-        if (!targetElementId) {
+        // Si no hay targetElementId o es la sección raíz, añadir al final de la raíz
+        if (!targetElementId || targetElementId === contentSection.id) {
             const updatedContent = {
                 ...contentSection,
                 content: [...(contentSection.content || []), newBlock]
             };
             setContentSection(updatedContent);
             setHasChanges(true);
-            console.log('✅ Bloque añadido al final:', newBlock);
+            console.log('✅ Bloque añadido a la raíz:', newBlock);
             return;
         }
 
@@ -100,65 +100,82 @@ export function useBlockManager(contentSection, setContentSection, setHasChanges
         console.log('🗑️ Bloque eliminado:', blockId);
     };
 
-    const moveBlock = (blockId, sourceContainerId, targetContainerId, destinationIndex) => {
+    const moveBlock = (blockId, targetElementId, position = 'after') => {
         if (!contentSection) return;
 
         let blockToMove = null;
 
+        // 1. Extraer el bloque de su posición actual
         const extractBlock = (content) => {
             if (!content || !Array.isArray(content)) return content;
-
-            return content
-                .filter(el => {
-                    if (el.id === blockId) {
-                        blockToMove = el;
-                        return false;
-                    }
-                    return true;
-                })
-                .map(el => ({
-                    ...el,
-                    content: el.content ? extractBlock(el.content) : el.content
-                }));
+            return content.filter(el => {
+                if (el.id === blockId) {
+                    blockToMove = el;
+                    return false;
+                }
+                return true;
+            }).map(el => ({
+                ...el,
+                content: el.content ? extractBlock(el.content) : el.content
+            }));
         };
 
+        // 2. Insertar el bloque en la nueva posición
         const insertBlock = (content) => {
             if (!content || !Array.isArray(content)) return content;
 
-            return content.map(el => {
-                if (el.id === targetContainerId) {
-                    const newContent = [...(el.content || [])];
-                    newContent.splice(destinationIndex, 0, blockToMove);
-                    return {
-                        ...el,
-                        content: newContent
-                    };
+            return content.reduce((acc, el) => {
+                if (el.id === targetElementId) {
+                    if (position === 'before') {
+                        acc.push(blockToMove);
+                        acc.push(el);
+                    } else if (position === 'after') {
+                        acc.push(el);
+                        acc.push(blockToMove);
+                    } else if (position === 'inside') {
+                        acc.push({
+                            ...el,
+                            content: [...(el.content || []), blockToMove]
+                        });
+                    }
+                } else {
+                    if (el.content) {
+                        acc.push({
+                            ...el,
+                            content: insertBlock(el.content)
+                        });
+                    } else {
+                        acc.push(el);
+                    }
                 }
-                if (el.content) {
-                    return {
-                        ...el,
-                        content: insertBlock(el.content)
-                    };
-                }
-                return el;
-            });
+                return acc;
+            }, []);
         };
 
-        let updatedContent = {
-            ...contentSection,
-            content: extractBlock(contentSection.content)
-        };
+        // Ejecutar extracción
+        const contentAfterExtraction = extractBlock(contentSection.content);
 
-        if (blockToMove) {
-            updatedContent = {
-                ...updatedContent,
-                content: insertBlock(updatedContent.content)
-            };
+        if (!blockToMove) {
+            console.warn('⚠️ No se encontró el bloque a mover:', blockId);
+            return;
         }
+
+        // Caso especial: Mover a la raíz (si el target es el ID de la sección)
+        let finalContent;
+        if (targetElementId === contentSection.id) {
+            finalContent = [...contentAfterExtraction, blockToMove];
+        } else {
+            finalContent = insertBlock(contentAfterExtraction);
+        }
+
+        const updatedContent = {
+            ...contentSection,
+            content: finalContent
+        };
 
         setContentSection(updatedContent);
         setHasChanges(true);
-        console.log('🔄 Bloque movido:', blockId, 'a', targetContainerId);
+        console.log(`🔄 Bloque ${blockId} movido ${position} de ${targetElementId}`);
     };
 
     const moveUp = (blockId) => {

@@ -43,7 +43,7 @@ export function renderElement(element, index) {
 export function renderPageSection(section, index) {
     if (!section) return null;
 
-    const { section: sectionType, id, class: className, content } = section;
+    const { section: sectionType, id, class: className, content, customStyles } = section;
     const contentElements = content && Array.isArray(content)
         ? content.map((el, i) => renderElement(el, i))
         : null;
@@ -51,7 +51,8 @@ export function renderPageSection(section, index) {
     // Props comunes (sin key)
     const props = {
         id: id,
-        className: className
+        className: className,
+        style: customStyles || {}
     };
 
     const key = id || `section-${index}`;

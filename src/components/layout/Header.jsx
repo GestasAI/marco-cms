@@ -5,77 +5,48 @@ export default function Header({ onMenuClick, onLogout }) {
     const user = authService.getUser();
 
     return (
-        <header style={{
-            background: 'var(--dashboard-color-surface)',
-            borderBottom: '1px solid var(--dashboard-color-border)',
-            position: 'sticky',
-            top: 0,
-            zIndex: 30,
-            padding: '1rem 1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
-        }}>
+        <header className="dashboard-header">
             {/* Left side */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div className="flex items-center gap-md">
                 <button
                     onClick={onMenuClick}
-                    className="dashboard-btn"
-                    style={{ padding: '0.5rem', display: 'none', background: 'transparent' }}
+                    className="dashboard-btn lg:hidden"
                     aria-label="Menu"
                 >
-                    <Menu size={24} color="var(--dashboard-color-text)" />
+                    <Menu size={20} />
                 </button>
-                <h2 className="dashboard-heading" style={{ margin: 0, fontSize: '1.25rem' }}>
+                <h2 className="heading-4" style={{ margin: 0 }}>
                     Dashboard
                 </h2>
             </div>
 
             {/* Right side */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <button className="dashboard-btn" style={{ position: 'relative', padding: '0.5rem', background: 'transparent' }}>
-                    <Bell size={20} style={{ color: 'var(--dashboard-color-text-muted)' }} />
+            <div className="flex items-center gap-md">
+                <button className="dashboard-btn" style={{ position: 'relative' }}>
+                    <Bell size={18} />
                     <span style={{
                         position: 'absolute',
-                        top: 2,
-                        right: 2,
-                        width: 8,
-                        height: 8,
-                        background: 'var(--dashboard-color-danger)',
+                        top: 6,
+                        right: 6,
+                        width: 6,
+                        height: 6,
+                        background: '#ef4444',
                         borderRadius: '50%'
                     }}></span>
                 </button>
 
-                <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.75rem',
-                    paddingLeft: '1rem',
-                    borderLeft: '1px solid var(--dashboard-color-border)'
-                }}>
-                    <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column' }}>
-                        <span style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--dashboard-color-text)' }}>
+                <div className="header-user-info">
+                    <div className="flex-column" style={{ textAlign: 'right' }}>
+                        <span className="font-semibold" style={{ fontSize: '0.875rem' }}>
                             {user?.name || 'Usuario'}
                         </span>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--dashboard-color-text-muted)' }}>
+                        <span className="text-xs text-secondary">
                             {user?.email || 'admin@gestasai.com'}
                         </span>
                     </div>
-                    <button
-                        onClick={onLogout}
-                        className="dashboard-btn dashboard-btn-primary"
-                        style={{
-                            width: 40,
-                            height: 40,
-                            borderRadius: '50%',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            padding: 0
-                        }}
-                    >
-                        <User size={20} />
-                    </button>
+                    <div className="user-avatar" onClick={onLogout} title="Cerrar sesión">
+                        {user?.name?.charAt(0) || <User size={18} />}
+                    </div>
                 </div>
             </div>
         </header>

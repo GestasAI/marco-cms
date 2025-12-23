@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout'; // Admin Layout
 import './styles/dashboard/variables.css';
 import './styles/dashboard/dashboard.css';
+import './styles/dashboard/editor-fse.css';
 import './index.css';
 import './styles/academy.css';
 

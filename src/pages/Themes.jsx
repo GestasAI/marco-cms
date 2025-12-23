@@ -74,7 +74,7 @@ export default function Themes() {
                 {themes.map(theme => {
                     const isActive = settings.active_theme === theme.id;
                     return (
-                        <div key={theme.id} className={`dashboard-card p-0 overflow-hidden flex-column ${isActive ? 'ring-2 ring-primary' : ''}`} style={{ border: isActive ? '2px solid var(--dashboard-color-primary)' : '' }}>
+                        <div key={theme.id} className={`tarjetas-dashboard p-0 overflow-hidden flex-column ${isActive ? 'ring-2 ring-primary' : ''}`} style={{ border: isActive ? '2px solid var(--dashboard-color-primary)' : '' }}>
                             {/* Preview Image */}
                             <div className="bg-gray-100 aspect-video flex-center relative group" style={{ height: '180px', overflow: 'hidden', position: 'relative' }}>
                                 {theme.screenshot ? (

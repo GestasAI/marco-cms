@@ -47,7 +47,7 @@ export async function loadPageFromACIDE(slug) {
 
 export async function loadPageFromJSON(slug) {
     try {
-        const response = await fetch(`/data/pages/${slug}.json`);
+        const response = await fetch(`/data/pages/${slug}.json?t=${Date.now()}`);
         if (response.ok) {
             // ROBUSTNESS: Check if response is actually JSON
             const contentType = response.headers.get('content-type');

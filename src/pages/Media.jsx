@@ -139,7 +139,7 @@ export default function Media() {
             ) : (
                 <div className="grid grid-4 gap-md">
                     {files.map(file => (
-                        <div key={file.id} className="dashboard-card p-0 overflow-hidden group relative">
+                        <div key={file.id} className="tarjetas-dashboard p-0 overflow-hidden group relative">
                             <div className="aspect-square bg-gray-100 flex-center relative">
                                 {file.type?.includes('image') && file.url ? (
                                     <img src={file.url} alt={file.title} className="w-full h-full object-cover" />

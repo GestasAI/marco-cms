@@ -7,28 +7,28 @@
 
 .drop-zone-active {
     background: rgba(99, 102, 241, 0.05);
-    border: 2px dashed var(--dashboard-color-primary);
-    border-radius: var(--radius-md);
+    border: 2px dashed var(--dashboard-color-primary, #6366f1);
+    border-radius: var(--radius-md, 8px);
 }
 
 .drop-zone-empty {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-xl, 2rem);
     text-align: center;
-    color: var(--dashboard-color-text-secondary);
+    color: var(--dashboard-color-text-secondary, #666);
     font-size: 14px;
-    border: 2px dashed var(--dashboard-color-border);
-    border-radius: var(--radius-md);
-    background: var(--dashboard-color-bg);
+    border: 2px dashed var(--dashboard-color-border, #ddd);
+    border-radius: var(--radius-md, 8px);
+    background: var(--dashboard-color-bg, #f9f9f9);
 }
 
 .drop-zone:hover .drop-zone-empty {
-    border-color: var(--dashboard-color-primary);
-    color: var(--dashboard-color-primary);
+    border-color: var(--dashboard-color-primary, #6366f1);
+    color: var(--dashboard-color-primary, #6366f1);
 }
 
 /* Elemento seleccionado */
 .element-selected {
-    outline: 2px solid var(--dashboard-color-primary);
+    outline: 2px solid var(--dashboard-color-primary, #6366f1);
     outline-offset: 2px;
     position: relative;
 }
@@ -38,11 +38,44 @@
     position: absolute;
     top: -24px;
     left: 0;
-    background: var(--dashboard-color-primary);
+    background: var(--dashboard-color-primary, #6366f1);
     color: white;
     padding: 2px 8px;
     font-size: 11px;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-sm, 4px);
     font-family: monospace;
     z-index: 10;
+}
+
+/* Indicadores de inserción antes/después */
+.drop-before {
+    position: relative;
+}
+
+.drop-before::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--dashboard-color-primary, #6366f1);
+    z-index: 100;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+.drop-after {
+    position: relative;
+}
+
+.drop-after::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--dashboard-color-primary, #6366f1);
+    z-index: 100;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
 }
