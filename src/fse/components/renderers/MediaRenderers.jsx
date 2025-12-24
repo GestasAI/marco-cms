@@ -2,11 +2,33 @@ import React from 'react';
 import { resolveDynamicValue } from '../../utils/dynamicUtils';
 import { formatStyles } from '../../../utils/styleUtils';
 
+/**
+ * Helper para aplicar settings comunes (spacing, border) a elementos de medios
+ */
+const applyCommonSettings = (element, baseStyles) => {
+    const settings = element.settings || {};
+    const styles = { ...baseStyles };
+
+    if (settings.spacing) {
+        if (settings.spacing.padding) styles.padding = settings.spacing.padding;
+        if (settings.spacing.margin) styles.margin = settings.spacing.margin;
+    }
+
+    if (settings.border) {
+        if (settings.border.radius) styles.borderRadius = settings.border.radius;
+        if (settings.border.width) styles.borderWidth = settings.border.width;
+        if (settings.border.color) styles.borderColor = settings.border.color;
+        if (settings.border.style) styles.borderStyle = settings.border.style;
+    }
+
+    return styles;
+};
+
 export const ImageRenderer = ({ element, doc, customStyles, handleClick, handleDoubleClick }) => {
     const isDynamic = element.dynamic?.enabled;
     const dynamicValue = isDynamic ? resolveDynamicValue(element, doc) : null;
 
-    const imageStyles = formatStyles({
+    const baseImageStyles = formatStyles({
         ...customStyles,
         width: element.width || customStyles.width || '100%',
         height: element.height || customStyles.height || 'auto',
@@ -14,19 +36,26 @@ export const ImageRenderer = ({ element, doc, customStyles, handleClick, handleD
         margin: customStyles.margin || (customStyles.textAlign === 'center' ? '0 auto' : '0')
     });
 
+    const finalStyles = applyCommonSettings(element, baseImageStyles);
+
     return (
         <div
             className={`image-wrapper ${isDynamic ? 'is-dynamic' : ''}`}
-            style={{ position: 'relative', ...imageStyles }}
+            style={{ position: 'relative', ...finalStyles }}
             onClick={handleClick}
             onDoubleClick={handleDoubleClick}
         >
             <img
                 id={element.id}
-                src={isDynamic ? (dynamicValue || '/placeholder-image.jpg') : (element.src || '/placeholder-image.jpg')}
+                src={isDynamic ? (dynamicValue || element.src || '/placeholder-image.jpg') : (element.src || '/placeholder-image.jpg')}
                 alt={element.alt || 'Imagen'}
                 className={element.class}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                style={{
+                    width: '100%',
+                    height: (finalStyles.height && finalStyles.height !== 'auto') ? '100%' : 'auto',
+                    objectFit: (finalStyles.height && finalStyles.height !== 'auto') ? 'cover' : 'initial',
+                    display: 'block'
+                }}
             />
             {isDynamic && (
                 <div className="dynamic-badge">
@@ -38,7 +67,7 @@ export const ImageRenderer = ({ element, doc, customStyles, handleClick, handleD
 };
 
 export const VideoRenderer = ({ element, customStyles, handleClick, handleDoubleClick }) => {
-    const videoStyles = formatStyles({
+    const baseVideoStyles = formatStyles({
         ...customStyles,
         width: element.width || customStyles.width || '100%',
         height: element.height || customStyles.height || 'auto',
@@ -46,9 +75,11 @@ export const VideoRenderer = ({ element, customStyles, handleClick, handleDouble
         margin: customStyles.margin || '0'
     });
 
+    const finalStyles = applyCommonSettings(element, baseVideoStyles);
+
     if (element.type === 'youtube' && element.youtubeId) {
         const hasCustomHeight = customStyles.height || element.height;
-        let containerStyles = { position: 'relative', ...videoStyles };
+        let containerStyles = { position: 'relative', ...finalStyles };
 
         if (!hasCustomHeight) {
             containerStyles = {
@@ -90,7 +121,7 @@ export const VideoRenderer = ({ element, customStyles, handleClick, handleDouble
         <video
             src={element.src || ''}
             className={element.class}
-            style={videoStyles}
+            style={finalStyles}
             controls={element.controls !== false}
             autoPlay={element.autoplay || false}
             loop={element.loop || false}

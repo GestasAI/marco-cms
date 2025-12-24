@@ -88,6 +88,7 @@ export function StyleTab({
             <LayoutSection
                 customStyles={customStyles}
                 handleCustomStyleChange={handleCustomStyleChange}
+                handleSettingsChange={handleSettingsChange}
                 selectedElement={selectedElement}
                 onUpdateStyle={onUpdateStyle}
             />

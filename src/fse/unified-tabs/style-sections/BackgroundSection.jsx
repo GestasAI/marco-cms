@@ -1,6 +1,7 @@
 import React from 'react';
 import { ColorControl } from '../../style-controls/ColorControl';
 import { GradientControl } from '../../style-controls/GradientControl';
+import { MediaControl } from '../../style-controls/MediaControl';
 
 export function BackgroundSection({
     selectedElement,
@@ -58,36 +59,28 @@ export function BackgroundSection({
             )}
 
             {bgType === 'image' && (
-                <div className="mt-sm">
-                    <label className="form-label-compact">URL de Imagen</label>
-                    <input
-                        type="text"
-                        className="form-input-compact"
-                        value={selectedElement.settings?.background?.image || ''}
-                        onChange={(e) => handleSettingsChange('background.image', e.target.value)}
-                        placeholder="https://..."
-                    />
-                </div>
+                <MediaControl
+                    label="Imagen de Fondo"
+                    value={selectedElement.settings?.background?.image || ''}
+                    type="image"
+                    onChange={(url) => handleSettingsChange('background.image', url)}
+                />
             )}
 
             {bgType === 'video' && (
-                <div className="mt-sm">
-                    <label className="form-label-compact">URL de Video (MP4)</label>
-                    <input
-                        type="text"
-                        className="form-input-compact"
-                        value={selectedElement.settings?.background?.video || ''}
-                        onChange={(e) => handleSettingsChange('background.video', e.target.value)}
-                        placeholder="https://..."
-                    />
-                </div>
+                <MediaControl
+                    label="Video de Fondo"
+                    value={selectedElement.settings?.background?.video || ''}
+                    type="video"
+                    onChange={(url) => handleSettingsChange('background.video', url)}
+                />
             )}
 
             {/* Overlay */}
             {isContainer && bgType !== 'none' && (
                 <div className="mt-md p-2 bg-gray-50 rounded border border-dashed border-gray-200">
                     <div className="flex items-center justify-between mb-2">
-                        <label className="text-xs font-bold text-gray-600">Overlay</label>
+                        <label className="text-xs font-bold text-gray-600">Overlay (Capa)</label>
                         <input
                             type="checkbox"
                             checked={selectedElement.settings?.background?.overlay?.enabled || false}

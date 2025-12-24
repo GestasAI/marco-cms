@@ -21,136 +21,138 @@ export function useElementEditor(contentSection, setContentSection) {
     };
 
     const updateElement = (elementId, field, value) => {
-        // 1. Si el elemento es la propia sección raíz
-        if (contentSection.id === elementId) {
-            const updated = { ...contentSection, [field]: value };
-            setContentSection(updated);
-            setSelectedElement(updated);
-            setHasChanges(true);
-            return;
-        }
+        setContentSection(prev => {
+            // 1. Si el elemento es la propia sección raíz
+            if (prev.id === elementId) {
+                const updated = { ...prev, [field]: value };
+                setSelectedElement(updated);
+                setHasChanges(true);
+                return updated;
+            }
 
-        // 2. Si es un elemento hijo
-        const updateInContent = (content) => {
-            if (!content || !Array.isArray(content)) return content;
-            return content.map(el => {
-                if (el.id === elementId) {
-                    const updated = { ...el, [field]: value };
-                    if (field === 'class') {
-                        const uniqueClass = `${el.element}-${el.id}`;
-                        const classes = value.split(' ').filter(c => c.trim());
-                        if (!classes.includes(uniqueClass)) {
-                            classes.push(uniqueClass);
-                            updated.class = classes.join(' ');
+            // 2. Si es un elemento hijo
+            const updateInContent = (content) => {
+                if (!content || !Array.isArray(content)) return content;
+                return content.map(el => {
+                    if (el.id === elementId) {
+                        const updated = { ...el, [field]: value };
+                        if (field === 'class') {
+                            const uniqueClass = `${el.element}-${el.id}`;
+                            const classes = value.split(' ').filter(c => c.trim());
+                            if (!classes.includes(uniqueClass)) {
+                                classes.push(uniqueClass);
+                                updated.class = classes.join(' ');
+                            }
                         }
+                        return updated;
                     }
-                    return updated;
-                }
-                if (el.content) {
-                    return { ...el, content: updateInContent(el.content) };
-                }
-                return el;
-            });
-        };
+                    if (el.content) {
+                        return { ...el, content: updateInContent(el.content) };
+                    }
+                    return el;
+                });
+            };
 
-        const updatedContent = {
-            ...contentSection,
-            content: updateInContent(contentSection.content)
-        };
+            const updatedContent = {
+                ...prev,
+                content: updateInContent(prev.content)
+            };
 
-        setContentSection(updatedContent);
-        setHasChanges(true);
-        const updated = findElementInContent(updatedContent.content, elementId);
-        if (updated) setSelectedElement(updated);
+            setHasChanges(true);
+            const updated = findElementInContent(updatedContent.content, elementId);
+            if (updated) setSelectedElement(updated);
+            return updatedContent;
+        });
     };
 
     /**
      * Actualizar múltiples campos de un elemento a la vez
      */
     const updateMultipleFields = (elementId, fields) => {
-        // 1. Si el elemento es la propia sección raíz
-        if (contentSection.id === elementId) {
-            const updated = { ...contentSection, ...fields };
-            setContentSection(updated);
-            setSelectedElement(updated);
+        setContentSection(prev => {
+            // 1. Si el elemento es la propia sección raíz
+            if (prev.id === elementId) {
+                const updated = { ...prev, ...fields };
+                setSelectedElement(updated);
+                setHasChanges(true);
+                return updated;
+            }
+
+            // 2. Si es un elemento hijo
+            const updateInContent = (content) => {
+                if (!content || !Array.isArray(content)) return content;
+                return content.map(el => {
+                    if (el.id === elementId) {
+                        return { ...el, ...fields };
+                    }
+                    if (el.content) {
+                        return { ...el, content: updateInContent(el.content) };
+                    }
+                    return el;
+                });
+            };
+
+            const updatedContent = {
+                ...prev,
+                content: updateInContent(prev.content)
+            };
+
             setHasChanges(true);
-            return;
-        }
-
-        // 2. Si es un elemento hijo
-        const updateInContent = (content) => {
-            if (!content || !Array.isArray(content)) return content;
-            return content.map(el => {
-                if (el.id === elementId) {
-                    return { ...el, ...fields };
-                }
-                if (el.content) {
-                    return { ...el, content: updateInContent(el.content) };
-                }
-                return el;
-            });
-        };
-
-        const updatedContent = {
-            ...contentSection,
-            content: updateInContent(contentSection.content)
-        };
-
-        setContentSection(updatedContent);
-        setHasChanges(true);
-        const updated = findElementInContent(updatedContent.content, elementId);
-        if (updated) setSelectedElement(updated);
+            const updated = findElementInContent(updatedContent.content, elementId);
+            if (updated) setSelectedElement(updated);
+            return updatedContent;
+        });
     };
 
     /**
      * Actualizar estilo personalizado de un elemento
      */
     const updateCustomStyle = (elementId, property, value) => {
-
-        // 1. Si el elemento es la propia sección raíz
-        if (contentSection.id === elementId) {
-            const customStyles = { ...(contentSection.customStyles || {}) };
-            if (value === null || value === '' || value === undefined) {
-                delete customStyles[property];
-            } else {
-                customStyles[property] = value;
+        setContentSection(prev => {
+            // 1. Si el elemento es la propia sección raíz
+            if (prev.id === elementId) {
+                const customStyles = { ...(prev.customStyles || {}) };
+                if (value === null || value === '' || value === undefined) {
+                    delete customStyles[property];
+                } else {
+                    customStyles[property] = value;
+                }
+                const updated = { ...prev, customStyles };
+                setSelectedElement(updated);
+                setHasChanges(true);
+                return updated;
             }
-            const updated = { ...contentSection, customStyles };
-            setContentSection(updated);
-            setSelectedElement(updated);
-            setHasChanges(true);
-            return;
-        }
 
-        // 2. Si es un elemento hijo
-        const updateInContent = (content) => {
-            if (!content || !Array.isArray(content)) return content;
-            return content.map(el => {
-                if (el.id === elementId) {
-                    const customStyles = { ...(el.customStyles || {}) };
-                    if (value === null || value === '' || value === undefined) {
-                        delete customStyles[property];
-                    } else {
-                        customStyles[property] = value;
+            // 2. Si es un elemento hijo
+            const updateInContent = (content) => {
+                if (!content || !Array.isArray(content)) return content;
+                return content.map(el => {
+                    if (el.id === elementId) {
+                        const customStyles = { ...(el.customStyles || {}) };
+                        if (value === null || value === '' || value === undefined) {
+                            delete customStyles[property];
+                        } else {
+                            customStyles[property] = value;
+                        }
+                        return { ...el, customStyles };
                     }
-                    return { ...el, customStyles };
-                }
-                if (el.content) {
-                    return { ...el, content: updateInContent(el.content) };
-                }
-                return el;
-            });
-        };
+                    if (el.content) {
+                        return { ...el, content: updateInContent(el.content) };
+                    }
+                    return el;
+                });
+            };
 
-        const updatedContent = {
-            ...contentSection,
-            content: updateInContent(contentSection.content)
-        };
+            const updatedContent = {
+                ...prev,
+                content: updateInContent(prev.content)
+            };
 
-        setContentSection(updatedContent);
-        setHasChanges(true);
-        const updated = findElementInContent(updatedContent.content, elementId);
-        if (updated) setSelectedElement(updated);
+            setHasChanges(true);
+            const updated = findElementInContent(updatedContent.content, elementId);
+            if (updated) setSelectedElement(updated);
+            return updatedContent;
+        });
     };
 
     const selectElement = (element) => {

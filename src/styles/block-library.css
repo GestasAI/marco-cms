@@ -1,5 +1,5 @@
-/* Biblioteca de Bloques - Estilo Compacto (Solo Iconos) */
-/* Contenedor Principal de la Biblioteca */
+/* Biblioteca de Bloques - Estilo Compacto (Inspirado en Elementor/FSE) */
+
 .block-library-container {
     display: flex;
     height: 100%;
@@ -7,112 +7,144 @@
     z-index: 100;
 }
 
-/* BARRA LATERAL FINA (ELEMENTOS) */
+/* BARRA LATERAL FINA (ICONOS) */
 .block-library-sidebar {
     width: 60px;
-    background: var(--dashboard-color-surface);
-    border-right: 1px solid var(--dashboard-color-border);
+    background: #ffffff;
+    border-right: 1px solid #e2e8f0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: var(--spacing-md) 0;
+    padding: 12px 0;
     height: 100%;
     flex-shrink: 0;
-    overflow: visible;
-    /* Permitir tooltips */
+    overflow-y: auto;
+    overflow-x: visible;
+    scrollbar-width: none;
+    /* Firefox */
 }
 
-.sidebar-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--dashboard-color-border);
-    background: white;
+.block-library-sidebar::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+/* Botón de Patrones (Arriba) */
+.sidebar-btn.patterns-toggle {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s;
-    color: var(--dashboard-color-text);
-    flex-shrink: 0;
+    color: #64748b;
+    margin-bottom: 12px;
 }
 
-.sidebar-btn:hover {
-    border-color: var(--dashboard-color-primary);
-    color: var(--dashboard-color-primary);
-    background: var(--dashboard-color-primary-light);
+.sidebar-btn.patterns-toggle:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+    background: #eff6ff;
 }
 
-.sidebar-btn.active {
-    background: var(--dashboard-color-primary);
-    color: white;
-    border-color: var(--dashboard-color-primary);
+.sidebar-btn.patterns-toggle.active {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
 }
 
+/* Divisores */
 .sidebar-divider {
-    width: 30px;
+    width: 32px;
     height: 1px;
-    background: var(--dashboard-color-border);
-    margin: var(--spacing-md) 0;
+    background: #e2e8f0;
+    margin: 8px 0 16px 0;
 }
 
+.sidebar-divider-small {
+    width: 20px;
+    height: 1px;
+    background: #f1f5f9;
+    margin: 12px 0;
+}
+
+/* Lista de Iconos */
 .element-icons-list {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
-    overflow: visible;
-    padding-bottom: var(--spacing-xl);
+    gap: 12px;
+    padding-bottom: 24px;
 }
 
-/* Reutilizamos .block-item para los iconos de la barra */
+/* Item de Bloque (Caja con Icono) */
 .block-item {
     position: relative;
-    background: white;
-    border: 1px solid var(--dashboard-color-border);
-    border-radius: var(--radius-md);
-    cursor: grab;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--dash-shadow-sm);
+    cursor: grab;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .block-item:hover {
-    border-color: var(--dashboard-color-primary);
-    transform: translateX(2px);
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
 }
 
-.block-item svg {
-    color: var(--dashboard-color-text-secondary);
-    transition: color 0.2s;
+.block-item:active {
+    cursor: grabbing;
 }
 
-.block-item:hover svg {
-    color: var(--dashboard-color-primary);
+/* Estilos por Categoría */
+.block-item.layout-item svg {
+    color: #2563eb;
+    /* Azul para Layout */
 }
 
-/* Tooltips para la barra lateral */
+.block-item.basic-item svg {
+    color: #1e293b;
+    /* Negro/Gris oscuro para Básicos */
+}
+
+.block-item.layout-item:hover {
+    border-color: #2563eb;
+    background: #f8fafc;
+}
+
+.block-item.basic-item:hover {
+    border-color: #1e293b;
+    background: #f8fafc;
+}
+
+/* Tooltips (Nombres al pasar el ratón) */
 .block-item::after {
     content: attr(data-label);
     position: absolute;
-    left: 60px;
+    left: 54px;
     top: 50%;
     transform: translateY(-50%) translateX(0);
     background: #1e293b;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 4px;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 500;
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
     transition: all 0.2s ease;
-    z-index: 9999;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .block-item:hover::after {
@@ -122,14 +154,14 @@
 
 /* PANEL DESPLEGABLE (FLYOUT) */
 .block-library-flyout {
-    width: 320px;
-    background: white;
-    border-right: 1px solid var(--dashboard-color-border);
+    width: 340px;
+    background: #ffffff;
+    border-right: 1px solid #e2e8f0;
     display: flex;
     flex-direction: column;
     height: 100%;
-    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
-    animation: slideIn 0.3s ease-out;
+    box-shadow: 15px 0 40px rgba(0, 0, 0, 0.05);
+    animation: slideIn 0.25s ease-out;
 }
 
 @keyframes slideIn {
@@ -145,8 +177,8 @@
 }
 
 .flyout-header {
-    padding: var(--spacing-lg);
-    border-bottom: 1px solid var(--dashboard-color-border);
+    padding: 20px;
+    border-bottom: 1px solid #f1f5f9;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -154,69 +186,70 @@
 
 .flyout-header h3 {
     margin: 0;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    color: var(--dashboard-color-text);
+    color: #1e293b;
 }
 
 .close-btn {
-    background: transparent;
+    background: #f8fafc;
     border: none;
     cursor: pointer;
-    color: var(--dashboard-color-text-secondary);
-    padding: 4px;
+    color: #64748b;
+    padding: 6px;
     border-radius: 50%;
     display: flex;
-    transition: background 0.2s;
+    transition: all 0.2s;
 }
 
 .close-btn:hover {
-    background: var(--dashboard-color-bg);
-    color: var(--dashboard-color-text);
+    background: #f1f5f9;
+    color: #1e293b;
 }
 
 .flyout-content {
     flex: 1;
     overflow-y: auto;
-    padding: var(--spacing-lg);
+    padding: 20px;
 }
 
 .flyout-intro {
     font-size: 13px;
-    color: var(--dashboard-color-text-secondary);
-    margin-bottom: var(--spacing-lg);
+    color: #64748b;
+    margin-bottom: 20px;
+    line-height: 1.5;
 }
 
-/* Cuadrícula de Bloques de Diseño */
+/* Cuadrícula de Patrones */
 .design-blocks-grid {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
 }
 
 .design-block-card {
-    border: 1px solid var(--dashboard-color-border);
-    border-radius: var(--radius-lg);
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
     overflow: hidden;
     cursor: grab;
     transition: all 0.2s;
-    background: var(--dashboard-color-bg);
+    background: #ffffff;
 }
 
 .design-block-card:hover {
-    border-color: var(--dashboard-color-primary);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-color: #2563eb;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
     transform: translateY(-2px);
 }
 
 .design-preview {
     aspect-ratio: 16/9;
-    background: #f1f5f9;
+    background: #f8fafc;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border-bottom: 1px solid var(--dashboard-color-border);
+    border-bottom: 1px solid #f1f5f9;
 }
 
 .design-preview img {
@@ -226,20 +259,19 @@
 }
 
 .preview-placeholder {
-    color: var(--dashboard-color-text-secondary);
-    opacity: 0.5;
+    color: #cbd5e1;
 }
 
 .design-label {
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: 10px;
     font-size: 12px;
     font-weight: 600;
-    color: var(--dashboard-color-text);
+    color: #334155;
     text-align: center;
 }
 
-/* Ajustes para el arrastre */
+/* Estado de Arrastre */
 body.dragging-block .block-library-flyout {
-    opacity: 0.5;
+    opacity: 0.3;
     pointer-events: none;
 }

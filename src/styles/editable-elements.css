@@ -2,10 +2,9 @@
 .editable-element-wrapper {
     position: relative;
     margin: 0;
-    /* No añadir display o padding aquí para no romper el layout del tema */
 }
 
-/* Hover Effect */
+/* Hover & Selection */
 .element-hovering {
     outline: 1px dashed rgba(99, 102, 241, 0.3);
     outline-offset: 2px;
@@ -17,7 +16,7 @@
     z-index: 10;
 }
 
-/* Add Block Triggers (botones +) */
+/* Add Block Triggers */
 .add-block-trigger {
     position: absolute;
     left: 50%;
@@ -66,119 +65,104 @@
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
-/* Empty Container */
-.empty-container {
-    min-height: 100px;
+/* --- Marco CMS Base Layout Classes (mc-) --- */
+/* Estas clases aseguran la estabilidad del layout sin chocar con el tema */
+
+.mc-section {
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.mc-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.mc-columns {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px dashed var(--dashboard-color-border);
-    border-radius: var(--radius-md);
-    background: var(--dashboard-color-bg);
-    padding: var(--spacing-xl);
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* Block Selector Menu */
-.block-selector-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    animation: fadeIn 0.2s;
+.mc-column {
+    flex: 1;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.block-selector-menu {
-    background: white;
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
-    max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: slideUp 0.3s;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.block-selector-grid {
+.mc-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: var(--spacing-sm);
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.block-selector-item {
+.mc-card {
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.mc-nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* --- Placeholders --- */
+.empty-layout-placeholder {
+    min-height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-md);
-    background: var(--dashboard-color-bg);
-    border: 1px solid var(--dashboard-color-border);
-    border-radius: var(--radius-md);
+    justify-content: center;
+    border: 2px dashed rgba(99, 102, 241, 0.2);
+    border-radius: 8px;
+    background: rgba(99, 102, 241, 0.02);
+    padding: 20px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
+    margin: 10px;
 }
 
-.block-selector-item:hover {
+.empty-layout-placeholder:hover {
+    background: rgba(99, 102, 241, 0.05);
     border-color: var(--dashboard-color-primary);
-    background: var(--dashboard-color-primary-light);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.block-selector-item svg {
+.empty-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--dashboard-color-primary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 8px;
 }
 
-.block-selector-item span {
-    font-size: 12px;
-    font-weight: 500;
-    text-align: center;
+.empty-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dashboard-color-text);
+    margin: 0;
 }
 
-/* Dynamic Content Styles */
+.empty-subtext {
+    font-size: 11px;
+    color: var(--dashboard-color-text-secondary);
+    margin-top: 2px;
+}
+
+/* --- Dynamic & Advanced --- */
 .is-dynamic {
-    position: relative;
     outline: 1px dashed var(--dashboard-color-primary) !important;
     background-color: rgba(79, 70, 229, 0.03) !important;
-}
-
-.dynamic-placeholder {
-    color: var(--dashboard-color-primary);
-    font-size: 11px;
-    font-weight: 600;
-    font-style: italic;
-    padding: 4px 8px;
-    background: rgba(79, 70, 229, 0.1);
-    border-radius: 4px;
-    display: inline-block;
 }
 
 .dynamic-badge {
@@ -191,69 +175,8 @@
     border-radius: 12px;
     font-size: 10px;
     font-weight: 700;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 10;
     pointer-events: none;
-}
-
-/* --- Advanced Layout Styles --- */
-
-.empty-layout-placeholder {
-    min-height: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 2px dashed rgba(99, 102, 241, 0.2);
-    border-radius: var(--radius-md);
-    background: rgba(99, 102, 241, 0.02);
-    padding: var(--spacing-xl);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 8px;
-}
-
-.empty-layout-placeholder:hover {
-    background: rgba(99, 102, 241, 0.05);
-    border-color: var(--dashboard-color-primary);
-    transform: translateY(-2px);
-}
-
-.empty-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--dashboard-color-primary);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    margin-bottom: var(--spacing-sm);
-}
-
-.empty-text {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--dashboard-color-text);
-    margin: 0;
-}
-
-.empty-subtext {
-    font-size: 12px;
-    color: var(--dashboard-color-text-secondary);
-    margin-top: 4px;
-}
-
-/* Eliminar estilos hardcoded que deben venir del tema */
-.section,
-.container,
-.columns,
-.column,
-.grid,
-.card,
-.nav {
-    /* Dejar que el tema mande */
 }
 
 .background-overlay,

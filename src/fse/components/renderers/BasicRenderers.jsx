@@ -1,16 +1,39 @@
 import React from 'react';
 import { resolveDynamicValue } from '../../utils/dynamicUtils';
 
+/**
+ * Helper para aplicar settings comunes (spacing, border) a elementos básicos
+ */
+const applyCommonSettings = (element, baseStyles) => {
+    const settings = element.settings || {};
+    const styles = { ...baseStyles };
+
+    if (settings.spacing) {
+        if (settings.spacing.padding) styles.padding = settings.spacing.padding;
+        if (settings.spacing.margin) styles.margin = settings.spacing.margin;
+    }
+
+    if (settings.border) {
+        if (settings.border.radius) styles.borderRadius = settings.border.radius;
+        if (settings.border.width) styles.borderWidth = settings.border.width;
+        if (settings.border.color) styles.borderColor = settings.border.color;
+        if (settings.border.style) styles.borderStyle = settings.border.style;
+    }
+
+    return styles;
+};
+
 export const ListRenderer = ({ element, doc, styles, handleClick, handleDoubleClick }) => {
     const Tag = element.tag || 'ul';
     const isDynamic = element.dynamic?.enabled;
     const dynamicValue = isDynamic ? resolveDynamicValue(element, doc) : null;
+    const finalStyles = applyCommonSettings(element, styles);
 
     return (
         <Tag
             id={element.id}
             className={`${element.class} ${isDynamic ? 'is-dynamic' : ''}`}
-            style={styles}
+            style={finalStyles}
             onClick={handleClick}
             onDoubleClick={handleDoubleClick}
         >
@@ -34,12 +57,13 @@ export const ListRenderer = ({ element, doc, styles, handleClick, handleDoubleCl
 export const HtmlRenderer = ({ element, doc, styles, handleClick, handleDoubleClick }) => {
     const isDynamic = element.dynamic?.enabled;
     const dynamicValue = isDynamic ? resolveDynamicValue(element, doc) : null;
+    const finalStyles = applyCommonSettings(element, styles);
 
     return (
         <div
             id={element.id}
             className={`${element.class} ${isDynamic ? 'is-dynamic' : ''}`}
-            style={styles}
+            style={finalStyles}
             onClick={handleClick}
             onDoubleClick={handleDoubleClick}
             dangerouslySetInnerHTML={{ __html: isDynamic ? (dynamicValue || '') : (element.content || '<div>HTML</div>') }}
@@ -50,12 +74,13 @@ export const HtmlRenderer = ({ element, doc, styles, handleClick, handleDoubleCl
 export const CodeRenderer = ({ element, doc, styles, handleClick, handleDoubleClick }) => {
     const isDynamic = element.dynamic?.enabled;
     const dynamicValue = isDynamic ? resolveDynamicValue(element, doc) : null;
+    const finalStyles = applyCommonSettings(element, styles);
 
     return (
         <div
             id={element.id}
             className={`${element.class} ${isDynamic ? 'is-dynamic' : ''}`}
-            style={styles}
+            style={finalStyles}
             onClick={handleClick}
             onDoubleClick={handleDoubleClick}
         >
@@ -74,16 +99,17 @@ export const TextRenderer = ({ element, doc, styles, isEditing, handleTextBlur, 
     const Tag = element.tag || (type === 'heading' ? 'h2' : 'p');
     const isDynamic = element.dynamic?.enabled;
     const dynamicValue = isDynamic ? resolveDynamicValue(element, doc) : null;
+    const finalStyles = applyCommonSettings(element, {
+        ...styles,
+        outline: isEditing ? '2px solid #2196f3' : 'none',
+        minWidth: '20px'
+    });
 
     return (
         <Tag
             id={element.id}
             className={`${element.class} ${isDynamic ? 'is-dynamic' : ''}`}
-            style={{
-                ...styles,
-                outline: isEditing ? '2px solid #2196f3' : 'none',
-                minWidth: '20px'
-            }}
+            style={finalStyles}
             contentEditable={isEditing && !isDynamic}
             suppressContentEditableWarning={true}
             onBlur={handleTextBlur}
@@ -98,16 +124,18 @@ export const TextRenderer = ({ element, doc, styles, isEditing, handleTextBlur, 
 };
 
 export const ButtonRenderer = ({ element, styles, isEditing, handleTextBlur, handleClick, handleDoubleClick }) => {
+    const finalStyles = applyCommonSettings(element, {
+        ...styles,
+        outline: isEditing ? '2px solid #2196f3' : 'none',
+        display: styles.display || 'inline-block'
+    });
+
     return (
         <a
             id={element.id}
             href={element.link || '#'}
             className={element.class}
-            style={{
-                ...styles,
-                outline: isEditing ? '2px solid #2196f3' : 'none',
-                display: styles.display || 'inline-block'
-            }}
+            style={finalStyles}
             target={element.target || '_self'}
             contentEditable={isEditing}
             suppressContentEditableWarning={true}
@@ -124,10 +152,12 @@ export const ButtonRenderer = ({ element, styles, isEditing, handleTextBlur, han
 };
 
 export const SearchRenderer = ({ element, styles, handleClick, handleDoubleClick }) => {
+    const finalStyles = applyCommonSettings(element, styles);
+
     return (
         <div
             className={element.class}
-            style={styles}
+            style={finalStyles}
             onClick={handleClick}
             onDoubleClick={handleDoubleClick}
         >

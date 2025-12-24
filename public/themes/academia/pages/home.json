@@ -561,7 +561,8 @@
                                 "element": "column",
                                 "id": "column-1766524804245-2921",
                                 "class": "column",
-                                "content": []
+                                "content": [],
+                                "customStyles": []
                             },
                             {
                                 "element": "column",
@@ -578,14 +579,127 @@
                                             "enabled": false,
                                             "source": "",
                                             "field": ""
-                                        }
+                                        },
+                                        "customStyles": []
                                     }
-                                ]
+                                ],
+                                "customStyles": []
                             }
                         ],
                         "settings": {
                             "gap": "20px",
                             "align": "stretch"
+                        },
+                        "customStyles": []
+                    },
+                    {
+                        "element": "section",
+                        "id": "section-1766529400555-6658",
+                        "class": "section mc-section",
+                        "content": [
+                            {
+                                "element": "heading",
+                                "id": "heading-1766529409988-6950",
+                                "class": "heading-2",
+                                "tag": "h2",
+                                "text": "Nuevo Título",
+                                "dynamic": {
+                                    "enabled": false,
+                                    "source": "",
+                                    "field": ""
+                                },
+                                "customStyles": []
+                            },
+                            {
+                                "element": "text",
+                                "id": "text-1766529448177-4193",
+                                "class": "text-base",
+                                "tag": "p",
+                                "text": "Hola",
+                                "dynamic": {
+                                    "enabled": false,
+                                    "source": "",
+                                    "field": ""
+                                },
+                                "customStyles": []
+                            }
+                        ],
+                        "settings": {
+                            "layout": {
+                                "width": "full-width",
+                                "maxWidth": "100%"
+                            },
+                            "spacing": {
+                                "padding": "40px 0",
+                                "margin": "0"
+                            },
+                            "background": {
+                                "type": "none",
+                                "color": "",
+                                "gradient": "",
+                                "image": "",
+                                "video": "",
+                                "overlay": {
+                                    "enabled": false,
+                                    "color": "rgba(0,0,0,0.5)",
+                                    "opacity": 0.5
+                                }
+                            }
+                        },
+                        "customStyles": []
+                    },
+                    {
+                        "element": "image",
+                        "id": "image-1766560188681-9902",
+                        "class": "img-fluid rounded",
+                        "src": "\/uploads\/2025\/12\/marco-media_693704b4288be.png",
+                        "alt": "marco",
+                        "dynamic": {
+                            "enabled": false,
+                            "source": "",
+                            "field": ""
+                        },
+                        "customStyles": [],
+                        "mediaId": "media_693704b4288be",
+                        "mediaData": {
+                            "id": "media_693704b4288be",
+                            "title": "marco",
+                            "filename": "marco-media_693704b4288be.png",
+                            "url": "\/uploads\/2025\/12\/marco-media_693704b4288be.png",
+                            "path": "C:\\Users\\infoj\\Documents\\Proyectoscambio\\gestasai\\marco-cms\\public\/uploads\/2025\/12\/marco-media_693704b4288be.png",
+                            "type": "image\/png",
+                            "size": 2023265,
+                            "created_at": "2025-12-08T17:02:44+00:00",
+                            "author": "admin",
+                            "_updatedAt": "2025-12-08T17:02:44+00:00",
+                            "_createdAt": "2025-12-08T17:02:44+00:00"
+                        }
+                    },
+                    {
+                        "element": "video",
+                        "id": "video-1766562716949-848",
+                        "class": "video-wrapper",
+                        "type": "upload",
+                        "youtubeId": "",
+                        "src": "\/uploads\/2025\/12\/bienvenidos-ia-media_694ac5618ae44.mp4",
+                        "controls": true,
+                        "autoplay": true,
+                        "loop": false,
+                        "muted": false,
+                        "poster": "",
+                        "mediaId": "media_694ac5618ae44",
+                        "mediaData": {
+                            "id": "media_694ac5618ae44",
+                            "title": "bienvenidos_IA",
+                            "filename": "bienvenidos-ia-media_694ac5618ae44.mp4",
+                            "url": "\/uploads\/2025\/12\/bienvenidos-ia-media_694ac5618ae44.mp4",
+                            "path": "C:\\Users\\infoj\\Documents\\Proyectoscambio\\gestasai\\marco-cms\\public\/uploads\/2025\/12\/bienvenidos-ia-media_694ac5618ae44.mp4",
+                            "type": "video\/mp4",
+                            "size": 2781543,
+                            "created_at": "2025-12-23T16:37:53+00:00",
+                            "author": "admin",
+                            "_updatedAt": "2025-12-23T16:37:53+00:00",
+                            "_createdAt": "2025-12-23T16:37:53+00:00"
                         }
                     }
                 ]
@@ -615,7 +729,7 @@
             }
         ]
     },
-    "updated_at": "2025-12-23T21:31:47.323Z",
+    "updated_at": "2025-12-24T07:52:59.840Z",
     "visibility": {
         "tablet": true
     },

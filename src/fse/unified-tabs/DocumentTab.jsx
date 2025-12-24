@@ -33,8 +33,20 @@ export function DocumentTab({ document, setDocument, pageData, setPageData }) {
         if (!file) return;
         setUploading(true);
         try {
-            const uploadedFile = await acideService.upload(file);
-            handleUpdate('featured_image', uploadedFile.url);
+            const result = await acideService.upload(file);
+            if (result && result.url) {
+                const newMediaEntry = {
+                    id: `media-${Date.now()}`,
+                    title: file.name,
+                    filename: result.url.split('/').pop(),
+                    url: result.url,
+                    type: file.type || 'application/octet-stream',
+                    size: file.size,
+                    created_at: new Date().toISOString()
+                };
+                await acideService.create('media', newMediaEntry);
+                handleUpdate('featured_image', newMediaEntry.url);
+            }
         } catch (error) {
             alert(`Error: ${error.message}`);
         } finally {
@@ -112,8 +124,7 @@ export function DocumentTab({ document, setDocument, pageData, setPageData }) {
 
             {showMediaLibrary && (
                 <MediaLibraryModal
-                    mediaLibrary={mediaLibrary}
-                    loading={loadingMedia}
+                    elementType="image"
                     onSelect={(m) => { handleUpdate('featured_image', m.url); setShowMediaLibrary(false); }}
                     onClose={() => setShowMediaLibrary(false)}
                 />
