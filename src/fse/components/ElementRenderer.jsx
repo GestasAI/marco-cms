@@ -10,6 +10,7 @@ import {
 } from './renderers/BasicRenderers';
 import { ImageRenderer, VideoRenderer } from './renderers/MediaRenderers';
 import { ContainerRenderer, ColumnsRenderer } from './renderers/LayoutRenderers';
+import { EffectRenderer } from './renderers/EffectRenderers';
 
 /**
  * Renderizador de elementos para el editor
@@ -100,6 +101,9 @@ export function ElementRenderer(props) {
 
         case 'columns':
             return <ColumnsRenderer {...props} styles={styles} ElementRenderer={ElementRenderer} />;
+
+        case 'effect':
+            return <EffectRenderer {...props} />;
 
         default:
             return null;

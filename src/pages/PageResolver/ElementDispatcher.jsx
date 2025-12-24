@@ -21,7 +21,8 @@ const RENDERER_MAP = {
     'column': Renderers.renderColumnElement,
     'card': Renderers.renderCardElement,
     'nav': Renderers.renderNavElement,
-    'grid': Renderers.renderGridElement
+    'grid': Renderers.renderGridElement,
+    'effect': Renderers.renderEffectElement
 };
 
 /**
@@ -34,15 +35,20 @@ export function renderElement(element, index, doc) {
     const Renderer = RENDERER_MAP[type];
 
     if (Renderer) {
-        // Para contenedores, secciones y columnas, pasamos renderElement para recursividad
-        if (['container', 'section', 'logo', 'columns', 'column', 'card', 'nav', 'grid'].includes(type)) {
-            return Renderer(element, index, renderElement, doc);
-        }
-        return Renderer(element, index, doc);
+        // Renderizamos como componente para respetar las reglas de Hooks
+        return (
+            <Renderer
+                key={element.id || index}
+                element={element}
+                index={index}
+                doc={doc}
+                renderElement={renderElement}
+            />
+        );
     }
 
     // Elementos no reconocidos o genéricos
-    return Renderers.renderGenericElement(element, index, renderElement, doc);
+    return <Renderers.renderGenericElement element={element} index={index} renderElement={renderElement} doc={doc} />;
 }
 
 /**

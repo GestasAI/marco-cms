@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Upload, Image as ImageIcon, Film, FileText, Loader2, Plus } from 'lucide-react';
+import { X, Upload, Image as ImageIcon, Film, FileText, Loader2, Plus, Sparkles } from 'lucide-react';
 import { acideService } from '../../acide/acideService';
 
 /**
@@ -11,6 +11,7 @@ export function MediaLibraryModal({ elementType, onSelect, onClose }) {
     const [files, setFiles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
+    const [activeTab, setActiveTab] = useState('files'); // 'files' o 'animations'
 
     useEffect(() => {
         loadMedia();
@@ -97,7 +98,20 @@ export function MediaLibraryModal({ elementType, onSelect, onClose }) {
                 <div className="flex items-center justify-between p-6 border-b bg-white">
                     <div>
                         <h2 className="text-xl font-bold text-gray-900">Biblioteca de Medios</h2>
-                        <p className="text-sm text-gray-500">Gestiona imágenes y documentos de tu sitio.</p>
+                        <div className="flex gap-4 mt-2">
+                            <button
+                                onClick={() => setActiveTab('files')}
+                                className={`text-sm font-bold pb-1 border-b-2 transition-all ${activeTab === 'files' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-400'}`}
+                            >
+                                Archivos
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('animations')}
+                                className={`text-sm font-bold pb-1 border-b-2 transition-all ${activeTab === 'animations' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-400'}`}
+                            >
+                                Animaciones (Three.js)
+                            </button>
+                        </div>
                     </div>
                     <div className="flex items-center gap-4">
                         <label className="btn-primary flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer shadow-sm hover:shadow-md transition-all bg-indigo-600 text-white font-bold text-sm">
@@ -113,7 +127,27 @@ export function MediaLibraryModal({ elementType, onSelect, onClose }) {
 
                 {/* Grid de Medios - Estilo Dashboard */}
                 <div className="flex-1 overflow-y-auto p-6 bg-gray-50">
-                    {loading ? (
+                    {activeTab === 'animations' ? (
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                            {[
+                                { id: 'antigravity-particles', title: 'Antigravity Particles', description: 'Efecto de partículas que siguen el cursor' },
+                                { id: 'starfield', title: 'Starfield', description: 'Viaje a través de las estrellas' },
+                                { id: 'wave-mesh', title: 'Wave Mesh', description: 'Malla ondulante 3D' }
+                            ].map(anim => (
+                                <div
+                                    key={anim.id}
+                                    className="bg-white p-4 rounded-xl border border-gray-200 hover:border-indigo-500 cursor-pointer transition-all shadow-sm hover:shadow-md"
+                                    onClick={() => onSelect({ type: 'animation', id: anim.id, url: anim.id, title: anim.title })}
+                                >
+                                    <div className="aspect-video bg-indigo-900 rounded-lg mb-3 flex items-center justify-center">
+                                        <Sparkles className="text-indigo-300" size={32} />
+                                    </div>
+                                    <div className="font-bold text-sm text-gray-800">{anim.title}</div>
+                                    <div className="text-[10px] text-gray-500 mt-1">{anim.description}</div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : loading ? (
                         <div className="h-full flex flex-col items-center justify-center text-gray-400">
                             <Loader2 size={40} className="animate-spin mb-4 text-indigo-500" />
                             <p className="font-medium">Cargando medios...</p>

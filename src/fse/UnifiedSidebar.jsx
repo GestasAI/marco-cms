@@ -6,6 +6,8 @@ import { StyleTab } from './unified-tabs/StyleTab';
 import { MediaTab } from './unified-tabs/MediaTab';
 import { HierarchyTab } from './unified-tabs/HierarchyTab';
 import { DynamicTab } from './unified-tabs/DynamicTab';
+import { AnimationTab } from './unified-tabs/AnimationTab';
+import { Sparkles } from 'lucide-react';
 
 /**
  * Sidebar unificado que combina PropertiesSidebar y StylesPanel
@@ -35,6 +37,7 @@ export function UnifiedSidebar({
         { id: 'document', label: 'Document', icon: FileText },
         { id: 'content', label: 'Block', icon: Layout },
         { id: 'style', label: 'Style', icon: Palette },
+        { id: 'animation', label: 'Animation', icon: Sparkles },
         { id: 'dynamic', label: 'Dynamic', icon: Database },
         { id: 'media', label: 'Media', icon: ImageIcon },
         { id: 'hierarchy', label: 'Hierarchy', icon: Layers }
@@ -111,6 +114,13 @@ export function UnifiedSidebar({
                     <DynamicTab
                         selectedElement={selectedElement}
                         onUpdate={onUpdate}
+                    />
+                );
+            case 'animation':
+                return (
+                    <AnimationTab
+                        selectedElement={selectedElement}
+                        onUpdateStyle={onUpdateStyle}
                     />
                 );
             case 'media':

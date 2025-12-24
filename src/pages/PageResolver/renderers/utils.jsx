@@ -30,6 +30,20 @@ export function resolveDynamicValue(element, doc) {
 }
 
 /**
+ * Resuelve la URL de un medio (imagen, video) para asegurar que sea accesible
+ */
+export function resolveMediaUrl(url) {
+    if (!url) return '';
+    if (url.startsWith('http') || url.startsWith('blob:') || url.startsWith('data:')) return url;
+
+    // Si es una ruta relativa de uploads, asegurar que sea absoluta desde la raíz
+    if (url.startsWith('/uploads')) return url;
+    if (url.startsWith('uploads')) return `/${url}`;
+
+    return url;
+}
+
+/**
  * Genera estilos de fondo basados en element.settings
  */
 export function getBackgroundStyles(element) {
@@ -45,7 +59,7 @@ export function getBackgroundStyles(element) {
             bgStyles.backgroundImage = background.gradient;
             break;
         case 'image':
-            bgStyles.backgroundImage = `url(${background.image})`;
+            bgStyles.backgroundImage = `url(${resolveMediaUrl(background.image)})`;
             bgStyles.backgroundSize = 'cover';
             bgStyles.backgroundPosition = 'center';
             break;
@@ -65,16 +79,17 @@ export function renderBackgroundExtras(element) {
     if (!settings) return null;
 
     if (settings.type === 'video' && settings.video) {
+        const videoUrl = resolveMediaUrl(settings.video);
         extras.push(
             <video
-                key="bg-video"
+                key={`bg-video-${videoUrl}`}
                 autoPlay muted loop playsInline
                 style={{
                     position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-                    objectFit: 'cover', zIndex: -1
+                    objectFit: 'cover', zIndex: 0
                 }}
             >
-                <source src={settings.video} type="video/mp4" />
+                <source src={videoUrl} type="video/mp4" />
             </video>
         );
     }
@@ -85,13 +100,13 @@ export function renderBackgroundExtras(element) {
                 key="bg-overlay"
                 style={{
                     position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-                    backgroundColor: settings.overlay.color,
-                    opacity: settings.overlay.opacity,
-                    pointerEvents: 'none', zIndex: 0
+                    backgroundColor: settings.overlay.color || '#000000',
+                    opacity: settings.overlay.opacity !== undefined ? settings.overlay.opacity : 0.5,
+                    pointerEvents: 'none', zIndex: 1
                 }}
             />
         );
     }
 
-    return extras.length > 0 ? extras : null;
+    return extras.length > 0 ? <React.Fragment key="bg-extras">{extras}</React.Fragment> : null;
 }

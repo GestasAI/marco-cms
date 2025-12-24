@@ -10,7 +10,10 @@ export function HierarchyTab({
     selectedElement,
     contentSection,
     onSelectElement,
-    onMoveBlock
+    onMoveBlock,
+    onUpdate,
+    onDelete,
+    onDuplicate
 }) {
     const [expandedIds, setExpandedIds] = useState([]);
     const sensors = useSensors(useSensor(PointerSensor));
@@ -36,6 +39,9 @@ export function HierarchyTab({
                         level={level}
                         selectedId={selectedElement?.id}
                         onSelect={onSelectElement}
+                        onRename={(id, newLabel) => onUpdate(id, 'label', newLabel)}
+                        onDelete={onDelete}
+                        onDuplicate={onDuplicate}
                         expandedIds={expandedIds}
                         onToggleExpand={handleToggleExpand}
                     />

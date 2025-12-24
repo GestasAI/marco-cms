@@ -31,3 +31,34 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
 }
+
+/* Marco CMS System Styles */
+.mc-effect-container {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.mc-effect-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.mc-content-layer {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Permitir que los eventos de ratón pasen al canvas si es necesario */
+}
+
+.mc-content-layer>* {
+    pointer-events: auto;
+    /* Pero que el contenido interno sí sea interactivo */
+}

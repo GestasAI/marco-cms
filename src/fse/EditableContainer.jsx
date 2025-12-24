@@ -154,8 +154,8 @@ export function EditableContainer({
             {/* Menú de selección de bloques */}
             {showAddMenu && (
                 <BlockSelectorMenu
-                    onSelect={(blockTemplate) => {
-                        onAddBlock(element.id, showAddMenu, blockTemplate);
+                    onSelect={(block) => {
+                        onAddBlock(block, element.id, showAddMenu);
                         setShowAddMenu(null);
                     }}
                     onClose={() => setShowAddMenu(null)}

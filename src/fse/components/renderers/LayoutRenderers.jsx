@@ -78,42 +78,57 @@ export const ContainerRenderer = ({
             {renderBackgroundVideo && renderBackgroundVideo()}
             {renderOverlay && renderOverlay()}
 
-            {element.content && element.content.length > 0 ? (
-                element.content.map((child, idx) => (
-                    readOnly ? (
-                        <ElementRenderer
-                            key={child.id || `child-${idx}`}
-                            element={child}
-                            doc={doc}
-                            readOnly={true}
-                        />
-                    ) : (
-                        <EditableContainer
-                            key={child.id || `child-${idx}`}
-                            element={child}
-                            document={doc}
-                            selectedElementId={selectedElementId}
-                            onSelect={onSelect}
-                            onAddBlock={onAddBlock}
-                            onUpdate={onUpdate}
-                            parentPath={currentPath}
-                        />
-                    )
-                ))
-            ) : (
-                !readOnly && (
-                    <div className="empty-layout-placeholder" onClick={() => setShowAddMenu('inside')}>
-                        <div className="empty-icon">
-                            <span style={{ fontSize: '20px' }}>+</span>
+            {/* Capa de contenido con z-index superior */}
+            <div className="mc-content-layer" style={{
+                position: 'relative',
+                zIndex: 2,
+                width: '100%',
+                height: '100%',
+                display: 'inherit',
+                flexDirection: 'inherit',
+                justifyContent: 'inherit',
+                alignItems: 'inherit',
+                gap: 'inherit',
+                gridTemplateColumns: 'inherit',
+                gridTemplateRows: 'inherit'
+            }}>
+                {element.content && element.content.length > 0 ? (
+                    element.content.map((child, idx) => (
+                        readOnly ? (
+                            <ElementRenderer
+                                key={child.id || `child-${idx}`}
+                                element={child}
+                                doc={doc}
+                                readOnly={true}
+                            />
+                        ) : (
+                            <EditableContainer
+                                key={child.id || `child-${idx}`}
+                                element={child}
+                                document={doc}
+                                selectedElementId={selectedElementId}
+                                onSelect={onSelect}
+                                onAddBlock={onAddBlock}
+                                onUpdate={onUpdate}
+                                parentPath={currentPath}
+                            />
+                        )
+                    ))
+                ) : (
+                    !readOnly && (
+                        <div className="empty-layout-placeholder" onClick={() => setShowAddMenu('inside')}>
+                            <div className="empty-icon">
+                                <span style={{ fontSize: '20px' }}>+</span>
+                            </div>
+                            <p className="empty-text">
+                                {element.element === 'column' ? 'Columna vacía' :
+                                    element.element === 'section' ? 'Sección vacía' : 'Contenedor vacío'}
+                            </p>
+                            <span className="empty-subtext">Haz clic para añadir bloques</span>
                         </div>
-                        <p className="empty-text">
-                            {element.element === 'column' ? 'Columna vacía' :
-                                element.element === 'section' ? 'Sección vacía' : 'Contenedor vacío'}
-                        </p>
-                        <span className="empty-subtext">Haz clic para añadir bloques</span>
-                    </div>
-                )
-            )}
+                    )
+                )}
+            </div>
         </ContainerTag>
     );
 };

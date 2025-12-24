@@ -53,19 +53,90 @@ class ElementRenderer
                     return "<video id=\"$id\" class=\"$class\"$styleAttr controls><source src=\"$src\" /></video>";
                 }
 
+            case 'effect':
+                $tag = 'div';
+                $content = $renderContentCallback($element['content'] ?? []);
+                $settings = $element['settings'] ?? [];
+                $settingsAttr = ' data-settings=\'' . json_encode($settings) . '\'';
+
+                // Extraer alto de los ajustes si existe
+                $height = $settings['layout']['height'] ?? '400px';
+                $effectStyles = "height: $height; position: relative; overflow: hidden; background: #000;";
+                $finalStyleAttr = ' style="' . trim(str_replace('style="', '', $styleAttr), '"; ') . '; ' . $effectStyles . '"';
+
+                $effectClass = trim($class . ' mc-effect-container');
+                $contentLayer = "<div class=\"mc-content-layer\">$content</div>";
+                return "<$tag id=\"$id\" class=\"$effectClass\"$finalStyleAttr$settingsAttr>$contentLayer</$tag>";
+
             case 'container':
             case 'section':
             case 'grid':
             case 'card':
             case 'nav':
-                $tag = $type === 'section' ? 'section' : 'div';
+                $tag = $type === 'section' ? 'section' : ($type === 'nav' ? 'nav' : 'div');
                 $content = $renderContentCallback($element['content'] ?? []);
-                return "<$tag id=\"$id\" class=\"$class\"$styleAttr>$content</$tag>";
+                $bgExtras = self::renderBackgroundExtras($element);
+                $bgStyles = self::getBackgroundStyles($element);
+                $finalStyleAttr = self::buildStyleAttr(array_merge($customStyles, $bgStyles));
+                $contentLayer = "<div class=\"mc-content-layer\">$content</div>";
+                return "<$tag id=\"$id\" class=\"$class\"$finalStyleAttr>$bgExtras$contentLayer</$tag>";
 
             default:
                 $content = $renderContentCallback($element['content'] ?? []);
                 return "<div id=\"$id\" class=\"$class\"$styleAttr>$content</div>";
         }
+    }
+
+    /**
+     * Renderiza extras de fondo (video y overlay) en PHP
+     */
+    private static function renderBackgroundExtras($element)
+    {
+        $settings = $element['settings']['background'] ?? null;
+        if (!$settings)
+            return '';
+
+        $html = '';
+        if (($settings['type'] ?? '') === 'video' && isset($settings['video'])) {
+            $videoUrl = $settings['video'];
+            $html .= "<video autoplay muted loop playsinline style=\"position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;\">";
+            $html .= "<source src=\"$videoUrl\" type=\"video/mp4\">";
+            $html .= "</video>";
+        }
+
+        if (isset($settings['overlay']['enabled']) && $settings['overlay']['enabled']) {
+            $color = $settings['overlay']['color'] ?? '#000000';
+            $opacity = $settings['overlay']['opacity'] ?? 0.5;
+            $html .= "<div style=\"position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: $color; opacity: $opacity; pointer-events: none; z-index: 1;\"></div>";
+        }
+
+        return $html;
+    }
+
+    /**
+     * Obtiene estilos de fondo para PHP
+     */
+    private static function getBackgroundStyles($element)
+    {
+        $settings = $element['settings']['background'] ?? null;
+        if (!$settings)
+            return [];
+
+        $styles = [];
+        switch ($settings['type'] ?? '') {
+            case 'color':
+                $styles['backgroundColor'] = $settings['color'] ?? '';
+                break;
+            case 'gradient':
+                $styles['backgroundImage'] = $settings['gradient'] ?? '';
+                break;
+            case 'image':
+                $styles['backgroundImage'] = "url(" . ($settings['image'] ?? '') . ")";
+                $styles['backgroundSize'] = 'cover';
+                $styles['backgroundPosition'] = 'center';
+                break;
+        }
+        return $styles;
     }
 
     /**

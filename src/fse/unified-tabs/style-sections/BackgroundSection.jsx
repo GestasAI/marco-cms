@@ -92,7 +92,7 @@ export function BackgroundSection({
                         <>
                             <ColorControl
                                 label="Color"
-                                value={selectedElement.settings?.background?.overlay?.color || 'rgba(0,0,0,0.5)'}
+                                value={selectedElement.settings?.background?.overlay?.color || '#000000'}
                                 onChange={(val) => handleSettingsChange('background.overlay.color', val)}
                             />
                             <div className="form-group-compact mt-2">

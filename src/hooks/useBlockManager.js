@@ -16,6 +16,7 @@ export function useBlockManager(contentSection, setContentSection, setHasChanges
 
         // Asignar IDs únicos
         const newBlock = assignIds(block.template);
+        newBlock.label = block.label; // Añadir etiqueta legible para el árbol
 
         // Si no hay targetElementId o es la sección raíz, añadir al final de la raíz
         if (!targetElementId || targetElementId === contentSection.id) {

@@ -167,7 +167,112 @@ $breadcrumbSchema
     <!-- Theme CSS -->
     <style>
 $themeCSS
+    .mc-effect-container { position: relative; overflow: hidden; background: #000; }
+    .mc-effect-container canvas { display: block; width: 100% !important; height: 100% !important; }
+    .mc-content-layer { position: relative; z-index: 2; width: 100%; height: 100%; }
     </style>
+    
+    <!-- Effects Runtime (Three.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const containers = document.querySelectorAll('.mc-effect-container');
+        containers.forEach(container => {
+            try {
+                const settings = JSON.parse(container.getAttribute('data-settings') || '{}');
+                initEffect(container, settings);
+            } catch(e) { console.error("Effect init error:", e); }
+        });
+
+        function initEffect(container, settings) {
+            const particleSettings = settings.particles || { count: 2000, size: 0.05, color: '#4285F4' };
+            const animSettings = settings.animation || { followCursor: true, intensity: 1.0, timeScale: 1.0 };
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight || 1, 0.1, 1000);
+            camera.position.z = 5;
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            
+            // Estilo explícito para asegurar visibilidad
+            renderer.domElement.style.position = 'absolute';
+            renderer.domElement.style.top = '0';
+            renderer.domElement.style.left = '0';
+            renderer.domElement.style.zIndex = '1';
+            
+            container.appendChild(renderer.domElement);
+
+            const count = particleSettings.count || 2000;
+            const geometry = new THREE.BufferGeometry();
+            const pos = new Float32Array(count * 3);
+            const initialPos = new Float32Array(count * 3);
+            for(let i=0; i<count*3; i++) {
+                const v = (Math.random() - 0.5) * 10;
+                pos[i] = initialPos[i] = v;
+            }
+            geometry.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: particleSettings.size || 0.05,
+                color: particleSettings.color || '#4285F4',
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending,
+                sizeAttenuation: true
+            });
+
+            const points = new THREE.Points(geometry, material);
+            scene.add(points);
+
+            const mouse = { x: 0, y: 0 };
+            window.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+            });
+
+            const clock = new THREE.Clock();
+            function animate() {
+                requestAnimationFrame(animate);
+                const elapsed = clock.getElapsedTime();
+                const timeScale = animSettings.timeScale || 1.0;
+                
+                const positions = points.geometry.attributes.position.array;
+                for(let i=0; i<count; i++) {
+                    const i3 = i * 3;
+                    positions[i3+1] = initialPos[i3+1] + Math.sin(elapsed * timeScale + initialPos[i3]) * 0.2;
+                    positions[i3] = initialPos[i3] + Math.cos(elapsed * timeScale * 0.5 + initialPos[i3+2]) * 0.1;
+
+                    if(animSettings.followCursor) {
+                        const dx = positions[i3] - mouse.x * 5;
+                        const dy = positions[i3+1] - mouse.y * 5;
+                        const dist = Math.sqrt(dx*dx + dy*dy);
+                        if(dist < 2) {
+                            const force = (2 - dist) / 2;
+                            positions[i3] += dx * force * 0.05 * animSettings.intensity;
+                            positions[i3+1] += dy * force * 0.05 * animSettings.intensity;
+                        }
+                    }
+                }
+                points.geometry.attributes.position.needsUpdate = true;
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                const w = container.clientWidth;
+                const h = container.clientHeight;
+                if (w > 0 && h > 0) {
+                    camera.aspect = w / h;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(w, h);
+                }
+            });
+        }
+    });
+    </script>
 </head>
 <body>
 $bodyContent

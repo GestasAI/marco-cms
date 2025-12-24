@@ -11,6 +11,7 @@
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-router-dom": "^7.10.1",
+    "three": "^0.182.0",
     "uuid": "^13.0.0"
   },
   "name": "marco-cms",
