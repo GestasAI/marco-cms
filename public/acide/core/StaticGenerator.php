@@ -185,46 +185,83 @@ $themeCSS
         });
 
         function initEffect(container, settings) {
-            const particleSettings = settings.particles || { count: 2000, size: 0.05, color: '#4285F4' };
-            const animSettings = settings.animation || { followCursor: true, intensity: 1.0, timeScale: 1.0 };
+            const particleSettings = settings.particles || { count: 3000, size: 0.06, color: '#4285F4', shape: 'points' };
+            const animSettings = settings.animation || { mode: 'follow', intensity: 1.5, timeScale: 1.2 };
             
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight || 1, 0.1, 1000);
+            const width = container.clientWidth || container.parentElement?.clientWidth || 800;
+            const height = container.clientHeight || container.parentElement?.clientHeight || 400;
+            const camera = new THREE.PerspectiveCamera(75, width / height || 1.6, 0.1, 1000);
             camera.position.z = 5;
 
             const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setSize(width, height);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             
-            // Estilo explícito para asegurar visibilidad
             renderer.domElement.style.position = 'absolute';
             renderer.domElement.style.top = '0';
             renderer.domElement.style.left = '0';
             renderer.domElement.style.zIndex = '1';
-            
             container.appendChild(renderer.domElement);
 
-            const count = particleSettings.count || 2000;
-            const geometry = new THREE.BufferGeometry();
-            const pos = new Float32Array(count * 3);
-            const initialPos = new Float32Array(count * 3);
-            for(let i=0; i<count*3; i++) {
-                const v = (Math.random() - 0.5) * 10;
-                pos[i] = initialPos[i] = v;
+            const count = particleSettings.count || 3000;
+            const shape = particleSettings.shape || 'points';
+            let mesh;
+
+            if (shape === 'points' || shape === 'lines' || shape === 'bubbles') {
+                const geometry = new THREE.BufferGeometry();
+                const pos = new Float32Array(count * 3);
+                const initialPos = new Float32Array(count * 3);
+                for(let i=0; i<count*3; i++) {
+                    const v = (Math.random() - 0.5) * 10;
+                    pos[i] = initialPos[i] = v;
+                }
+                geometry.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+                geometry.userData = { initialPos };
+
+                if (shape === 'lines') {
+                    const material = new THREE.LineBasicMaterial({ color: particleSettings.color || '#4285F4', transparent: true, opacity: 0.6 });
+                    mesh = new THREE.LineSegments(geometry, material);
+                } else {
+                    const material = new THREE.PointsMaterial({
+                        size: particleSettings.size || 0.06,
+                        color: particleSettings.color || '#4285F4',
+                        transparent: true,
+                        opacity: shape === 'bubbles' ? 0.4 : 0.8,
+                        blending: THREE.AdditiveBlending,
+                        sizeAttenuation: true
+                    });
+                    mesh = new THREE.Points(geometry, material);
+                }
+            } else {
+                const baseGeom = shape === 'spheres' 
+                    ? new THREE.SphereGeometry(particleSettings.size || 0.06, 8, 8)
+                    : new THREE.BoxGeometry(particleSettings.size || 0.06, particleSettings.size || 0.06, particleSettings.size || 0.06);
+                
+                const material = new THREE.MeshPhongMaterial({ color: particleSettings.color || '#4285F4', transparent: true, opacity: 0.8 });
+                mesh = new THREE.InstancedMesh(baseGeom, material, count);
+                
+                const matrix = new THREE.Matrix4();
+                const initialPos = new Float32Array(count * 3);
+                for (let i = 0; i < count; i++) {
+                    const x = (Math.random() - 0.5) * 10;
+                    const y = (Math.random() - 0.5) * 10;
+                    const z = (Math.random() - 0.5) * 10;
+                    initialPos[i*3] = x;
+                    initialPos[i*3+1] = y;
+                    initialPos[i*3+2] = z;
+                    matrix.setPosition(x, y, z);
+                    mesh.setMatrixAt(i, matrix);
+                }
+                mesh.userData = { initialPos };
+                
+                const light = new THREE.DirectionalLight(0xffffff, 1);
+                light.position.set(1, 1, 2);
+                scene.add(light);
+                scene.add(new THREE.AmbientLight(0x404040));
             }
-            geometry.setAttribute('position', new THREE.BufferAttribute(pos, 3));
 
-            const material = new THREE.PointsMaterial({
-                size: particleSettings.size || 0.05,
-                color: particleSettings.color || '#4285F4',
-                transparent: true,
-                opacity: 0.8,
-                blending: THREE.AdditiveBlending,
-                sizeAttenuation: true
-            });
-
-            const points = new THREE.Points(geometry, material);
-            scene.add(points);
+            scene.add(mesh);
 
             const mouse = { x: 0, y: 0 };
             window.addEventListener('mousemove', (e) => {
@@ -237,26 +274,72 @@ $themeCSS
             function animate() {
                 requestAnimationFrame(animate);
                 const elapsed = clock.getElapsedTime();
-                const timeScale = animSettings.timeScale || 1.0;
+                const timeScale = animSettings.timeScale || 1.2;
+                const intensity = animSettings.intensity || 1.5;
+                const mode = animSettings.mode || 'follow';
                 
-                const positions = points.geometry.attributes.position.array;
-                for(let i=0; i<count; i++) {
-                    const i3 = i * 3;
-                    positions[i3+1] = initialPos[i3+1] + Math.sin(elapsed * timeScale + initialPos[i3]) * 0.2;
-                    positions[i3] = initialPos[i3] + Math.cos(elapsed * timeScale * 0.5 + initialPos[i3+2]) * 0.1;
+                const initialPos = mesh.userData.initialPos;
 
-                    if(animSettings.followCursor) {
-                        const dx = positions[i3] - mouse.x * 5;
-                        const dy = positions[i3+1] - mouse.y * 5;
-                        const dist = Math.sqrt(dx*dx + dy*dy);
-                        if(dist < 2) {
-                            const force = (2 - dist) / 2;
-                            positions[i3] += dx * force * 0.05 * animSettings.intensity;
-                            positions[i3+1] += dy * force * 0.05 * animSettings.intensity;
+                if (shape === 'points' || shape === 'lines' || shape === 'bubbles') {
+                    const positions = mesh.geometry.attributes.position.array;
+                    for(let i=0; i<count; i++) {
+                        const i3 = i * 3;
+                        if (mode === 'rain') {
+                            positions[i3+1] -= 0.02 * timeScale;
+                            if (positions[i3+1] < -5) positions[i3+1] = 5;
+                        } else if (mode === 'direction') {
+                            positions[i3] += 0.01 * timeScale;
+                            if (positions[i3] > 5) positions[i3] = -5;
+                        } else {
+                            positions[i3+1] = initialPos[i3+1] + Math.sin(elapsed * timeScale + initialPos[i3]) * 0.2;
+                            positions[i3] = initialPos[i3] + Math.cos(elapsed * timeScale * 0.5 + initialPos[i3+2]) * 0.1;
+                        }
+
+                        if(mode === 'follow' || mode === 'avoid') {
+                            const dx = positions[i3] - mouse.x * 5;
+                            const dy = positions[i3+1] - mouse.y * 5;
+                            const dist = Math.sqrt(dx*dx + dy*dy);
+                            if(dist < 2) {
+                                const force = (2 - dist) / 2;
+                                const factor = mode === 'follow' ? 1 : -1;
+                                positions[i3] += dx * force * 0.05 * intensity * factor;
+                                positions[i3+1] += dy * force * 0.05 * intensity * factor;
+                            }
                         }
                     }
+                    mesh.geometry.attributes.position.needsUpdate = true;
+                } else {
+                    const matrix = new THREE.Matrix4();
+                    for (let i = 0; i < count; i++) {
+                        const i3 = i * 3;
+                        let x = initialPos[i3];
+                        let y = initialPos[i3+1];
+                        let z = initialPos[i3+2];
+
+                        if (mode === 'rain') {
+                            y = (y - elapsed * 0.5 * timeScale) % 10;
+                            if (y < -5) y += 10;
+                        } else {
+                            y += Math.sin(elapsed * timeScale + x) * 0.2;
+                            x += Math.cos(elapsed * timeScale * 0.5 + z) * 0.1;
+                        }
+
+                        if (mode === 'follow' || mode === 'avoid') {
+                            const dx = x - mouse.x * 5;
+                            const dy = y - mouse.y * 5;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            if (dist < 2) {
+                                const force = (2 - dist) / 2;
+                                const factor = mode === 'follow' ? 1 : -1;
+                                x += dx * force * 0.05 * intensity * factor;
+                                y += dy * force * 0.05 * intensity * factor;
+                            }
+                        }
+                        matrix.setPosition(x, y, z);
+                        mesh.setMatrixAt(i, matrix);
+                    }
+                    mesh.instanceMatrix.needsUpdate = true;
                 }
-                points.geometry.attributes.position.needsUpdate = true;
                 renderer.render(scene, camera);
             }
             animate();

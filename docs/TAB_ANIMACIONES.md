@@ -40,9 +40,10 @@ Se gestionan mediante un `useRef` llamado `liveSettings`. El loop de animación 
 - **Velocidad de Tiempo**: Factor de escala del reloj de Three.js.
 - **Seguimiento de Cursor**: Activa/desactiva la interacción.
 
-## 4. Componentes del DOM
+## 4. Componentes del DOM (Solo para Bloques de Efecto)
 
-Cada bloque de efecto genera la siguiente estructura:
+Cada bloque de efecto genera la estructura de capas necesaria para la superposición. **Nota importante**: Esta estructura es exclusiva del bloque `effect`. Los contenedores estándar (secciones, grids) no utilizan el wrapper `mc-content-layer` para no romper los layouts de Flexbox o Grid.
+
 ```html
 <div class="mc-effect-container" style="height: 500px; position: relative;">
     <!-- Capa 1: El motor de renderizado (Canvas) -->

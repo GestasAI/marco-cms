@@ -11,6 +11,7 @@ export const ContainerRenderer = ({
     handleDoubleClick,
     renderBackgroundVideo,
     renderOverlay,
+    renderBackgroundAnimation,
     doc,
     selectedElementId,
     onSelect,
@@ -27,7 +28,13 @@ export const ContainerRenderer = ({
 
     // Combinar estilos base con configuraciones específicas de layout
     const settings = element.settings || {};
-    const finalStyles = { ...styles, position: 'relative' };
+    const isAnimation = settings.background?.type === 'animation';
+    const finalStyles = {
+        ...styles,
+        position: 'relative',
+        isolation: 'isolate',
+        ...(isAnimation ? { backgroundColor: 'transparent', backgroundImage: 'none' } : {})
+    };
 
     // Aplicar configuraciones de Spacing (Padding/Margin)
     if (settings.spacing) {
@@ -77,58 +84,44 @@ export const ContainerRenderer = ({
         >
             {renderBackgroundVideo && renderBackgroundVideo()}
             {renderOverlay && renderOverlay()}
+            {renderBackgroundAnimation && renderBackgroundAnimation()}
 
-            {/* Capa de contenido con z-index superior */}
-            <div className="mc-content-layer" style={{
-                position: 'relative',
-                zIndex: 2,
-                width: '100%',
-                height: '100%',
-                display: 'inherit',
-                flexDirection: 'inherit',
-                justifyContent: 'inherit',
-                alignItems: 'inherit',
-                gap: 'inherit',
-                gridTemplateColumns: 'inherit',
-                gridTemplateRows: 'inherit'
-            }}>
-                {element.content && element.content.length > 0 ? (
-                    element.content.map((child, idx) => (
-                        readOnly ? (
-                            <ElementRenderer
-                                key={child.id || `child-${idx}`}
-                                element={child}
-                                doc={doc}
-                                readOnly={true}
-                            />
-                        ) : (
-                            <EditableContainer
-                                key={child.id || `child-${idx}`}
-                                element={child}
-                                document={doc}
-                                selectedElementId={selectedElementId}
-                                onSelect={onSelect}
-                                onAddBlock={onAddBlock}
-                                onUpdate={onUpdate}
-                                parentPath={currentPath}
-                            />
-                        )
-                    ))
-                ) : (
-                    !readOnly && (
-                        <div className="empty-layout-placeholder" onClick={() => setShowAddMenu('inside')}>
-                            <div className="empty-icon">
-                                <span style={{ fontSize: '20px' }}>+</span>
-                            </div>
-                            <p className="empty-text">
-                                {element.element === 'column' ? 'Columna vacía' :
-                                    element.element === 'section' ? 'Sección vacía' : 'Contenedor vacío'}
-                            </p>
-                            <span className="empty-subtext">Haz clic para añadir bloques</span>
-                        </div>
+            {element.content && element.content.length > 0 ? (
+                element.content.map((child, idx) => (
+                    readOnly ? (
+                        <ElementRenderer
+                            key={child.id || `child-${idx}`}
+                            element={child}
+                            doc={doc}
+                            readOnly={true}
+                        />
+                    ) : (
+                        <EditableContainer
+                            key={child.id || `child-${idx}`}
+                            element={child}
+                            document={doc}
+                            selectedElementId={selectedElementId}
+                            onSelect={onSelect}
+                            onAddBlock={onAddBlock}
+                            onUpdate={onUpdate}
+                            parentPath={currentPath}
+                        />
                     )
-                )}
-            </div>
+                ))
+            ) : (
+                !readOnly && (
+                    <div className="empty-layout-placeholder" onClick={() => setShowAddMenu('inside')}>
+                        <div className="empty-icon">
+                            <span style={{ fontSize: '20px' }}>+</span>
+                        </div>
+                        <p className="empty-text">
+                            {element.element === 'column' ? 'Columna vacía' :
+                                element.element === 'section' ? 'Sección vacía' : 'Contenedor vacío'}
+                        </p>
+                        <span className="empty-subtext">Haz clic para añadir bloques</span>
+                    </div>
+                )
+            )}
         </ContainerTag>
     );
 };
@@ -149,9 +142,11 @@ export const ColumnsRenderer = ({
     onUpdate,
     currentPath,
     EditableContainer,
-    ElementRenderer
+    ElementRenderer,
+    renderBackgroundAnimation
 }) => {
     const settings = element.settings || {};
+    const isAnimation = settings.background?.type === 'animation';
     const finalStyles = {
         ...styles,
         display: 'flex',
@@ -159,7 +154,10 @@ export const ColumnsRenderer = ({
         width: '100%',
         gap: settings.layout?.gap || '20px',
         alignItems: settings.layout?.align || 'stretch',
-        justifyContent: settings.layout?.justify || 'flex-start'
+        justifyContent: settings.layout?.justify || 'flex-start',
+        position: 'relative',
+        isolation: 'isolate',
+        ...(isAnimation ? { backgroundColor: 'transparent', backgroundImage: 'none' } : {})
     };
 
     // Aplicar Spacing
@@ -177,6 +175,7 @@ export const ColumnsRenderer = ({
             onDoubleClick={handleDoubleClick}
             data-drop-target={element.id}
         >
+            {renderBackgroundAnimation && renderBackgroundAnimation()}
             {element.content && element.content.map((child, idx) => (
                 readOnly ? (
                     <ElementRenderer

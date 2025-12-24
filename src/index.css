@@ -33,10 +33,10 @@ code {
 }
 
 /* Marco CMS System Styles */
+/* Estilos para el sistema de efectos Three.js */
 .mc-effect-container {
     position: relative;
     overflow: hidden;
-    background: #000;
 }
 
 .mc-effect-container canvas {
@@ -47,18 +47,21 @@ code {
     top: 0;
     left: 0;
     z-index: 1;
+    pointer-events: none;
+    /* El canvas no debe bloquear clics al contenido */
 }
 
-.mc-content-layer {
+/* Capa de contenido sobre efectos o fondos */
+.mc-effect-container>.mc-content-layer {
     position: relative;
     z-index: 2;
+    pointer-events: none;
+    /* La capa en sí es transparente a eventos */
     width: 100%;
     height: 100%;
-    pointer-events: none;
-    /* Permitir que los eventos de ratón pasen al canvas si es necesario */
 }
 
 .mc-content-layer>* {
     pointer-events: auto;
-    /* Pero que el contenido interno sí sea interactivo */
+    /* El contenido interno sí es interactivo */
 }

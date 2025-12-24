@@ -97,10 +97,10 @@ export function ElementRenderer(props) {
         case 'nav':
         case 'section':
         case 'column':
-            return <ContainerRenderer {...props} styles={styles} ElementRenderer={ElementRenderer} />;
+            return <ContainerRenderer {...props} styles={styles} ElementRenderer={ElementRenderer} renderBackgroundAnimation={props.renderBackgroundAnimation} />;
 
         case 'columns':
-            return <ColumnsRenderer {...props} styles={styles} ElementRenderer={ElementRenderer} />;
+            return <ColumnsRenderer {...props} styles={styles} ElementRenderer={ElementRenderer} renderBackgroundAnimation={props.renderBackgroundAnimation} />;
 
         case 'effect':
             return <EffectRenderer {...props} />;

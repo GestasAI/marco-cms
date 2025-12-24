@@ -16,21 +16,22 @@ export const effectBlocks = [
                     count: 3000,
                     size: 0.06,
                     color: '#4285F4',
-                    speed: 1.0,
-                    type: 'points'
+                    shape: 'points',
+                    speed: 1.0
                 },
                 camera: {
                     fov: 75,
                     position: [0, 0, 5]
                 },
                 animation: {
-                    followCursor: true,
+                    mode: 'follow',
                     intensity: 1.5,
                     timeScale: 1.2
                 },
                 layout: {
                     height: '500px',
-                    width: '100%'
+                    width: '100%',
+                    background: '#000000'
                 }
             },
             content: []

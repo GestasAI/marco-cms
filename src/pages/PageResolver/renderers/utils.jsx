@@ -108,5 +108,43 @@ export function renderBackgroundExtras(element) {
         );
     }
 
+    if (settings.type === 'animation' && settings.animation) {
+        // Importación dinámica o asunción de que el despachador lo manejará
+        // Para simplificar, inyectamos un marcador que el despachador de efectos reconocerá
+        const anim = settings.animation;
+        const effectElement = {
+            id: `bg-anim-${element.id}`,
+            settings: {
+                particles: {
+                    count: anim.count || 2000,
+                    size: 0.06,
+                    color: anim.color || '#4285F4',
+                    shape: anim.shape || 'points'
+                },
+                animation: {
+                    mode: anim.mode || 'follow',
+                    intensity: 1.5,
+                    timeScale: 1.2
+                },
+                layout: {
+                    height: '100%',
+                    background: 'transparent'
+                }
+            }
+        };
+
+        // Necesitamos acceder a renderEffectElement. 
+        // Como utils.jsx no suele importar renderers para evitar circulares, 
+        // usaremos un truco: pasar el componente como prop o inyectarlo globalmente.
+        // Pero en este proyecto, PageResolver suele tener acceso.
+        // Por ahora, inyectamos el contenedor y el despachador lo llenará si es necesario, 
+        // o mejor, lo manejamos en LayoutRenderers.jsx del frontend.
+        extras.push(
+            <div key="bg-animation" className="mc-background-animation" data-bg-settings={JSON.stringify(effectElement.settings)} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}>
+                {/* El renderizador de efectos se encargará de esto si encuentra esta clase */}
+            </div>
+        );
+    }
+
     return extras.length > 0 ? <React.Fragment key="bg-extras">{extras}</React.Fragment> : null;
 }

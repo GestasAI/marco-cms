@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ElementRenderer } from './components/ElementRenderer';
 import { AddBlockTriggers } from './components/AddBlockTriggers';
 import { BlockSelectorMenu } from './components/BlockSelectorMenu';
+import { EffectRenderer } from './components/renderers/EffectRenderers';
 
 /**
  * Contenedor principal para elementos editables en el FSE
@@ -101,6 +102,40 @@ export function EditableContainer({
         return null;
     };
 
+    // Renderizar animación de fondo (Three.js)
+    const renderBackgroundAnimation = () => {
+        const bg = element.settings?.background;
+        if (bg?.type === 'animation' && bg.animation) {
+            // Mapear ajustes de fondo a formato de EffectRenderer
+            const effectElement = {
+                id: `bg-anim-${element.id}`,
+                settings: {
+                    particles: {
+                        count: bg.animation.count !== undefined ? bg.animation.count : 2000,
+                        size: bg.animation.size || 0.06,
+                        color: bg.animation.color || '#4285F4',
+                        shape: bg.animation.shape || 'points'
+                    },
+                    animation: {
+                        mode: bg.animation.mode || 'follow',
+                        intensity: bg.animation.intensity || 1.5,
+                        timeScale: bg.animation.timeScale || 1.2
+                    },
+                    layout: {
+                        height: '100%',
+                        background: bg.animation.backgroundColor || 'transparent'
+                    }
+                }
+            };
+            return (
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, pointerEvents: 'none' }}>
+                    <EffectRenderer element={effectElement} />
+                </div>
+            );
+        }
+        return null;
+    };
+
     // Estilos especiales para el wrapper si es un elemento de layout
     const getWrapperStyles = () => {
         const styles = {};
@@ -142,6 +177,7 @@ export function EditableContainer({
                 handleDoubleClick={handleDoubleClick}
                 renderBackgroundVideo={renderBackgroundVideo}
                 renderOverlay={renderOverlay}
+                renderBackgroundAnimation={renderBackgroundAnimation}
                 EditableContainer={EditableContainer}
                 selectedElementId={selectedElementId}
                 onSelect={onSelect}

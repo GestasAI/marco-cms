@@ -338,7 +338,9 @@
                                         "class": "heading-2 text-center mb-2xl",
                                         "text": "Planes de Suscripción",
                                         "id": "heading-xcuvlwfyw",
-                                        "customStyles": []
+                                        "customStyles": {
+                                            "color": "#b62020"
+                                        }
                                     },
                                     {
                                         "element": "grid",
@@ -524,6 +526,61 @@
                         "customStyles": []
                     },
                     {
+                        "element": "container",
+                        "id": "mc-container-014168-593",
+                        "class": "container mc-container",
+                        "content": [
+                            {
+                                "element": "text",
+                                "id": "mc-text-018013-733",
+                                "class": "text-base",
+                                "tag": "p",
+                                "text": "hola",
+                                "dynamic": {
+                                    "enabled": false,
+                                    "source": "",
+                                    "field": ""
+                                },
+                                "label": "Texto",
+                                "customStyles": {
+                                    "padding": "300px"
+                                }
+                            }
+                        ],
+                        "settings": {
+                            "layout": {
+                                "width": "boxed",
+                                "maxWidth": "1200px"
+                            },
+                            "spacing": {
+                                "padding": "20px",
+                                "margin": "0 auto"
+                            },
+                            "background": {
+                                "type": "animation",
+                                "color": "",
+                                "gradient": "",
+                                "image": "",
+                                "video": "",
+                                "overlay": {
+                                    "enabled": false,
+                                    "color": "rgba(0,0,0,0.5)",
+                                    "opacity": 0.5
+                                },
+                                "animation": {
+                                    "shape": "cubes",
+                                    "count": 2,
+                                    "size": 0.18,
+                                    "intensity": 2.5,
+                                    "timeScale": 2.5,
+                                    "color": "#b73454",
+                                    "backgroundColor": "#da7272"
+                                }
+                            }
+                        },
+                        "label": "Contenedor"
+                    },
+                    {
                         "element": "heading",
                         "id": "heading-1766521888091-6786",
                         "class": "heading-2",
@@ -535,216 +592,6 @@
                             "field": ""
                         },
                         "customStyles": []
-                    },
-                    {
-                        "element": "effect",
-                        "id": "mc-effect-525505-6",
-                        "class": "mc-effect mc-antigravity-hero",
-                        "type": "antigravity-particles",
-                        "settings": {
-                            "particles": {
-                                "count": 100,
-                                "size": 0.05,
-                                "color": "#4285F4",
-                                "speed": 1,
-                                "type": "points"
-                            },
-                            "camera": {
-                                "fov": 75,
-                                "position": [
-                                    0,
-                                    0,
-                                    5
-                                ]
-                            },
-                            "animation": {
-                                "followCursor": true,
-                                "intensity": 1.8,
-                                "timeScale": 0.9
-                            },
-                            "layout": {
-                                "height": "600px",
-                                "width": "100%"
-                            }
-                        },
-                        "content": [],
-                        "label": "Antigravity Hero",
-                        "customStyles": []
-                    },
-                    {
-                        "element": "section",
-                        "id": "section-1766565722547-8185",
-                        "class": "section mc-section",
-                        "content": [
-                            {
-                                "element": "columns",
-                                "id": "mc-columns-772152-224",
-                                "class": "columns mc-columns",
-                                "content": [
-                                    {
-                                        "element": "column",
-                                        "id": "mc-column-772152-538",
-                                        "class": "column mc-column",
-                                        "content": [
-                                            {
-                                                "element": "video",
-                                                "id": "mc-video-781366-128",
-                                                "class": "video-wrapper",
-                                                "type": "upload",
-                                                "youtubeId": "",
-                                                "src": "\/uploads\/2025\/12\/bienvenidos-ia-media_694ac5618ae44.mp4",
-                                                "controls": true,
-                                                "autoplay": false,
-                                                "loop": false,
-                                                "muted": false,
-                                                "poster": "",
-                                                "label": "Video",
-                                                "mediaId": "media_694ac5618ae44",
-                                                "mediaData": {
-                                                    "id": "media_694ac5618ae44",
-                                                    "title": "bienvenidos_IA",
-                                                    "filename": "bienvenidos-ia-media_694ac5618ae44.mp4",
-                                                    "url": "\/uploads\/2025\/12\/bienvenidos-ia-media_694ac5618ae44.mp4",
-                                                    "path": "C:\\Users\\infoj\\Documents\\Proyectoscambio\\gestasai\\marco-cms\\public\/uploads\/2025\/12\/bienvenidos-ia-media_694ac5618ae44.mp4",
-                                                    "type": "video\/mp4",
-                                                    "size": 2781543,
-                                                    "created_at": "2025-12-23T16:37:53+00:00",
-                                                    "author": "admin",
-                                                    "_updatedAt": "2025-12-23T16:37:53+00:00",
-                                                    "_createdAt": "2025-12-23T16:37:53+00:00"
-                                                },
-                                                "customStyles": {
-                                                    "borderTopLeftRadius": "25px",
-                                                    "borderBottomRightRadius": "25px"
-                                                }
-                                            }
-                                        ],
-                                        "settings": {
-                                            "spacing": {
-                                                "padding": "15px"
-                                            }
-                                        },
-                                        "customStyles": []
-                                    },
-                                    {
-                                        "element": "column",
-                                        "id": "mc-column-772152-466",
-                                        "class": "column mc-column",
-                                        "content": [
-                                            {
-                                                "element": "image",
-                                                "id": "mc-image-806628-586",
-                                                "class": "img-fluid rounded",
-                                                "src": "\/uploads\/2025\/12\/marco-media_693704b4288be.png",
-                                                "alt": "marco",
-                                                "dynamic": {
-                                                    "enabled": false,
-                                                    "source": "",
-                                                    "field": ""
-                                                },
-                                                "label": "Imagen",
-                                                "mediaId": "media_693704b4288be",
-                                                "mediaData": {
-                                                    "id": "media_693704b4288be",
-                                                    "title": "marco",
-                                                    "filename": "marco-media_693704b4288be.png",
-                                                    "url": "\/uploads\/2025\/12\/marco-media_693704b4288be.png",
-                                                    "path": "C:\\Users\\infoj\\Documents\\Proyectoscambio\\gestasai\\marco-cms\\public\/uploads\/2025\/12\/marco-media_693704b4288be.png",
-                                                    "type": "image\/png",
-                                                    "size": 2023265,
-                                                    "created_at": "2025-12-08T17:02:44+00:00",
-                                                    "author": "admin",
-                                                    "_updatedAt": "2025-12-08T17:02:44+00:00",
-                                                    "_createdAt": "2025-12-08T17:02:44+00:00"
-                                                },
-                                                "customStyles": []
-                                            }
-                                        ],
-                                        "settings": {
-                                            "spacing": {
-                                                "padding": "15px"
-                                            }
-                                        },
-                                        "customStyles": []
-                                    }
-                                ],
-                                "settings": {
-                                    "layout": {
-                                        "gap": "20px",
-                                        "align": "stretch",
-                                        "justify": "flex-start"
-                                    },
-                                    "spacing": {
-                                        "padding": "0",
-                                        "margin": "0"
-                                    },
-                                    "background": {
-                                        "type": "none",
-                                        "color": "",
-                                        "gradient": "",
-                                        "image": "",
-                                        "video": "",
-                                        "overlay": {
-                                            "enabled": false,
-                                            "color": "rgba(0,0,0,0.5)",
-                                            "opacity": 0.5
-                                        }
-                                    }
-                                },
-                                "label": "Columnas",
-                                "customStyles": []
-                            },
-                            {
-                                "element": "button",
-                                "id": "button-1766565907275-9521",
-                                "class": "btn btn-primary",
-                                "text": "Haz clic aquí",
-                                "link": "#",
-                                "dynamic": {
-                                    "enabled": false,
-                                    "source": "",
-                                    "field": ""
-                                },
-                                "label": "Botón",
-                                "customStyles": {
-                                    "justifyContent": "center",
-                                    "alignItems": "center",
-                                    "display": "grid"
-                                }
-                            }
-                        ],
-                        "settings": {
-                            "layout": {
-                                "width": "full-width",
-                                "maxWidth": "80%",
-                                "align": "center",
-                                "justify": "flex-end"
-                            },
-                            "spacing": {
-                                "padding": "px 0",
-                                "margin": ""
-                            },
-                            "background": {
-                                "type": "color",
-                                "color": "#1c8d9c",
-                                "gradient": "",
-                                "image": "\/uploads\/2025\/12\/marco-media_693704b4288be.png",
-                                "video": "\/uploads\/2025\/12\/creaci-n-de-video-profesional-con-ia-media_6946987fb2e5d.mp4",
-                                "overlay": {
-                                    "enabled": true,
-                                    "color": "rgba(0,0,0,0.5)",
-                                    "opacity": 0.5
-                                }
-                            }
-                        },
-                        "label": "Sección",
-                        "customStyles": {
-                            "display": "grid",
-                            "paddingTop": "20px",
-                            "paddingBottom": "50px",
-                            "paddingLeft": "50px",
-                            "paddingRight": "50px"
-                        }
                     }
                 ]
             },
@@ -773,7 +620,7 @@
             }
         ]
     },
-    "updated_at": "2025-12-24T10:40:16.743Z",
+    "updated_at": "2025-12-24T11:54:44.306Z",
     "visibility": {
         "tablet": true
     },

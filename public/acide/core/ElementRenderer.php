@@ -19,7 +19,7 @@ class ElementRenderer
         $customStyles = $element['customStyles'] ?? [];
 
         // Construir atributos style
-        $styleAttr = self::buildStyleAttr($customStyles);
+        $styleAttr = self::buildStyleAttr($customStyles, $element);
 
         switch ($type) {
             case 'heading':
@@ -59,9 +59,10 @@ class ElementRenderer
                 $settings = $element['settings'] ?? [];
                 $settingsAttr = ' data-settings=\'' . json_encode($settings) . '\'';
 
-                // Extraer alto de los ajustes si existe
-                $height = $settings['layout']['height'] ?? '400px';
-                $effectStyles = "height: $height; position: relative; overflow: hidden; background: #000;";
+                // Extraer alto y fondo de los ajustes si existe
+                $height = $settings['layout']['height'] ?? '500px';
+                $background = $settings['layout']['background'] ?? '#000';
+                $effectStyles = "height: $height; background: $background; position: relative; overflow: hidden;";
                 $finalStyleAttr = ' style="' . trim(str_replace('style="', '', $styleAttr), '"; ') . '; ' . $effectStyles . '"';
 
                 $effectClass = trim($class . ' mc-effect-container');
@@ -73,13 +74,19 @@ class ElementRenderer
             case 'grid':
             case 'card':
             case 'nav':
+            case 'columns':
+            case 'column':
                 $tag = $type === 'section' ? 'section' : ($type === 'nav' ? 'nav' : 'div');
                 $content = $renderContentCallback($element['content'] ?? []);
                 $bgExtras = self::renderBackgroundExtras($element);
                 $bgStyles = self::getBackgroundStyles($element);
-                $finalStyleAttr = self::buildStyleAttr(array_merge($customStyles, $bgStyles));
-                $contentLayer = "<div class=\"mc-content-layer\">$content</div>";
-                return "<$tag id=\"$id\" class=\"$class\"$finalStyleAttr>$bgExtras$contentLayer</$tag>";
+
+                // Asegurar position relative para el contenedor
+                $mergedStyles = array_merge($customStyles, $bgStyles);
+                $mergedStyles['position'] = 'relative';
+                $finalStyleAttr = self::buildStyleAttr($mergedStyles, $element);
+
+                return "<$tag id=\"$id\" class=\"$class\"$finalStyleAttr>$bgExtras$content</$tag>";
 
             default:
                 $content = $renderContentCallback($element['content'] ?? []);
@@ -108,6 +115,29 @@ class ElementRenderer
             $color = $settings['overlay']['color'] ?? '#000000';
             $opacity = $settings['overlay']['opacity'] ?? 0.5;
             $html .= "<div style=\"position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: $color; opacity: $opacity; pointer-events: none; z-index: 1;\"></div>";
+        }
+
+        if (($settings['type'] ?? '') === 'animation' && isset($settings['animation'])) {
+            $anim = $settings['animation'];
+            $effectSettings = [
+                'particles' => [
+                    'count' => isset($anim['count']) ? (int) $anim['count'] : 2000,
+                    'size' => $anim['size'] ?? 0.06,
+                    'color' => $anim['color'] ?? '#4285F4',
+                    'shape' => $anim['shape'] ?? 'points'
+                ],
+                'animation' => [
+                    'mode' => $anim['mode'] ?? 'follow',
+                    'intensity' => $anim['intensity'] ?? 1.5,
+                    'timeScale' => $anim['timeScale'] ?? 1.2
+                ],
+                'layout' => [
+                    'height' => '100%',
+                    'background' => $anim['backgroundColor'] ?? 'transparent'
+                ]
+            ];
+            $jsonSettings = htmlspecialchars(json_encode($effectSettings), ENT_QUOTES, 'UTF-8');
+            $html .= "<div class=\"mc-effect-container mc-background-animation\" data-settings=\"$jsonSettings\" style=\"position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;\"></div>";
         }
 
         return $html;
@@ -142,9 +172,9 @@ class ElementRenderer
     /**
      * Construye el atributo style convirtiendo camelCase a kebab-case
      */
-    private static function buildStyleAttr($customStyles)
+    private static function buildStyleAttr($customStyles, $element = null)
     {
-        if (empty($customStyles)) {
+        if (empty($customStyles) && !$element) {
             return '';
         }
 
@@ -153,16 +183,29 @@ class ElementRenderer
             if (empty($value))
                 continue;
 
-            // Convertir camelCase a kebab-case (ej: flexDirection -> flex-direction)
+            // Convertir camelCase a kebab-case
             $kebabProp = strtolower(preg_replace('/([a-z])([A-Z])/', '$1-$2', $prop));
 
-            // Añadir !important a propiedades que suelen ser sobrescritas por el tema
+            // Si hay animación, forzar fondo transparente en el contenedor padre
+            if ($element && ($element['settings']['background']['type'] ?? '') === 'animation') {
+                if ($kebabProp === 'background-color' || $kebabProp === 'background-image') {
+                    continue;
+                }
+            }
+
             $important = '';
             if (in_array($kebabProp, ['color', 'background-color', 'background-image', 'font-size', 'font-family'])) {
                 $important = ' !important';
             }
 
             $styles[] = "$kebabProp: $value$important";
+        }
+
+        // Añadir aislamiento si hay animación
+        if ($element && ($element['settings']['background']['type'] ?? '') === 'animation') {
+            $styles[] = "isolation: isolate";
+            $styles[] = "background-color: transparent !important";
+            $styles[] = "background-image: none !important";
         }
 
         return empty($styles) ? '' : ' style="' . implode('; ', $styles) . '"';
